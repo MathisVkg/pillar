@@ -30,17 +30,33 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy standalone Next.js output
-COPY --from=builder --chown=nextjs:nodejs /app/apps/main/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/main/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/apps/main/public ./public
+# In monorepo, standalone output is nested under the app path:
+# apps/main/.next/standalone/apps/main/server.js
+# Copy from that nested path so server.js lands at /app/server.js
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/apps/main/.next/standalone/apps/main/ ./
 
-# Copy Prisma engine and generated client from root node_modules
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
+# node_modules bundled by standalone output (hoisted deps)
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/apps/main/.next/standalone/node_modules ./node_modules
 
-# Copy prisma schema for migrations
-COPY --from=builder --chown=nextjs:nodejs /app/packages/database/prisma ./packages/database/prisma
+# Static assets and public files
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/apps/main/.next/static ./.next/static
+
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/apps/main/public ./public
+
+# Prisma engine files
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/node_modules/.prisma ./node_modules/.prisma
+
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/node_modules/@prisma ./node_modules/@prisma
+
+# Prisma schema for migrations
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/packages/database/prisma ./packages/database/prisma
 
 USER nextjs
 EXPOSE 3000
