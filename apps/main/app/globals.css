@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ── Brand tokens ── */
+:root {
+  /* Brand */
+  --brand:       #1a1a2e;
+  --brand-deep:  #0f172a;
+  --accent:      #2563eb;
+  --accent-l:    #dbeafe;
+  --ok:          #16a34a;
+  --ok-l:        #dcfce7;
+  --warn:        #d97706;
+  --warn-l:      #fef3c7;
+  --danger:      #dc2626;
+  --danger-l:    #fee2e2;
+
+  /* Console side */
+  --con-bg:      #f8f9fb;
+  --con-surface: #ffffff;
+  --con-border:  #e2e5eb;
+  --con-text:    #0f172a;
+  --con-muted:   #64748b;
+  --con-subtle:  #94a3b8;
+
+  /* Portal side */
+  --cli-bg:      #fafafa;
+  --cli-surface: #ffffff;
+  --cli-border:  #ebebeb;
+  --cli-text:    #111111;
+  --cli-muted:   #737373;
+  --cli-subtle:  #a3a3a3;
+
+  /* Fonts */
+  --font-display: 'Archivo', sans-serif;
+  --font-sans:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'Geist Mono', monospace;
+}
+
+@theme inline {
+  --color-brand:      var(--brand);
+  --color-accent:     var(--accent);
+  --color-accent-l:   var(--accent-l);
+  --color-ok:         var(--ok);
+  --color-ok-l:       var(--ok-l);
+  --color-warn:       var(--warn);
+  --color-warn-l:     var(--warn-l);
+  --color-danger:     var(--danger);
+  --color-danger-l:   var(--danger-l);
+  --color-con-bg:     var(--con-bg);
+  --color-con-surface:var(--con-surface);
+  --color-con-border: var(--con-border);
+  --color-con-text:   var(--con-text);
+  --color-con-muted:  var(--con-muted);
+  --color-con-subtle: var(--con-subtle);
+  --color-cli-bg:     var(--cli-bg);
+  --color-cli-surface:var(--cli-surface);
+  --color-cli-border: var(--cli-border);
+  --color-cli-text:   var(--cli-text);
+  --color-cli-muted:  var(--cli-muted);
+  --color-cli-subtle: var(--cli-subtle);
+  --font-sans:        var(--font-sans);
+  --font-mono:        var(--font-mono);
+  --font-display:     var(--font-display);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--con-bg);
+  color: var(--con-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Console readability scale-up ── */
+.console-layout {
+  font-size: 15px;
+}
+
+/* Table cells: minimum 14px */
+.console-layout td,
+.console-layout th {
+  font-size: max(14px, 0.93em);
+}
+
+/* Mono data values: 14px floor */
+.console-layout [style*="font-mono"] {
+  /* Handled inline; this ensures inherited contexts get readable sizing */
+}
+
+/* Badge text bump */
+.console-layout [data-badge] {
+  font-size: 12px;
+}

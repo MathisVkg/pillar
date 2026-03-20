@@ -1,0 +1,8 @@
+{
+  "name": "pillar-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

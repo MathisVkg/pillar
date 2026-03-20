@@ -1,0 +1,318 @@
+// ============================================================
+// PILLAR — schema.prisma
+// Database: MariaDB 11
+// ORM:      Prisma
+// ============================================================
+// Commands:
+//   npx prisma migrate dev --name init      (first time)
+//   npx prisma migrate dev --name <change>  (after editing)
+//   npx prisma migrate deploy               (production)
+//   npx prisma studio                       (visual DB browser)
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ADMIN
+// Single row — the consultant. Created via seed script.
+// Completely separate from ClientUser — never mixed.
+// ============================================================
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin")
+}
+
+// ============================================================
+// CLIENT
+// One row per client company.
+// ============================================================
+model Client {
+  id              String    @id @default(uuid())
+  name            String
+  slug            String    @unique // acme-sa → /portal/acme-sa
+  vatNumber       String?   // Belgian format: BE + 10 digits
+  address         String?   @db.Text
+  city            String?
+  language        String    @default("fr") // fr | nl | en
+  contractType    String    @default("adhoc") // retainer | adhoc
+  retainerHours   Int?      // included hours/month (retainer only)
+  retainerFee     Decimal?  @db.Decimal(10, 2) // monthly flat fee excl. VAT
+  hourlyRate      Decimal   @default(95.00) @db.Decimal(10, 2)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  users           ClientUser[]
+  tickets         Ticket[]
+  timeEntries     TimeEntry[]
+  invoices        Invoice[]
+  assets          Asset[]
+  contracts       Contract[]
+  visits          Visit[]
+  checklistTemplates ChecklistTemplate[]
+
+  @@map("client")
+}
+
+// ============================================================
+// CLIENT USER
+// One row per person who has portal access.
+// Supports both magic link (token) and email/password.
+// Multiple users can belong to the same client.
+// ============================================================
+model ClientUser {
+  id              String    @id @default(uuid())
+  clientId        String
+  name            String
+  email           String    @unique
+  passwordHash    String?   // null = token-only access
+  role            String    @default("viewer") // admin | viewer
+  portalToken     String    @unique @default(uuid()) // magic link token
+  tokenExpiresAt  DateTime? // null = never expires
+  lastLoginAt     DateTime?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("client_user")
+}
+
+// ============================================================
+// TICKET
+// Every incident or request, regardless of how it came in.
+// ============================================================
+model Ticket {
+  id              String    @id @default(uuid())
+  clientId        String
+  visitId         String?   // set if created from a site visit flag
+  reference       String    @unique // auto-generated: #142
+  title           String
+  description     String?   @db.Text
+  status          String    @default("open") // open | in_progress | done | closed
+  priority        String    @default("normal") // low | normal | high | urgent
+  source          String    @default("manual") // phone | whatsapp | email | portal | manual
+  sourceRef       String?   // original message ID for webhook-created tickets
+  isBillable      Boolean   @default(true)
+  resolvedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  visit           Visit?    @relation(fields: [visitId], references: [id], onDelete: SetNull)
+  timeEntries     TimeEntry[]
+
+  @@map("ticket")
+}
+
+// ============================================================
+// TIME ENTRY
+// Every hour logged. The financial backbone of Pillar.
+// Stored in minutes to avoid floating point issues.
+// ============================================================
+model TimeEntry {
+  id              String    @id @default(uuid())
+  clientId        String
+  ticketId        String?   // linked ticket (optional)
+  invoiceId       String?   // set when added to an invoice
+  description     String
+  durationMinutes Int       // always minutes — convert to hours only for display
+  hourlyRate      Decimal   @db.Decimal(10, 2) // snapshot at time of entry
+  isBillable      Boolean   @default(true)
+  isInvoiced      Boolean   @default(false)
+  loggedAt        DateTime  // when the work happened (not when it was logged)
+  createdAt       DateTime  @default(now())
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  ticket          Ticket?   @relation(fields: [ticketId], references: [id], onDelete: SetNull)
+  invoice         Invoice?  @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+
+  @@map("time_entry")
+}
+
+// ============================================================
+// INVOICE
+// Monthly invoice per client.
+// Time entries are linked here when invoiced.
+// ============================================================
+model Invoice {
+  id              String    @id @default(uuid())
+  clientId        String
+  number          String    @unique // INV-2026-031 — auto-generated
+  status          String    @default("draft") // draft | sent | paid | overdue
+  periodStart     DateTime  @db.Date
+  periodEnd       DateTime  @db.Date
+  subtotal        Decimal   @db.Decimal(10, 2) // excl. VAT
+  vatRate         Decimal   @default(0.21) @db.Decimal(4, 2)
+  vatAmount       Decimal   @db.Decimal(10, 2)
+  total           Decimal   @db.Decimal(10, 2) // subtotal + vatAmount
+  dueDate         DateTime  @db.Date
+  paidAt          DateTime?
+  notes           String?   @db.Text // appears at bottom of PDF
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  timeEntries     TimeEntry[]
+
+  @@map("invoice")
+}
+
+// ============================================================
+// ASSET
+// Device, software license, network device or camera per client.
+// Sensitivity controls what the client portal shows.
+// ============================================================
+model Asset {
+  id                  String    @id @default(uuid())
+  clientId            String
+  name                String    // e.g. Dell Latitude 5540
+  type                String    // hardware | software | license | camera | network
+  serialNumber        String?
+  assignedTo          String?   // person name
+  status              String    @default("ok") // ok | warning | critical | retired
+
+  // Portal visibility controls
+  sensitivity         String    @default("normal")
+  // normal    → visible to all portal users
+  // restricted → logged-in users only (not token access)
+  // internal   → your console only, never in portal
+
+  showSerialInPortal  Boolean   @default(false) // you enable per asset if needed
+
+  notes               String?   @db.Text // your internal notes — never shown in portal
+  warrantyExpiresAt   DateTime? @db.Date // triggers 60-day alert
+  purchasedAt         DateTime? @db.Date
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  // Relations
+  client              Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("asset")
+}
+
+// ============================================================
+// CONTRACT
+// Software licenses, hardware warranties, service contracts.
+// Triggers renewal alerts 60 days before renewalDate.
+// ============================================================
+model Contract {
+  id              String    @id @default(uuid())
+  clientId        String
+  name            String    // e.g. Sophos Endpoint Protection
+  vendor          String?
+  type            String    // software | hardware | service | retainer
+  renewalDate     DateTime  @db.Date // 60-day alert fires from here
+  costPerYear     Decimal?  @db.Decimal(10, 2)
+  autoRenews      Boolean   @default(false)
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("contract")
+}
+
+// ============================================================
+// VISIT
+// A site visit with a checklist attached.
+// Flagged items auto-create tickets on close.
+// ============================================================
+model Visit {
+  id              String    @id @default(uuid())
+  clientId        String
+  type            String    @default("adhoc") // quarterly | monthly | adhoc
+  status          String    @default("in_progress") // in_progress | completed
+  notes           String?   @db.Text // your visit summary
+  visitedAt       DateTime  // when the visit took place
+  completedAt     DateTime? // set when you close the visit
+
+  // Relations
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  checklistItems  ChecklistItem[]
+  tickets         Ticket[]
+
+  @@map("visit")
+}
+
+// ============================================================
+// CHECKLIST ITEM
+// One row per check performed during a visit.
+// Copied from a template at visit start, then updated live.
+// ============================================================
+model ChecklistItem {
+  id              String    @id @default(uuid())
+  visitId         String
+  templateItemId  String?   // source template item (for reference)
+  label           String    // e.g. Internet speed test
+  status          String    @default("pending") // pending | done | flagged
+  resultNote      String?   // e.g. ↓142 ↑48 Mbps — your quick note
+  sortOrder       Int       @default(0)
+
+  // Relations
+  visit           Visit     @relation(fields: [visitId], references: [id], onDelete: Cascade)
+  templateItem    ChecklistTemplateItem? @relation(fields: [templateItemId], references: [id], onDelete: SetNull)
+
+  @@map("checklist_item")
+}
+
+// ============================================================
+// CHECKLIST TEMPLATE
+// Reusable checklist. clientId = null means global default.
+// Client-specific templates override the global default.
+// ============================================================
+model ChecklistTemplate {
+  id              String    @id @default(uuid())
+  clientId        String?   // null = global default for all clients
+  name            String    // e.g. Quarterly visit
+  isDefault       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  // Relations
+  client          Client?   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  items           ChecklistTemplateItem[]
+
+  @@map("checklist_template")
+}
+
+// ============================================================
+// CHECKLIST TEMPLATE ITEM
+// One check definition inside a template.
+// Copied into ChecklistItem rows when a visit starts.
+// ============================================================
+model ChecklistTemplateItem {
+  id              String    @id @default(uuid())
+  templateId      String
+  label           String    // e.g. Internet speed test
+  instruction     String?   // what exactly to check/do
+  section         String?   // network | backups | physical | security
+  sortOrder       Int       @default(0)
+
+  // Relations
+  template        ChecklistTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  checklistItems  ChecklistItem[]
+
+  @@map("checklist_template_item")
+}

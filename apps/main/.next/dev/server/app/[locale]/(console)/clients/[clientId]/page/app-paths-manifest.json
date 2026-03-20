@@ -1,0 +1,3 @@
+{
+  "/[locale]/(console)/clients/[clientId]/page": "app/[locale]/(console)/clients/[clientId]/page.js"
+}

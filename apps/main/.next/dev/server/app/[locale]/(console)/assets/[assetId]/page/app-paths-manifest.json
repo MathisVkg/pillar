@@ -1,0 +1,3 @@
+{
+  "/[locale]/(console)/assets/[assetId]/page": "app/[locale]/(console)/assets/[assetId]/page.js"
+}
