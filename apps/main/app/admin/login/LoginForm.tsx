@@ -1,18 +1,25 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useTranslation } from "@/components/LangProvider";
 
-type ActionFn = (formData: FormData) => Promise<{ error: string } | undefined>;
+type State = { error: string } | { success: true } | undefined;
+type ActionFn = (formData: FormData) => Promise<State>;
 
-export default function LoginForm({ action }: { action: ActionFn }) {
+export default function LoginForm({ action, locale }: { action: ActionFn; locale: string }) {
   const { t } = useTranslation();
   const [state, formAction, pending] = useActionState(
-    async (_prev: { error: string } | undefined, formData: FormData) => {
+    async (_prev: State, formData: FormData) => {
       return await action(formData);
     },
     undefined
   );
+
+  useEffect(() => {
+    if (state && "success" in state) {
+      window.location.href = `/${locale}/dashboard`;
+    }
+  }, [state, locale]);
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
@@ -64,7 +71,7 @@ export default function LoginForm({ action }: { action: ActionFn }) {
         />
       </div>
 
-      {state?.error && (
+      {state && "error" in state && (
         <p
           style={{
             fontFamily: "var(--font-mono)",

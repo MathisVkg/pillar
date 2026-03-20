@@ -1,16 +1,20 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useTranslation } from "@/components/LangProvider";
 
-type ActionFn = (
-  prev: { error: string } | undefined,
-  formData: FormData
-) => Promise<{ error: string } | undefined>;
+type State = { error: string } | { success: true } | undefined;
+type ActionFn = (prev: State, formData: FormData) => Promise<State>;
 
-export default function PortalLoginForm({ action }: { action: ActionFn }) {
+export default function PortalLoginForm({ action, locale }: { action: ActionFn; locale: string }) {
   const { t } = useTranslation();
   const [state, formAction, pending] = useActionState(action, undefined);
+
+  useEffect(() => {
+    if (state && "success" in state) {
+      window.location.href = `/${locale}/portal`;
+    }
+  }, [state, locale]);
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
@@ -65,7 +69,7 @@ export default function PortalLoginForm({ action }: { action: ActionFn }) {
         />
       </div>
 
-      {state?.error && (
+      {state && "error" in state && (
         <div
           style={{
             background: "var(--danger-l)",

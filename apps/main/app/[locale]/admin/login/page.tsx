@@ -41,7 +41,7 @@ export default async function AdminLoginPage({ params }: Props) {
 					</span>
 				</div>
 
-				<LoginForm action={adminLogin} />
+				<LoginForm action={adminLogin} locale={locale} />
 
 				{/* Footer */}
 				<p

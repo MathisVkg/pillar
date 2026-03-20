@@ -2,19 +2,21 @@
 
 import { signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
-import { redirect } from "next/navigation";
 
-export async function adminLogin(formData: FormData) {
+export async function adminLogin(
+  formData: FormData
+): Promise<{ error: string } | { success: true } | undefined> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
   try {
-    await signIn("admin", { email, password, redirectTo: "/dashboard" });
+    await signIn("admin", { email, password });
   } catch (err) {
     if (err instanceof AuthError) {
       return { error: "Invalid email or password." };
     }
-    // signIn throws a redirect — re-throw it so Next.js handles it
     throw err;
   }
+
+  return { success: true };
 }

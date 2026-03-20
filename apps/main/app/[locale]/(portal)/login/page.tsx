@@ -58,7 +58,7 @@ export default async function PortalLoginPage({ params }: Props) {
           </p>
         </div>
 
-        <PortalLoginForm action={portalLogin} />
+        <PortalLoginForm action={portalLogin} locale={locale} />
       </div>
 
       <p style={{ fontSize: "12px", color: "var(--cli-subtle)", marginTop: "24px" }}>
