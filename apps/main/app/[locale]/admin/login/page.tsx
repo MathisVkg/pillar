@@ -1,4 +1,3 @@
-import { adminLogin } from "@/app/admin/login/actions";
 import LoginForm from "@/app/admin/login/LoginForm";
 import ConsoleLanguageSwitcher from "@/components/console/LanguageSwitcher";
 import { getT, type Lang } from "@/lib/i18n";
@@ -41,7 +40,7 @@ export default async function AdminLoginPage({ params }: Props) {
 					</span>
 				</div>
 
-				<LoginForm action={adminLogin} locale={locale} />
+				<LoginForm locale={locale} />
 
 				{/* Footer */}
 				<p

@@ -1,7 +1,6 @@
 import PortalLoginForm from "./PortalLoginForm";
 import PortalLanguageSwitcher from "@/components/portal/LanguageSwitcher";
 import type { Metadata } from "next";
-import { portalLogin } from "./actions";
 import { getT, type Lang } from "@/lib/i18n";
 
 export const metadata: Metadata = { title: "Pillar \u00B7 Sign in" };
@@ -58,7 +57,7 @@ export default async function PortalLoginPage({ params }: Props) {
           </p>
         </div>
 
-        <PortalLoginForm action={portalLogin} locale={locale} />
+        <PortalLoginForm locale={locale} />
       </div>
 
       <p style={{ fontSize: "12px", color: "var(--cli-subtle)", marginTop: "24px" }}>

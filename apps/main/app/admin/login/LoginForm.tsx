@@ -1,25 +1,12 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { useTranslation } from "@/components/LangProvider";
+import { adminLogin } from "./actions";
 
-type State = { error: string } | { success: true } | undefined;
-type ActionFn = (formData: FormData) => Promise<State>;
-
-export default function LoginForm({ action, locale }: { action: ActionFn; locale: string }) {
+export default function LoginForm({ locale }: { locale: string }) {
   const { t } = useTranslation();
-  const [state, formAction, pending] = useActionState(
-    async (_prev: State, formData: FormData) => {
-      return await action(formData);
-    },
-    undefined
-  );
-
-  useEffect(() => {
-    if (state && "success" in state) {
-      window.location.href = `/${locale}/dashboard`;
-    }
-  }, [state, locale]);
+  const [state, formAction, pending] = useActionState(adminLogin, undefined);
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
@@ -45,6 +32,8 @@ export default function LoginForm({ action, locale }: { action: ActionFn; locale
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
+      <input type="hidden" name="locale" value={locale} />
+
       <div>
         <label style={labelStyle}>{t("auth.email")}</label>
         <input
@@ -71,7 +60,7 @@ export default function LoginForm({ action, locale }: { action: ActionFn; locale
         />
       </div>
 
-      {state && "error" in state && (
+      {state?.error && (
         <p
           style={{
             fontFamily: "var(--font-mono)",
