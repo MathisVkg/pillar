@@ -621,5 +621,5 @@ function InvoicePdf({ data }: { data: PdfInvoiceData }) {
 
 export async function generateInvoicePdf(data: PdfInvoiceData): Promise<Buffer> {
 	const element = React.createElement(InvoicePdf, { data });
-	return renderToBuffer(element);
+	return renderToBuffer(element as React.ReactElement<any>);
 }
