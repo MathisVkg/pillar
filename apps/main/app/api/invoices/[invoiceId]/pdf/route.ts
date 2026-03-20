@@ -100,7 +100,7 @@ export async function GET(_req: Request, { params }: Params) {
 	const buffer = await generateInvoicePdf(pdfData);
 	const filename = `${invoice.number}.pdf`;
 
-	return new Response(buffer, {
+	return new Response(new Uint8Array(buffer), {
 		status: 200,
 		headers: {
 			"Content-Type": "application/pdf",
