@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth-edge";
 import { NextResponse } from "next/server";
 import { SUPPORTED_LANGS, DEFAULT_LANG, isValidLang, type Lang } from "@/lib/i18n";
 

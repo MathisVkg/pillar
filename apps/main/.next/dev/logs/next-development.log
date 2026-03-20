@@ -1,3 +1,0 @@
-[00:00:01.240] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:01.400] Server  LOG     ✓ Ready in 1101ms
-[00:00:11.032] Server  LOG     ○ Compiling /[locale]/dashboard ...
