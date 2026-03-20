@@ -27,5 +27,5 @@ jobs:
           file: apps/main/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/pillar:latest
-            ghcr.io/${{ github.repository_owner }}/pillar:${{ github.sha }}
+            ghcr.io/mathisvkg/pillar:latest
+            ghcr.io/mathisvkg/pillar:${{ github.sha }}
