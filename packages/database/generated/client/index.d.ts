@@ -1,0 +1,22116 @@
+
+/**
+ * Client
+**/
+
+import * as runtime from './runtime/library.js';
+import $Types = runtime.Types // general types
+import $Public = runtime.Types.Public
+import $Utils = runtime.Types.Utils
+import $Extensions = runtime.Types.Extensions
+import $Result = runtime.Types.Result
+
+export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+
+/**
+ * Model Admin
+ * 
+ */
+export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
+/**
+ * Model Client
+ * 
+ */
+export type Client = $Result.DefaultSelection<Prisma.$ClientPayload>
+/**
+ * Model ClientUser
+ * 
+ */
+export type ClientUser = $Result.DefaultSelection<Prisma.$ClientUserPayload>
+/**
+ * Model Ticket
+ * 
+ */
+export type Ticket = $Result.DefaultSelection<Prisma.$TicketPayload>
+/**
+ * Model TimeEntry
+ * 
+ */
+export type TimeEntry = $Result.DefaultSelection<Prisma.$TimeEntryPayload>
+/**
+ * Model Invoice
+ * 
+ */
+export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
+/**
+ * Model Asset
+ * 
+ */
+export type Asset = $Result.DefaultSelection<Prisma.$AssetPayload>
+/**
+ * Model Contract
+ * 
+ */
+export type Contract = $Result.DefaultSelection<Prisma.$ContractPayload>
+/**
+ * Model Visit
+ * 
+ */
+export type Visit = $Result.DefaultSelection<Prisma.$VisitPayload>
+/**
+ * Model ChecklistItem
+ * 
+ */
+export type ChecklistItem = $Result.DefaultSelection<Prisma.$ChecklistItemPayload>
+/**
+ * Model ChecklistTemplate
+ * 
+ */
+export type ChecklistTemplate = $Result.DefaultSelection<Prisma.$ChecklistTemplatePayload>
+/**
+ * Model ChecklistTemplateItem
+ * 
+ */
+export type ChecklistTemplateItem = $Result.DefaultSelection<Prisma.$ChecklistTemplateItemPayload>
+
+/**
+ * ##  Prisma Client ʲˢ
+ *
+ * Type-safe database client for TypeScript & Node.js
+ * @example
+ * ```
+ * const prisma = new PrismaClient()
+ * // Fetch zero or more Admins
+ * const admins = await prisma.admin.findMany()
+ * ```
+ *
+ *
+ * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ */
+export class PrismaClient<
+  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
+> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+
+    /**
+   * ##  Prisma Client ʲˢ
+   *
+   * Type-safe database client for TypeScript & Node.js
+   * @example
+   * ```
+   * const prisma = new PrismaClient()
+   * // Fetch zero or more Admins
+   * const admins = await prisma.admin.findMany()
+   * ```
+   *
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   */
+
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+
+  /**
+   * Connect with the database
+   */
+  $connect(): $Utils.JsPromise<void>;
+
+  /**
+   * Disconnect from the database
+   */
+  $disconnect(): $Utils.JsPromise<void>;
+
+/**
+   * Executes a prepared raw query and returns the number of affected rows.
+   * @example
+   * ```
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
+
+  /**
+   * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
+   * @example
+   * ```
+   * const [george, bob, alice] = await prisma.$transaction([
+   *   prisma.user.create({ data: { name: 'George' } }),
+   *   prisma.user.create({ data: { name: 'Bob' } }),
+   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * ])
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   */
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+
+
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
+    extArgs: ExtArgs
+  }>>
+
+      /**
+   * `prisma.admin`: Exposes CRUD operations for the **Admin** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Admins
+    * const admins = await prisma.admin.findMany()
+    * ```
+    */
+  get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.client`: Exposes CRUD operations for the **Client** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Clients
+    * const clients = await prisma.client.findMany()
+    * ```
+    */
+  get client(): Prisma.ClientDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientUser`: Exposes CRUD operations for the **ClientUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientUsers
+    * const clientUsers = await prisma.clientUser.findMany()
+    * ```
+    */
+  get clientUser(): Prisma.ClientUserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ticket`: Exposes CRUD operations for the **Ticket** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tickets
+    * const tickets = await prisma.ticket.findMany()
+    * ```
+    */
+  get ticket(): Prisma.TicketDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.timeEntry`: Exposes CRUD operations for the **TimeEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TimeEntries
+    * const timeEntries = await prisma.timeEntry.findMany()
+    * ```
+    */
+  get timeEntry(): Prisma.TimeEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoice`: Exposes CRUD operations for the **Invoice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invoices
+    * const invoices = await prisma.invoice.findMany()
+    * ```
+    */
+  get invoice(): Prisma.InvoiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.asset`: Exposes CRUD operations for the **Asset** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Assets
+    * const assets = await prisma.asset.findMany()
+    * ```
+    */
+  get asset(): Prisma.AssetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contract`: Exposes CRUD operations for the **Contract** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contracts
+    * const contracts = await prisma.contract.findMany()
+    * ```
+    */
+  get contract(): Prisma.ContractDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.visit`: Exposes CRUD operations for the **Visit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Visits
+    * const visits = await prisma.visit.findMany()
+    * ```
+    */
+  get visit(): Prisma.VisitDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.checklistItem`: Exposes CRUD operations for the **ChecklistItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChecklistItems
+    * const checklistItems = await prisma.checklistItem.findMany()
+    * ```
+    */
+  get checklistItem(): Prisma.ChecklistItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.checklistTemplate`: Exposes CRUD operations for the **ChecklistTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChecklistTemplates
+    * const checklistTemplates = await prisma.checklistTemplate.findMany()
+    * ```
+    */
+  get checklistTemplate(): Prisma.ChecklistTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.checklistTemplateItem`: Exposes CRUD operations for the **ChecklistTemplateItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChecklistTemplateItems
+    * const checklistTemplateItems = await prisma.checklistTemplateItem.findMany()
+    * ```
+    */
+  get checklistTemplateItem(): Prisma.ChecklistTemplateItemDelegate<ExtArgs, ClientOptions>;
+}
+
+export namespace Prisma {
+  export import DMMF = runtime.DMMF
+
+  export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+  /**
+   * Validator
+   */
+  export import validator = runtime.Public.validator
+
+  /**
+   * Prisma Errors
+   */
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError
+
+  /**
+   * Re-export of sql-template-tag
+   */
+  export import sql = runtime.sqltag
+  export import empty = runtime.empty
+  export import join = runtime.join
+  export import raw = runtime.raw
+  export import Sql = runtime.Sql
+
+
+
+  /**
+   * Decimal.js
+   */
+  export import Decimal = runtime.Decimal
+
+  export type DecimalJsLike = runtime.DecimalJsLike
+
+  /**
+   * Metrics
+   */
+  export type Metrics = runtime.Metrics
+  export type Metric<T> = runtime.Metric<T>
+  export type MetricHistogram = runtime.MetricHistogram
+  export type MetricHistogramBucket = runtime.MetricHistogramBucket
+
+  /**
+  * Extensions
+  */
+  export import Extension = $Extensions.UserArgs
+  export import getExtensionContext = runtime.Extensions.getExtensionContext
+  export import Args = $Public.Args
+  export import Payload = $Public.Payload
+  export import Result = $Public.Result
+  export import Exact = $Public.Exact
+
+  /**
+   * Prisma Client JS version: 6.19.2
+   * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
+   */
+  export type PrismaVersion = {
+    client: string
+  }
+
+  export const prismaVersion: PrismaVersion
+
+  /**
+   * Utility Types
+   */
+
+
+  export import Bytes = runtime.Bytes
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
+
+  /**
+   * Types of the values used to represent different kinds of `null` values when working with JSON fields.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  namespace NullTypes {
+    /**
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class DbNull {
+      private DbNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class JsonNull {
+      private JsonNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class AnyNull {
+      private AnyNull: never
+      private constructor()
+    }
+  }
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: NullTypes.DbNull
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: NullTypes.JsonNull
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: NullTypes.AnyNull
+
+  type SelectAndInclude = {
+    select: any
+    include: any
+  }
+
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
+  /**
+   * Get the type of the value, that the Promise holds.
+   */
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+
+  /**
+   * Get the return type of a function which returns a Promise.
+   */
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+
+  /**
+   * From T, pick a set of properties whose keys are in the union K
+   */
+  type Prisma__Pick<T, K extends keyof T> = {
+      [P in K]: T[P];
+  };
+
+
+  export type Enumerable<T> = T | Array<T>;
+
+  export type RequiredKeys<T> = {
+    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
+  }[keyof T]
+
+  export type TruthyKeys<T> = keyof {
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
+  }
+
+  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
+
+  /**
+   * Subset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
+   */
+  export type Subset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
+
+  /**
+   * SelectSubset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
+   * Additionally, it validates, if both select and include are present. If the case, it errors.
+   */
+  export type SelectSubset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
+
+  /**
+   * Subset + Intersection
+   * @desc From `T` pick properties that exist in `U` and intersect `K`
+   */
+  export type SubsetIntersection<T, U, K> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    K
+
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+  /**
+   * XOR is needed to have a real mutually exclusive union type
+   * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
+   */
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
+
+  /**
+   * Is T a Record?
+   */
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
+
+  /**
+   * If it's T[], return T
+   */
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+  /**
+   * From ts-toolbelt
+   */
+
+  type __Either<O extends object, K extends Key> = Omit<O, K> &
+    {
+      // Merge all but K
+      [P in K]: Prisma__Pick<O, P & keyof O> // With K possibilities
+    }[K]
+
+  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>
+
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
+
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
+    1: EitherStrict<O, K>
+    0: EitherLoose<O, K>
+  }[strict]
+
+  type Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean = 1
+  > = O extends unknown ? _Either<O, K, strict> : never
+
+  export type Union = any
+
+  type PatchUndefined<O extends object, O1 extends object> = {
+    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K]
+  } & {}
+
+  /** Helper Types for "Merge" **/
+  export type IntersectOf<U extends Union> = (
+    U extends unknown ? (k: U) => void : never
+  ) extends (k: infer I) => void
+    ? I
+    : never
+
+  export type Overwrite<O extends object, O1 extends object> = {
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
+
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
+
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
+
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
+
+  export type OptionalFlat<O> = {
+    [K in keyof O]?: O[K];
+  } & {};
+
+  type _Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  // cause typescript not to expand types and preserve names
+  type NoExpand<T> = T extends unknown ? T : never;
+
+  // this type assumes the passed object is entirely optional
+  type AtLeast<O extends object, K extends string> = NoExpand<
+    O extends unknown
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
+    : never>;
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  /** End Helper Types for "Merge" **/
+
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+  /**
+  A [[Boolean]]
+  */
+  export type Boolean = True | False
+
+  // /**
+  // 1
+  // */
+  export type True = 1
+
+  /**
+  0
+  */
+  export type False = 0
+
+  export type Not<B extends Boolean> = {
+    0: 1
+    1: 0
+  }[B]
+
+  export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+    ? 0 // anything `never` is false
+    : A1 extends A2
+    ? 1
+    : 0
+
+  export type Has<U extends Union, U1 extends Union> = Not<
+    Extends<Exclude<U1, U>, U1>
+  >
+
+  export type Or<B1 extends Boolean, B2 extends Boolean> = {
+    0: {
+      0: 0
+      1: 1
+    }
+    1: {
+      0: 1
+      1: 1
+    }
+  }[B1][B2]
+
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+  type Cast<A, B> = A extends B ? A : B;
+
+  export const type: unique symbol;
+
+
+
+  /**
+   * Used by group by
+   */
+
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
+
+  type FieldPaths<
+    T,
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
+  > = IsObject<T> extends True ? U : T
+
+  type GetHavingFields<T> = {
+    [K in keyof T]: Or<
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
+    > extends True
+      ? // infer is only needed to not hit TS limit
+        // based on the brilliant idea of Pierre-Antoine Mills
+        // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+        T[K] extends infer TK
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        : never
+      : {} extends FieldPaths<T[K]>
+      ? never
+      : K
+  }[keyof T]
+
+  /**
+   * Convert tuple to union
+   */
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
+
+  /**
+   * Like `Pick`, but additionally can also accept an array of keys
+   */
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
+
+  export const ModelName: {
+    Admin: 'Admin',
+    Client: 'Client',
+    ClientUser: 'ClientUser',
+    Ticket: 'Ticket',
+    TimeEntry: 'TimeEntry',
+    Invoice: 'Invoice',
+    Asset: 'Asset',
+    Contract: 'Contract',
+    Visit: 'Visit',
+    ChecklistItem: 'ChecklistItem',
+    ChecklistTemplate: 'ChecklistTemplate',
+    ChecklistTemplateItem: 'ChecklistTemplateItem'
+  };
+
+  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
+
+  export type Datasources = {
+    db?: Datasource
+  }
+
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+  }
+
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+    globalOmitOptions: {
+      omit: GlobalOmitOptions
+    }
+    meta: {
+      modelProps: "admin" | "client" | "clientUser" | "ticket" | "timeEntry" | "invoice" | "asset" | "contract" | "visit" | "checklistItem" | "checklistTemplate" | "checklistTemplateItem"
+      txIsolationLevel: Prisma.TransactionIsolationLevel
+    }
+    model: {
+      Admin: {
+        payload: Prisma.$AdminPayload<ExtArgs>
+        fields: Prisma.AdminFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          findMany: {
+            args: Prisma.AdminFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>[]
+          }
+          create: {
+            args: Prisma.AdminCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          createMany: {
+            args: Prisma.AdminCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AdminDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          update: {
+            args: Prisma.AdminUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AdminUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdmin>
+          }
+          groupBy: {
+            args: Prisma.AdminGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      Client: {
+        payload: Prisma.$ClientPayload<ExtArgs>
+        fields: Prisma.ClientFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          findFirst: {
+            args: Prisma.ClientFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          findMany: {
+            args: Prisma.ClientFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>[]
+          }
+          create: {
+            args: Prisma.ClientCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          createMany: {
+            args: Prisma.ClientCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ClientDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          update: {
+            args: Prisma.ClientUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ClientUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
+          }
+          aggregate: {
+            args: Prisma.ClientAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClient>
+          }
+          groupBy: {
+            args: Prisma.ClientGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClientUser: {
+        payload: Prisma.$ClientUserPayload<ExtArgs>
+        fields: Prisma.ClientUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          findFirst: {
+            args: Prisma.ClientUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          findMany: {
+            args: Prisma.ClientUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>[]
+          }
+          create: {
+            args: Prisma.ClientUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          createMany: {
+            args: Prisma.ClientUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ClientUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          update: {
+            args: Prisma.ClientUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ClientUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientUserPayload>
+          }
+          aggregate: {
+            args: Prisma.ClientUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientUser>
+          }
+          groupBy: {
+            args: Prisma.ClientUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientUserCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientUserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Ticket: {
+        payload: Prisma.$TicketPayload<ExtArgs>
+        fields: Prisma.TicketFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TicketFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TicketFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          findFirst: {
+            args: Prisma.TicketFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TicketFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          findMany: {
+            args: Prisma.TicketFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>[]
+          }
+          create: {
+            args: Prisma.TicketCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          createMany: {
+            args: Prisma.TicketCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TicketDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          update: {
+            args: Prisma.TicketUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          deleteMany: {
+            args: Prisma.TicketDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TicketUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TicketUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketPayload>
+          }
+          aggregate: {
+            args: Prisma.TicketAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTicket>
+          }
+          groupBy: {
+            args: Prisma.TicketGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TicketGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TicketCountArgs<ExtArgs>
+            result: $Utils.Optional<TicketCountAggregateOutputType> | number
+          }
+        }
+      }
+      TimeEntry: {
+        payload: Prisma.$TimeEntryPayload<ExtArgs>
+        fields: Prisma.TimeEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TimeEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TimeEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.TimeEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TimeEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          findMany: {
+            args: Prisma.TimeEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>[]
+          }
+          create: {
+            args: Prisma.TimeEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          createMany: {
+            args: Prisma.TimeEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TimeEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          update: {
+            args: Prisma.TimeEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.TimeEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TimeEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TimeEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.TimeEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTimeEntry>
+          }
+          groupBy: {
+            args: Prisma.TimeEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TimeEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TimeEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<TimeEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invoice: {
+        payload: Prisma.$InvoicePayload<ExtArgs>
+        fields: Prisma.InvoiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.InvoiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          update: {
+            args: Prisma.InvoiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.InvoiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoice>
+          }
+          groupBy: {
+            args: Prisma.InvoiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Asset: {
+        payload: Prisma.$AssetPayload<ExtArgs>
+        fields: Prisma.AssetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          findFirst: {
+            args: Prisma.AssetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          findMany: {
+            args: Prisma.AssetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>[]
+          }
+          create: {
+            args: Prisma.AssetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          createMany: {
+            args: Prisma.AssetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AssetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          update: {
+            args: Prisma.AssetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AssetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          aggregate: {
+            args: Prisma.AssetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAsset>
+          }
+          groupBy: {
+            args: Prisma.AssetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AssetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssetCountArgs<ExtArgs>
+            result: $Utils.Optional<AssetCountAggregateOutputType> | number
+          }
+        }
+      }
+      Contract: {
+        payload: Prisma.$ContractPayload<ExtArgs>
+        fields: Prisma.ContractFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContractFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContractFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          findFirst: {
+            args: Prisma.ContractFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContractFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          findMany: {
+            args: Prisma.ContractFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>[]
+          }
+          create: {
+            args: Prisma.ContractCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          createMany: {
+            args: Prisma.ContractCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ContractDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          update: {
+            args: Prisma.ContractUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContractDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContractUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ContractUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContractPayload>
+          }
+          aggregate: {
+            args: Prisma.ContractAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContract>
+          }
+          groupBy: {
+            args: Prisma.ContractGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContractGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContractCountArgs<ExtArgs>
+            result: $Utils.Optional<ContractCountAggregateOutputType> | number
+          }
+        }
+      }
+      Visit: {
+        payload: Prisma.$VisitPayload<ExtArgs>
+        fields: Prisma.VisitFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VisitFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VisitFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          findFirst: {
+            args: Prisma.VisitFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VisitFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          findMany: {
+            args: Prisma.VisitFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>[]
+          }
+          create: {
+            args: Prisma.VisitCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          createMany: {
+            args: Prisma.VisitCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.VisitDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          update: {
+            args: Prisma.VisitUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          deleteMany: {
+            args: Prisma.VisitDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VisitUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.VisitUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VisitPayload>
+          }
+          aggregate: {
+            args: Prisma.VisitAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVisit>
+          }
+          groupBy: {
+            args: Prisma.VisitGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VisitGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VisitCountArgs<ExtArgs>
+            result: $Utils.Optional<VisitCountAggregateOutputType> | number
+          }
+        }
+      }
+      ChecklistItem: {
+        payload: Prisma.$ChecklistItemPayload<ExtArgs>
+        fields: Prisma.ChecklistItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChecklistItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChecklistItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ChecklistItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChecklistItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          findMany: {
+            args: Prisma.ChecklistItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>[]
+          }
+          create: {
+            args: Prisma.ChecklistItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          createMany: {
+            args: Prisma.ChecklistItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ChecklistItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          update: {
+            args: Prisma.ChecklistItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChecklistItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChecklistItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ChecklistItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ChecklistItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChecklistItem>
+          }
+          groupBy: {
+            args: Prisma.ChecklistItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChecklistItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ChecklistTemplate: {
+        payload: Prisma.$ChecklistTemplatePayload<ExtArgs>
+        fields: Prisma.ChecklistTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChecklistTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChecklistTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.ChecklistTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChecklistTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.ChecklistTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.ChecklistTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.ChecklistTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ChecklistTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          update: {
+            args: Prisma.ChecklistTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.ChecklistTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChecklistTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ChecklistTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.ChecklistTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChecklistTemplate>
+          }
+          groupBy: {
+            args: Prisma.ChecklistTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChecklistTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      ChecklistTemplateItem: {
+        payload: Prisma.$ChecklistTemplateItemPayload<ExtArgs>
+        fields: Prisma.ChecklistTemplateItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChecklistTemplateItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChecklistTemplateItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ChecklistTemplateItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChecklistTemplateItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          findMany: {
+            args: Prisma.ChecklistTemplateItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>[]
+          }
+          create: {
+            args: Prisma.ChecklistTemplateItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          createMany: {
+            args: Prisma.ChecklistTemplateItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ChecklistTemplateItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          update: {
+            args: Prisma.ChecklistTemplateItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChecklistTemplateItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChecklistTemplateItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ChecklistTemplateItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChecklistTemplateItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ChecklistTemplateItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChecklistTemplateItem>
+          }
+          groupBy: {
+            args: Prisma.ChecklistTemplateItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistTemplateItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChecklistTemplateItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ChecklistTemplateItemCountAggregateOutputType> | number
+          }
+        }
+      }
+    }
+  } & {
+    other: {
+      payload: any
+      operations: {
+        $executeRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $executeRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+        $queryRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $queryRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+      }
+    }
+  }
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export type DefaultPrismaClient = PrismaClient
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+  export interface PrismaClientOptions {
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasources?: Datasources
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasourceUrl?: string
+    /**
+     * @default "colorless"
+     */
+    errorFormat?: ErrorFormat
+    /**
+     * @example
+     * ```
+     * // Shorthand for `emit: 'stdout'`
+     * log: ['query', 'info', 'warn', 'error']
+     * 
+     * // Emit as events only
+     * log: [
+     *   { emit: 'event', level: 'query' },
+     *   { emit: 'event', level: 'info' },
+     *   { emit: 'event', level: 'warn' }
+     *   { emit: 'event', level: 'error' }
+     * ]
+     * 
+     * / Emit as events and log to stdout
+     * og: [
+     *  { emit: 'stdout', level: 'query' },
+     *  { emit: 'stdout', level: 'info' },
+     *  { emit: 'stdout', level: 'warn' }
+     *  { emit: 'stdout', level: 'error' }
+     * 
+     * ```
+     * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+     */
+    log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
+    /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory | null
+    /**
+     * Global configuration for omitting model fields by default.
+     * 
+     * @example
+     * ```
+     * const prisma = new PrismaClient({
+     *   omit: {
+     *     user: {
+     *       password: true
+     *     }
+     *   }
+     * })
+     * ```
+     */
+    omit?: Prisma.GlobalOmitConfig
+  }
+  export type GlobalOmitConfig = {
+    admin?: AdminOmit
+    client?: ClientOmit
+    clientUser?: ClientUserOmit
+    ticket?: TicketOmit
+    timeEntry?: TimeEntryOmit
+    invoice?: InvoiceOmit
+    asset?: AssetOmit
+    contract?: ContractOmit
+    visit?: VisitOmit
+    checklistItem?: ChecklistItemOmit
+    checklistTemplate?: ChecklistTemplateOmit
+    checklistTemplateItem?: ChecklistTemplateItemOmit
+  }
+
+  /* Types for Logging */
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogDefinition = {
+    level: LogLevel
+    emit: 'stdout' | 'event'
+  }
+
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+  export type GetLogType<T> = CheckIsLogLevel<
+    T extends LogDefinition ? T['level'] : T
+  >;
+
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
+
+  export type QueryEvent = {
+    timestamp: Date
+    query: string
+    params: string
+    duration: number
+    target: string
+  }
+
+  export type LogEvent = {
+    timestamp: Date
+    message: string
+    target: string
+  }
+  /* End Types for Logging */
+
+
+  export type PrismaAction =
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
+
+  // tested in getLogLevel.test.ts
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+
+  /**
+   * `PrismaClient` proxy available in interactive transactions.
+   */
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
+
+  export type Datasource = {
+    url?: string
+  }
+
+  /**
+   * Count Types
+   */
+
+
+  /**
+   * Count Type ClientCountOutputType
+   */
+
+  export type ClientCountOutputType = {
+    users: number
+    tickets: number
+    timeEntries: number
+    invoices: number
+    assets: number
+    contracts: number
+    visits: number
+    checklistTemplates: number
+  }
+
+  export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | ClientCountOutputTypeCountUsersArgs
+    tickets?: boolean | ClientCountOutputTypeCountTicketsArgs
+    timeEntries?: boolean | ClientCountOutputTypeCountTimeEntriesArgs
+    invoices?: boolean | ClientCountOutputTypeCountInvoicesArgs
+    assets?: boolean | ClientCountOutputTypeCountAssetsArgs
+    contracts?: boolean | ClientCountOutputTypeCountContractsArgs
+    visits?: boolean | ClientCountOutputTypeCountVisitsArgs
+    checklistTemplates?: boolean | ClientCountOutputTypeCountChecklistTemplatesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientCountOutputType
+     */
+    select?: ClientCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientUserWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountTimeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeEntryWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountContractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContractWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountVisitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VisitWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountChecklistTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistTemplateWhereInput
+  }
+
+
+  /**
+   * Count Type TicketCountOutputType
+   */
+
+  export type TicketCountOutputType = {
+    timeEntries: number
+  }
+
+  export type TicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeEntries?: boolean | TicketCountOutputTypeCountTimeEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TicketCountOutputType without action
+   */
+  export type TicketCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketCountOutputType
+     */
+    select?: TicketCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TicketCountOutputType without action
+   */
+  export type TicketCountOutputTypeCountTimeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeEntryWhereInput
+  }
+
+
+  /**
+   * Count Type InvoiceCountOutputType
+   */
+
+  export type InvoiceCountOutputType = {
+    timeEntries: number
+  }
+
+  export type InvoiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeEntries?: boolean | InvoiceCountOutputTypeCountTimeEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceCountOutputType
+     */
+    select?: InvoiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeCountTimeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeEntryWhereInput
+  }
+
+
+  /**
+   * Count Type VisitCountOutputType
+   */
+
+  export type VisitCountOutputType = {
+    checklistItems: number
+    tickets: number
+  }
+
+  export type VisitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checklistItems?: boolean | VisitCountOutputTypeCountChecklistItemsArgs
+    tickets?: boolean | VisitCountOutputTypeCountTicketsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VisitCountOutputType without action
+   */
+  export type VisitCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VisitCountOutputType
+     */
+    select?: VisitCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VisitCountOutputType without action
+   */
+  export type VisitCountOutputTypeCountChecklistItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistItemWhereInput
+  }
+
+  /**
+   * VisitCountOutputType without action
+   */
+  export type VisitCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+
+  /**
+   * Count Type ChecklistTemplateCountOutputType
+   */
+
+  export type ChecklistTemplateCountOutputType = {
+    items: number
+  }
+
+  export type ChecklistTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ChecklistTemplateCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChecklistTemplateCountOutputType without action
+   */
+  export type ChecklistTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateCountOutputType
+     */
+    select?: ChecklistTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChecklistTemplateCountOutputType without action
+   */
+  export type ChecklistTemplateCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistTemplateItemWhereInput
+  }
+
+
+  /**
+   * Count Type ChecklistTemplateItemCountOutputType
+   */
+
+  export type ChecklistTemplateItemCountOutputType = {
+    checklistItems: number
+  }
+
+  export type ChecklistTemplateItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checklistItems?: boolean | ChecklistTemplateItemCountOutputTypeCountChecklistItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChecklistTemplateItemCountOutputType without action
+   */
+  export type ChecklistTemplateItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItemCountOutputType
+     */
+    select?: ChecklistTemplateItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChecklistTemplateItemCountOutputType without action
+   */
+  export type ChecklistTemplateItemCountOutputTypeCountChecklistItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistItemWhereInput
+  }
+
+
+  /**
+   * Models
+   */
+
+  /**
+   * Model Admin
+   */
+
+  export type AggregateAdmin = {
+    _count: AdminCountAggregateOutputType | null
+    _min: AdminMinAggregateOutputType | null
+    _max: AdminMaxAggregateOutputType | null
+  }
+
+  export type AdminMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    passwordHash: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdminMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    passwordHash: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdminCountAggregateOutputType = {
+    id: number
+    email: number
+    passwordHash: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdminMinAggregateInputType = {
+    id?: true
+    email?: true
+    passwordHash?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdminMaxAggregateInputType = {
+    id?: true
+    email?: true
+    passwordHash?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdminCountAggregateInputType = {
+    id?: true
+    email?: true
+    passwordHash?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admin to aggregate.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Admins
+    **/
+    _count?: true | AdminCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminMaxAggregateInputType
+  }
+
+  export type GetAdminAggregateType<T extends AdminAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdmin]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdmin[P]>
+      : GetScalarType<T[P], AggregateAdmin[P]>
+  }
+
+
+
+
+  export type AdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminWhereInput
+    orderBy?: AdminOrderByWithAggregationInput | AdminOrderByWithAggregationInput[]
+    by: AdminScalarFieldEnum[] | AdminScalarFieldEnum
+    having?: AdminScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminCountAggregateInputType | true
+    _min?: AdminMinAggregateInputType
+    _max?: AdminMaxAggregateInputType
+  }
+
+  export type AdminGroupByOutputType = {
+    id: string
+    email: string
+    passwordHash: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AdminCountAggregateOutputType | null
+    _min: AdminMinAggregateOutputType | null
+    _max: AdminMaxAggregateOutputType | null
+  }
+
+  type GetAdminGroupByPayload<T extends AdminGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["admin"]>
+
+
+
+  export type AdminSelectScalar = {
+    id?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
+
+  export type $AdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Admin"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      passwordHash: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["admin"]>
+    composites: {}
+  }
+
+  type AdminGetPayload<S extends boolean | null | undefined | AdminDefaultArgs> = $Result.GetResult<Prisma.$AdminPayload, S>
+
+  type AdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminCountAggregateInputType | true
+    }
+
+  export interface AdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Admin'], meta: { name: 'Admin' } }
+    /**
+     * Find zero or one Admin that matches the filter.
+     * @param {AdminFindUniqueArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminFindUniqueArgs>(args: SelectSubset<T, AdminFindUniqueArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Admin that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminFindUniqueOrThrowArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admin that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindFirstArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminFindFirstArgs>(args?: SelectSubset<T, AdminFindFirstArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admin that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindFirstOrThrowArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Admins that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Admins
+     * const admins = await prisma.admin.findMany()
+     * 
+     * // Get first 10 Admins
+     * const admins = await prisma.admin.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminWithIdOnly = await prisma.admin.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminFindManyArgs>(args?: SelectSubset<T, AdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Admin.
+     * @param {AdminCreateArgs} args - Arguments to create a Admin.
+     * @example
+     * // Create one Admin
+     * const Admin = await prisma.admin.create({
+     *   data: {
+     *     // ... data to create a Admin
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminCreateArgs>(args: SelectSubset<T, AdminCreateArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Admins.
+     * @param {AdminCreateManyArgs} args - Arguments to create many Admins.
+     * @example
+     * // Create many Admins
+     * const admin = await prisma.admin.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminCreateManyArgs>(args?: SelectSubset<T, AdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Admin.
+     * @param {AdminDeleteArgs} args - Arguments to delete one Admin.
+     * @example
+     * // Delete one Admin
+     * const Admin = await prisma.admin.delete({
+     *   where: {
+     *     // ... filter to delete one Admin
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminDeleteArgs>(args: SelectSubset<T, AdminDeleteArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Admin.
+     * @param {AdminUpdateArgs} args - Arguments to update one Admin.
+     * @example
+     * // Update one Admin
+     * const admin = await prisma.admin.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminUpdateArgs>(args: SelectSubset<T, AdminUpdateArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Admins.
+     * @param {AdminDeleteManyArgs} args - Arguments to filter Admins to delete.
+     * @example
+     * // Delete a few Admins
+     * const { count } = await prisma.admin.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminDeleteManyArgs>(args?: SelectSubset<T, AdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Admins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Admins
+     * const admin = await prisma.admin.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminUpdateManyArgs>(args: SelectSubset<T, AdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Admin.
+     * @param {AdminUpsertArgs} args - Arguments to update or create a Admin.
+     * @example
+     * // Update or create a Admin
+     * const admin = await prisma.admin.upsert({
+     *   create: {
+     *     // ... data to create a Admin
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Admin we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminUpsertArgs>(args: SelectSubset<T, AdminUpsertArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Admins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminCountArgs} args - Arguments to filter Admins to count.
+     * @example
+     * // Count the number of Admins
+     * const count = await prisma.admin.count({
+     *   where: {
+     *     // ... the filter for the Admins we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminCountArgs>(
+      args?: Subset<T, AdminCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Admin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminAggregateArgs>(args: Subset<T, AdminAggregateArgs>): Prisma.PrismaPromise<GetAdminAggregateType<T>>
+
+    /**
+     * Group by Admin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminGroupByArgs['orderBy'] }
+        : { orderBy?: AdminGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Admin model
+   */
+  readonly fields: AdminFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Admin.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Admin model
+   */
+  interface AdminFieldRefs {
+    readonly id: FieldRef<"Admin", 'String'>
+    readonly email: FieldRef<"Admin", 'String'>
+    readonly passwordHash: FieldRef<"Admin", 'String'>
+    readonly createdAt: FieldRef<"Admin", 'DateTime'>
+    readonly updatedAt: FieldRef<"Admin", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Admin findUnique
+   */
+  export type AdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin findUniqueOrThrow
+   */
+  export type AdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin findFirst
+   */
+  export type AdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admins.
+     */
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin findFirstOrThrow
+   */
+  export type AdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admins.
+     */
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin findMany
+   */
+  export type AdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter, which Admins to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin create
+   */
+  export type AdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Admin.
+     */
+    data: XOR<AdminCreateInput, AdminUncheckedCreateInput>
+  }
+
+  /**
+   * Admin createMany
+   */
+  export type AdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Admins.
+     */
+    data: AdminCreateManyInput | AdminCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Admin update
+   */
+  export type AdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Admin.
+     */
+    data: XOR<AdminUpdateInput, AdminUncheckedUpdateInput>
+    /**
+     * Choose, which Admin to update.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin updateMany
+   */
+  export type AdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Admins.
+     */
+    data: XOR<AdminUpdateManyMutationInput, AdminUncheckedUpdateManyInput>
+    /**
+     * Filter which Admins to update
+     */
+    where?: AdminWhereInput
+    /**
+     * Limit how many Admins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admin upsert
+   */
+  export type AdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Admin to update in case it exists.
+     */
+    where: AdminWhereUniqueInput
+    /**
+     * In case the Admin found by the `where` argument doesn't exist, create a new Admin with this data.
+     */
+    create: XOR<AdminCreateInput, AdminUncheckedCreateInput>
+    /**
+     * In case the Admin was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminUpdateInput, AdminUncheckedUpdateInput>
+  }
+
+  /**
+   * Admin delete
+   */
+  export type AdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Filter which Admin to delete.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin deleteMany
+   */
+  export type AdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admins to delete
+     */
+    where?: AdminWhereInput
+    /**
+     * Limit how many Admins to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admin without action
+   */
+  export type AdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Client
+   */
+
+  export type AggregateClient = {
+    _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
+    _min: ClientMinAggregateOutputType | null
+    _max: ClientMaxAggregateOutputType | null
+  }
+
+  export type ClientAvgAggregateOutputType = {
+    retainerHours: number | null
+    retainerFee: Decimal | null
+    hourlyRate: Decimal | null
+  }
+
+  export type ClientSumAggregateOutputType = {
+    retainerHours: number | null
+    retainerFee: Decimal | null
+    hourlyRate: Decimal | null
+  }
+
+  export type ClientMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    vatNumber: string | null
+    address: string | null
+    city: string | null
+    language: string | null
+    contractType: string | null
+    retainerHours: number | null
+    retainerFee: Decimal | null
+    hourlyRate: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    vatNumber: string | null
+    address: string | null
+    city: string | null
+    language: string | null
+    contractType: string | null
+    retainerHours: number | null
+    retainerFee: Decimal | null
+    hourlyRate: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    vatNumber: number
+    address: number
+    city: number
+    language: number
+    contractType: number
+    retainerHours: number
+    retainerFee: number
+    hourlyRate: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClientAvgAggregateInputType = {
+    retainerHours?: true
+    retainerFee?: true
+    hourlyRate?: true
+  }
+
+  export type ClientSumAggregateInputType = {
+    retainerHours?: true
+    retainerFee?: true
+    hourlyRate?: true
+  }
+
+  export type ClientMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    vatNumber?: true
+    address?: true
+    city?: true
+    language?: true
+    contractType?: true
+    retainerHours?: true
+    retainerFee?: true
+    hourlyRate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    vatNumber?: true
+    address?: true
+    city?: true
+    language?: true
+    contractType?: true
+    retainerHours?: true
+    retainerFee?: true
+    hourlyRate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    vatNumber?: true
+    address?: true
+    city?: true
+    language?: true
+    contractType?: true
+    retainerHours?: true
+    retainerFee?: true
+    hourlyRate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Client to aggregate.
+     */
+    where?: ClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clients to fetch.
+     */
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Clients
+    **/
+    _count?: true | ClientCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClientAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientMaxAggregateInputType
+  }
+
+  export type GetClientAggregateType<T extends ClientAggregateArgs> = {
+        [P in keyof T & keyof AggregateClient]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClient[P]>
+      : GetScalarType<T[P], AggregateClient[P]>
+  }
+
+
+
+
+  export type ClientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientWhereInput
+    orderBy?: ClientOrderByWithAggregationInput | ClientOrderByWithAggregationInput[]
+    by: ClientScalarFieldEnum[] | ClientScalarFieldEnum
+    having?: ClientScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientCountAggregateInputType | true
+    _avg?: ClientAvgAggregateInputType
+    _sum?: ClientSumAggregateInputType
+    _min?: ClientMinAggregateInputType
+    _max?: ClientMaxAggregateInputType
+  }
+
+  export type ClientGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    vatNumber: string | null
+    address: string | null
+    city: string | null
+    language: string
+    contractType: string
+    retainerHours: number | null
+    retainerFee: Decimal | null
+    hourlyRate: Decimal
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
+    _min: ClientMinAggregateOutputType | null
+    _max: ClientMaxAggregateOutputType | null
+  }
+
+  type GetClientGroupByPayload<T extends ClientGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    vatNumber?: boolean
+    address?: boolean
+    city?: boolean
+    language?: boolean
+    contractType?: boolean
+    retainerHours?: boolean
+    retainerFee?: boolean
+    hourlyRate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    users?: boolean | Client$usersArgs<ExtArgs>
+    tickets?: boolean | Client$ticketsArgs<ExtArgs>
+    timeEntries?: boolean | Client$timeEntriesArgs<ExtArgs>
+    invoices?: boolean | Client$invoicesArgs<ExtArgs>
+    assets?: boolean | Client$assetsArgs<ExtArgs>
+    contracts?: boolean | Client$contractsArgs<ExtArgs>
+    visits?: boolean | Client$visitsArgs<ExtArgs>
+    checklistTemplates?: boolean | Client$checklistTemplatesArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["client"]>
+
+
+
+  export type ClientSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    vatNumber?: boolean
+    address?: boolean
+    city?: boolean
+    language?: boolean
+    contractType?: boolean
+    retainerHours?: boolean
+    retainerFee?: boolean
+    hourlyRate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "vatNumber" | "address" | "city" | "language" | "contractType" | "retainerHours" | "retainerFee" | "hourlyRate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
+  export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | Client$usersArgs<ExtArgs>
+    tickets?: boolean | Client$ticketsArgs<ExtArgs>
+    timeEntries?: boolean | Client$timeEntriesArgs<ExtArgs>
+    invoices?: boolean | Client$invoicesArgs<ExtArgs>
+    assets?: boolean | Client$assetsArgs<ExtArgs>
+    contracts?: boolean | Client$contractsArgs<ExtArgs>
+    visits?: boolean | Client$visitsArgs<ExtArgs>
+    checklistTemplates?: boolean | Client$checklistTemplatesArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Client"
+    objects: {
+      users: Prisma.$ClientUserPayload<ExtArgs>[]
+      tickets: Prisma.$TicketPayload<ExtArgs>[]
+      timeEntries: Prisma.$TimeEntryPayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+      assets: Prisma.$AssetPayload<ExtArgs>[]
+      contracts: Prisma.$ContractPayload<ExtArgs>[]
+      visits: Prisma.$VisitPayload<ExtArgs>[]
+      checklistTemplates: Prisma.$ChecklistTemplatePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      vatNumber: string | null
+      address: string | null
+      city: string | null
+      language: string
+      contractType: string
+      retainerHours: number | null
+      retainerFee: Prisma.Decimal | null
+      hourlyRate: Prisma.Decimal
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["client"]>
+    composites: {}
+  }
+
+  type ClientGetPayload<S extends boolean | null | undefined | ClientDefaultArgs> = $Result.GetResult<Prisma.$ClientPayload, S>
+
+  type ClientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientCountAggregateInputType | true
+    }
+
+  export interface ClientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Client'], meta: { name: 'Client' } }
+    /**
+     * Find zero or one Client that matches the filter.
+     * @param {ClientFindUniqueArgs} args - Arguments to find a Client
+     * @example
+     * // Get one Client
+     * const client = await prisma.client.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientFindUniqueArgs>(args: SelectSubset<T, ClientFindUniqueArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Client that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientFindUniqueOrThrowArgs} args - Arguments to find a Client
+     * @example
+     * // Get one Client
+     * const client = await prisma.client.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Client that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientFindFirstArgs} args - Arguments to find a Client
+     * @example
+     * // Get one Client
+     * const client = await prisma.client.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientFindFirstArgs>(args?: SelectSubset<T, ClientFindFirstArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Client that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientFindFirstOrThrowArgs} args - Arguments to find a Client
+     * @example
+     * // Get one Client
+     * const client = await prisma.client.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Clients that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Clients
+     * const clients = await prisma.client.findMany()
+     * 
+     * // Get first 10 Clients
+     * const clients = await prisma.client.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientWithIdOnly = await prisma.client.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientFindManyArgs>(args?: SelectSubset<T, ClientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Client.
+     * @param {ClientCreateArgs} args - Arguments to create a Client.
+     * @example
+     * // Create one Client
+     * const Client = await prisma.client.create({
+     *   data: {
+     *     // ... data to create a Client
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientCreateArgs>(args: SelectSubset<T, ClientCreateArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Clients.
+     * @param {ClientCreateManyArgs} args - Arguments to create many Clients.
+     * @example
+     * // Create many Clients
+     * const client = await prisma.client.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientCreateManyArgs>(args?: SelectSubset<T, ClientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Client.
+     * @param {ClientDeleteArgs} args - Arguments to delete one Client.
+     * @example
+     * // Delete one Client
+     * const Client = await prisma.client.delete({
+     *   where: {
+     *     // ... filter to delete one Client
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientDeleteArgs>(args: SelectSubset<T, ClientDeleteArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Client.
+     * @param {ClientUpdateArgs} args - Arguments to update one Client.
+     * @example
+     * // Update one Client
+     * const client = await prisma.client.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientUpdateArgs>(args: SelectSubset<T, ClientUpdateArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Clients.
+     * @param {ClientDeleteManyArgs} args - Arguments to filter Clients to delete.
+     * @example
+     * // Delete a few Clients
+     * const { count } = await prisma.client.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientDeleteManyArgs>(args?: SelectSubset<T, ClientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Clients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Clients
+     * const client = await prisma.client.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientUpdateManyArgs>(args: SelectSubset<T, ClientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Client.
+     * @param {ClientUpsertArgs} args - Arguments to update or create a Client.
+     * @example
+     * // Update or create a Client
+     * const client = await prisma.client.upsert({
+     *   create: {
+     *     // ... data to create a Client
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Client we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientUpsertArgs>(args: SelectSubset<T, ClientUpsertArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Clients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientCountArgs} args - Arguments to filter Clients to count.
+     * @example
+     * // Count the number of Clients
+     * const count = await prisma.client.count({
+     *   where: {
+     *     // ... the filter for the Clients we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientCountArgs>(
+      args?: Subset<T, ClientCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Client.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientAggregateArgs>(args: Subset<T, ClientAggregateArgs>): Prisma.PrismaPromise<GetClientAggregateType<T>>
+
+    /**
+     * Group by Client.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientGroupByArgs['orderBy'] }
+        : { orderBy?: ClientGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Client model
+   */
+  readonly fields: ClientFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Client.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends Client$usersArgs<ExtArgs> = {}>(args?: Subset<T, Client$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tickets<T extends Client$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Client$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    timeEntries<T extends Client$timeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Client$timeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends Client$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Client$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assets<T extends Client$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Client$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contracts<T extends Client$contractsArgs<ExtArgs> = {}>(args?: Subset<T, Client$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    visits<T extends Client$visitsArgs<ExtArgs> = {}>(args?: Subset<T, Client$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    checklistTemplates<T extends Client$checklistTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Client$checklistTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Client model
+   */
+  interface ClientFieldRefs {
+    readonly id: FieldRef<"Client", 'String'>
+    readonly name: FieldRef<"Client", 'String'>
+    readonly slug: FieldRef<"Client", 'String'>
+    readonly vatNumber: FieldRef<"Client", 'String'>
+    readonly address: FieldRef<"Client", 'String'>
+    readonly city: FieldRef<"Client", 'String'>
+    readonly language: FieldRef<"Client", 'String'>
+    readonly contractType: FieldRef<"Client", 'String'>
+    readonly retainerHours: FieldRef<"Client", 'Int'>
+    readonly retainerFee: FieldRef<"Client", 'Decimal'>
+    readonly hourlyRate: FieldRef<"Client", 'Decimal'>
+    readonly isActive: FieldRef<"Client", 'Boolean'>
+    readonly createdAt: FieldRef<"Client", 'DateTime'>
+    readonly updatedAt: FieldRef<"Client", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Client findUnique
+   */
+  export type ClientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter, which Client to fetch.
+     */
+    where: ClientWhereUniqueInput
+  }
+
+  /**
+   * Client findUniqueOrThrow
+   */
+  export type ClientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter, which Client to fetch.
+     */
+    where: ClientWhereUniqueInput
+  }
+
+  /**
+   * Client findFirst
+   */
+  export type ClientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter, which Client to fetch.
+     */
+    where?: ClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clients to fetch.
+     */
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Clients.
+     */
+    cursor?: ClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Clients.
+     */
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
+  }
+
+  /**
+   * Client findFirstOrThrow
+   */
+  export type ClientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter, which Client to fetch.
+     */
+    where?: ClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clients to fetch.
+     */
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Clients.
+     */
+    cursor?: ClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Clients.
+     */
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
+  }
+
+  /**
+   * Client findMany
+   */
+  export type ClientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter, which Clients to fetch.
+     */
+    where?: ClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clients to fetch.
+     */
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Clients.
+     */
+    cursor?: ClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clients.
+     */
+    skip?: number
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
+  }
+
+  /**
+   * Client create
+   */
+  export type ClientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Client.
+     */
+    data: XOR<ClientCreateInput, ClientUncheckedCreateInput>
+  }
+
+  /**
+   * Client createMany
+   */
+  export type ClientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Clients.
+     */
+    data: ClientCreateManyInput | ClientCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Client update
+   */
+  export type ClientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Client.
+     */
+    data: XOR<ClientUpdateInput, ClientUncheckedUpdateInput>
+    /**
+     * Choose, which Client to update.
+     */
+    where: ClientWhereUniqueInput
+  }
+
+  /**
+   * Client updateMany
+   */
+  export type ClientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Clients.
+     */
+    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyInput>
+    /**
+     * Filter which Clients to update
+     */
+    where?: ClientWhereInput
+    /**
+     * Limit how many Clients to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Client upsert
+   */
+  export type ClientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Client to update in case it exists.
+     */
+    where: ClientWhereUniqueInput
+    /**
+     * In case the Client found by the `where` argument doesn't exist, create a new Client with this data.
+     */
+    create: XOR<ClientCreateInput, ClientUncheckedCreateInput>
+    /**
+     * In case the Client was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientUpdateInput, ClientUncheckedUpdateInput>
+  }
+
+  /**
+   * Client delete
+   */
+  export type ClientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    /**
+     * Filter which Client to delete.
+     */
+    where: ClientWhereUniqueInput
+  }
+
+  /**
+   * Client deleteMany
+   */
+  export type ClientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Clients to delete
+     */
+    where?: ClientWhereInput
+    /**
+     * Limit how many Clients to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Client.users
+   */
+  export type Client$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    where?: ClientUserWhereInput
+    orderBy?: ClientUserOrderByWithRelationInput | ClientUserOrderByWithRelationInput[]
+    cursor?: ClientUserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientUserScalarFieldEnum | ClientUserScalarFieldEnum[]
+  }
+
+  /**
+   * Client.tickets
+   */
+  export type Client$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Client.timeEntries
+   */
+  export type Client$timeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    where?: TimeEntryWhereInput
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    cursor?: TimeEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Client.invoices
+   */
+  export type Client$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Client.assets
+   */
+  export type Client$assetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    where?: AssetWhereInput
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    cursor?: AssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+  /**
+   * Client.contracts
+   */
+  export type Client$contractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    where?: ContractWhereInput
+    orderBy?: ContractOrderByWithRelationInput | ContractOrderByWithRelationInput[]
+    cursor?: ContractWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContractScalarFieldEnum | ContractScalarFieldEnum[]
+  }
+
+  /**
+   * Client.visits
+   */
+  export type Client$visitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    where?: VisitWhereInput
+    orderBy?: VisitOrderByWithRelationInput | VisitOrderByWithRelationInput[]
+    cursor?: VisitWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VisitScalarFieldEnum | VisitScalarFieldEnum[]
+  }
+
+  /**
+   * Client.checklistTemplates
+   */
+  export type Client$checklistTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    where?: ChecklistTemplateWhereInput
+    orderBy?: ChecklistTemplateOrderByWithRelationInput | ChecklistTemplateOrderByWithRelationInput[]
+    cursor?: ChecklistTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChecklistTemplateScalarFieldEnum | ChecklistTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * Client without action
+   */
+  export type ClientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientUser
+   */
+
+  export type AggregateClientUser = {
+    _count: ClientUserCountAggregateOutputType | null
+    _min: ClientUserMinAggregateOutputType | null
+    _max: ClientUserMaxAggregateOutputType | null
+  }
+
+  export type ClientUserMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    email: string | null
+    passwordHash: string | null
+    role: string | null
+    portalToken: string | null
+    tokenExpiresAt: Date | null
+    lastLoginAt: Date | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientUserMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    email: string | null
+    passwordHash: string | null
+    role: string | null
+    portalToken: string | null
+    tokenExpiresAt: Date | null
+    lastLoginAt: Date | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientUserCountAggregateOutputType = {
+    id: number
+    clientId: number
+    name: number
+    email: number
+    passwordHash: number
+    role: number
+    portalToken: number
+    tokenExpiresAt: number
+    lastLoginAt: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClientUserMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    email?: true
+    passwordHash?: true
+    role?: true
+    portalToken?: true
+    tokenExpiresAt?: true
+    lastLoginAt?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientUserMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    email?: true
+    passwordHash?: true
+    role?: true
+    portalToken?: true
+    tokenExpiresAt?: true
+    lastLoginAt?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientUserCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    email?: true
+    passwordHash?: true
+    role?: true
+    portalToken?: true
+    tokenExpiresAt?: true
+    lastLoginAt?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClientUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientUser to aggregate.
+     */
+    where?: ClientUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientUsers to fetch.
+     */
+    orderBy?: ClientUserOrderByWithRelationInput | ClientUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientUsers
+    **/
+    _count?: true | ClientUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientUserMaxAggregateInputType
+  }
+
+  export type GetClientUserAggregateType<T extends ClientUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientUser[P]>
+      : GetScalarType<T[P], AggregateClientUser[P]>
+  }
+
+
+
+
+  export type ClientUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientUserWhereInput
+    orderBy?: ClientUserOrderByWithAggregationInput | ClientUserOrderByWithAggregationInput[]
+    by: ClientUserScalarFieldEnum[] | ClientUserScalarFieldEnum
+    having?: ClientUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientUserCountAggregateInputType | true
+    _min?: ClientUserMinAggregateInputType
+    _max?: ClientUserMaxAggregateInputType
+  }
+
+  export type ClientUserGroupByOutputType = {
+    id: string
+    clientId: string
+    name: string
+    email: string
+    passwordHash: string | null
+    role: string
+    portalToken: string
+    tokenExpiresAt: Date | null
+    lastLoginAt: Date | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ClientUserCountAggregateOutputType | null
+    _min: ClientUserMinAggregateOutputType | null
+    _max: ClientUserMaxAggregateOutputType | null
+  }
+
+  type GetClientUserGroupByPayload<T extends ClientUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientUserGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    role?: boolean
+    portalToken?: boolean
+    tokenExpiresAt?: boolean
+    lastLoginAt?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientUser"]>
+
+
+
+  export type ClientUserSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    role?: boolean
+    portalToken?: boolean
+    tokenExpiresAt?: boolean
+    lastLoginAt?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClientUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "name" | "email" | "passwordHash" | "role" | "portalToken" | "tokenExpiresAt" | "lastLoginAt" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["clientUser"]>
+  export type ClientUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientUser"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      name: string
+      email: string
+      passwordHash: string | null
+      role: string
+      portalToken: string
+      tokenExpiresAt: Date | null
+      lastLoginAt: Date | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["clientUser"]>
+    composites: {}
+  }
+
+  type ClientUserGetPayload<S extends boolean | null | undefined | ClientUserDefaultArgs> = $Result.GetResult<Prisma.$ClientUserPayload, S>
+
+  type ClientUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientUserCountAggregateInputType | true
+    }
+
+  export interface ClientUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientUser'], meta: { name: 'ClientUser' } }
+    /**
+     * Find zero or one ClientUser that matches the filter.
+     * @param {ClientUserFindUniqueArgs} args - Arguments to find a ClientUser
+     * @example
+     * // Get one ClientUser
+     * const clientUser = await prisma.clientUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientUserFindUniqueArgs>(args: SelectSubset<T, ClientUserFindUniqueArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientUserFindUniqueOrThrowArgs} args - Arguments to find a ClientUser
+     * @example
+     * // Get one ClientUser
+     * const clientUser = await prisma.clientUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientUserFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserFindFirstArgs} args - Arguments to find a ClientUser
+     * @example
+     * // Get one ClientUser
+     * const clientUser = await prisma.clientUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientUserFindFirstArgs>(args?: SelectSubset<T, ClientUserFindFirstArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserFindFirstOrThrowArgs} args - Arguments to find a ClientUser
+     * @example
+     * // Get one ClientUser
+     * const clientUser = await prisma.clientUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientUserFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientUsers
+     * const clientUsers = await prisma.clientUser.findMany()
+     * 
+     * // Get first 10 ClientUsers
+     * const clientUsers = await prisma.clientUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientUserWithIdOnly = await prisma.clientUser.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientUserFindManyArgs>(args?: SelectSubset<T, ClientUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientUser.
+     * @param {ClientUserCreateArgs} args - Arguments to create a ClientUser.
+     * @example
+     * // Create one ClientUser
+     * const ClientUser = await prisma.clientUser.create({
+     *   data: {
+     *     // ... data to create a ClientUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientUserCreateArgs>(args: SelectSubset<T, ClientUserCreateArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientUsers.
+     * @param {ClientUserCreateManyArgs} args - Arguments to create many ClientUsers.
+     * @example
+     * // Create many ClientUsers
+     * const clientUser = await prisma.clientUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientUserCreateManyArgs>(args?: SelectSubset<T, ClientUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ClientUser.
+     * @param {ClientUserDeleteArgs} args - Arguments to delete one ClientUser.
+     * @example
+     * // Delete one ClientUser
+     * const ClientUser = await prisma.clientUser.delete({
+     *   where: {
+     *     // ... filter to delete one ClientUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientUserDeleteArgs>(args: SelectSubset<T, ClientUserDeleteArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientUser.
+     * @param {ClientUserUpdateArgs} args - Arguments to update one ClientUser.
+     * @example
+     * // Update one ClientUser
+     * const clientUser = await prisma.clientUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientUserUpdateArgs>(args: SelectSubset<T, ClientUserUpdateArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientUsers.
+     * @param {ClientUserDeleteManyArgs} args - Arguments to filter ClientUsers to delete.
+     * @example
+     * // Delete a few ClientUsers
+     * const { count } = await prisma.clientUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientUserDeleteManyArgs>(args?: SelectSubset<T, ClientUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientUsers
+     * const clientUser = await prisma.clientUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientUserUpdateManyArgs>(args: SelectSubset<T, ClientUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ClientUser.
+     * @param {ClientUserUpsertArgs} args - Arguments to update or create a ClientUser.
+     * @example
+     * // Update or create a ClientUser
+     * const clientUser = await prisma.clientUser.upsert({
+     *   create: {
+     *     // ... data to create a ClientUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientUserUpsertArgs>(args: SelectSubset<T, ClientUserUpsertArgs<ExtArgs>>): Prisma__ClientUserClient<$Result.GetResult<Prisma.$ClientUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserCountArgs} args - Arguments to filter ClientUsers to count.
+     * @example
+     * // Count the number of ClientUsers
+     * const count = await prisma.clientUser.count({
+     *   where: {
+     *     // ... the filter for the ClientUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientUserCountArgs>(
+      args?: Subset<T, ClientUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientUserAggregateArgs>(args: Subset<T, ClientUserAggregateArgs>): Prisma.PrismaPromise<GetClientUserAggregateType<T>>
+
+    /**
+     * Group by ClientUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientUserGroupByArgs['orderBy'] }
+        : { orderBy?: ClientUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientUser model
+   */
+  readonly fields: ClientUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientUser model
+   */
+  interface ClientUserFieldRefs {
+    readonly id: FieldRef<"ClientUser", 'String'>
+    readonly clientId: FieldRef<"ClientUser", 'String'>
+    readonly name: FieldRef<"ClientUser", 'String'>
+    readonly email: FieldRef<"ClientUser", 'String'>
+    readonly passwordHash: FieldRef<"ClientUser", 'String'>
+    readonly role: FieldRef<"ClientUser", 'String'>
+    readonly portalToken: FieldRef<"ClientUser", 'String'>
+    readonly tokenExpiresAt: FieldRef<"ClientUser", 'DateTime'>
+    readonly lastLoginAt: FieldRef<"ClientUser", 'DateTime'>
+    readonly isActive: FieldRef<"ClientUser", 'Boolean'>
+    readonly createdAt: FieldRef<"ClientUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClientUser", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientUser findUnique
+   */
+  export type ClientUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientUser to fetch.
+     */
+    where: ClientUserWhereUniqueInput
+  }
+
+  /**
+   * ClientUser findUniqueOrThrow
+   */
+  export type ClientUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientUser to fetch.
+     */
+    where: ClientUserWhereUniqueInput
+  }
+
+  /**
+   * ClientUser findFirst
+   */
+  export type ClientUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientUser to fetch.
+     */
+    where?: ClientUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientUsers to fetch.
+     */
+    orderBy?: ClientUserOrderByWithRelationInput | ClientUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientUsers.
+     */
+    cursor?: ClientUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientUsers.
+     */
+    distinct?: ClientUserScalarFieldEnum | ClientUserScalarFieldEnum[]
+  }
+
+  /**
+   * ClientUser findFirstOrThrow
+   */
+  export type ClientUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientUser to fetch.
+     */
+    where?: ClientUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientUsers to fetch.
+     */
+    orderBy?: ClientUserOrderByWithRelationInput | ClientUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientUsers.
+     */
+    cursor?: ClientUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientUsers.
+     */
+    distinct?: ClientUserScalarFieldEnum | ClientUserScalarFieldEnum[]
+  }
+
+  /**
+   * ClientUser findMany
+   */
+  export type ClientUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientUsers to fetch.
+     */
+    where?: ClientUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientUsers to fetch.
+     */
+    orderBy?: ClientUserOrderByWithRelationInput | ClientUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientUsers.
+     */
+    cursor?: ClientUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientUsers.
+     */
+    skip?: number
+    distinct?: ClientUserScalarFieldEnum | ClientUserScalarFieldEnum[]
+  }
+
+  /**
+   * ClientUser create
+   */
+  export type ClientUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientUser.
+     */
+    data: XOR<ClientUserCreateInput, ClientUserUncheckedCreateInput>
+  }
+
+  /**
+   * ClientUser createMany
+   */
+  export type ClientUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientUsers.
+     */
+    data: ClientUserCreateManyInput | ClientUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClientUser update
+   */
+  export type ClientUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientUser.
+     */
+    data: XOR<ClientUserUpdateInput, ClientUserUncheckedUpdateInput>
+    /**
+     * Choose, which ClientUser to update.
+     */
+    where: ClientUserWhereUniqueInput
+  }
+
+  /**
+   * ClientUser updateMany
+   */
+  export type ClientUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientUsers.
+     */
+    data: XOR<ClientUserUpdateManyMutationInput, ClientUserUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientUsers to update
+     */
+    where?: ClientUserWhereInput
+    /**
+     * Limit how many ClientUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientUser upsert
+   */
+  export type ClientUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientUser to update in case it exists.
+     */
+    where: ClientUserWhereUniqueInput
+    /**
+     * In case the ClientUser found by the `where` argument doesn't exist, create a new ClientUser with this data.
+     */
+    create: XOR<ClientUserCreateInput, ClientUserUncheckedCreateInput>
+    /**
+     * In case the ClientUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientUserUpdateInput, ClientUserUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientUser delete
+   */
+  export type ClientUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+    /**
+     * Filter which ClientUser to delete.
+     */
+    where: ClientUserWhereUniqueInput
+  }
+
+  /**
+   * ClientUser deleteMany
+   */
+  export type ClientUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientUsers to delete
+     */
+    where?: ClientUserWhereInput
+    /**
+     * Limit how many ClientUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientUser without action
+   */
+  export type ClientUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientUser
+     */
+    select?: ClientUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientUser
+     */
+    omit?: ClientUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientUserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Ticket
+   */
+
+  export type AggregateTicket = {
+    _count: TicketCountAggregateOutputType | null
+    _min: TicketMinAggregateOutputType | null
+    _max: TicketMaxAggregateOutputType | null
+  }
+
+  export type TicketMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    visitId: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    status: string | null
+    priority: string | null
+    source: string | null
+    sourceRef: string | null
+    isBillable: boolean | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TicketMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    visitId: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    status: string | null
+    priority: string | null
+    source: string | null
+    sourceRef: string | null
+    isBillable: boolean | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TicketCountAggregateOutputType = {
+    id: number
+    clientId: number
+    visitId: number
+    reference: number
+    title: number
+    description: number
+    status: number
+    priority: number
+    source: number
+    sourceRef: number
+    isBillable: number
+    resolvedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TicketMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    visitId?: true
+    reference?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    source?: true
+    sourceRef?: true
+    isBillable?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TicketMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    visitId?: true
+    reference?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    source?: true
+    sourceRef?: true
+    isBillable?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TicketCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    visitId?: true
+    reference?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    source?: true
+    sourceRef?: true
+    isBillable?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TicketAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Ticket to aggregate.
+     */
+    where?: TicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tickets to fetch.
+     */
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tickets
+    **/
+    _count?: true | TicketCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TicketMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TicketMaxAggregateInputType
+  }
+
+  export type GetTicketAggregateType<T extends TicketAggregateArgs> = {
+        [P in keyof T & keyof AggregateTicket]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTicket[P]>
+      : GetScalarType<T[P], AggregateTicket[P]>
+  }
+
+
+
+
+  export type TicketGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithAggregationInput | TicketOrderByWithAggregationInput[]
+    by: TicketScalarFieldEnum[] | TicketScalarFieldEnum
+    having?: TicketScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TicketCountAggregateInputType | true
+    _min?: TicketMinAggregateInputType
+    _max?: TicketMaxAggregateInputType
+  }
+
+  export type TicketGroupByOutputType = {
+    id: string
+    clientId: string
+    visitId: string | null
+    reference: string
+    title: string
+    description: string | null
+    status: string
+    priority: string
+    source: string
+    sourceRef: string | null
+    isBillable: boolean
+    resolvedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TicketCountAggregateOutputType | null
+    _min: TicketMinAggregateOutputType | null
+    _max: TicketMaxAggregateOutputType | null
+  }
+
+  type GetTicketGroupByPayload<T extends TicketGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TicketGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TicketGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TicketGroupByOutputType[P]>
+            : GetScalarType<T[P], TicketGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TicketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    visitId?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    source?: boolean
+    sourceRef?: boolean
+    isBillable?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    visit?: boolean | Ticket$visitArgs<ExtArgs>
+    timeEntries?: boolean | Ticket$timeEntriesArgs<ExtArgs>
+    _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticket"]>
+
+
+
+  export type TicketSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    visitId?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    source?: boolean
+    sourceRef?: boolean
+    isBillable?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "visitId" | "reference" | "title" | "description" | "status" | "priority" | "source" | "sourceRef" | "isBillable" | "resolvedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["ticket"]>
+  export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    visit?: boolean | Ticket$visitArgs<ExtArgs>
+    timeEntries?: boolean | Ticket$timeEntriesArgs<ExtArgs>
+    _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $TicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Ticket"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      visit: Prisma.$VisitPayload<ExtArgs> | null
+      timeEntries: Prisma.$TimeEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      visitId: string | null
+      reference: string
+      title: string
+      description: string | null
+      status: string
+      priority: string
+      source: string
+      sourceRef: string | null
+      isBillable: boolean
+      resolvedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["ticket"]>
+    composites: {}
+  }
+
+  type TicketGetPayload<S extends boolean | null | undefined | TicketDefaultArgs> = $Result.GetResult<Prisma.$TicketPayload, S>
+
+  type TicketCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TicketFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TicketCountAggregateInputType | true
+    }
+
+  export interface TicketDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ticket'], meta: { name: 'Ticket' } }
+    /**
+     * Find zero or one Ticket that matches the filter.
+     * @param {TicketFindUniqueArgs} args - Arguments to find a Ticket
+     * @example
+     * // Get one Ticket
+     * const ticket = await prisma.ticket.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TicketFindUniqueArgs>(args: SelectSubset<T, TicketFindUniqueArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Ticket that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TicketFindUniqueOrThrowArgs} args - Arguments to find a Ticket
+     * @example
+     * // Get one Ticket
+     * const ticket = await prisma.ticket.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TicketFindUniqueOrThrowArgs>(args: SelectSubset<T, TicketFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ticket that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketFindFirstArgs} args - Arguments to find a Ticket
+     * @example
+     * // Get one Ticket
+     * const ticket = await prisma.ticket.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TicketFindFirstArgs>(args?: SelectSubset<T, TicketFindFirstArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ticket that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketFindFirstOrThrowArgs} args - Arguments to find a Ticket
+     * @example
+     * // Get one Ticket
+     * const ticket = await prisma.ticket.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TicketFindFirstOrThrowArgs>(args?: SelectSubset<T, TicketFindFirstOrThrowArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tickets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tickets
+     * const tickets = await prisma.ticket.findMany()
+     * 
+     * // Get first 10 Tickets
+     * const tickets = await prisma.ticket.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ticketWithIdOnly = await prisma.ticket.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TicketFindManyArgs>(args?: SelectSubset<T, TicketFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Ticket.
+     * @param {TicketCreateArgs} args - Arguments to create a Ticket.
+     * @example
+     * // Create one Ticket
+     * const Ticket = await prisma.ticket.create({
+     *   data: {
+     *     // ... data to create a Ticket
+     *   }
+     * })
+     * 
+     */
+    create<T extends TicketCreateArgs>(args: SelectSubset<T, TicketCreateArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tickets.
+     * @param {TicketCreateManyArgs} args - Arguments to create many Tickets.
+     * @example
+     * // Create many Tickets
+     * const ticket = await prisma.ticket.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TicketCreateManyArgs>(args?: SelectSubset<T, TicketCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Ticket.
+     * @param {TicketDeleteArgs} args - Arguments to delete one Ticket.
+     * @example
+     * // Delete one Ticket
+     * const Ticket = await prisma.ticket.delete({
+     *   where: {
+     *     // ... filter to delete one Ticket
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TicketDeleteArgs>(args: SelectSubset<T, TicketDeleteArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Ticket.
+     * @param {TicketUpdateArgs} args - Arguments to update one Ticket.
+     * @example
+     * // Update one Ticket
+     * const ticket = await prisma.ticket.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TicketUpdateArgs>(args: SelectSubset<T, TicketUpdateArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tickets.
+     * @param {TicketDeleteManyArgs} args - Arguments to filter Tickets to delete.
+     * @example
+     * // Delete a few Tickets
+     * const { count } = await prisma.ticket.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TicketDeleteManyArgs>(args?: SelectSubset<T, TicketDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tickets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tickets
+     * const ticket = await prisma.ticket.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TicketUpdateManyArgs>(args: SelectSubset<T, TicketUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Ticket.
+     * @param {TicketUpsertArgs} args - Arguments to update or create a Ticket.
+     * @example
+     * // Update or create a Ticket
+     * const ticket = await prisma.ticket.upsert({
+     *   create: {
+     *     // ... data to create a Ticket
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Ticket we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TicketUpsertArgs>(args: SelectSubset<T, TicketUpsertArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tickets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketCountArgs} args - Arguments to filter Tickets to count.
+     * @example
+     * // Count the number of Tickets
+     * const count = await prisma.ticket.count({
+     *   where: {
+     *     // ... the filter for the Tickets we want to count
+     *   }
+     * })
+    **/
+    count<T extends TicketCountArgs>(
+      args?: Subset<T, TicketCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TicketCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Ticket.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TicketAggregateArgs>(args: Subset<T, TicketAggregateArgs>): Prisma.PrismaPromise<GetTicketAggregateType<T>>
+
+    /**
+     * Group by Ticket.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TicketGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TicketGroupByArgs['orderBy'] }
+        : { orderBy?: TicketGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TicketGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTicketGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Ticket model
+   */
+  readonly fields: TicketFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Ticket.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TicketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    visit<T extends Ticket$visitArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$visitArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    timeEntries<T extends Ticket$timeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$timeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Ticket model
+   */
+  interface TicketFieldRefs {
+    readonly id: FieldRef<"Ticket", 'String'>
+    readonly clientId: FieldRef<"Ticket", 'String'>
+    readonly visitId: FieldRef<"Ticket", 'String'>
+    readonly reference: FieldRef<"Ticket", 'String'>
+    readonly title: FieldRef<"Ticket", 'String'>
+    readonly description: FieldRef<"Ticket", 'String'>
+    readonly status: FieldRef<"Ticket", 'String'>
+    readonly priority: FieldRef<"Ticket", 'String'>
+    readonly source: FieldRef<"Ticket", 'String'>
+    readonly sourceRef: FieldRef<"Ticket", 'String'>
+    readonly isBillable: FieldRef<"Ticket", 'Boolean'>
+    readonly resolvedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly createdAt: FieldRef<"Ticket", 'DateTime'>
+    readonly updatedAt: FieldRef<"Ticket", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Ticket findUnique
+   */
+  export type TicketFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter, which Ticket to fetch.
+     */
+    where: TicketWhereUniqueInput
+  }
+
+  /**
+   * Ticket findUniqueOrThrow
+   */
+  export type TicketFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter, which Ticket to fetch.
+     */
+    where: TicketWhereUniqueInput
+  }
+
+  /**
+   * Ticket findFirst
+   */
+  export type TicketFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter, which Ticket to fetch.
+     */
+    where?: TicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tickets to fetch.
+     */
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tickets.
+     */
+    cursor?: TicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tickets.
+     */
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Ticket findFirstOrThrow
+   */
+  export type TicketFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter, which Ticket to fetch.
+     */
+    where?: TicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tickets to fetch.
+     */
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tickets.
+     */
+    cursor?: TicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tickets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tickets.
+     */
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Ticket findMany
+   */
+  export type TicketFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter, which Tickets to fetch.
+     */
+    where?: TicketWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tickets to fetch.
+     */
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tickets.
+     */
+    cursor?: TicketWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tickets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tickets.
+     */
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Ticket create
+   */
+  export type TicketCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Ticket.
+     */
+    data: XOR<TicketCreateInput, TicketUncheckedCreateInput>
+  }
+
+  /**
+   * Ticket createMany
+   */
+  export type TicketCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tickets.
+     */
+    data: TicketCreateManyInput | TicketCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Ticket update
+   */
+  export type TicketUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Ticket.
+     */
+    data: XOR<TicketUpdateInput, TicketUncheckedUpdateInput>
+    /**
+     * Choose, which Ticket to update.
+     */
+    where: TicketWhereUniqueInput
+  }
+
+  /**
+   * Ticket updateMany
+   */
+  export type TicketUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tickets.
+     */
+    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyInput>
+    /**
+     * Filter which Tickets to update
+     */
+    where?: TicketWhereInput
+    /**
+     * Limit how many Tickets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Ticket upsert
+   */
+  export type TicketUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Ticket to update in case it exists.
+     */
+    where: TicketWhereUniqueInput
+    /**
+     * In case the Ticket found by the `where` argument doesn't exist, create a new Ticket with this data.
+     */
+    create: XOR<TicketCreateInput, TicketUncheckedCreateInput>
+    /**
+     * In case the Ticket was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TicketUpdateInput, TicketUncheckedUpdateInput>
+  }
+
+  /**
+   * Ticket delete
+   */
+  export type TicketDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    /**
+     * Filter which Ticket to delete.
+     */
+    where: TicketWhereUniqueInput
+  }
+
+  /**
+   * Ticket deleteMany
+   */
+  export type TicketDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tickets to delete
+     */
+    where?: TicketWhereInput
+    /**
+     * Limit how many Tickets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Ticket.visit
+   */
+  export type Ticket$visitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    where?: VisitWhereInput
+  }
+
+  /**
+   * Ticket.timeEntries
+   */
+  export type Ticket$timeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    where?: TimeEntryWhereInput
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    cursor?: TimeEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Ticket without action
+   */
+  export type TicketDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TimeEntry
+   */
+
+  export type AggregateTimeEntry = {
+    _count: TimeEntryCountAggregateOutputType | null
+    _avg: TimeEntryAvgAggregateOutputType | null
+    _sum: TimeEntrySumAggregateOutputType | null
+    _min: TimeEntryMinAggregateOutputType | null
+    _max: TimeEntryMaxAggregateOutputType | null
+  }
+
+  export type TimeEntryAvgAggregateOutputType = {
+    durationMinutes: number | null
+    hourlyRate: Decimal | null
+  }
+
+  export type TimeEntrySumAggregateOutputType = {
+    durationMinutes: number | null
+    hourlyRate: Decimal | null
+  }
+
+  export type TimeEntryMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    ticketId: string | null
+    invoiceId: string | null
+    description: string | null
+    durationMinutes: number | null
+    hourlyRate: Decimal | null
+    isBillable: boolean | null
+    isInvoiced: boolean | null
+    loggedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type TimeEntryMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    ticketId: string | null
+    invoiceId: string | null
+    description: string | null
+    durationMinutes: number | null
+    hourlyRate: Decimal | null
+    isBillable: boolean | null
+    isInvoiced: boolean | null
+    loggedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type TimeEntryCountAggregateOutputType = {
+    id: number
+    clientId: number
+    ticketId: number
+    invoiceId: number
+    description: number
+    durationMinutes: number
+    hourlyRate: number
+    isBillable: number
+    isInvoiced: number
+    loggedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TimeEntryAvgAggregateInputType = {
+    durationMinutes?: true
+    hourlyRate?: true
+  }
+
+  export type TimeEntrySumAggregateInputType = {
+    durationMinutes?: true
+    hourlyRate?: true
+  }
+
+  export type TimeEntryMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    ticketId?: true
+    invoiceId?: true
+    description?: true
+    durationMinutes?: true
+    hourlyRate?: true
+    isBillable?: true
+    isInvoiced?: true
+    loggedAt?: true
+    createdAt?: true
+  }
+
+  export type TimeEntryMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    ticketId?: true
+    invoiceId?: true
+    description?: true
+    durationMinutes?: true
+    hourlyRate?: true
+    isBillable?: true
+    isInvoiced?: true
+    loggedAt?: true
+    createdAt?: true
+  }
+
+  export type TimeEntryCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    ticketId?: true
+    invoiceId?: true
+    description?: true
+    durationMinutes?: true
+    hourlyRate?: true
+    isBillable?: true
+    isInvoiced?: true
+    loggedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TimeEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeEntry to aggregate.
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeEntries to fetch.
+     */
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TimeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TimeEntries
+    **/
+    _count?: true | TimeEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TimeEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TimeEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TimeEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TimeEntryMaxAggregateInputType
+  }
+
+  export type GetTimeEntryAggregateType<T extends TimeEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateTimeEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTimeEntry[P]>
+      : GetScalarType<T[P], AggregateTimeEntry[P]>
+  }
+
+
+
+
+  export type TimeEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeEntryWhereInput
+    orderBy?: TimeEntryOrderByWithAggregationInput | TimeEntryOrderByWithAggregationInput[]
+    by: TimeEntryScalarFieldEnum[] | TimeEntryScalarFieldEnum
+    having?: TimeEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TimeEntryCountAggregateInputType | true
+    _avg?: TimeEntryAvgAggregateInputType
+    _sum?: TimeEntrySumAggregateInputType
+    _min?: TimeEntryMinAggregateInputType
+    _max?: TimeEntryMaxAggregateInputType
+  }
+
+  export type TimeEntryGroupByOutputType = {
+    id: string
+    clientId: string
+    ticketId: string | null
+    invoiceId: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal
+    isBillable: boolean
+    isInvoiced: boolean
+    loggedAt: Date
+    createdAt: Date
+    _count: TimeEntryCountAggregateOutputType | null
+    _avg: TimeEntryAvgAggregateOutputType | null
+    _sum: TimeEntrySumAggregateOutputType | null
+    _min: TimeEntryMinAggregateOutputType | null
+    _max: TimeEntryMaxAggregateOutputType | null
+  }
+
+  type GetTimeEntryGroupByPayload<T extends TimeEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TimeEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TimeEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TimeEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], TimeEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TimeEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    ticketId?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    durationMinutes?: boolean
+    hourlyRate?: boolean
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt?: boolean
+    createdAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    ticket?: boolean | TimeEntry$ticketArgs<ExtArgs>
+    invoice?: boolean | TimeEntry$invoiceArgs<ExtArgs>
+  }, ExtArgs["result"]["timeEntry"]>
+
+
+
+  export type TimeEntrySelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    ticketId?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    durationMinutes?: boolean
+    hourlyRate?: boolean
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type TimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "ticketId" | "invoiceId" | "description" | "durationMinutes" | "hourlyRate" | "isBillable" | "isInvoiced" | "loggedAt" | "createdAt", ExtArgs["result"]["timeEntry"]>
+  export type TimeEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    ticket?: boolean | TimeEntry$ticketArgs<ExtArgs>
+    invoice?: boolean | TimeEntry$invoiceArgs<ExtArgs>
+  }
+
+  export type $TimeEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TimeEntry"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      ticket: Prisma.$TicketPayload<ExtArgs> | null
+      invoice: Prisma.$InvoicePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      ticketId: string | null
+      invoiceId: string | null
+      description: string
+      durationMinutes: number
+      hourlyRate: Prisma.Decimal
+      isBillable: boolean
+      isInvoiced: boolean
+      loggedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["timeEntry"]>
+    composites: {}
+  }
+
+  type TimeEntryGetPayload<S extends boolean | null | undefined | TimeEntryDefaultArgs> = $Result.GetResult<Prisma.$TimeEntryPayload, S>
+
+  type TimeEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TimeEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TimeEntryCountAggregateInputType | true
+    }
+
+  export interface TimeEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TimeEntry'], meta: { name: 'TimeEntry' } }
+    /**
+     * Find zero or one TimeEntry that matches the filter.
+     * @param {TimeEntryFindUniqueArgs} args - Arguments to find a TimeEntry
+     * @example
+     * // Get one TimeEntry
+     * const timeEntry = await prisma.timeEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TimeEntryFindUniqueArgs>(args: SelectSubset<T, TimeEntryFindUniqueArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TimeEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TimeEntryFindUniqueOrThrowArgs} args - Arguments to find a TimeEntry
+     * @example
+     * // Get one TimeEntry
+     * const timeEntry = await prisma.timeEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TimeEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, TimeEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryFindFirstArgs} args - Arguments to find a TimeEntry
+     * @example
+     * // Get one TimeEntry
+     * const timeEntry = await prisma.timeEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TimeEntryFindFirstArgs>(args?: SelectSubset<T, TimeEntryFindFirstArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryFindFirstOrThrowArgs} args - Arguments to find a TimeEntry
+     * @example
+     * // Get one TimeEntry
+     * const timeEntry = await prisma.timeEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TimeEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, TimeEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TimeEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TimeEntries
+     * const timeEntries = await prisma.timeEntry.findMany()
+     * 
+     * // Get first 10 TimeEntries
+     * const timeEntries = await prisma.timeEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const timeEntryWithIdOnly = await prisma.timeEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TimeEntryFindManyArgs>(args?: SelectSubset<T, TimeEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TimeEntry.
+     * @param {TimeEntryCreateArgs} args - Arguments to create a TimeEntry.
+     * @example
+     * // Create one TimeEntry
+     * const TimeEntry = await prisma.timeEntry.create({
+     *   data: {
+     *     // ... data to create a TimeEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends TimeEntryCreateArgs>(args: SelectSubset<T, TimeEntryCreateArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TimeEntries.
+     * @param {TimeEntryCreateManyArgs} args - Arguments to create many TimeEntries.
+     * @example
+     * // Create many TimeEntries
+     * const timeEntry = await prisma.timeEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TimeEntryCreateManyArgs>(args?: SelectSubset<T, TimeEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TimeEntry.
+     * @param {TimeEntryDeleteArgs} args - Arguments to delete one TimeEntry.
+     * @example
+     * // Delete one TimeEntry
+     * const TimeEntry = await prisma.timeEntry.delete({
+     *   where: {
+     *     // ... filter to delete one TimeEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TimeEntryDeleteArgs>(args: SelectSubset<T, TimeEntryDeleteArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TimeEntry.
+     * @param {TimeEntryUpdateArgs} args - Arguments to update one TimeEntry.
+     * @example
+     * // Update one TimeEntry
+     * const timeEntry = await prisma.timeEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TimeEntryUpdateArgs>(args: SelectSubset<T, TimeEntryUpdateArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TimeEntries.
+     * @param {TimeEntryDeleteManyArgs} args - Arguments to filter TimeEntries to delete.
+     * @example
+     * // Delete a few TimeEntries
+     * const { count } = await prisma.timeEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TimeEntryDeleteManyArgs>(args?: SelectSubset<T, TimeEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimeEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TimeEntries
+     * const timeEntry = await prisma.timeEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TimeEntryUpdateManyArgs>(args: SelectSubset<T, TimeEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TimeEntry.
+     * @param {TimeEntryUpsertArgs} args - Arguments to update or create a TimeEntry.
+     * @example
+     * // Update or create a TimeEntry
+     * const timeEntry = await prisma.timeEntry.upsert({
+     *   create: {
+     *     // ... data to create a TimeEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TimeEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TimeEntryUpsertArgs>(args: SelectSubset<T, TimeEntryUpsertArgs<ExtArgs>>): Prisma__TimeEntryClient<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TimeEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryCountArgs} args - Arguments to filter TimeEntries to count.
+     * @example
+     * // Count the number of TimeEntries
+     * const count = await prisma.timeEntry.count({
+     *   where: {
+     *     // ... the filter for the TimeEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends TimeEntryCountArgs>(
+      args?: Subset<T, TimeEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TimeEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TimeEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TimeEntryAggregateArgs>(args: Subset<T, TimeEntryAggregateArgs>): Prisma.PrismaPromise<GetTimeEntryAggregateType<T>>
+
+    /**
+     * Group by TimeEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TimeEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TimeEntryGroupByArgs['orderBy'] }
+        : { orderBy?: TimeEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TimeEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTimeEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TimeEntry model
+   */
+  readonly fields: TimeEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TimeEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TimeEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ticket<T extends TimeEntry$ticketArgs<ExtArgs> = {}>(args?: Subset<T, TimeEntry$ticketArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    invoice<T extends TimeEntry$invoiceArgs<ExtArgs> = {}>(args?: Subset<T, TimeEntry$invoiceArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TimeEntry model
+   */
+  interface TimeEntryFieldRefs {
+    readonly id: FieldRef<"TimeEntry", 'String'>
+    readonly clientId: FieldRef<"TimeEntry", 'String'>
+    readonly ticketId: FieldRef<"TimeEntry", 'String'>
+    readonly invoiceId: FieldRef<"TimeEntry", 'String'>
+    readonly description: FieldRef<"TimeEntry", 'String'>
+    readonly durationMinutes: FieldRef<"TimeEntry", 'Int'>
+    readonly hourlyRate: FieldRef<"TimeEntry", 'Decimal'>
+    readonly isBillable: FieldRef<"TimeEntry", 'Boolean'>
+    readonly isInvoiced: FieldRef<"TimeEntry", 'Boolean'>
+    readonly loggedAt: FieldRef<"TimeEntry", 'DateTime'>
+    readonly createdAt: FieldRef<"TimeEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TimeEntry findUnique
+   */
+  export type TimeEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeEntry to fetch.
+     */
+    where: TimeEntryWhereUniqueInput
+  }
+
+  /**
+   * TimeEntry findUniqueOrThrow
+   */
+  export type TimeEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeEntry to fetch.
+     */
+    where: TimeEntryWhereUniqueInput
+  }
+
+  /**
+   * TimeEntry findFirst
+   */
+  export type TimeEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeEntry to fetch.
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeEntries to fetch.
+     */
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeEntries.
+     */
+    cursor?: TimeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeEntries.
+     */
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimeEntry findFirstOrThrow
+   */
+  export type TimeEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeEntry to fetch.
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeEntries to fetch.
+     */
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeEntries.
+     */
+    cursor?: TimeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeEntries.
+     */
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimeEntry findMany
+   */
+  export type TimeEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeEntries to fetch.
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeEntries to fetch.
+     */
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TimeEntries.
+     */
+    cursor?: TimeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeEntries.
+     */
+    skip?: number
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimeEntry create
+   */
+  export type TimeEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TimeEntry.
+     */
+    data: XOR<TimeEntryCreateInput, TimeEntryUncheckedCreateInput>
+  }
+
+  /**
+   * TimeEntry createMany
+   */
+  export type TimeEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TimeEntries.
+     */
+    data: TimeEntryCreateManyInput | TimeEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TimeEntry update
+   */
+  export type TimeEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TimeEntry.
+     */
+    data: XOR<TimeEntryUpdateInput, TimeEntryUncheckedUpdateInput>
+    /**
+     * Choose, which TimeEntry to update.
+     */
+    where: TimeEntryWhereUniqueInput
+  }
+
+  /**
+   * TimeEntry updateMany
+   */
+  export type TimeEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TimeEntries.
+     */
+    data: XOR<TimeEntryUpdateManyMutationInput, TimeEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which TimeEntries to update
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * Limit how many TimeEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeEntry upsert
+   */
+  export type TimeEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TimeEntry to update in case it exists.
+     */
+    where: TimeEntryWhereUniqueInput
+    /**
+     * In case the TimeEntry found by the `where` argument doesn't exist, create a new TimeEntry with this data.
+     */
+    create: XOR<TimeEntryCreateInput, TimeEntryUncheckedCreateInput>
+    /**
+     * In case the TimeEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TimeEntryUpdateInput, TimeEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * TimeEntry delete
+   */
+  export type TimeEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    /**
+     * Filter which TimeEntry to delete.
+     */
+    where: TimeEntryWhereUniqueInput
+  }
+
+  /**
+   * TimeEntry deleteMany
+   */
+  export type TimeEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeEntries to delete
+     */
+    where?: TimeEntryWhereInput
+    /**
+     * Limit how many TimeEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeEntry.ticket
+   */
+  export type TimeEntry$ticketArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+  }
+
+  /**
+   * TimeEntry.invoice
+   */
+  export type TimeEntry$invoiceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+  }
+
+  /**
+   * TimeEntry without action
+   */
+  export type TimeEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invoice
+   */
+
+  export type AggregateInvoice = {
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  export type InvoiceAvgAggregateOutputType = {
+    subtotal: Decimal | null
+    vatRate: Decimal | null
+    vatAmount: Decimal | null
+    total: Decimal | null
+  }
+
+  export type InvoiceSumAggregateOutputType = {
+    subtotal: Decimal | null
+    vatRate: Decimal | null
+    vatAmount: Decimal | null
+    total: Decimal | null
+  }
+
+  export type InvoiceMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    number: string | null
+    status: string | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    subtotal: Decimal | null
+    vatRate: Decimal | null
+    vatAmount: Decimal | null
+    total: Decimal | null
+    dueDate: Date | null
+    paidAt: Date | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    number: string | null
+    status: string | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    subtotal: Decimal | null
+    vatRate: Decimal | null
+    vatAmount: Decimal | null
+    total: Decimal | null
+    dueDate: Date | null
+    paidAt: Date | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceCountAggregateOutputType = {
+    id: number
+    clientId: number
+    number: number
+    status: number
+    periodStart: number
+    periodEnd: number
+    subtotal: number
+    vatRate: number
+    vatAmount: number
+    total: number
+    dueDate: number
+    paidAt: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InvoiceAvgAggregateInputType = {
+    subtotal?: true
+    vatRate?: true
+    vatAmount?: true
+    total?: true
+  }
+
+  export type InvoiceSumAggregateInputType = {
+    subtotal?: true
+    vatRate?: true
+    vatAmount?: true
+    total?: true
+  }
+
+  export type InvoiceMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    number?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    subtotal?: true
+    vatRate?: true
+    vatAmount?: true
+    total?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    number?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    subtotal?: true
+    vatRate?: true
+    vatAmount?: true
+    total?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    number?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    subtotal?: true
+    vatRate?: true
+    vatAmount?: true
+    total?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InvoiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoice to aggregate.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invoices
+    **/
+    _count?: true | InvoiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type GetInvoiceAggregateType<T extends InvoiceAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoice[P]>
+      : GetScalarType<T[P], AggregateInvoice[P]>
+  }
+
+
+
+
+  export type InvoiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithAggregationInput | InvoiceOrderByWithAggregationInput[]
+    by: InvoiceScalarFieldEnum[] | InvoiceScalarFieldEnum
+    having?: InvoiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceCountAggregateInputType | true
+    _avg?: InvoiceAvgAggregateInputType
+    _sum?: InvoiceSumAggregateInputType
+    _min?: InvoiceMinAggregateInputType
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type InvoiceGroupByOutputType = {
+    id: string
+    clientId: string
+    number: string
+    status: string
+    periodStart: Date
+    periodEnd: Date
+    subtotal: Decimal
+    vatRate: Decimal
+    vatAmount: Decimal
+    total: Decimal
+    dueDate: Date
+    paidAt: Date | null
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceGroupByPayload<T extends InvoiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    subtotal?: boolean
+    vatRate?: boolean
+    vatAmount?: boolean
+    total?: boolean
+    dueDate?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    timeEntries?: boolean | Invoice$timeEntriesArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoice"]>
+
+
+
+  export type InvoiceSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    subtotal?: boolean
+    vatRate?: boolean
+    vatAmount?: boolean
+    total?: boolean
+    dueDate?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "number" | "status" | "periodStart" | "periodEnd" | "subtotal" | "vatRate" | "vatAmount" | "total" | "dueDate" | "paidAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+  export type InvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    timeEntries?: boolean | Invoice$timeEntriesArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $InvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invoice"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      timeEntries: Prisma.$TimeEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      number: string
+      status: string
+      periodStart: Date
+      periodEnd: Date
+      subtotal: Prisma.Decimal
+      vatRate: Prisma.Decimal
+      vatAmount: Prisma.Decimal
+      total: Prisma.Decimal
+      dueDate: Date
+      paidAt: Date | null
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["invoice"]>
+    composites: {}
+  }
+
+  type InvoiceGetPayload<S extends boolean | null | undefined | InvoiceDefaultArgs> = $Result.GetResult<Prisma.$InvoicePayload, S>
+
+  type InvoiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceCountAggregateInputType | true
+    }
+
+  export interface InvoiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invoice'], meta: { name: 'Invoice' } }
+    /**
+     * Find zero or one Invoice that matches the filter.
+     * @param {InvoiceFindUniqueArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceFindUniqueArgs>(args: SelectSubset<T, InvoiceFindUniqueArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invoice that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceFindUniqueOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceFindFirstArgs>(args?: SelectSubset<T, InvoiceFindFirstArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invoices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invoices
+     * const invoices = await prisma.invoice.findMany()
+     * 
+     * // Get first 10 Invoices
+     * const invoices = await prisma.invoice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceWithIdOnly = await prisma.invoice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceFindManyArgs>(args?: SelectSubset<T, InvoiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invoice.
+     * @param {InvoiceCreateArgs} args - Arguments to create a Invoice.
+     * @example
+     * // Create one Invoice
+     * const Invoice = await prisma.invoice.create({
+     *   data: {
+     *     // ... data to create a Invoice
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceCreateArgs>(args: SelectSubset<T, InvoiceCreateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invoices.
+     * @param {InvoiceCreateManyArgs} args - Arguments to create many Invoices.
+     * @example
+     * // Create many Invoices
+     * const invoice = await prisma.invoice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceCreateManyArgs>(args?: SelectSubset<T, InvoiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Invoice.
+     * @param {InvoiceDeleteArgs} args - Arguments to delete one Invoice.
+     * @example
+     * // Delete one Invoice
+     * const Invoice = await prisma.invoice.delete({
+     *   where: {
+     *     // ... filter to delete one Invoice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceDeleteArgs>(args: SelectSubset<T, InvoiceDeleteArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invoice.
+     * @param {InvoiceUpdateArgs} args - Arguments to update one Invoice.
+     * @example
+     * // Update one Invoice
+     * const invoice = await prisma.invoice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceUpdateArgs>(args: SelectSubset<T, InvoiceUpdateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invoices.
+     * @param {InvoiceDeleteManyArgs} args - Arguments to filter Invoices to delete.
+     * @example
+     * // Delete a few Invoices
+     * const { count } = await prisma.invoice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceDeleteManyArgs>(args?: SelectSubset<T, InvoiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invoices
+     * const invoice = await prisma.invoice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceUpdateManyArgs>(args: SelectSubset<T, InvoiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Invoice.
+     * @param {InvoiceUpsertArgs} args - Arguments to update or create a Invoice.
+     * @example
+     * // Update or create a Invoice
+     * const invoice = await prisma.invoice.upsert({
+     *   create: {
+     *     // ... data to create a Invoice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invoice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceUpsertArgs>(args: SelectSubset<T, InvoiceUpsertArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceCountArgs} args - Arguments to filter Invoices to count.
+     * @example
+     * // Count the number of Invoices
+     * const count = await prisma.invoice.count({
+     *   where: {
+     *     // ... the filter for the Invoices we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceCountArgs>(
+      args?: Subset<T, InvoiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceAggregateArgs>(args: Subset<T, InvoiceAggregateArgs>): Prisma.PrismaPromise<GetInvoiceAggregateType<T>>
+
+    /**
+     * Group by Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invoice model
+   */
+  readonly fields: InvoiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invoice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    timeEntries<T extends Invoice$timeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$timeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invoice model
+   */
+  interface InvoiceFieldRefs {
+    readonly id: FieldRef<"Invoice", 'String'>
+    readonly clientId: FieldRef<"Invoice", 'String'>
+    readonly number: FieldRef<"Invoice", 'String'>
+    readonly status: FieldRef<"Invoice", 'String'>
+    readonly periodStart: FieldRef<"Invoice", 'DateTime'>
+    readonly periodEnd: FieldRef<"Invoice", 'DateTime'>
+    readonly subtotal: FieldRef<"Invoice", 'Decimal'>
+    readonly vatRate: FieldRef<"Invoice", 'Decimal'>
+    readonly vatAmount: FieldRef<"Invoice", 'Decimal'>
+    readonly total: FieldRef<"Invoice", 'Decimal'>
+    readonly dueDate: FieldRef<"Invoice", 'DateTime'>
+    readonly paidAt: FieldRef<"Invoice", 'DateTime'>
+    readonly notes: FieldRef<"Invoice", 'String'>
+    readonly createdAt: FieldRef<"Invoice", 'DateTime'>
+    readonly updatedAt: FieldRef<"Invoice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invoice findUnique
+   */
+  export type InvoiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findUniqueOrThrow
+   */
+  export type InvoiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findFirst
+   */
+  export type InvoiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findFirstOrThrow
+   */
+  export type InvoiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findMany
+   */
+  export type InvoiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoices to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice create
+   */
+  export type InvoiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invoice.
+     */
+    data: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+  }
+
+  /**
+   * Invoice createMany
+   */
+  export type InvoiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invoices.
+     */
+    data: InvoiceCreateManyInput | InvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invoice update
+   */
+  export type InvoiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invoice.
+     */
+    data: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+    /**
+     * Choose, which Invoice to update.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice updateMany
+   */
+  export type InvoiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invoices.
+     */
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which Invoices to update
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice upsert
+   */
+  export type InvoiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invoice to update in case it exists.
+     */
+    where: InvoiceWhereUniqueInput
+    /**
+     * In case the Invoice found by the `where` argument doesn't exist, create a new Invoice with this data.
+     */
+    create: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+    /**
+     * In case the Invoice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+  }
+
+  /**
+   * Invoice delete
+   */
+  export type InvoiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter which Invoice to delete.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice deleteMany
+   */
+  export type InvoiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoices to delete
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice.timeEntries
+   */
+  export type Invoice$timeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeEntry
+     */
+    select?: TimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeEntry
+     */
+    omit?: TimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeEntryInclude<ExtArgs> | null
+    where?: TimeEntryWhereInput
+    orderBy?: TimeEntryOrderByWithRelationInput | TimeEntryOrderByWithRelationInput[]
+    cursor?: TimeEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimeEntryScalarFieldEnum | TimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice without action
+   */
+  export type InvoiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Asset
+   */
+
+  export type AggregateAsset = {
+    _count: AssetCountAggregateOutputType | null
+    _min: AssetMinAggregateOutputType | null
+    _max: AssetMaxAggregateOutputType | null
+  }
+
+  export type AssetMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    type: string | null
+    serialNumber: string | null
+    assignedTo: string | null
+    status: string | null
+    sensitivity: string | null
+    showSerialInPortal: boolean | null
+    notes: string | null
+    warrantyExpiresAt: Date | null
+    purchasedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AssetMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    type: string | null
+    serialNumber: string | null
+    assignedTo: string | null
+    status: string | null
+    sensitivity: string | null
+    showSerialInPortal: boolean | null
+    notes: string | null
+    warrantyExpiresAt: Date | null
+    purchasedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AssetCountAggregateOutputType = {
+    id: number
+    clientId: number
+    name: number
+    type: number
+    serialNumber: number
+    assignedTo: number
+    status: number
+    sensitivity: number
+    showSerialInPortal: number
+    notes: number
+    warrantyExpiresAt: number
+    purchasedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AssetMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    type?: true
+    serialNumber?: true
+    assignedTo?: true
+    status?: true
+    sensitivity?: true
+    showSerialInPortal?: true
+    notes?: true
+    warrantyExpiresAt?: true
+    purchasedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AssetMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    type?: true
+    serialNumber?: true
+    assignedTo?: true
+    status?: true
+    sensitivity?: true
+    showSerialInPortal?: true
+    notes?: true
+    warrantyExpiresAt?: true
+    purchasedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AssetCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    type?: true
+    serialNumber?: true
+    assignedTo?: true
+    status?: true
+    sensitivity?: true
+    showSerialInPortal?: true
+    notes?: true
+    warrantyExpiresAt?: true
+    purchasedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AssetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Asset to aggregate.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Assets
+    **/
+    _count?: true | AssetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssetMaxAggregateInputType
+  }
+
+  export type GetAssetAggregateType<T extends AssetAggregateArgs> = {
+        [P in keyof T & keyof AggregateAsset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAsset[P]>
+      : GetScalarType<T[P], AggregateAsset[P]>
+  }
+
+
+
+
+  export type AssetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetWhereInput
+    orderBy?: AssetOrderByWithAggregationInput | AssetOrderByWithAggregationInput[]
+    by: AssetScalarFieldEnum[] | AssetScalarFieldEnum
+    having?: AssetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssetCountAggregateInputType | true
+    _min?: AssetMinAggregateInputType
+    _max?: AssetMaxAggregateInputType
+  }
+
+  export type AssetGroupByOutputType = {
+    id: string
+    clientId: string
+    name: string
+    type: string
+    serialNumber: string | null
+    assignedTo: string | null
+    status: string
+    sensitivity: string
+    showSerialInPortal: boolean
+    notes: string | null
+    warrantyExpiresAt: Date | null
+    purchasedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AssetCountAggregateOutputType | null
+    _min: AssetMinAggregateOutputType | null
+    _max: AssetMaxAggregateOutputType | null
+  }
+
+  type GetAssetGroupByPayload<T extends AssetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssetGroupByOutputType[P]>
+            : GetScalarType<T[P], AssetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    type?: boolean
+    serialNumber?: boolean
+    assignedTo?: boolean
+    status?: boolean
+    sensitivity?: boolean
+    showSerialInPortal?: boolean
+    notes?: boolean
+    warrantyExpiresAt?: boolean
+    purchasedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["asset"]>
+
+
+
+  export type AssetSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    type?: boolean
+    serialNumber?: boolean
+    assignedTo?: boolean
+    status?: boolean
+    sensitivity?: boolean
+    showSerialInPortal?: boolean
+    notes?: boolean
+    warrantyExpiresAt?: boolean
+    purchasedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AssetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "name" | "type" | "serialNumber" | "assignedTo" | "status" | "sensitivity" | "showSerialInPortal" | "notes" | "warrantyExpiresAt" | "purchasedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["asset"]>
+  export type AssetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $AssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Asset"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      name: string
+      type: string
+      serialNumber: string | null
+      assignedTo: string | null
+      status: string
+      sensitivity: string
+      showSerialInPortal: boolean
+      notes: string | null
+      warrantyExpiresAt: Date | null
+      purchasedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["asset"]>
+    composites: {}
+  }
+
+  type AssetGetPayload<S extends boolean | null | undefined | AssetDefaultArgs> = $Result.GetResult<Prisma.$AssetPayload, S>
+
+  type AssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AssetCountAggregateInputType | true
+    }
+
+  export interface AssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Asset'], meta: { name: 'Asset' } }
+    /**
+     * Find zero or one Asset that matches the filter.
+     * @param {AssetFindUniqueArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AssetFindUniqueArgs>(args: SelectSubset<T, AssetFindUniqueArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Asset that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AssetFindUniqueOrThrowArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AssetFindUniqueOrThrowArgs>(args: SelectSubset<T, AssetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Asset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindFirstArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AssetFindFirstArgs>(args?: SelectSubset<T, AssetFindFirstArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Asset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindFirstOrThrowArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AssetFindFirstOrThrowArgs>(args?: SelectSubset<T, AssetFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Assets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Assets
+     * const assets = await prisma.asset.findMany()
+     * 
+     * // Get first 10 Assets
+     * const assets = await prisma.asset.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const assetWithIdOnly = await prisma.asset.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AssetFindManyArgs>(args?: SelectSubset<T, AssetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Asset.
+     * @param {AssetCreateArgs} args - Arguments to create a Asset.
+     * @example
+     * // Create one Asset
+     * const Asset = await prisma.asset.create({
+     *   data: {
+     *     // ... data to create a Asset
+     *   }
+     * })
+     * 
+     */
+    create<T extends AssetCreateArgs>(args: SelectSubset<T, AssetCreateArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Assets.
+     * @param {AssetCreateManyArgs} args - Arguments to create many Assets.
+     * @example
+     * // Create many Assets
+     * const asset = await prisma.asset.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AssetCreateManyArgs>(args?: SelectSubset<T, AssetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Asset.
+     * @param {AssetDeleteArgs} args - Arguments to delete one Asset.
+     * @example
+     * // Delete one Asset
+     * const Asset = await prisma.asset.delete({
+     *   where: {
+     *     // ... filter to delete one Asset
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AssetDeleteArgs>(args: SelectSubset<T, AssetDeleteArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Asset.
+     * @param {AssetUpdateArgs} args - Arguments to update one Asset.
+     * @example
+     * // Update one Asset
+     * const asset = await prisma.asset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AssetUpdateArgs>(args: SelectSubset<T, AssetUpdateArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Assets.
+     * @param {AssetDeleteManyArgs} args - Arguments to filter Assets to delete.
+     * @example
+     * // Delete a few Assets
+     * const { count } = await prisma.asset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AssetDeleteManyArgs>(args?: SelectSubset<T, AssetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Assets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Assets
+     * const asset = await prisma.asset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AssetUpdateManyArgs>(args: SelectSubset<T, AssetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Asset.
+     * @param {AssetUpsertArgs} args - Arguments to update or create a Asset.
+     * @example
+     * // Update or create a Asset
+     * const asset = await prisma.asset.upsert({
+     *   create: {
+     *     // ... data to create a Asset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Asset we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AssetUpsertArgs>(args: SelectSubset<T, AssetUpsertArgs<ExtArgs>>): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Assets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetCountArgs} args - Arguments to filter Assets to count.
+     * @example
+     * // Count the number of Assets
+     * const count = await prisma.asset.count({
+     *   where: {
+     *     // ... the filter for the Assets we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssetCountArgs>(
+      args?: Subset<T, AssetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Asset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssetAggregateArgs>(args: Subset<T, AssetAggregateArgs>): Prisma.PrismaPromise<GetAssetAggregateType<T>>
+
+    /**
+     * Group by Asset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssetGroupByArgs['orderBy'] }
+        : { orderBy?: AssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Asset model
+   */
+  readonly fields: AssetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Asset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Asset model
+   */
+  interface AssetFieldRefs {
+    readonly id: FieldRef<"Asset", 'String'>
+    readonly clientId: FieldRef<"Asset", 'String'>
+    readonly name: FieldRef<"Asset", 'String'>
+    readonly type: FieldRef<"Asset", 'String'>
+    readonly serialNumber: FieldRef<"Asset", 'String'>
+    readonly assignedTo: FieldRef<"Asset", 'String'>
+    readonly status: FieldRef<"Asset", 'String'>
+    readonly sensitivity: FieldRef<"Asset", 'String'>
+    readonly showSerialInPortal: FieldRef<"Asset", 'Boolean'>
+    readonly notes: FieldRef<"Asset", 'String'>
+    readonly warrantyExpiresAt: FieldRef<"Asset", 'DateTime'>
+    readonly purchasedAt: FieldRef<"Asset", 'DateTime'>
+    readonly createdAt: FieldRef<"Asset", 'DateTime'>
+    readonly updatedAt: FieldRef<"Asset", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Asset findUnique
+   */
+  export type AssetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+  /**
+   * Asset findUniqueOrThrow
+   */
+  export type AssetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+  /**
+   * Asset findFirst
+   */
+  export type AssetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assets.
+     */
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+  /**
+   * Asset findFirstOrThrow
+   */
+  export type AssetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assets.
+     */
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+  /**
+   * Asset findMany
+   */
+  export type AssetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter, which Assets to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+  /**
+   * Asset create
+   */
+  export type AssetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Asset.
+     */
+    data: XOR<AssetCreateInput, AssetUncheckedCreateInput>
+  }
+
+  /**
+   * Asset createMany
+   */
+  export type AssetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Assets.
+     */
+    data: AssetCreateManyInput | AssetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Asset update
+   */
+  export type AssetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Asset.
+     */
+    data: XOR<AssetUpdateInput, AssetUncheckedUpdateInput>
+    /**
+     * Choose, which Asset to update.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+  /**
+   * Asset updateMany
+   */
+  export type AssetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Assets.
+     */
+    data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyInput>
+    /**
+     * Filter which Assets to update
+     */
+    where?: AssetWhereInput
+    /**
+     * Limit how many Assets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Asset upsert
+   */
+  export type AssetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Asset to update in case it exists.
+     */
+    where: AssetWhereUniqueInput
+    /**
+     * In case the Asset found by the `where` argument doesn't exist, create a new Asset with this data.
+     */
+    create: XOR<AssetCreateInput, AssetUncheckedCreateInput>
+    /**
+     * In case the Asset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssetUpdateInput, AssetUncheckedUpdateInput>
+  }
+
+  /**
+   * Asset delete
+   */
+  export type AssetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
+     * Filter which Asset to delete.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+  /**
+   * Asset deleteMany
+   */
+  export type AssetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Assets to delete
+     */
+    where?: AssetWhereInput
+    /**
+     * Limit how many Assets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Asset without action
+   */
+  export type AssetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Asset
+     */
+    omit?: AssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssetInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Contract
+   */
+
+  export type AggregateContract = {
+    _count: ContractCountAggregateOutputType | null
+    _avg: ContractAvgAggregateOutputType | null
+    _sum: ContractSumAggregateOutputType | null
+    _min: ContractMinAggregateOutputType | null
+    _max: ContractMaxAggregateOutputType | null
+  }
+
+  export type ContractAvgAggregateOutputType = {
+    costPerYear: Decimal | null
+  }
+
+  export type ContractSumAggregateOutputType = {
+    costPerYear: Decimal | null
+  }
+
+  export type ContractMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    vendor: string | null
+    type: string | null
+    renewalDate: Date | null
+    costPerYear: Decimal | null
+    autoRenews: boolean | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContractMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    vendor: string | null
+    type: string | null
+    renewalDate: Date | null
+    costPerYear: Decimal | null
+    autoRenews: boolean | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContractCountAggregateOutputType = {
+    id: number
+    clientId: number
+    name: number
+    vendor: number
+    type: number
+    renewalDate: number
+    costPerYear: number
+    autoRenews: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ContractAvgAggregateInputType = {
+    costPerYear?: true
+  }
+
+  export type ContractSumAggregateInputType = {
+    costPerYear?: true
+  }
+
+  export type ContractMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    vendor?: true
+    type?: true
+    renewalDate?: true
+    costPerYear?: true
+    autoRenews?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContractMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    vendor?: true
+    type?: true
+    renewalDate?: true
+    costPerYear?: true
+    autoRenews?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContractCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    vendor?: true
+    type?: true
+    renewalDate?: true
+    costPerYear?: true
+    autoRenews?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ContractAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contract to aggregate.
+     */
+    where?: ContractWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contracts to fetch.
+     */
+    orderBy?: ContractOrderByWithRelationInput | ContractOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContractWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Contracts
+    **/
+    _count?: true | ContractCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContractAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContractSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContractMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContractMaxAggregateInputType
+  }
+
+  export type GetContractAggregateType<T extends ContractAggregateArgs> = {
+        [P in keyof T & keyof AggregateContract]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContract[P]>
+      : GetScalarType<T[P], AggregateContract[P]>
+  }
+
+
+
+
+  export type ContractGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContractWhereInput
+    orderBy?: ContractOrderByWithAggregationInput | ContractOrderByWithAggregationInput[]
+    by: ContractScalarFieldEnum[] | ContractScalarFieldEnum
+    having?: ContractScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContractCountAggregateInputType | true
+    _avg?: ContractAvgAggregateInputType
+    _sum?: ContractSumAggregateInputType
+    _min?: ContractMinAggregateInputType
+    _max?: ContractMaxAggregateInputType
+  }
+
+  export type ContractGroupByOutputType = {
+    id: string
+    clientId: string
+    name: string
+    vendor: string | null
+    type: string
+    renewalDate: Date
+    costPerYear: Decimal | null
+    autoRenews: boolean
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ContractCountAggregateOutputType | null
+    _avg: ContractAvgAggregateOutputType | null
+    _sum: ContractSumAggregateOutputType | null
+    _min: ContractMinAggregateOutputType | null
+    _max: ContractMaxAggregateOutputType | null
+  }
+
+  type GetContractGroupByPayload<T extends ContractGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContractGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContractGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContractGroupByOutputType[P]>
+            : GetScalarType<T[P], ContractGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContractSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    vendor?: boolean
+    type?: boolean
+    renewalDate?: boolean
+    costPerYear?: boolean
+    autoRenews?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contract"]>
+
+
+
+  export type ContractSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    vendor?: boolean
+    type?: boolean
+    renewalDate?: boolean
+    costPerYear?: boolean
+    autoRenews?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ContractOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "name" | "vendor" | "type" | "renewalDate" | "costPerYear" | "autoRenews" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["contract"]>
+  export type ContractInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $ContractPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Contract"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      name: string
+      vendor: string | null
+      type: string
+      renewalDate: Date
+      costPerYear: Prisma.Decimal | null
+      autoRenews: boolean
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["contract"]>
+    composites: {}
+  }
+
+  type ContractGetPayload<S extends boolean | null | undefined | ContractDefaultArgs> = $Result.GetResult<Prisma.$ContractPayload, S>
+
+  type ContractCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContractFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContractCountAggregateInputType | true
+    }
+
+  export interface ContractDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contract'], meta: { name: 'Contract' } }
+    /**
+     * Find zero or one Contract that matches the filter.
+     * @param {ContractFindUniqueArgs} args - Arguments to find a Contract
+     * @example
+     * // Get one Contract
+     * const contract = await prisma.contract.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContractFindUniqueArgs>(args: SelectSubset<T, ContractFindUniqueArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contract that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContractFindUniqueOrThrowArgs} args - Arguments to find a Contract
+     * @example
+     * // Get one Contract
+     * const contract = await prisma.contract.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContractFindUniqueOrThrowArgs>(args: SelectSubset<T, ContractFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contract that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractFindFirstArgs} args - Arguments to find a Contract
+     * @example
+     * // Get one Contract
+     * const contract = await prisma.contract.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContractFindFirstArgs>(args?: SelectSubset<T, ContractFindFirstArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contract that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractFindFirstOrThrowArgs} args - Arguments to find a Contract
+     * @example
+     * // Get one Contract
+     * const contract = await prisma.contract.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContractFindFirstOrThrowArgs>(args?: SelectSubset<T, ContractFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contracts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contracts
+     * const contracts = await prisma.contract.findMany()
+     * 
+     * // Get first 10 Contracts
+     * const contracts = await prisma.contract.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contractWithIdOnly = await prisma.contract.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContractFindManyArgs>(args?: SelectSubset<T, ContractFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contract.
+     * @param {ContractCreateArgs} args - Arguments to create a Contract.
+     * @example
+     * // Create one Contract
+     * const Contract = await prisma.contract.create({
+     *   data: {
+     *     // ... data to create a Contract
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContractCreateArgs>(args: SelectSubset<T, ContractCreateArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contracts.
+     * @param {ContractCreateManyArgs} args - Arguments to create many Contracts.
+     * @example
+     * // Create many Contracts
+     * const contract = await prisma.contract.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContractCreateManyArgs>(args?: SelectSubset<T, ContractCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Contract.
+     * @param {ContractDeleteArgs} args - Arguments to delete one Contract.
+     * @example
+     * // Delete one Contract
+     * const Contract = await prisma.contract.delete({
+     *   where: {
+     *     // ... filter to delete one Contract
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContractDeleteArgs>(args: SelectSubset<T, ContractDeleteArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contract.
+     * @param {ContractUpdateArgs} args - Arguments to update one Contract.
+     * @example
+     * // Update one Contract
+     * const contract = await prisma.contract.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContractUpdateArgs>(args: SelectSubset<T, ContractUpdateArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contracts.
+     * @param {ContractDeleteManyArgs} args - Arguments to filter Contracts to delete.
+     * @example
+     * // Delete a few Contracts
+     * const { count } = await prisma.contract.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContractDeleteManyArgs>(args?: SelectSubset<T, ContractDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contracts
+     * const contract = await prisma.contract.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContractUpdateManyArgs>(args: SelectSubset<T, ContractUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Contract.
+     * @param {ContractUpsertArgs} args - Arguments to update or create a Contract.
+     * @example
+     * // Update or create a Contract
+     * const contract = await prisma.contract.upsert({
+     *   create: {
+     *     // ... data to create a Contract
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contract we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContractUpsertArgs>(args: SelectSubset<T, ContractUpsertArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractCountArgs} args - Arguments to filter Contracts to count.
+     * @example
+     * // Count the number of Contracts
+     * const count = await prisma.contract.count({
+     *   where: {
+     *     // ... the filter for the Contracts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContractCountArgs>(
+      args?: Subset<T, ContractCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContractCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contract.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContractAggregateArgs>(args: Subset<T, ContractAggregateArgs>): Prisma.PrismaPromise<GetContractAggregateType<T>>
+
+    /**
+     * Group by Contract.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContractGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContractGroupByArgs['orderBy'] }
+        : { orderBy?: ContractGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContractGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContractGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Contract model
+   */
+  readonly fields: ContractFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Contract.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContractClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Contract model
+   */
+  interface ContractFieldRefs {
+    readonly id: FieldRef<"Contract", 'String'>
+    readonly clientId: FieldRef<"Contract", 'String'>
+    readonly name: FieldRef<"Contract", 'String'>
+    readonly vendor: FieldRef<"Contract", 'String'>
+    readonly type: FieldRef<"Contract", 'String'>
+    readonly renewalDate: FieldRef<"Contract", 'DateTime'>
+    readonly costPerYear: FieldRef<"Contract", 'Decimal'>
+    readonly autoRenews: FieldRef<"Contract", 'Boolean'>
+    readonly notes: FieldRef<"Contract", 'String'>
+    readonly createdAt: FieldRef<"Contract", 'DateTime'>
+    readonly updatedAt: FieldRef<"Contract", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Contract findUnique
+   */
+  export type ContractFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter, which Contract to fetch.
+     */
+    where: ContractWhereUniqueInput
+  }
+
+  /**
+   * Contract findUniqueOrThrow
+   */
+  export type ContractFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter, which Contract to fetch.
+     */
+    where: ContractWhereUniqueInput
+  }
+
+  /**
+   * Contract findFirst
+   */
+  export type ContractFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter, which Contract to fetch.
+     */
+    where?: ContractWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contracts to fetch.
+     */
+    orderBy?: ContractOrderByWithRelationInput | ContractOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contracts.
+     */
+    cursor?: ContractWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contracts.
+     */
+    distinct?: ContractScalarFieldEnum | ContractScalarFieldEnum[]
+  }
+
+  /**
+   * Contract findFirstOrThrow
+   */
+  export type ContractFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter, which Contract to fetch.
+     */
+    where?: ContractWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contracts to fetch.
+     */
+    orderBy?: ContractOrderByWithRelationInput | ContractOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contracts.
+     */
+    cursor?: ContractWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contracts.
+     */
+    distinct?: ContractScalarFieldEnum | ContractScalarFieldEnum[]
+  }
+
+  /**
+   * Contract findMany
+   */
+  export type ContractFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter, which Contracts to fetch.
+     */
+    where?: ContractWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contracts to fetch.
+     */
+    orderBy?: ContractOrderByWithRelationInput | ContractOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Contracts.
+     */
+    cursor?: ContractWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contracts.
+     */
+    skip?: number
+    distinct?: ContractScalarFieldEnum | ContractScalarFieldEnum[]
+  }
+
+  /**
+   * Contract create
+   */
+  export type ContractCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Contract.
+     */
+    data: XOR<ContractCreateInput, ContractUncheckedCreateInput>
+  }
+
+  /**
+   * Contract createMany
+   */
+  export type ContractCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Contracts.
+     */
+    data: ContractCreateManyInput | ContractCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contract update
+   */
+  export type ContractUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Contract.
+     */
+    data: XOR<ContractUpdateInput, ContractUncheckedUpdateInput>
+    /**
+     * Choose, which Contract to update.
+     */
+    where: ContractWhereUniqueInput
+  }
+
+  /**
+   * Contract updateMany
+   */
+  export type ContractUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Contracts.
+     */
+    data: XOR<ContractUpdateManyMutationInput, ContractUncheckedUpdateManyInput>
+    /**
+     * Filter which Contracts to update
+     */
+    where?: ContractWhereInput
+    /**
+     * Limit how many Contracts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contract upsert
+   */
+  export type ContractUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Contract to update in case it exists.
+     */
+    where: ContractWhereUniqueInput
+    /**
+     * In case the Contract found by the `where` argument doesn't exist, create a new Contract with this data.
+     */
+    create: XOR<ContractCreateInput, ContractUncheckedCreateInput>
+    /**
+     * In case the Contract was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContractUpdateInput, ContractUncheckedUpdateInput>
+  }
+
+  /**
+   * Contract delete
+   */
+  export type ContractDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+    /**
+     * Filter which Contract to delete.
+     */
+    where: ContractWhereUniqueInput
+  }
+
+  /**
+   * Contract deleteMany
+   */
+  export type ContractDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contracts to delete
+     */
+    where?: ContractWhereInput
+    /**
+     * Limit how many Contracts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contract without action
+   */
+  export type ContractDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contract
+     */
+    select?: ContractSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contract
+     */
+    omit?: ContractOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContractInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Visit
+   */
+
+  export type AggregateVisit = {
+    _count: VisitCountAggregateOutputType | null
+    _min: VisitMinAggregateOutputType | null
+    _max: VisitMaxAggregateOutputType | null
+  }
+
+  export type VisitMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    type: string | null
+    status: string | null
+    notes: string | null
+    visitedAt: Date | null
+    completedAt: Date | null
+  }
+
+  export type VisitMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    type: string | null
+    status: string | null
+    notes: string | null
+    visitedAt: Date | null
+    completedAt: Date | null
+  }
+
+  export type VisitCountAggregateOutputType = {
+    id: number
+    clientId: number
+    type: number
+    status: number
+    notes: number
+    visitedAt: number
+    completedAt: number
+    _all: number
+  }
+
+
+  export type VisitMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    type?: true
+    status?: true
+    notes?: true
+    visitedAt?: true
+    completedAt?: true
+  }
+
+  export type VisitMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    type?: true
+    status?: true
+    notes?: true
+    visitedAt?: true
+    completedAt?: true
+  }
+
+  export type VisitCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    type?: true
+    status?: true
+    notes?: true
+    visitedAt?: true
+    completedAt?: true
+    _all?: true
+  }
+
+  export type VisitAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Visit to aggregate.
+     */
+    where?: VisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Visits to fetch.
+     */
+    orderBy?: VisitOrderByWithRelationInput | VisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Visits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Visits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Visits
+    **/
+    _count?: true | VisitCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VisitMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VisitMaxAggregateInputType
+  }
+
+  export type GetVisitAggregateType<T extends VisitAggregateArgs> = {
+        [P in keyof T & keyof AggregateVisit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVisit[P]>
+      : GetScalarType<T[P], AggregateVisit[P]>
+  }
+
+
+
+
+  export type VisitGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VisitWhereInput
+    orderBy?: VisitOrderByWithAggregationInput | VisitOrderByWithAggregationInput[]
+    by: VisitScalarFieldEnum[] | VisitScalarFieldEnum
+    having?: VisitScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VisitCountAggregateInputType | true
+    _min?: VisitMinAggregateInputType
+    _max?: VisitMaxAggregateInputType
+  }
+
+  export type VisitGroupByOutputType = {
+    id: string
+    clientId: string
+    type: string
+    status: string
+    notes: string | null
+    visitedAt: Date
+    completedAt: Date | null
+    _count: VisitCountAggregateOutputType | null
+    _min: VisitMinAggregateOutputType | null
+    _max: VisitMaxAggregateOutputType | null
+  }
+
+  type GetVisitGroupByPayload<T extends VisitGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VisitGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VisitGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VisitGroupByOutputType[P]>
+            : GetScalarType<T[P], VisitGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VisitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    type?: boolean
+    status?: boolean
+    notes?: boolean
+    visitedAt?: boolean
+    completedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    checklistItems?: boolean | Visit$checklistItemsArgs<ExtArgs>
+    tickets?: boolean | Visit$ticketsArgs<ExtArgs>
+    _count?: boolean | VisitCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["visit"]>
+
+
+
+  export type VisitSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    type?: boolean
+    status?: boolean
+    notes?: boolean
+    visitedAt?: boolean
+    completedAt?: boolean
+  }
+
+  export type VisitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "type" | "status" | "notes" | "visitedAt" | "completedAt", ExtArgs["result"]["visit"]>
+  export type VisitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    checklistItems?: boolean | Visit$checklistItemsArgs<ExtArgs>
+    tickets?: boolean | Visit$ticketsArgs<ExtArgs>
+    _count?: boolean | VisitCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $VisitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Visit"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      checklistItems: Prisma.$ChecklistItemPayload<ExtArgs>[]
+      tickets: Prisma.$TicketPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      type: string
+      status: string
+      notes: string | null
+      visitedAt: Date
+      completedAt: Date | null
+    }, ExtArgs["result"]["visit"]>
+    composites: {}
+  }
+
+  type VisitGetPayload<S extends boolean | null | undefined | VisitDefaultArgs> = $Result.GetResult<Prisma.$VisitPayload, S>
+
+  type VisitCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VisitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VisitCountAggregateInputType | true
+    }
+
+  export interface VisitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Visit'], meta: { name: 'Visit' } }
+    /**
+     * Find zero or one Visit that matches the filter.
+     * @param {VisitFindUniqueArgs} args - Arguments to find a Visit
+     * @example
+     * // Get one Visit
+     * const visit = await prisma.visit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VisitFindUniqueArgs>(args: SelectSubset<T, VisitFindUniqueArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Visit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VisitFindUniqueOrThrowArgs} args - Arguments to find a Visit
+     * @example
+     * // Get one Visit
+     * const visit = await prisma.visit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VisitFindUniqueOrThrowArgs>(args: SelectSubset<T, VisitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Visit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitFindFirstArgs} args - Arguments to find a Visit
+     * @example
+     * // Get one Visit
+     * const visit = await prisma.visit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VisitFindFirstArgs>(args?: SelectSubset<T, VisitFindFirstArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Visit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitFindFirstOrThrowArgs} args - Arguments to find a Visit
+     * @example
+     * // Get one Visit
+     * const visit = await prisma.visit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VisitFindFirstOrThrowArgs>(args?: SelectSubset<T, VisitFindFirstOrThrowArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Visits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Visits
+     * const visits = await prisma.visit.findMany()
+     * 
+     * // Get first 10 Visits
+     * const visits = await prisma.visit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const visitWithIdOnly = await prisma.visit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VisitFindManyArgs>(args?: SelectSubset<T, VisitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Visit.
+     * @param {VisitCreateArgs} args - Arguments to create a Visit.
+     * @example
+     * // Create one Visit
+     * const Visit = await prisma.visit.create({
+     *   data: {
+     *     // ... data to create a Visit
+     *   }
+     * })
+     * 
+     */
+    create<T extends VisitCreateArgs>(args: SelectSubset<T, VisitCreateArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Visits.
+     * @param {VisitCreateManyArgs} args - Arguments to create many Visits.
+     * @example
+     * // Create many Visits
+     * const visit = await prisma.visit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VisitCreateManyArgs>(args?: SelectSubset<T, VisitCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Visit.
+     * @param {VisitDeleteArgs} args - Arguments to delete one Visit.
+     * @example
+     * // Delete one Visit
+     * const Visit = await prisma.visit.delete({
+     *   where: {
+     *     // ... filter to delete one Visit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VisitDeleteArgs>(args: SelectSubset<T, VisitDeleteArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Visit.
+     * @param {VisitUpdateArgs} args - Arguments to update one Visit.
+     * @example
+     * // Update one Visit
+     * const visit = await prisma.visit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VisitUpdateArgs>(args: SelectSubset<T, VisitUpdateArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Visits.
+     * @param {VisitDeleteManyArgs} args - Arguments to filter Visits to delete.
+     * @example
+     * // Delete a few Visits
+     * const { count } = await prisma.visit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VisitDeleteManyArgs>(args?: SelectSubset<T, VisitDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Visits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Visits
+     * const visit = await prisma.visit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VisitUpdateManyArgs>(args: SelectSubset<T, VisitUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Visit.
+     * @param {VisitUpsertArgs} args - Arguments to update or create a Visit.
+     * @example
+     * // Update or create a Visit
+     * const visit = await prisma.visit.upsert({
+     *   create: {
+     *     // ... data to create a Visit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Visit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VisitUpsertArgs>(args: SelectSubset<T, VisitUpsertArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Visits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitCountArgs} args - Arguments to filter Visits to count.
+     * @example
+     * // Count the number of Visits
+     * const count = await prisma.visit.count({
+     *   where: {
+     *     // ... the filter for the Visits we want to count
+     *   }
+     * })
+    **/
+    count<T extends VisitCountArgs>(
+      args?: Subset<T, VisitCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VisitCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Visit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VisitAggregateArgs>(args: Subset<T, VisitAggregateArgs>): Prisma.PrismaPromise<GetVisitAggregateType<T>>
+
+    /**
+     * Group by Visit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VisitGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VisitGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VisitGroupByArgs['orderBy'] }
+        : { orderBy?: VisitGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VisitGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVisitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Visit model
+   */
+  readonly fields: VisitFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Visit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VisitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    checklistItems<T extends Visit$checklistItemsArgs<ExtArgs> = {}>(args?: Subset<T, Visit$checklistItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tickets<T extends Visit$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Visit$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Visit model
+   */
+  interface VisitFieldRefs {
+    readonly id: FieldRef<"Visit", 'String'>
+    readonly clientId: FieldRef<"Visit", 'String'>
+    readonly type: FieldRef<"Visit", 'String'>
+    readonly status: FieldRef<"Visit", 'String'>
+    readonly notes: FieldRef<"Visit", 'String'>
+    readonly visitedAt: FieldRef<"Visit", 'DateTime'>
+    readonly completedAt: FieldRef<"Visit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Visit findUnique
+   */
+  export type VisitFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter, which Visit to fetch.
+     */
+    where: VisitWhereUniqueInput
+  }
+
+  /**
+   * Visit findUniqueOrThrow
+   */
+  export type VisitFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter, which Visit to fetch.
+     */
+    where: VisitWhereUniqueInput
+  }
+
+  /**
+   * Visit findFirst
+   */
+  export type VisitFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter, which Visit to fetch.
+     */
+    where?: VisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Visits to fetch.
+     */
+    orderBy?: VisitOrderByWithRelationInput | VisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Visits.
+     */
+    cursor?: VisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Visits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Visits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Visits.
+     */
+    distinct?: VisitScalarFieldEnum | VisitScalarFieldEnum[]
+  }
+
+  /**
+   * Visit findFirstOrThrow
+   */
+  export type VisitFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter, which Visit to fetch.
+     */
+    where?: VisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Visits to fetch.
+     */
+    orderBy?: VisitOrderByWithRelationInput | VisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Visits.
+     */
+    cursor?: VisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Visits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Visits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Visits.
+     */
+    distinct?: VisitScalarFieldEnum | VisitScalarFieldEnum[]
+  }
+
+  /**
+   * Visit findMany
+   */
+  export type VisitFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter, which Visits to fetch.
+     */
+    where?: VisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Visits to fetch.
+     */
+    orderBy?: VisitOrderByWithRelationInput | VisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Visits.
+     */
+    cursor?: VisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Visits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Visits.
+     */
+    skip?: number
+    distinct?: VisitScalarFieldEnum | VisitScalarFieldEnum[]
+  }
+
+  /**
+   * Visit create
+   */
+  export type VisitCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Visit.
+     */
+    data: XOR<VisitCreateInput, VisitUncheckedCreateInput>
+  }
+
+  /**
+   * Visit createMany
+   */
+  export type VisitCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Visits.
+     */
+    data: VisitCreateManyInput | VisitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Visit update
+   */
+  export type VisitUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Visit.
+     */
+    data: XOR<VisitUpdateInput, VisitUncheckedUpdateInput>
+    /**
+     * Choose, which Visit to update.
+     */
+    where: VisitWhereUniqueInput
+  }
+
+  /**
+   * Visit updateMany
+   */
+  export type VisitUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Visits.
+     */
+    data: XOR<VisitUpdateManyMutationInput, VisitUncheckedUpdateManyInput>
+    /**
+     * Filter which Visits to update
+     */
+    where?: VisitWhereInput
+    /**
+     * Limit how many Visits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Visit upsert
+   */
+  export type VisitUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Visit to update in case it exists.
+     */
+    where: VisitWhereUniqueInput
+    /**
+     * In case the Visit found by the `where` argument doesn't exist, create a new Visit with this data.
+     */
+    create: XOR<VisitCreateInput, VisitUncheckedCreateInput>
+    /**
+     * In case the Visit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VisitUpdateInput, VisitUncheckedUpdateInput>
+  }
+
+  /**
+   * Visit delete
+   */
+  export type VisitDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+    /**
+     * Filter which Visit to delete.
+     */
+    where: VisitWhereUniqueInput
+  }
+
+  /**
+   * Visit deleteMany
+   */
+  export type VisitDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Visits to delete
+     */
+    where?: VisitWhereInput
+    /**
+     * Limit how many Visits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Visit.checklistItems
+   */
+  export type Visit$checklistItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    where?: ChecklistItemWhereInput
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    cursor?: ChecklistItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChecklistItemScalarFieldEnum | ChecklistItemScalarFieldEnum[]
+  }
+
+  /**
+   * Visit.tickets
+   */
+  export type Visit$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Visit without action
+   */
+  export type VisitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Visit
+     */
+    select?: VisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Visit
+     */
+    omit?: VisitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VisitInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ChecklistItem
+   */
+
+  export type AggregateChecklistItem = {
+    _count: ChecklistItemCountAggregateOutputType | null
+    _avg: ChecklistItemAvgAggregateOutputType | null
+    _sum: ChecklistItemSumAggregateOutputType | null
+    _min: ChecklistItemMinAggregateOutputType | null
+    _max: ChecklistItemMaxAggregateOutputType | null
+  }
+
+  export type ChecklistItemAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ChecklistItemSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ChecklistItemMinAggregateOutputType = {
+    id: string | null
+    visitId: string | null
+    templateItemId: string | null
+    label: string | null
+    status: string | null
+    resultNote: string | null
+    sortOrder: number | null
+  }
+
+  export type ChecklistItemMaxAggregateOutputType = {
+    id: string | null
+    visitId: string | null
+    templateItemId: string | null
+    label: string | null
+    status: string | null
+    resultNote: string | null
+    sortOrder: number | null
+  }
+
+  export type ChecklistItemCountAggregateOutputType = {
+    id: number
+    visitId: number
+    templateItemId: number
+    label: number
+    status: number
+    resultNote: number
+    sortOrder: number
+    _all: number
+  }
+
+
+  export type ChecklistItemAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ChecklistItemSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ChecklistItemMinAggregateInputType = {
+    id?: true
+    visitId?: true
+    templateItemId?: true
+    label?: true
+    status?: true
+    resultNote?: true
+    sortOrder?: true
+  }
+
+  export type ChecklistItemMaxAggregateInputType = {
+    id?: true
+    visitId?: true
+    templateItemId?: true
+    label?: true
+    status?: true
+    resultNote?: true
+    sortOrder?: true
+  }
+
+  export type ChecklistItemCountAggregateInputType = {
+    id?: true
+    visitId?: true
+    templateItemId?: true
+    label?: true
+    status?: true
+    resultNote?: true
+    sortOrder?: true
+    _all?: true
+  }
+
+  export type ChecklistItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistItem to aggregate.
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistItems to fetch.
+     */
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChecklistItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChecklistItems
+    **/
+    _count?: true | ChecklistItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ChecklistItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ChecklistItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChecklistItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChecklistItemMaxAggregateInputType
+  }
+
+  export type GetChecklistItemAggregateType<T extends ChecklistItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateChecklistItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChecklistItem[P]>
+      : GetScalarType<T[P], AggregateChecklistItem[P]>
+  }
+
+
+
+
+  export type ChecklistItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistItemWhereInput
+    orderBy?: ChecklistItemOrderByWithAggregationInput | ChecklistItemOrderByWithAggregationInput[]
+    by: ChecklistItemScalarFieldEnum[] | ChecklistItemScalarFieldEnum
+    having?: ChecklistItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChecklistItemCountAggregateInputType | true
+    _avg?: ChecklistItemAvgAggregateInputType
+    _sum?: ChecklistItemSumAggregateInputType
+    _min?: ChecklistItemMinAggregateInputType
+    _max?: ChecklistItemMaxAggregateInputType
+  }
+
+  export type ChecklistItemGroupByOutputType = {
+    id: string
+    visitId: string
+    templateItemId: string | null
+    label: string
+    status: string
+    resultNote: string | null
+    sortOrder: number
+    _count: ChecklistItemCountAggregateOutputType | null
+    _avg: ChecklistItemAvgAggregateOutputType | null
+    _sum: ChecklistItemSumAggregateOutputType | null
+    _min: ChecklistItemMinAggregateOutputType | null
+    _max: ChecklistItemMaxAggregateOutputType | null
+  }
+
+  type GetChecklistItemGroupByPayload<T extends ChecklistItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChecklistItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChecklistItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChecklistItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ChecklistItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChecklistItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visitId?: boolean
+    templateItemId?: boolean
+    label?: boolean
+    status?: boolean
+    resultNote?: boolean
+    sortOrder?: boolean
+    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    templateItem?: boolean | ChecklistItem$templateItemArgs<ExtArgs>
+  }, ExtArgs["result"]["checklistItem"]>
+
+
+
+  export type ChecklistItemSelectScalar = {
+    id?: boolean
+    visitId?: boolean
+    templateItemId?: boolean
+    label?: boolean
+    status?: boolean
+    resultNote?: boolean
+    sortOrder?: boolean
+  }
+
+  export type ChecklistItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "visitId" | "templateItemId" | "label" | "status" | "resultNote" | "sortOrder", ExtArgs["result"]["checklistItem"]>
+  export type ChecklistItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    templateItem?: boolean | ChecklistItem$templateItemArgs<ExtArgs>
+  }
+
+  export type $ChecklistItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChecklistItem"
+    objects: {
+      visit: Prisma.$VisitPayload<ExtArgs>
+      templateItem: Prisma.$ChecklistTemplateItemPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      visitId: string
+      templateItemId: string | null
+      label: string
+      status: string
+      resultNote: string | null
+      sortOrder: number
+    }, ExtArgs["result"]["checklistItem"]>
+    composites: {}
+  }
+
+  type ChecklistItemGetPayload<S extends boolean | null | undefined | ChecklistItemDefaultArgs> = $Result.GetResult<Prisma.$ChecklistItemPayload, S>
+
+  type ChecklistItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChecklistItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChecklistItemCountAggregateInputType | true
+    }
+
+  export interface ChecklistItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChecklistItem'], meta: { name: 'ChecklistItem' } }
+    /**
+     * Find zero or one ChecklistItem that matches the filter.
+     * @param {ChecklistItemFindUniqueArgs} args - Arguments to find a ChecklistItem
+     * @example
+     * // Get one ChecklistItem
+     * const checklistItem = await prisma.checklistItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChecklistItemFindUniqueArgs>(args: SelectSubset<T, ChecklistItemFindUniqueArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChecklistItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChecklistItemFindUniqueOrThrowArgs} args - Arguments to find a ChecklistItem
+     * @example
+     * // Get one ChecklistItem
+     * const checklistItem = await prisma.checklistItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChecklistItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ChecklistItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemFindFirstArgs} args - Arguments to find a ChecklistItem
+     * @example
+     * // Get one ChecklistItem
+     * const checklistItem = await prisma.checklistItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChecklistItemFindFirstArgs>(args?: SelectSubset<T, ChecklistItemFindFirstArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemFindFirstOrThrowArgs} args - Arguments to find a ChecklistItem
+     * @example
+     * // Get one ChecklistItem
+     * const checklistItem = await prisma.checklistItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChecklistItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ChecklistItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChecklistItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChecklistItems
+     * const checklistItems = await prisma.checklistItem.findMany()
+     * 
+     * // Get first 10 ChecklistItems
+     * const checklistItems = await prisma.checklistItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const checklistItemWithIdOnly = await prisma.checklistItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChecklistItemFindManyArgs>(args?: SelectSubset<T, ChecklistItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChecklistItem.
+     * @param {ChecklistItemCreateArgs} args - Arguments to create a ChecklistItem.
+     * @example
+     * // Create one ChecklistItem
+     * const ChecklistItem = await prisma.checklistItem.create({
+     *   data: {
+     *     // ... data to create a ChecklistItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChecklistItemCreateArgs>(args: SelectSubset<T, ChecklistItemCreateArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChecklistItems.
+     * @param {ChecklistItemCreateManyArgs} args - Arguments to create many ChecklistItems.
+     * @example
+     * // Create many ChecklistItems
+     * const checklistItem = await prisma.checklistItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChecklistItemCreateManyArgs>(args?: SelectSubset<T, ChecklistItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ChecklistItem.
+     * @param {ChecklistItemDeleteArgs} args - Arguments to delete one ChecklistItem.
+     * @example
+     * // Delete one ChecklistItem
+     * const ChecklistItem = await prisma.checklistItem.delete({
+     *   where: {
+     *     // ... filter to delete one ChecklistItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChecklistItemDeleteArgs>(args: SelectSubset<T, ChecklistItemDeleteArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChecklistItem.
+     * @param {ChecklistItemUpdateArgs} args - Arguments to update one ChecklistItem.
+     * @example
+     * // Update one ChecklistItem
+     * const checklistItem = await prisma.checklistItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChecklistItemUpdateArgs>(args: SelectSubset<T, ChecklistItemUpdateArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChecklistItems.
+     * @param {ChecklistItemDeleteManyArgs} args - Arguments to filter ChecklistItems to delete.
+     * @example
+     * // Delete a few ChecklistItems
+     * const { count } = await prisma.checklistItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChecklistItemDeleteManyArgs>(args?: SelectSubset<T, ChecklistItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChecklistItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChecklistItems
+     * const checklistItem = await prisma.checklistItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChecklistItemUpdateManyArgs>(args: SelectSubset<T, ChecklistItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ChecklistItem.
+     * @param {ChecklistItemUpsertArgs} args - Arguments to update or create a ChecklistItem.
+     * @example
+     * // Update or create a ChecklistItem
+     * const checklistItem = await prisma.checklistItem.upsert({
+     *   create: {
+     *     // ... data to create a ChecklistItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChecklistItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChecklistItemUpsertArgs>(args: SelectSubset<T, ChecklistItemUpsertArgs<ExtArgs>>): Prisma__ChecklistItemClient<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChecklistItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemCountArgs} args - Arguments to filter ChecklistItems to count.
+     * @example
+     * // Count the number of ChecklistItems
+     * const count = await prisma.checklistItem.count({
+     *   where: {
+     *     // ... the filter for the ChecklistItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChecklistItemCountArgs>(
+      args?: Subset<T, ChecklistItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChecklistItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChecklistItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChecklistItemAggregateArgs>(args: Subset<T, ChecklistItemAggregateArgs>): Prisma.PrismaPromise<GetChecklistItemAggregateType<T>>
+
+    /**
+     * Group by ChecklistItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChecklistItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChecklistItemGroupByArgs['orderBy'] }
+        : { orderBy?: ChecklistItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChecklistItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChecklistItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChecklistItem model
+   */
+  readonly fields: ChecklistItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChecklistItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChecklistItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    visit<T extends VisitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VisitDefaultArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    templateItem<T extends ChecklistItem$templateItemArgs<ExtArgs> = {}>(args?: Subset<T, ChecklistItem$templateItemArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChecklistItem model
+   */
+  interface ChecklistItemFieldRefs {
+    readonly id: FieldRef<"ChecklistItem", 'String'>
+    readonly visitId: FieldRef<"ChecklistItem", 'String'>
+    readonly templateItemId: FieldRef<"ChecklistItem", 'String'>
+    readonly label: FieldRef<"ChecklistItem", 'String'>
+    readonly status: FieldRef<"ChecklistItem", 'String'>
+    readonly resultNote: FieldRef<"ChecklistItem", 'String'>
+    readonly sortOrder: FieldRef<"ChecklistItem", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChecklistItem findUnique
+   */
+  export type ChecklistItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistItem to fetch.
+     */
+    where: ChecklistItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistItem findUniqueOrThrow
+   */
+  export type ChecklistItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistItem to fetch.
+     */
+    where: ChecklistItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistItem findFirst
+   */
+  export type ChecklistItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistItem to fetch.
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistItems to fetch.
+     */
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistItems.
+     */
+    cursor?: ChecklistItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistItems.
+     */
+    distinct?: ChecklistItemScalarFieldEnum | ChecklistItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistItem findFirstOrThrow
+   */
+  export type ChecklistItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistItem to fetch.
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistItems to fetch.
+     */
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistItems.
+     */
+    cursor?: ChecklistItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistItems.
+     */
+    distinct?: ChecklistItemScalarFieldEnum | ChecklistItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistItem findMany
+   */
+  export type ChecklistItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistItems to fetch.
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistItems to fetch.
+     */
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChecklistItems.
+     */
+    cursor?: ChecklistItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistItems.
+     */
+    skip?: number
+    distinct?: ChecklistItemScalarFieldEnum | ChecklistItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistItem create
+   */
+  export type ChecklistItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChecklistItem.
+     */
+    data: XOR<ChecklistItemCreateInput, ChecklistItemUncheckedCreateInput>
+  }
+
+  /**
+   * ChecklistItem createMany
+   */
+  export type ChecklistItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChecklistItems.
+     */
+    data: ChecklistItemCreateManyInput | ChecklistItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChecklistItem update
+   */
+  export type ChecklistItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChecklistItem.
+     */
+    data: XOR<ChecklistItemUpdateInput, ChecklistItemUncheckedUpdateInput>
+    /**
+     * Choose, which ChecklistItem to update.
+     */
+    where: ChecklistItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistItem updateMany
+   */
+  export type ChecklistItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChecklistItems.
+     */
+    data: XOR<ChecklistItemUpdateManyMutationInput, ChecklistItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ChecklistItems to update
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * Limit how many ChecklistItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistItem upsert
+   */
+  export type ChecklistItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChecklistItem to update in case it exists.
+     */
+    where: ChecklistItemWhereUniqueInput
+    /**
+     * In case the ChecklistItem found by the `where` argument doesn't exist, create a new ChecklistItem with this data.
+     */
+    create: XOR<ChecklistItemCreateInput, ChecklistItemUncheckedCreateInput>
+    /**
+     * In case the ChecklistItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChecklistItemUpdateInput, ChecklistItemUncheckedUpdateInput>
+  }
+
+  /**
+   * ChecklistItem delete
+   */
+  export type ChecklistItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    /**
+     * Filter which ChecklistItem to delete.
+     */
+    where: ChecklistItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistItem deleteMany
+   */
+  export type ChecklistItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistItems to delete
+     */
+    where?: ChecklistItemWhereInput
+    /**
+     * Limit how many ChecklistItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistItem.templateItem
+   */
+  export type ChecklistItem$templateItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    where?: ChecklistTemplateItemWhereInput
+  }
+
+  /**
+   * ChecklistItem without action
+   */
+  export type ChecklistItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ChecklistTemplate
+   */
+
+  export type AggregateChecklistTemplate = {
+    _count: ChecklistTemplateCountAggregateOutputType | null
+    _min: ChecklistTemplateMinAggregateOutputType | null
+    _max: ChecklistTemplateMaxAggregateOutputType | null
+  }
+
+  export type ChecklistTemplateMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    isDefault: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ChecklistTemplateMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    isDefault: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ChecklistTemplateCountAggregateOutputType = {
+    id: number
+    clientId: number
+    name: number
+    isDefault: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ChecklistTemplateMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    isDefault?: true
+    createdAt?: true
+  }
+
+  export type ChecklistTemplateMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    isDefault?: true
+    createdAt?: true
+  }
+
+  export type ChecklistTemplateCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    isDefault?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ChecklistTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistTemplate to aggregate.
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplates to fetch.
+     */
+    orderBy?: ChecklistTemplateOrderByWithRelationInput | ChecklistTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChecklistTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChecklistTemplates
+    **/
+    _count?: true | ChecklistTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChecklistTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChecklistTemplateMaxAggregateInputType
+  }
+
+  export type GetChecklistTemplateAggregateType<T extends ChecklistTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateChecklistTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChecklistTemplate[P]>
+      : GetScalarType<T[P], AggregateChecklistTemplate[P]>
+  }
+
+
+
+
+  export type ChecklistTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistTemplateWhereInput
+    orderBy?: ChecklistTemplateOrderByWithAggregationInput | ChecklistTemplateOrderByWithAggregationInput[]
+    by: ChecklistTemplateScalarFieldEnum[] | ChecklistTemplateScalarFieldEnum
+    having?: ChecklistTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChecklistTemplateCountAggregateInputType | true
+    _min?: ChecklistTemplateMinAggregateInputType
+    _max?: ChecklistTemplateMaxAggregateInputType
+  }
+
+  export type ChecklistTemplateGroupByOutputType = {
+    id: string
+    clientId: string | null
+    name: string
+    isDefault: boolean
+    createdAt: Date
+    _count: ChecklistTemplateCountAggregateOutputType | null
+    _min: ChecklistTemplateMinAggregateOutputType | null
+    _max: ChecklistTemplateMaxAggregateOutputType | null
+  }
+
+  type GetChecklistTemplateGroupByPayload<T extends ChecklistTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChecklistTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChecklistTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChecklistTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], ChecklistTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChecklistTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+    client?: boolean | ChecklistTemplate$clientArgs<ExtArgs>
+    items?: boolean | ChecklistTemplate$itemsArgs<ExtArgs>
+    _count?: boolean | ChecklistTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["checklistTemplate"]>
+
+
+
+  export type ChecklistTemplateSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+  }
+
+  export type ChecklistTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "name" | "isDefault" | "createdAt", ExtArgs["result"]["checklistTemplate"]>
+  export type ChecklistTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ChecklistTemplate$clientArgs<ExtArgs>
+    items?: boolean | ChecklistTemplate$itemsArgs<ExtArgs>
+    _count?: boolean | ChecklistTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ChecklistTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChecklistTemplate"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs> | null
+      items: Prisma.$ChecklistTemplateItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string | null
+      name: string
+      isDefault: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["checklistTemplate"]>
+    composites: {}
+  }
+
+  type ChecklistTemplateGetPayload<S extends boolean | null | undefined | ChecklistTemplateDefaultArgs> = $Result.GetResult<Prisma.$ChecklistTemplatePayload, S>
+
+  type ChecklistTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChecklistTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChecklistTemplateCountAggregateInputType | true
+    }
+
+  export interface ChecklistTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChecklistTemplate'], meta: { name: 'ChecklistTemplate' } }
+    /**
+     * Find zero or one ChecklistTemplate that matches the filter.
+     * @param {ChecklistTemplateFindUniqueArgs} args - Arguments to find a ChecklistTemplate
+     * @example
+     * // Get one ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChecklistTemplateFindUniqueArgs>(args: SelectSubset<T, ChecklistTemplateFindUniqueArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChecklistTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChecklistTemplateFindUniqueOrThrowArgs} args - Arguments to find a ChecklistTemplate
+     * @example
+     * // Get one ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChecklistTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, ChecklistTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateFindFirstArgs} args - Arguments to find a ChecklistTemplate
+     * @example
+     * // Get one ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChecklistTemplateFindFirstArgs>(args?: SelectSubset<T, ChecklistTemplateFindFirstArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateFindFirstOrThrowArgs} args - Arguments to find a ChecklistTemplate
+     * @example
+     * // Get one ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChecklistTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, ChecklistTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChecklistTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChecklistTemplates
+     * const checklistTemplates = await prisma.checklistTemplate.findMany()
+     * 
+     * // Get first 10 ChecklistTemplates
+     * const checklistTemplates = await prisma.checklistTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const checklistTemplateWithIdOnly = await prisma.checklistTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChecklistTemplateFindManyArgs>(args?: SelectSubset<T, ChecklistTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChecklistTemplate.
+     * @param {ChecklistTemplateCreateArgs} args - Arguments to create a ChecklistTemplate.
+     * @example
+     * // Create one ChecklistTemplate
+     * const ChecklistTemplate = await prisma.checklistTemplate.create({
+     *   data: {
+     *     // ... data to create a ChecklistTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChecklistTemplateCreateArgs>(args: SelectSubset<T, ChecklistTemplateCreateArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChecklistTemplates.
+     * @param {ChecklistTemplateCreateManyArgs} args - Arguments to create many ChecklistTemplates.
+     * @example
+     * // Create many ChecklistTemplates
+     * const checklistTemplate = await prisma.checklistTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChecklistTemplateCreateManyArgs>(args?: SelectSubset<T, ChecklistTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ChecklistTemplate.
+     * @param {ChecklistTemplateDeleteArgs} args - Arguments to delete one ChecklistTemplate.
+     * @example
+     * // Delete one ChecklistTemplate
+     * const ChecklistTemplate = await prisma.checklistTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one ChecklistTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChecklistTemplateDeleteArgs>(args: SelectSubset<T, ChecklistTemplateDeleteArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChecklistTemplate.
+     * @param {ChecklistTemplateUpdateArgs} args - Arguments to update one ChecklistTemplate.
+     * @example
+     * // Update one ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChecklistTemplateUpdateArgs>(args: SelectSubset<T, ChecklistTemplateUpdateArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChecklistTemplates.
+     * @param {ChecklistTemplateDeleteManyArgs} args - Arguments to filter ChecklistTemplates to delete.
+     * @example
+     * // Delete a few ChecklistTemplates
+     * const { count } = await prisma.checklistTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChecklistTemplateDeleteManyArgs>(args?: SelectSubset<T, ChecklistTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChecklistTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChecklistTemplates
+     * const checklistTemplate = await prisma.checklistTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChecklistTemplateUpdateManyArgs>(args: SelectSubset<T, ChecklistTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ChecklistTemplate.
+     * @param {ChecklistTemplateUpsertArgs} args - Arguments to update or create a ChecklistTemplate.
+     * @example
+     * // Update or create a ChecklistTemplate
+     * const checklistTemplate = await prisma.checklistTemplate.upsert({
+     *   create: {
+     *     // ... data to create a ChecklistTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChecklistTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChecklistTemplateUpsertArgs>(args: SelectSubset<T, ChecklistTemplateUpsertArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChecklistTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateCountArgs} args - Arguments to filter ChecklistTemplates to count.
+     * @example
+     * // Count the number of ChecklistTemplates
+     * const count = await prisma.checklistTemplate.count({
+     *   where: {
+     *     // ... the filter for the ChecklistTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChecklistTemplateCountArgs>(
+      args?: Subset<T, ChecklistTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChecklistTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChecklistTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChecklistTemplateAggregateArgs>(args: Subset<T, ChecklistTemplateAggregateArgs>): Prisma.PrismaPromise<GetChecklistTemplateAggregateType<T>>
+
+    /**
+     * Group by ChecklistTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChecklistTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChecklistTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: ChecklistTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChecklistTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChecklistTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChecklistTemplate model
+   */
+  readonly fields: ChecklistTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChecklistTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChecklistTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ChecklistTemplate$clientArgs<ExtArgs> = {}>(args?: Subset<T, ChecklistTemplate$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    items<T extends ChecklistTemplate$itemsArgs<ExtArgs> = {}>(args?: Subset<T, ChecklistTemplate$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChecklistTemplate model
+   */
+  interface ChecklistTemplateFieldRefs {
+    readonly id: FieldRef<"ChecklistTemplate", 'String'>
+    readonly clientId: FieldRef<"ChecklistTemplate", 'String'>
+    readonly name: FieldRef<"ChecklistTemplate", 'String'>
+    readonly isDefault: FieldRef<"ChecklistTemplate", 'Boolean'>
+    readonly createdAt: FieldRef<"ChecklistTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChecklistTemplate findUnique
+   */
+  export type ChecklistTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplate to fetch.
+     */
+    where: ChecklistTemplateWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplate findUniqueOrThrow
+   */
+  export type ChecklistTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplate to fetch.
+     */
+    where: ChecklistTemplateWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplate findFirst
+   */
+  export type ChecklistTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplate to fetch.
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplates to fetch.
+     */
+    orderBy?: ChecklistTemplateOrderByWithRelationInput | ChecklistTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistTemplates.
+     */
+    cursor?: ChecklistTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistTemplates.
+     */
+    distinct?: ChecklistTemplateScalarFieldEnum | ChecklistTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplate findFirstOrThrow
+   */
+  export type ChecklistTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplate to fetch.
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplates to fetch.
+     */
+    orderBy?: ChecklistTemplateOrderByWithRelationInput | ChecklistTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistTemplates.
+     */
+    cursor?: ChecklistTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistTemplates.
+     */
+    distinct?: ChecklistTemplateScalarFieldEnum | ChecklistTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplate findMany
+   */
+  export type ChecklistTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplates to fetch.
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplates to fetch.
+     */
+    orderBy?: ChecklistTemplateOrderByWithRelationInput | ChecklistTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChecklistTemplates.
+     */
+    cursor?: ChecklistTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplates.
+     */
+    skip?: number
+    distinct?: ChecklistTemplateScalarFieldEnum | ChecklistTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplate create
+   */
+  export type ChecklistTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChecklistTemplate.
+     */
+    data: XOR<ChecklistTemplateCreateInput, ChecklistTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * ChecklistTemplate createMany
+   */
+  export type ChecklistTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChecklistTemplates.
+     */
+    data: ChecklistTemplateCreateManyInput | ChecklistTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChecklistTemplate update
+   */
+  export type ChecklistTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChecklistTemplate.
+     */
+    data: XOR<ChecklistTemplateUpdateInput, ChecklistTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which ChecklistTemplate to update.
+     */
+    where: ChecklistTemplateWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplate updateMany
+   */
+  export type ChecklistTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChecklistTemplates.
+     */
+    data: XOR<ChecklistTemplateUpdateManyMutationInput, ChecklistTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which ChecklistTemplates to update
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * Limit how many ChecklistTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistTemplate upsert
+   */
+  export type ChecklistTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChecklistTemplate to update in case it exists.
+     */
+    where: ChecklistTemplateWhereUniqueInput
+    /**
+     * In case the ChecklistTemplate found by the `where` argument doesn't exist, create a new ChecklistTemplate with this data.
+     */
+    create: XOR<ChecklistTemplateCreateInput, ChecklistTemplateUncheckedCreateInput>
+    /**
+     * In case the ChecklistTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChecklistTemplateUpdateInput, ChecklistTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * ChecklistTemplate delete
+   */
+  export type ChecklistTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which ChecklistTemplate to delete.
+     */
+    where: ChecklistTemplateWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplate deleteMany
+   */
+  export type ChecklistTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistTemplates to delete
+     */
+    where?: ChecklistTemplateWhereInput
+    /**
+     * Limit how many ChecklistTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistTemplate.client
+   */
+  export type ChecklistTemplate$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+  }
+
+  /**
+   * ChecklistTemplate.items
+   */
+  export type ChecklistTemplate$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    where?: ChecklistTemplateItemWhereInput
+    orderBy?: ChecklistTemplateItemOrderByWithRelationInput | ChecklistTemplateItemOrderByWithRelationInput[]
+    cursor?: ChecklistTemplateItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChecklistTemplateItemScalarFieldEnum | ChecklistTemplateItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplate without action
+   */
+  export type ChecklistTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplate
+     */
+    select?: ChecklistTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplate
+     */
+    omit?: ChecklistTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ChecklistTemplateItem
+   */
+
+  export type AggregateChecklistTemplateItem = {
+    _count: ChecklistTemplateItemCountAggregateOutputType | null
+    _avg: ChecklistTemplateItemAvgAggregateOutputType | null
+    _sum: ChecklistTemplateItemSumAggregateOutputType | null
+    _min: ChecklistTemplateItemMinAggregateOutputType | null
+    _max: ChecklistTemplateItemMaxAggregateOutputType | null
+  }
+
+  export type ChecklistTemplateItemAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ChecklistTemplateItemSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ChecklistTemplateItemMinAggregateOutputType = {
+    id: string | null
+    templateId: string | null
+    label: string | null
+    instruction: string | null
+    section: string | null
+    sortOrder: number | null
+  }
+
+  export type ChecklistTemplateItemMaxAggregateOutputType = {
+    id: string | null
+    templateId: string | null
+    label: string | null
+    instruction: string | null
+    section: string | null
+    sortOrder: number | null
+  }
+
+  export type ChecklistTemplateItemCountAggregateOutputType = {
+    id: number
+    templateId: number
+    label: number
+    instruction: number
+    section: number
+    sortOrder: number
+    _all: number
+  }
+
+
+  export type ChecklistTemplateItemAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ChecklistTemplateItemSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ChecklistTemplateItemMinAggregateInputType = {
+    id?: true
+    templateId?: true
+    label?: true
+    instruction?: true
+    section?: true
+    sortOrder?: true
+  }
+
+  export type ChecklistTemplateItemMaxAggregateInputType = {
+    id?: true
+    templateId?: true
+    label?: true
+    instruction?: true
+    section?: true
+    sortOrder?: true
+  }
+
+  export type ChecklistTemplateItemCountAggregateInputType = {
+    id?: true
+    templateId?: true
+    label?: true
+    instruction?: true
+    section?: true
+    sortOrder?: true
+    _all?: true
+  }
+
+  export type ChecklistTemplateItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistTemplateItem to aggregate.
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplateItems to fetch.
+     */
+    orderBy?: ChecklistTemplateItemOrderByWithRelationInput | ChecklistTemplateItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChecklistTemplateItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplateItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplateItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChecklistTemplateItems
+    **/
+    _count?: true | ChecklistTemplateItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ChecklistTemplateItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ChecklistTemplateItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChecklistTemplateItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChecklistTemplateItemMaxAggregateInputType
+  }
+
+  export type GetChecklistTemplateItemAggregateType<T extends ChecklistTemplateItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateChecklistTemplateItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChecklistTemplateItem[P]>
+      : GetScalarType<T[P], AggregateChecklistTemplateItem[P]>
+  }
+
+
+
+
+  export type ChecklistTemplateItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChecklistTemplateItemWhereInput
+    orderBy?: ChecklistTemplateItemOrderByWithAggregationInput | ChecklistTemplateItemOrderByWithAggregationInput[]
+    by: ChecklistTemplateItemScalarFieldEnum[] | ChecklistTemplateItemScalarFieldEnum
+    having?: ChecklistTemplateItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChecklistTemplateItemCountAggregateInputType | true
+    _avg?: ChecklistTemplateItemAvgAggregateInputType
+    _sum?: ChecklistTemplateItemSumAggregateInputType
+    _min?: ChecklistTemplateItemMinAggregateInputType
+    _max?: ChecklistTemplateItemMaxAggregateInputType
+  }
+
+  export type ChecklistTemplateItemGroupByOutputType = {
+    id: string
+    templateId: string
+    label: string
+    instruction: string | null
+    section: string | null
+    sortOrder: number
+    _count: ChecklistTemplateItemCountAggregateOutputType | null
+    _avg: ChecklistTemplateItemAvgAggregateOutputType | null
+    _sum: ChecklistTemplateItemSumAggregateOutputType | null
+    _min: ChecklistTemplateItemMinAggregateOutputType | null
+    _max: ChecklistTemplateItemMaxAggregateOutputType | null
+  }
+
+  type GetChecklistTemplateItemGroupByPayload<T extends ChecklistTemplateItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChecklistTemplateItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChecklistTemplateItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChecklistTemplateItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ChecklistTemplateItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChecklistTemplateItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    templateId?: boolean
+    label?: boolean
+    instruction?: boolean
+    section?: boolean
+    sortOrder?: boolean
+    template?: boolean | ChecklistTemplateDefaultArgs<ExtArgs>
+    checklistItems?: boolean | ChecklistTemplateItem$checklistItemsArgs<ExtArgs>
+    _count?: boolean | ChecklistTemplateItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["checklistTemplateItem"]>
+
+
+
+  export type ChecklistTemplateItemSelectScalar = {
+    id?: boolean
+    templateId?: boolean
+    label?: boolean
+    instruction?: boolean
+    section?: boolean
+    sortOrder?: boolean
+  }
+
+  export type ChecklistTemplateItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "templateId" | "label" | "instruction" | "section" | "sortOrder", ExtArgs["result"]["checklistTemplateItem"]>
+  export type ChecklistTemplateItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    template?: boolean | ChecklistTemplateDefaultArgs<ExtArgs>
+    checklistItems?: boolean | ChecklistTemplateItem$checklistItemsArgs<ExtArgs>
+    _count?: boolean | ChecklistTemplateItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ChecklistTemplateItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChecklistTemplateItem"
+    objects: {
+      template: Prisma.$ChecklistTemplatePayload<ExtArgs>
+      checklistItems: Prisma.$ChecklistItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      templateId: string
+      label: string
+      instruction: string | null
+      section: string | null
+      sortOrder: number
+    }, ExtArgs["result"]["checklistTemplateItem"]>
+    composites: {}
+  }
+
+  type ChecklistTemplateItemGetPayload<S extends boolean | null | undefined | ChecklistTemplateItemDefaultArgs> = $Result.GetResult<Prisma.$ChecklistTemplateItemPayload, S>
+
+  type ChecklistTemplateItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChecklistTemplateItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChecklistTemplateItemCountAggregateInputType | true
+    }
+
+  export interface ChecklistTemplateItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChecklistTemplateItem'], meta: { name: 'ChecklistTemplateItem' } }
+    /**
+     * Find zero or one ChecklistTemplateItem that matches the filter.
+     * @param {ChecklistTemplateItemFindUniqueArgs} args - Arguments to find a ChecklistTemplateItem
+     * @example
+     * // Get one ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChecklistTemplateItemFindUniqueArgs>(args: SelectSubset<T, ChecklistTemplateItemFindUniqueArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChecklistTemplateItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChecklistTemplateItemFindUniqueOrThrowArgs} args - Arguments to find a ChecklistTemplateItem
+     * @example
+     * // Get one ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChecklistTemplateItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ChecklistTemplateItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistTemplateItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemFindFirstArgs} args - Arguments to find a ChecklistTemplateItem
+     * @example
+     * // Get one ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChecklistTemplateItemFindFirstArgs>(args?: SelectSubset<T, ChecklistTemplateItemFindFirstArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChecklistTemplateItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemFindFirstOrThrowArgs} args - Arguments to find a ChecklistTemplateItem
+     * @example
+     * // Get one ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChecklistTemplateItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ChecklistTemplateItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChecklistTemplateItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChecklistTemplateItems
+     * const checklistTemplateItems = await prisma.checklistTemplateItem.findMany()
+     * 
+     * // Get first 10 ChecklistTemplateItems
+     * const checklistTemplateItems = await prisma.checklistTemplateItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const checklistTemplateItemWithIdOnly = await prisma.checklistTemplateItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChecklistTemplateItemFindManyArgs>(args?: SelectSubset<T, ChecklistTemplateItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChecklistTemplateItem.
+     * @param {ChecklistTemplateItemCreateArgs} args - Arguments to create a ChecklistTemplateItem.
+     * @example
+     * // Create one ChecklistTemplateItem
+     * const ChecklistTemplateItem = await prisma.checklistTemplateItem.create({
+     *   data: {
+     *     // ... data to create a ChecklistTemplateItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChecklistTemplateItemCreateArgs>(args: SelectSubset<T, ChecklistTemplateItemCreateArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChecklistTemplateItems.
+     * @param {ChecklistTemplateItemCreateManyArgs} args - Arguments to create many ChecklistTemplateItems.
+     * @example
+     * // Create many ChecklistTemplateItems
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChecklistTemplateItemCreateManyArgs>(args?: SelectSubset<T, ChecklistTemplateItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ChecklistTemplateItem.
+     * @param {ChecklistTemplateItemDeleteArgs} args - Arguments to delete one ChecklistTemplateItem.
+     * @example
+     * // Delete one ChecklistTemplateItem
+     * const ChecklistTemplateItem = await prisma.checklistTemplateItem.delete({
+     *   where: {
+     *     // ... filter to delete one ChecklistTemplateItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChecklistTemplateItemDeleteArgs>(args: SelectSubset<T, ChecklistTemplateItemDeleteArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChecklistTemplateItem.
+     * @param {ChecklistTemplateItemUpdateArgs} args - Arguments to update one ChecklistTemplateItem.
+     * @example
+     * // Update one ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChecklistTemplateItemUpdateArgs>(args: SelectSubset<T, ChecklistTemplateItemUpdateArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChecklistTemplateItems.
+     * @param {ChecklistTemplateItemDeleteManyArgs} args - Arguments to filter ChecklistTemplateItems to delete.
+     * @example
+     * // Delete a few ChecklistTemplateItems
+     * const { count } = await prisma.checklistTemplateItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChecklistTemplateItemDeleteManyArgs>(args?: SelectSubset<T, ChecklistTemplateItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChecklistTemplateItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChecklistTemplateItems
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChecklistTemplateItemUpdateManyArgs>(args: SelectSubset<T, ChecklistTemplateItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ChecklistTemplateItem.
+     * @param {ChecklistTemplateItemUpsertArgs} args - Arguments to update or create a ChecklistTemplateItem.
+     * @example
+     * // Update or create a ChecklistTemplateItem
+     * const checklistTemplateItem = await prisma.checklistTemplateItem.upsert({
+     *   create: {
+     *     // ... data to create a ChecklistTemplateItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChecklistTemplateItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChecklistTemplateItemUpsertArgs>(args: SelectSubset<T, ChecklistTemplateItemUpsertArgs<ExtArgs>>): Prisma__ChecklistTemplateItemClient<$Result.GetResult<Prisma.$ChecklistTemplateItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChecklistTemplateItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemCountArgs} args - Arguments to filter ChecklistTemplateItems to count.
+     * @example
+     * // Count the number of ChecklistTemplateItems
+     * const count = await prisma.checklistTemplateItem.count({
+     *   where: {
+     *     // ... the filter for the ChecklistTemplateItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChecklistTemplateItemCountArgs>(
+      args?: Subset<T, ChecklistTemplateItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChecklistTemplateItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChecklistTemplateItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChecklistTemplateItemAggregateArgs>(args: Subset<T, ChecklistTemplateItemAggregateArgs>): Prisma.PrismaPromise<GetChecklistTemplateItemAggregateType<T>>
+
+    /**
+     * Group by ChecklistTemplateItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChecklistTemplateItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChecklistTemplateItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChecklistTemplateItemGroupByArgs['orderBy'] }
+        : { orderBy?: ChecklistTemplateItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChecklistTemplateItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChecklistTemplateItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChecklistTemplateItem model
+   */
+  readonly fields: ChecklistTemplateItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChecklistTemplateItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChecklistTemplateItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    template<T extends ChecklistTemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChecklistTemplateDefaultArgs<ExtArgs>>): Prisma__ChecklistTemplateClient<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    checklistItems<T extends ChecklistTemplateItem$checklistItemsArgs<ExtArgs> = {}>(args?: Subset<T, ChecklistTemplateItem$checklistItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChecklistTemplateItem model
+   */
+  interface ChecklistTemplateItemFieldRefs {
+    readonly id: FieldRef<"ChecklistTemplateItem", 'String'>
+    readonly templateId: FieldRef<"ChecklistTemplateItem", 'String'>
+    readonly label: FieldRef<"ChecklistTemplateItem", 'String'>
+    readonly instruction: FieldRef<"ChecklistTemplateItem", 'String'>
+    readonly section: FieldRef<"ChecklistTemplateItem", 'String'>
+    readonly sortOrder: FieldRef<"ChecklistTemplateItem", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChecklistTemplateItem findUnique
+   */
+  export type ChecklistTemplateItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplateItem to fetch.
+     */
+    where: ChecklistTemplateItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplateItem findUniqueOrThrow
+   */
+  export type ChecklistTemplateItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplateItem to fetch.
+     */
+    where: ChecklistTemplateItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplateItem findFirst
+   */
+  export type ChecklistTemplateItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplateItem to fetch.
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplateItems to fetch.
+     */
+    orderBy?: ChecklistTemplateItemOrderByWithRelationInput | ChecklistTemplateItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistTemplateItems.
+     */
+    cursor?: ChecklistTemplateItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplateItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplateItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistTemplateItems.
+     */
+    distinct?: ChecklistTemplateItemScalarFieldEnum | ChecklistTemplateItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplateItem findFirstOrThrow
+   */
+  export type ChecklistTemplateItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplateItem to fetch.
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplateItems to fetch.
+     */
+    orderBy?: ChecklistTemplateItemOrderByWithRelationInput | ChecklistTemplateItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChecklistTemplateItems.
+     */
+    cursor?: ChecklistTemplateItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplateItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplateItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChecklistTemplateItems.
+     */
+    distinct?: ChecklistTemplateItemScalarFieldEnum | ChecklistTemplateItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplateItem findMany
+   */
+  export type ChecklistTemplateItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ChecklistTemplateItems to fetch.
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChecklistTemplateItems to fetch.
+     */
+    orderBy?: ChecklistTemplateItemOrderByWithRelationInput | ChecklistTemplateItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChecklistTemplateItems.
+     */
+    cursor?: ChecklistTemplateItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChecklistTemplateItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChecklistTemplateItems.
+     */
+    skip?: number
+    distinct?: ChecklistTemplateItemScalarFieldEnum | ChecklistTemplateItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplateItem create
+   */
+  export type ChecklistTemplateItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChecklistTemplateItem.
+     */
+    data: XOR<ChecklistTemplateItemCreateInput, ChecklistTemplateItemUncheckedCreateInput>
+  }
+
+  /**
+   * ChecklistTemplateItem createMany
+   */
+  export type ChecklistTemplateItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChecklistTemplateItems.
+     */
+    data: ChecklistTemplateItemCreateManyInput | ChecklistTemplateItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChecklistTemplateItem update
+   */
+  export type ChecklistTemplateItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChecklistTemplateItem.
+     */
+    data: XOR<ChecklistTemplateItemUpdateInput, ChecklistTemplateItemUncheckedUpdateInput>
+    /**
+     * Choose, which ChecklistTemplateItem to update.
+     */
+    where: ChecklistTemplateItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplateItem updateMany
+   */
+  export type ChecklistTemplateItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChecklistTemplateItems.
+     */
+    data: XOR<ChecklistTemplateItemUpdateManyMutationInput, ChecklistTemplateItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ChecklistTemplateItems to update
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * Limit how many ChecklistTemplateItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistTemplateItem upsert
+   */
+  export type ChecklistTemplateItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChecklistTemplateItem to update in case it exists.
+     */
+    where: ChecklistTemplateItemWhereUniqueInput
+    /**
+     * In case the ChecklistTemplateItem found by the `where` argument doesn't exist, create a new ChecklistTemplateItem with this data.
+     */
+    create: XOR<ChecklistTemplateItemCreateInput, ChecklistTemplateItemUncheckedCreateInput>
+    /**
+     * In case the ChecklistTemplateItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChecklistTemplateItemUpdateInput, ChecklistTemplateItemUncheckedUpdateInput>
+  }
+
+  /**
+   * ChecklistTemplateItem delete
+   */
+  export type ChecklistTemplateItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+    /**
+     * Filter which ChecklistTemplateItem to delete.
+     */
+    where: ChecklistTemplateItemWhereUniqueInput
+  }
+
+  /**
+   * ChecklistTemplateItem deleteMany
+   */
+  export type ChecklistTemplateItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChecklistTemplateItems to delete
+     */
+    where?: ChecklistTemplateItemWhereInput
+    /**
+     * Limit how many ChecklistTemplateItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChecklistTemplateItem.checklistItems
+   */
+  export type ChecklistTemplateItem$checklistItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistItem
+     */
+    select?: ChecklistItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistItem
+     */
+    omit?: ChecklistItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistItemInclude<ExtArgs> | null
+    where?: ChecklistItemWhereInput
+    orderBy?: ChecklistItemOrderByWithRelationInput | ChecklistItemOrderByWithRelationInput[]
+    cursor?: ChecklistItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChecklistItemScalarFieldEnum | ChecklistItemScalarFieldEnum[]
+  }
+
+  /**
+   * ChecklistTemplateItem without action
+   */
+  export type ChecklistTemplateItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChecklistTemplateItem
+     */
+    select?: ChecklistTemplateItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChecklistTemplateItem
+     */
+    omit?: ChecklistTemplateItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChecklistTemplateItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Enums
+   */
+
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
+
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const AdminScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    passwordHash: 'passwordHash',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+  export const ClientScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    vatNumber: 'vatNumber',
+    address: 'address',
+    city: 'city',
+    language: 'language',
+    contractType: 'contractType',
+    retainerHours: 'retainerHours',
+    retainerFee: 'retainerFee',
+    hourlyRate: 'hourlyRate',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+  export const ClientUserScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    email: 'email',
+    passwordHash: 'passwordHash',
+    role: 'role',
+    portalToken: 'portalToken',
+    tokenExpiresAt: 'tokenExpiresAt',
+    lastLoginAt: 'lastLoginAt',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClientUserScalarFieldEnum = (typeof ClientUserScalarFieldEnum)[keyof typeof ClientUserScalarFieldEnum]
+
+
+  export const TicketScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    visitId: 'visitId',
+    reference: 'reference',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    priority: 'priority',
+    source: 'source',
+    sourceRef: 'sourceRef',
+    isBillable: 'isBillable',
+    resolvedAt: 'resolvedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+  export const TimeEntryScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    ticketId: 'ticketId',
+    invoiceId: 'invoiceId',
+    description: 'description',
+    durationMinutes: 'durationMinutes',
+    hourlyRate: 'hourlyRate',
+    isBillable: 'isBillable',
+    isInvoiced: 'isInvoiced',
+    loggedAt: 'loggedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type TimeEntryScalarFieldEnum = (typeof TimeEntryScalarFieldEnum)[keyof typeof TimeEntryScalarFieldEnum]
+
+
+  export const InvoiceScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    number: 'number',
+    status: 'status',
+    periodStart: 'periodStart',
+    periodEnd: 'periodEnd',
+    subtotal: 'subtotal',
+    vatRate: 'vatRate',
+    vatAmount: 'vatAmount',
+    total: 'total',
+    dueDate: 'dueDate',
+    paidAt: 'paidAt',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+  export const AssetScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    type: 'type',
+    serialNumber: 'serialNumber',
+    assignedTo: 'assignedTo',
+    status: 'status',
+    sensitivity: 'sensitivity',
+    showSerialInPortal: 'showSerialInPortal',
+    notes: 'notes',
+    warrantyExpiresAt: 'warrantyExpiresAt',
+    purchasedAt: 'purchasedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
+
+
+  export const ContractScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    vendor: 'vendor',
+    type: 'type',
+    renewalDate: 'renewalDate',
+    costPerYear: 'costPerYear',
+    autoRenews: 'autoRenews',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ContractScalarFieldEnum = (typeof ContractScalarFieldEnum)[keyof typeof ContractScalarFieldEnum]
+
+
+  export const VisitScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    type: 'type',
+    status: 'status',
+    notes: 'notes',
+    visitedAt: 'visitedAt',
+    completedAt: 'completedAt'
+  };
+
+  export type VisitScalarFieldEnum = (typeof VisitScalarFieldEnum)[keyof typeof VisitScalarFieldEnum]
+
+
+  export const ChecklistItemScalarFieldEnum: {
+    id: 'id',
+    visitId: 'visitId',
+    templateItemId: 'templateItemId',
+    label: 'label',
+    status: 'status',
+    resultNote: 'resultNote',
+    sortOrder: 'sortOrder'
+  };
+
+  export type ChecklistItemScalarFieldEnum = (typeof ChecklistItemScalarFieldEnum)[keyof typeof ChecklistItemScalarFieldEnum]
+
+
+  export const ChecklistTemplateScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    isDefault: 'isDefault',
+    createdAt: 'createdAt'
+  };
+
+  export type ChecklistTemplateScalarFieldEnum = (typeof ChecklistTemplateScalarFieldEnum)[keyof typeof ChecklistTemplateScalarFieldEnum]
+
+
+  export const ChecklistTemplateItemScalarFieldEnum: {
+    id: 'id',
+    templateId: 'templateId',
+    label: 'label',
+    instruction: 'instruction',
+    section: 'section',
+    sortOrder: 'sortOrder'
+  };
+
+  export type ChecklistTemplateItemScalarFieldEnum = (typeof ChecklistTemplateItemScalarFieldEnum)[keyof typeof ChecklistTemplateItemScalarFieldEnum]
+
+
+  export const SortOrder: {
+    asc: 'asc',
+    desc: 'desc'
+  };
+
+  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const AdminOrderByRelevanceFieldEnum: {
+    id: 'id',
+    email: 'email',
+    passwordHash: 'passwordHash'
+  };
+
+  export type AdminOrderByRelevanceFieldEnum = (typeof AdminOrderByRelevanceFieldEnum)[keyof typeof AdminOrderByRelevanceFieldEnum]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const ClientOrderByRelevanceFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    vatNumber: 'vatNumber',
+    address: 'address',
+    city: 'city',
+    language: 'language',
+    contractType: 'contractType'
+  };
+
+  export type ClientOrderByRelevanceFieldEnum = (typeof ClientOrderByRelevanceFieldEnum)[keyof typeof ClientOrderByRelevanceFieldEnum]
+
+
+  export const ClientUserOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    email: 'email',
+    passwordHash: 'passwordHash',
+    role: 'role',
+    portalToken: 'portalToken'
+  };
+
+  export type ClientUserOrderByRelevanceFieldEnum = (typeof ClientUserOrderByRelevanceFieldEnum)[keyof typeof ClientUserOrderByRelevanceFieldEnum]
+
+
+  export const TicketOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    visitId: 'visitId',
+    reference: 'reference',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    priority: 'priority',
+    source: 'source',
+    sourceRef: 'sourceRef'
+  };
+
+  export type TicketOrderByRelevanceFieldEnum = (typeof TicketOrderByRelevanceFieldEnum)[keyof typeof TicketOrderByRelevanceFieldEnum]
+
+
+  export const TimeEntryOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    ticketId: 'ticketId',
+    invoiceId: 'invoiceId',
+    description: 'description'
+  };
+
+  export type TimeEntryOrderByRelevanceFieldEnum = (typeof TimeEntryOrderByRelevanceFieldEnum)[keyof typeof TimeEntryOrderByRelevanceFieldEnum]
+
+
+  export const InvoiceOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    number: 'number',
+    status: 'status',
+    notes: 'notes'
+  };
+
+  export type InvoiceOrderByRelevanceFieldEnum = (typeof InvoiceOrderByRelevanceFieldEnum)[keyof typeof InvoiceOrderByRelevanceFieldEnum]
+
+
+  export const AssetOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    type: 'type',
+    serialNumber: 'serialNumber',
+    assignedTo: 'assignedTo',
+    status: 'status',
+    sensitivity: 'sensitivity',
+    notes: 'notes'
+  };
+
+  export type AssetOrderByRelevanceFieldEnum = (typeof AssetOrderByRelevanceFieldEnum)[keyof typeof AssetOrderByRelevanceFieldEnum]
+
+
+  export const ContractOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    vendor: 'vendor',
+    type: 'type',
+    notes: 'notes'
+  };
+
+  export type ContractOrderByRelevanceFieldEnum = (typeof ContractOrderByRelevanceFieldEnum)[keyof typeof ContractOrderByRelevanceFieldEnum]
+
+
+  export const VisitOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    type: 'type',
+    status: 'status',
+    notes: 'notes'
+  };
+
+  export type VisitOrderByRelevanceFieldEnum = (typeof VisitOrderByRelevanceFieldEnum)[keyof typeof VisitOrderByRelevanceFieldEnum]
+
+
+  export const ChecklistItemOrderByRelevanceFieldEnum: {
+    id: 'id',
+    visitId: 'visitId',
+    templateItemId: 'templateItemId',
+    label: 'label',
+    status: 'status',
+    resultNote: 'resultNote'
+  };
+
+  export type ChecklistItemOrderByRelevanceFieldEnum = (typeof ChecklistItemOrderByRelevanceFieldEnum)[keyof typeof ChecklistItemOrderByRelevanceFieldEnum]
+
+
+  export const ChecklistTemplateOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name'
+  };
+
+  export type ChecklistTemplateOrderByRelevanceFieldEnum = (typeof ChecklistTemplateOrderByRelevanceFieldEnum)[keyof typeof ChecklistTemplateOrderByRelevanceFieldEnum]
+
+
+  export const ChecklistTemplateItemOrderByRelevanceFieldEnum: {
+    id: 'id',
+    templateId: 'templateId',
+    label: 'label',
+    instruction: 'instruction',
+    section: 'section'
+  };
+
+  export type ChecklistTemplateItemOrderByRelevanceFieldEnum = (typeof ChecklistTemplateItemOrderByRelevanceFieldEnum)[keyof typeof ChecklistTemplateItemOrderByRelevanceFieldEnum]
+
+
+  /**
+   * Field references
+   */
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+  /**
+   * Deep Input Types
+   */
+
+
+  export type AdminWhereInput = {
+    AND?: AdminWhereInput | AdminWhereInput[]
+    OR?: AdminWhereInput[]
+    NOT?: AdminWhereInput | AdminWhereInput[]
+    id?: StringFilter<"Admin"> | string
+    email?: StringFilter<"Admin"> | string
+    passwordHash?: StringFilter<"Admin"> | string
+    createdAt?: DateTimeFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeFilter<"Admin"> | Date | string
+  }
+
+  export type AdminOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: AdminOrderByRelevanceInput
+  }
+
+  export type AdminWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: AdminWhereInput | AdminWhereInput[]
+    OR?: AdminWhereInput[]
+    NOT?: AdminWhereInput | AdminWhereInput[]
+    passwordHash?: StringFilter<"Admin"> | string
+    createdAt?: DateTimeFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeFilter<"Admin"> | Date | string
+  }, "id" | "email">
+
+  export type AdminOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdminCountOrderByAggregateInput
+    _max?: AdminMaxOrderByAggregateInput
+    _min?: AdminMinOrderByAggregateInput
+  }
+
+  export type AdminScalarWhereWithAggregatesInput = {
+    AND?: AdminScalarWhereWithAggregatesInput | AdminScalarWhereWithAggregatesInput[]
+    OR?: AdminScalarWhereWithAggregatesInput[]
+    NOT?: AdminScalarWhereWithAggregatesInput | AdminScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Admin"> | string
+    email?: StringWithAggregatesFilter<"Admin"> | string
+    passwordHash?: StringWithAggregatesFilter<"Admin"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
+  }
+
+  export type ClientWhereInput = {
+    AND?: ClientWhereInput | ClientWhereInput[]
+    OR?: ClientWhereInput[]
+    NOT?: ClientWhereInput | ClientWhereInput[]
+    id?: StringFilter<"Client"> | string
+    name?: StringFilter<"Client"> | string
+    slug?: StringFilter<"Client"> | string
+    vatNumber?: StringNullableFilter<"Client"> | string | null
+    address?: StringNullableFilter<"Client"> | string | null
+    city?: StringNullableFilter<"Client"> | string | null
+    language?: StringFilter<"Client"> | string
+    contractType?: StringFilter<"Client"> | string
+    retainerHours?: IntNullableFilter<"Client"> | number | null
+    retainerFee?: DecimalNullableFilter<"Client"> | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFilter<"Client"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"Client"> | boolean
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+    updatedAt?: DateTimeFilter<"Client"> | Date | string
+    users?: ClientUserListRelationFilter
+    tickets?: TicketListRelationFilter
+    timeEntries?: TimeEntryListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    assets?: AssetListRelationFilter
+    contracts?: ContractListRelationFilter
+    visits?: VisitListRelationFilter
+    checklistTemplates?: ChecklistTemplateListRelationFilter
+  }
+
+  export type ClientOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    vatNumber?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    language?: SortOrder
+    contractType?: SortOrder
+    retainerHours?: SortOrderInput | SortOrder
+    retainerFee?: SortOrderInput | SortOrder
+    hourlyRate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    users?: ClientUserOrderByRelationAggregateInput
+    tickets?: TicketOrderByRelationAggregateInput
+    timeEntries?: TimeEntryOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
+    assets?: AssetOrderByRelationAggregateInput
+    contracts?: ContractOrderByRelationAggregateInput
+    visits?: VisitOrderByRelationAggregateInput
+    checklistTemplates?: ChecklistTemplateOrderByRelationAggregateInput
+    _relevance?: ClientOrderByRelevanceInput
+  }
+
+  export type ClientWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: ClientWhereInput | ClientWhereInput[]
+    OR?: ClientWhereInput[]
+    NOT?: ClientWhereInput | ClientWhereInput[]
+    name?: StringFilter<"Client"> | string
+    vatNumber?: StringNullableFilter<"Client"> | string | null
+    address?: StringNullableFilter<"Client"> | string | null
+    city?: StringNullableFilter<"Client"> | string | null
+    language?: StringFilter<"Client"> | string
+    contractType?: StringFilter<"Client"> | string
+    retainerHours?: IntNullableFilter<"Client"> | number | null
+    retainerFee?: DecimalNullableFilter<"Client"> | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFilter<"Client"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"Client"> | boolean
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+    updatedAt?: DateTimeFilter<"Client"> | Date | string
+    users?: ClientUserListRelationFilter
+    tickets?: TicketListRelationFilter
+    timeEntries?: TimeEntryListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    assets?: AssetListRelationFilter
+    contracts?: ContractListRelationFilter
+    visits?: VisitListRelationFilter
+    checklistTemplates?: ChecklistTemplateListRelationFilter
+  }, "id" | "slug">
+
+  export type ClientOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    vatNumber?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    language?: SortOrder
+    contractType?: SortOrder
+    retainerHours?: SortOrderInput | SortOrder
+    retainerFee?: SortOrderInput | SortOrder
+    hourlyRate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClientCountOrderByAggregateInput
+    _avg?: ClientAvgOrderByAggregateInput
+    _max?: ClientMaxOrderByAggregateInput
+    _min?: ClientMinOrderByAggregateInput
+    _sum?: ClientSumOrderByAggregateInput
+  }
+
+  export type ClientScalarWhereWithAggregatesInput = {
+    AND?: ClientScalarWhereWithAggregatesInput | ClientScalarWhereWithAggregatesInput[]
+    OR?: ClientScalarWhereWithAggregatesInput[]
+    NOT?: ClientScalarWhereWithAggregatesInput | ClientScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Client"> | string
+    name?: StringWithAggregatesFilter<"Client"> | string
+    slug?: StringWithAggregatesFilter<"Client"> | string
+    vatNumber?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    address?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    language?: StringWithAggregatesFilter<"Client"> | string
+    contractType?: StringWithAggregatesFilter<"Client"> | string
+    retainerHours?: IntNullableWithAggregatesFilter<"Client"> | number | null
+    retainerFee?: DecimalNullableWithAggregatesFilter<"Client"> | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalWithAggregatesFilter<"Client"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter<"Client"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
+  }
+
+  export type ClientUserWhereInput = {
+    AND?: ClientUserWhereInput | ClientUserWhereInput[]
+    OR?: ClientUserWhereInput[]
+    NOT?: ClientUserWhereInput | ClientUserWhereInput[]
+    id?: StringFilter<"ClientUser"> | string
+    clientId?: StringFilter<"ClientUser"> | string
+    name?: StringFilter<"ClientUser"> | string
+    email?: StringFilter<"ClientUser"> | string
+    passwordHash?: StringNullableFilter<"ClientUser"> | string | null
+    role?: StringFilter<"ClientUser"> | string
+    portalToken?: StringFilter<"ClientUser"> | string
+    tokenExpiresAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    isActive?: BoolFilter<"ClientUser"> | boolean
+    createdAt?: DateTimeFilter<"ClientUser"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientUser"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type ClientUserOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    role?: SortOrder
+    portalToken?: SortOrder
+    tokenExpiresAt?: SortOrderInput | SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: ClientUserOrderByRelevanceInput
+  }
+
+  export type ClientUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    portalToken?: string
+    AND?: ClientUserWhereInput | ClientUserWhereInput[]
+    OR?: ClientUserWhereInput[]
+    NOT?: ClientUserWhereInput | ClientUserWhereInput[]
+    clientId?: StringFilter<"ClientUser"> | string
+    name?: StringFilter<"ClientUser"> | string
+    passwordHash?: StringNullableFilter<"ClientUser"> | string | null
+    role?: StringFilter<"ClientUser"> | string
+    tokenExpiresAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    isActive?: BoolFilter<"ClientUser"> | boolean
+    createdAt?: DateTimeFilter<"ClientUser"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientUser"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id" | "email" | "portalToken">
+
+  export type ClientUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    role?: SortOrder
+    portalToken?: SortOrder
+    tokenExpiresAt?: SortOrderInput | SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClientUserCountOrderByAggregateInput
+    _max?: ClientUserMaxOrderByAggregateInput
+    _min?: ClientUserMinOrderByAggregateInput
+  }
+
+  export type ClientUserScalarWhereWithAggregatesInput = {
+    AND?: ClientUserScalarWhereWithAggregatesInput | ClientUserScalarWhereWithAggregatesInput[]
+    OR?: ClientUserScalarWhereWithAggregatesInput[]
+    NOT?: ClientUserScalarWhereWithAggregatesInput | ClientUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClientUser"> | string
+    clientId?: StringWithAggregatesFilter<"ClientUser"> | string
+    name?: StringWithAggregatesFilter<"ClientUser"> | string
+    email?: StringWithAggregatesFilter<"ClientUser"> | string
+    passwordHash?: StringNullableWithAggregatesFilter<"ClientUser"> | string | null
+    role?: StringWithAggregatesFilter<"ClientUser"> | string
+    portalToken?: StringWithAggregatesFilter<"ClientUser"> | string
+    tokenExpiresAt?: DateTimeNullableWithAggregatesFilter<"ClientUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"ClientUser"> | Date | string | null
+    isActive?: BoolWithAggregatesFilter<"ClientUser"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ClientUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClientUser"> | Date | string
+  }
+
+  export type TicketWhereInput = {
+    AND?: TicketWhereInput | TicketWhereInput[]
+    OR?: TicketWhereInput[]
+    NOT?: TicketWhereInput | TicketWhereInput[]
+    id?: StringFilter<"Ticket"> | string
+    clientId?: StringFilter<"Ticket"> | string
+    visitId?: StringNullableFilter<"Ticket"> | string | null
+    reference?: StringFilter<"Ticket"> | string
+    title?: StringFilter<"Ticket"> | string
+    description?: StringNullableFilter<"Ticket"> | string | null
+    status?: StringFilter<"Ticket"> | string
+    priority?: StringFilter<"Ticket"> | string
+    source?: StringFilter<"Ticket"> | string
+    sourceRef?: StringNullableFilter<"Ticket"> | string | null
+    isBillable?: BoolFilter<"Ticket"> | boolean
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    createdAt?: DateTimeFilter<"Ticket"> | Date | string
+    updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    visit?: XOR<VisitNullableScalarRelationFilter, VisitWhereInput> | null
+    timeEntries?: TimeEntryListRelationFilter
+  }
+
+  export type TicketOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    visitId?: SortOrderInput | SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    source?: SortOrder
+    sourceRef?: SortOrderInput | SortOrder
+    isBillable?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    visit?: VisitOrderByWithRelationInput
+    timeEntries?: TimeEntryOrderByRelationAggregateInput
+    _relevance?: TicketOrderByRelevanceInput
+  }
+
+  export type TicketWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: TicketWhereInput | TicketWhereInput[]
+    OR?: TicketWhereInput[]
+    NOT?: TicketWhereInput | TicketWhereInput[]
+    clientId?: StringFilter<"Ticket"> | string
+    visitId?: StringNullableFilter<"Ticket"> | string | null
+    title?: StringFilter<"Ticket"> | string
+    description?: StringNullableFilter<"Ticket"> | string | null
+    status?: StringFilter<"Ticket"> | string
+    priority?: StringFilter<"Ticket"> | string
+    source?: StringFilter<"Ticket"> | string
+    sourceRef?: StringNullableFilter<"Ticket"> | string | null
+    isBillable?: BoolFilter<"Ticket"> | boolean
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    createdAt?: DateTimeFilter<"Ticket"> | Date | string
+    updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    visit?: XOR<VisitNullableScalarRelationFilter, VisitWhereInput> | null
+    timeEntries?: TimeEntryListRelationFilter
+  }, "id" | "reference">
+
+  export type TicketOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    visitId?: SortOrderInput | SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    source?: SortOrder
+    sourceRef?: SortOrderInput | SortOrder
+    isBillable?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TicketCountOrderByAggregateInput
+    _max?: TicketMaxOrderByAggregateInput
+    _min?: TicketMinOrderByAggregateInput
+  }
+
+  export type TicketScalarWhereWithAggregatesInput = {
+    AND?: TicketScalarWhereWithAggregatesInput | TicketScalarWhereWithAggregatesInput[]
+    OR?: TicketScalarWhereWithAggregatesInput[]
+    NOT?: TicketScalarWhereWithAggregatesInput | TicketScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Ticket"> | string
+    clientId?: StringWithAggregatesFilter<"Ticket"> | string
+    visitId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    reference?: StringWithAggregatesFilter<"Ticket"> | string
+    title?: StringWithAggregatesFilter<"Ticket"> | string
+    description?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    status?: StringWithAggregatesFilter<"Ticket"> | string
+    priority?: StringWithAggregatesFilter<"Ticket"> | string
+    source?: StringWithAggregatesFilter<"Ticket"> | string
+    sourceRef?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    isBillable?: BoolWithAggregatesFilter<"Ticket"> | boolean
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
+  }
+
+  export type TimeEntryWhereInput = {
+    AND?: TimeEntryWhereInput | TimeEntryWhereInput[]
+    OR?: TimeEntryWhereInput[]
+    NOT?: TimeEntryWhereInput | TimeEntryWhereInput[]
+    id?: StringFilter<"TimeEntry"> | string
+    clientId?: StringFilter<"TimeEntry"> | string
+    ticketId?: StringNullableFilter<"TimeEntry"> | string | null
+    invoiceId?: StringNullableFilter<"TimeEntry"> | string | null
+    description?: StringFilter<"TimeEntry"> | string
+    durationMinutes?: IntFilter<"TimeEntry"> | number
+    hourlyRate?: DecimalFilter<"TimeEntry"> | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFilter<"TimeEntry"> | boolean
+    isInvoiced?: BoolFilter<"TimeEntry"> | boolean
+    loggedAt?: DateTimeFilter<"TimeEntry"> | Date | string
+    createdAt?: DateTimeFilter<"TimeEntry"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    ticket?: XOR<TicketNullableScalarRelationFilter, TicketWhereInput> | null
+    invoice?: XOR<InvoiceNullableScalarRelationFilter, InvoiceWhereInput> | null
+  }
+
+  export type TimeEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    ticketId?: SortOrderInput | SortOrder
+    invoiceId?: SortOrderInput | SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+    isBillable?: SortOrder
+    isInvoiced?: SortOrder
+    loggedAt?: SortOrder
+    createdAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    ticket?: TicketOrderByWithRelationInput
+    invoice?: InvoiceOrderByWithRelationInput
+    _relevance?: TimeEntryOrderByRelevanceInput
+  }
+
+  export type TimeEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TimeEntryWhereInput | TimeEntryWhereInput[]
+    OR?: TimeEntryWhereInput[]
+    NOT?: TimeEntryWhereInput | TimeEntryWhereInput[]
+    clientId?: StringFilter<"TimeEntry"> | string
+    ticketId?: StringNullableFilter<"TimeEntry"> | string | null
+    invoiceId?: StringNullableFilter<"TimeEntry"> | string | null
+    description?: StringFilter<"TimeEntry"> | string
+    durationMinutes?: IntFilter<"TimeEntry"> | number
+    hourlyRate?: DecimalFilter<"TimeEntry"> | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFilter<"TimeEntry"> | boolean
+    isInvoiced?: BoolFilter<"TimeEntry"> | boolean
+    loggedAt?: DateTimeFilter<"TimeEntry"> | Date | string
+    createdAt?: DateTimeFilter<"TimeEntry"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    ticket?: XOR<TicketNullableScalarRelationFilter, TicketWhereInput> | null
+    invoice?: XOR<InvoiceNullableScalarRelationFilter, InvoiceWhereInput> | null
+  }, "id">
+
+  export type TimeEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    ticketId?: SortOrderInput | SortOrder
+    invoiceId?: SortOrderInput | SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+    isBillable?: SortOrder
+    isInvoiced?: SortOrder
+    loggedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: TimeEntryCountOrderByAggregateInput
+    _avg?: TimeEntryAvgOrderByAggregateInput
+    _max?: TimeEntryMaxOrderByAggregateInput
+    _min?: TimeEntryMinOrderByAggregateInput
+    _sum?: TimeEntrySumOrderByAggregateInput
+  }
+
+  export type TimeEntryScalarWhereWithAggregatesInput = {
+    AND?: TimeEntryScalarWhereWithAggregatesInput | TimeEntryScalarWhereWithAggregatesInput[]
+    OR?: TimeEntryScalarWhereWithAggregatesInput[]
+    NOT?: TimeEntryScalarWhereWithAggregatesInput | TimeEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TimeEntry"> | string
+    clientId?: StringWithAggregatesFilter<"TimeEntry"> | string
+    ticketId?: StringNullableWithAggregatesFilter<"TimeEntry"> | string | null
+    invoiceId?: StringNullableWithAggregatesFilter<"TimeEntry"> | string | null
+    description?: StringWithAggregatesFilter<"TimeEntry"> | string
+    durationMinutes?: IntWithAggregatesFilter<"TimeEntry"> | number
+    hourlyRate?: DecimalWithAggregatesFilter<"TimeEntry"> | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolWithAggregatesFilter<"TimeEntry"> | boolean
+    isInvoiced?: BoolWithAggregatesFilter<"TimeEntry"> | boolean
+    loggedAt?: DateTimeWithAggregatesFilter<"TimeEntry"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"TimeEntry"> | Date | string
+  }
+
+  export type InvoiceWhereInput = {
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    clientId?: StringFilter<"Invoice"> | string
+    number?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    periodStart?: DateTimeFilter<"Invoice"> | Date | string
+    periodEnd?: DateTimeFilter<"Invoice"> | Date | string
+    subtotal?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFilter<"Invoice"> | Date | string
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    timeEntries?: TimeEntryListRelationFilter
+  }
+
+  export type InvoiceOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    timeEntries?: TimeEntryOrderByRelationAggregateInput
+    _relevance?: InvoiceOrderByRelevanceInput
+  }
+
+  export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    number?: string
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    clientId?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    periodStart?: DateTimeFilter<"Invoice"> | Date | string
+    periodEnd?: DateTimeFilter<"Invoice"> | Date | string
+    subtotal?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFilter<"Invoice"> | Date | string
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    timeEntries?: TimeEntryListRelationFilter
+  }, "id" | "number">
+
+  export type InvoiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InvoiceCountOrderByAggregateInput
+    _avg?: InvoiceAvgOrderByAggregateInput
+    _max?: InvoiceMaxOrderByAggregateInput
+    _min?: InvoiceMinOrderByAggregateInput
+    _sum?: InvoiceSumOrderByAggregateInput
+  }
+
+  export type InvoiceScalarWhereWithAggregatesInput = {
+    AND?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    OR?: InvoiceScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invoice"> | string
+    clientId?: StringWithAggregatesFilter<"Invoice"> | string
+    number?: StringWithAggregatesFilter<"Invoice"> | string
+    status?: StringWithAggregatesFilter<"Invoice"> | string
+    periodStart?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    periodEnd?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    subtotal?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    paidAt?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+  }
+
+  export type AssetWhereInput = {
+    AND?: AssetWhereInput | AssetWhereInput[]
+    OR?: AssetWhereInput[]
+    NOT?: AssetWhereInput | AssetWhereInput[]
+    id?: StringFilter<"Asset"> | string
+    clientId?: StringFilter<"Asset"> | string
+    name?: StringFilter<"Asset"> | string
+    type?: StringFilter<"Asset"> | string
+    serialNumber?: StringNullableFilter<"Asset"> | string | null
+    assignedTo?: StringNullableFilter<"Asset"> | string | null
+    status?: StringFilter<"Asset"> | string
+    sensitivity?: StringFilter<"Asset"> | string
+    showSerialInPortal?: BoolFilter<"Asset"> | boolean
+    notes?: StringNullableFilter<"Asset"> | string | null
+    warrantyExpiresAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    purchasedAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    createdAt?: DateTimeFilter<"Asset"> | Date | string
+    updatedAt?: DateTimeFilter<"Asset"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type AssetOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    serialNumber?: SortOrderInput | SortOrder
+    assignedTo?: SortOrderInput | SortOrder
+    status?: SortOrder
+    sensitivity?: SortOrder
+    showSerialInPortal?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    warrantyExpiresAt?: SortOrderInput | SortOrder
+    purchasedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: AssetOrderByRelevanceInput
+  }
+
+  export type AssetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AssetWhereInput | AssetWhereInput[]
+    OR?: AssetWhereInput[]
+    NOT?: AssetWhereInput | AssetWhereInput[]
+    clientId?: StringFilter<"Asset"> | string
+    name?: StringFilter<"Asset"> | string
+    type?: StringFilter<"Asset"> | string
+    serialNumber?: StringNullableFilter<"Asset"> | string | null
+    assignedTo?: StringNullableFilter<"Asset"> | string | null
+    status?: StringFilter<"Asset"> | string
+    sensitivity?: StringFilter<"Asset"> | string
+    showSerialInPortal?: BoolFilter<"Asset"> | boolean
+    notes?: StringNullableFilter<"Asset"> | string | null
+    warrantyExpiresAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    purchasedAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    createdAt?: DateTimeFilter<"Asset"> | Date | string
+    updatedAt?: DateTimeFilter<"Asset"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id">
+
+  export type AssetOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    serialNumber?: SortOrderInput | SortOrder
+    assignedTo?: SortOrderInput | SortOrder
+    status?: SortOrder
+    sensitivity?: SortOrder
+    showSerialInPortal?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    warrantyExpiresAt?: SortOrderInput | SortOrder
+    purchasedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AssetCountOrderByAggregateInput
+    _max?: AssetMaxOrderByAggregateInput
+    _min?: AssetMinOrderByAggregateInput
+  }
+
+  export type AssetScalarWhereWithAggregatesInput = {
+    AND?: AssetScalarWhereWithAggregatesInput | AssetScalarWhereWithAggregatesInput[]
+    OR?: AssetScalarWhereWithAggregatesInput[]
+    NOT?: AssetScalarWhereWithAggregatesInput | AssetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Asset"> | string
+    clientId?: StringWithAggregatesFilter<"Asset"> | string
+    name?: StringWithAggregatesFilter<"Asset"> | string
+    type?: StringWithAggregatesFilter<"Asset"> | string
+    serialNumber?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    assignedTo?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    status?: StringWithAggregatesFilter<"Asset"> | string
+    sensitivity?: StringWithAggregatesFilter<"Asset"> | string
+    showSerialInPortal?: BoolWithAggregatesFilter<"Asset"> | boolean
+    notes?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    warrantyExpiresAt?: DateTimeNullableWithAggregatesFilter<"Asset"> | Date | string | null
+    purchasedAt?: DateTimeNullableWithAggregatesFilter<"Asset"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
+  }
+
+  export type ContractWhereInput = {
+    AND?: ContractWhereInput | ContractWhereInput[]
+    OR?: ContractWhereInput[]
+    NOT?: ContractWhereInput | ContractWhereInput[]
+    id?: StringFilter<"Contract"> | string
+    clientId?: StringFilter<"Contract"> | string
+    name?: StringFilter<"Contract"> | string
+    vendor?: StringNullableFilter<"Contract"> | string | null
+    type?: StringFilter<"Contract"> | string
+    renewalDate?: DateTimeFilter<"Contract"> | Date | string
+    costPerYear?: DecimalNullableFilter<"Contract"> | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFilter<"Contract"> | boolean
+    notes?: StringNullableFilter<"Contract"> | string | null
+    createdAt?: DateTimeFilter<"Contract"> | Date | string
+    updatedAt?: DateTimeFilter<"Contract"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type ContractOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    vendor?: SortOrderInput | SortOrder
+    type?: SortOrder
+    renewalDate?: SortOrder
+    costPerYear?: SortOrderInput | SortOrder
+    autoRenews?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: ContractOrderByRelevanceInput
+  }
+
+  export type ContractWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ContractWhereInput | ContractWhereInput[]
+    OR?: ContractWhereInput[]
+    NOT?: ContractWhereInput | ContractWhereInput[]
+    clientId?: StringFilter<"Contract"> | string
+    name?: StringFilter<"Contract"> | string
+    vendor?: StringNullableFilter<"Contract"> | string | null
+    type?: StringFilter<"Contract"> | string
+    renewalDate?: DateTimeFilter<"Contract"> | Date | string
+    costPerYear?: DecimalNullableFilter<"Contract"> | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFilter<"Contract"> | boolean
+    notes?: StringNullableFilter<"Contract"> | string | null
+    createdAt?: DateTimeFilter<"Contract"> | Date | string
+    updatedAt?: DateTimeFilter<"Contract"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id">
+
+  export type ContractOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    vendor?: SortOrderInput | SortOrder
+    type?: SortOrder
+    renewalDate?: SortOrder
+    costPerYear?: SortOrderInput | SortOrder
+    autoRenews?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ContractCountOrderByAggregateInput
+    _avg?: ContractAvgOrderByAggregateInput
+    _max?: ContractMaxOrderByAggregateInput
+    _min?: ContractMinOrderByAggregateInput
+    _sum?: ContractSumOrderByAggregateInput
+  }
+
+  export type ContractScalarWhereWithAggregatesInput = {
+    AND?: ContractScalarWhereWithAggregatesInput | ContractScalarWhereWithAggregatesInput[]
+    OR?: ContractScalarWhereWithAggregatesInput[]
+    NOT?: ContractScalarWhereWithAggregatesInput | ContractScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Contract"> | string
+    clientId?: StringWithAggregatesFilter<"Contract"> | string
+    name?: StringWithAggregatesFilter<"Contract"> | string
+    vendor?: StringNullableWithAggregatesFilter<"Contract"> | string | null
+    type?: StringWithAggregatesFilter<"Contract"> | string
+    renewalDate?: DateTimeWithAggregatesFilter<"Contract"> | Date | string
+    costPerYear?: DecimalNullableWithAggregatesFilter<"Contract"> | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolWithAggregatesFilter<"Contract"> | boolean
+    notes?: StringNullableWithAggregatesFilter<"Contract"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Contract"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Contract"> | Date | string
+  }
+
+  export type VisitWhereInput = {
+    AND?: VisitWhereInput | VisitWhereInput[]
+    OR?: VisitWhereInput[]
+    NOT?: VisitWhereInput | VisitWhereInput[]
+    id?: StringFilter<"Visit"> | string
+    clientId?: StringFilter<"Visit"> | string
+    type?: StringFilter<"Visit"> | string
+    status?: StringFilter<"Visit"> | string
+    notes?: StringNullableFilter<"Visit"> | string | null
+    visitedAt?: DateTimeFilter<"Visit"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    checklistItems?: ChecklistItemListRelationFilter
+    tickets?: TicketListRelationFilter
+  }
+
+  export type VisitOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    visitedAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    client?: ClientOrderByWithRelationInput
+    checklistItems?: ChecklistItemOrderByRelationAggregateInput
+    tickets?: TicketOrderByRelationAggregateInput
+    _relevance?: VisitOrderByRelevanceInput
+  }
+
+  export type VisitWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VisitWhereInput | VisitWhereInput[]
+    OR?: VisitWhereInput[]
+    NOT?: VisitWhereInput | VisitWhereInput[]
+    clientId?: StringFilter<"Visit"> | string
+    type?: StringFilter<"Visit"> | string
+    status?: StringFilter<"Visit"> | string
+    notes?: StringNullableFilter<"Visit"> | string | null
+    visitedAt?: DateTimeFilter<"Visit"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    checklistItems?: ChecklistItemListRelationFilter
+    tickets?: TicketListRelationFilter
+  }, "id">
+
+  export type VisitOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    visitedAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    _count?: VisitCountOrderByAggregateInput
+    _max?: VisitMaxOrderByAggregateInput
+    _min?: VisitMinOrderByAggregateInput
+  }
+
+  export type VisitScalarWhereWithAggregatesInput = {
+    AND?: VisitScalarWhereWithAggregatesInput | VisitScalarWhereWithAggregatesInput[]
+    OR?: VisitScalarWhereWithAggregatesInput[]
+    NOT?: VisitScalarWhereWithAggregatesInput | VisitScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Visit"> | string
+    clientId?: StringWithAggregatesFilter<"Visit"> | string
+    type?: StringWithAggregatesFilter<"Visit"> | string
+    status?: StringWithAggregatesFilter<"Visit"> | string
+    notes?: StringNullableWithAggregatesFilter<"Visit"> | string | null
+    visitedAt?: DateTimeWithAggregatesFilter<"Visit"> | Date | string
+    completedAt?: DateTimeNullableWithAggregatesFilter<"Visit"> | Date | string | null
+  }
+
+  export type ChecklistItemWhereInput = {
+    AND?: ChecklistItemWhereInput | ChecklistItemWhereInput[]
+    OR?: ChecklistItemWhereInput[]
+    NOT?: ChecklistItemWhereInput | ChecklistItemWhereInput[]
+    id?: StringFilter<"ChecklistItem"> | string
+    visitId?: StringFilter<"ChecklistItem"> | string
+    templateItemId?: StringNullableFilter<"ChecklistItem"> | string | null
+    label?: StringFilter<"ChecklistItem"> | string
+    status?: StringFilter<"ChecklistItem"> | string
+    resultNote?: StringNullableFilter<"ChecklistItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistItem"> | number
+    visit?: XOR<VisitScalarRelationFilter, VisitWhereInput>
+    templateItem?: XOR<ChecklistTemplateItemNullableScalarRelationFilter, ChecklistTemplateItemWhereInput> | null
+  }
+
+  export type ChecklistItemOrderByWithRelationInput = {
+    id?: SortOrder
+    visitId?: SortOrder
+    templateItemId?: SortOrderInput | SortOrder
+    label?: SortOrder
+    status?: SortOrder
+    resultNote?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    visit?: VisitOrderByWithRelationInput
+    templateItem?: ChecklistTemplateItemOrderByWithRelationInput
+    _relevance?: ChecklistItemOrderByRelevanceInput
+  }
+
+  export type ChecklistItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChecklistItemWhereInput | ChecklistItemWhereInput[]
+    OR?: ChecklistItemWhereInput[]
+    NOT?: ChecklistItemWhereInput | ChecklistItemWhereInput[]
+    visitId?: StringFilter<"ChecklistItem"> | string
+    templateItemId?: StringNullableFilter<"ChecklistItem"> | string | null
+    label?: StringFilter<"ChecklistItem"> | string
+    status?: StringFilter<"ChecklistItem"> | string
+    resultNote?: StringNullableFilter<"ChecklistItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistItem"> | number
+    visit?: XOR<VisitScalarRelationFilter, VisitWhereInput>
+    templateItem?: XOR<ChecklistTemplateItemNullableScalarRelationFilter, ChecklistTemplateItemWhereInput> | null
+  }, "id">
+
+  export type ChecklistItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    visitId?: SortOrder
+    templateItemId?: SortOrderInput | SortOrder
+    label?: SortOrder
+    status?: SortOrder
+    resultNote?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    _count?: ChecklistItemCountOrderByAggregateInput
+    _avg?: ChecklistItemAvgOrderByAggregateInput
+    _max?: ChecklistItemMaxOrderByAggregateInput
+    _min?: ChecklistItemMinOrderByAggregateInput
+    _sum?: ChecklistItemSumOrderByAggregateInput
+  }
+
+  export type ChecklistItemScalarWhereWithAggregatesInput = {
+    AND?: ChecklistItemScalarWhereWithAggregatesInput | ChecklistItemScalarWhereWithAggregatesInput[]
+    OR?: ChecklistItemScalarWhereWithAggregatesInput[]
+    NOT?: ChecklistItemScalarWhereWithAggregatesInput | ChecklistItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChecklistItem"> | string
+    visitId?: StringWithAggregatesFilter<"ChecklistItem"> | string
+    templateItemId?: StringNullableWithAggregatesFilter<"ChecklistItem"> | string | null
+    label?: StringWithAggregatesFilter<"ChecklistItem"> | string
+    status?: StringWithAggregatesFilter<"ChecklistItem"> | string
+    resultNote?: StringNullableWithAggregatesFilter<"ChecklistItem"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"ChecklistItem"> | number
+  }
+
+  export type ChecklistTemplateWhereInput = {
+    AND?: ChecklistTemplateWhereInput | ChecklistTemplateWhereInput[]
+    OR?: ChecklistTemplateWhereInput[]
+    NOT?: ChecklistTemplateWhereInput | ChecklistTemplateWhereInput[]
+    id?: StringFilter<"ChecklistTemplate"> | string
+    clientId?: StringNullableFilter<"ChecklistTemplate"> | string | null
+    name?: StringFilter<"ChecklistTemplate"> | string
+    isDefault?: BoolFilter<"ChecklistTemplate"> | boolean
+    createdAt?: DateTimeFilter<"ChecklistTemplate"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+    items?: ChecklistTemplateItemListRelationFilter
+  }
+
+  export type ChecklistTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    items?: ChecklistTemplateItemOrderByRelationAggregateInput
+    _relevance?: ChecklistTemplateOrderByRelevanceInput
+  }
+
+  export type ChecklistTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChecklistTemplateWhereInput | ChecklistTemplateWhereInput[]
+    OR?: ChecklistTemplateWhereInput[]
+    NOT?: ChecklistTemplateWhereInput | ChecklistTemplateWhereInput[]
+    clientId?: StringNullableFilter<"ChecklistTemplate"> | string | null
+    name?: StringFilter<"ChecklistTemplate"> | string
+    isDefault?: BoolFilter<"ChecklistTemplate"> | boolean
+    createdAt?: DateTimeFilter<"ChecklistTemplate"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+    items?: ChecklistTemplateItemListRelationFilter
+  }, "id">
+
+  export type ChecklistTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    _count?: ChecklistTemplateCountOrderByAggregateInput
+    _max?: ChecklistTemplateMaxOrderByAggregateInput
+    _min?: ChecklistTemplateMinOrderByAggregateInput
+  }
+
+  export type ChecklistTemplateScalarWhereWithAggregatesInput = {
+    AND?: ChecklistTemplateScalarWhereWithAggregatesInput | ChecklistTemplateScalarWhereWithAggregatesInput[]
+    OR?: ChecklistTemplateScalarWhereWithAggregatesInput[]
+    NOT?: ChecklistTemplateScalarWhereWithAggregatesInput | ChecklistTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChecklistTemplate"> | string
+    clientId?: StringNullableWithAggregatesFilter<"ChecklistTemplate"> | string | null
+    name?: StringWithAggregatesFilter<"ChecklistTemplate"> | string
+    isDefault?: BoolWithAggregatesFilter<"ChecklistTemplate"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ChecklistTemplate"> | Date | string
+  }
+
+  export type ChecklistTemplateItemWhereInput = {
+    AND?: ChecklistTemplateItemWhereInput | ChecklistTemplateItemWhereInput[]
+    OR?: ChecklistTemplateItemWhereInput[]
+    NOT?: ChecklistTemplateItemWhereInput | ChecklistTemplateItemWhereInput[]
+    id?: StringFilter<"ChecklistTemplateItem"> | string
+    templateId?: StringFilter<"ChecklistTemplateItem"> | string
+    label?: StringFilter<"ChecklistTemplateItem"> | string
+    instruction?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    section?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistTemplateItem"> | number
+    template?: XOR<ChecklistTemplateScalarRelationFilter, ChecklistTemplateWhereInput>
+    checklistItems?: ChecklistItemListRelationFilter
+  }
+
+  export type ChecklistTemplateItemOrderByWithRelationInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    label?: SortOrder
+    instruction?: SortOrderInput | SortOrder
+    section?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    template?: ChecklistTemplateOrderByWithRelationInput
+    checklistItems?: ChecklistItemOrderByRelationAggregateInput
+    _relevance?: ChecklistTemplateItemOrderByRelevanceInput
+  }
+
+  export type ChecklistTemplateItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChecklistTemplateItemWhereInput | ChecklistTemplateItemWhereInput[]
+    OR?: ChecklistTemplateItemWhereInput[]
+    NOT?: ChecklistTemplateItemWhereInput | ChecklistTemplateItemWhereInput[]
+    templateId?: StringFilter<"ChecklistTemplateItem"> | string
+    label?: StringFilter<"ChecklistTemplateItem"> | string
+    instruction?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    section?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistTemplateItem"> | number
+    template?: XOR<ChecklistTemplateScalarRelationFilter, ChecklistTemplateWhereInput>
+    checklistItems?: ChecklistItemListRelationFilter
+  }, "id">
+
+  export type ChecklistTemplateItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    label?: SortOrder
+    instruction?: SortOrderInput | SortOrder
+    section?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    _count?: ChecklistTemplateItemCountOrderByAggregateInput
+    _avg?: ChecklistTemplateItemAvgOrderByAggregateInput
+    _max?: ChecklistTemplateItemMaxOrderByAggregateInput
+    _min?: ChecklistTemplateItemMinOrderByAggregateInput
+    _sum?: ChecklistTemplateItemSumOrderByAggregateInput
+  }
+
+  export type ChecklistTemplateItemScalarWhereWithAggregatesInput = {
+    AND?: ChecklistTemplateItemScalarWhereWithAggregatesInput | ChecklistTemplateItemScalarWhereWithAggregatesInput[]
+    OR?: ChecklistTemplateItemScalarWhereWithAggregatesInput[]
+    NOT?: ChecklistTemplateItemScalarWhereWithAggregatesInput | ChecklistTemplateItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChecklistTemplateItem"> | string
+    templateId?: StringWithAggregatesFilter<"ChecklistTemplateItem"> | string
+    label?: StringWithAggregatesFilter<"ChecklistTemplateItem"> | string
+    instruction?: StringNullableWithAggregatesFilter<"ChecklistTemplateItem"> | string | null
+    section?: StringNullableWithAggregatesFilter<"ChecklistTemplateItem"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"ChecklistTemplateItem"> | number
+  }
+
+  export type AdminCreateInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdminUncheckedCreateInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdminUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminCreateManyInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdminUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUserCreateInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutUsersInput
+  }
+
+  export type ClientUserUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type ClientUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUserCreateManyInput = {
+    id?: string
+    clientId: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TicketCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutTicketsInput
+    visit?: VisitCreateNestedOneWithoutTicketsInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    visitId?: string | null
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
+    visit?: VisitUpdateOneWithoutTicketsNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitId?: NullableStringFieldUpdateOperationsInput | string | null
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketCreateManyInput = {
+    id?: string
+    clientId: string
+    visitId?: string | null
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TicketUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TicketUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitId?: NullableStringFieldUpdateOperationsInput | string | null
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryCreateInput = {
+    id?: string
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+    client: ClientCreateNestedOneWithoutTimeEntriesInput
+    ticket?: TicketCreateNestedOneWithoutTimeEntriesInput
+    invoice?: InvoiceCreateNestedOneWithoutTimeEntriesInput
+  }
+
+  export type TimeEntryUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    ticketId?: string | null
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTimeEntriesNestedInput
+    ticket?: TicketUpdateOneWithoutTimeEntriesNestedInput
+    invoice?: InvoiceUpdateOneWithoutTimeEntriesNestedInput
+  }
+
+  export type TimeEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryCreateManyInput = {
+    id?: string
+    clientId: string
+    ticketId?: string | null
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceCreateInput = {
+    id?: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceCreateManyInput = {
+    id?: string
+    clientId: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetCreateInput = {
+    id?: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutAssetsInput
+  }
+
+  export type AssetUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutAssetsNestedInput
+  }
+
+  export type AssetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetCreateManyInput = {
+    id?: string
+    clientId: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractCreateInput = {
+    id?: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutContractsInput
+  }
+
+  export type ContractUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContractUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutContractsNestedInput
+  }
+
+  export type ContractUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractCreateManyInput = {
+    id?: string
+    clientId: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContractUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VisitCreateInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    client: ClientCreateNestedOneWithoutVisitsInput
+    checklistItems?: ChecklistItemCreateNestedManyWithoutVisitInput
+    tickets?: TicketCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    checklistItems?: ChecklistItemUncheckedCreateNestedManyWithoutVisitInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: ClientUpdateOneRequiredWithoutVisitsNestedInput
+    checklistItems?: ChecklistItemUpdateManyWithoutVisitNestedInput
+    tickets?: TicketUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checklistItems?: ChecklistItemUncheckedUpdateManyWithoutVisitNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitCreateManyInput = {
+    id?: string
+    clientId: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type VisitUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VisitUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ChecklistItemCreateInput = {
+    id?: string
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+    visit: VisitCreateNestedOneWithoutChecklistItemsInput
+    templateItem?: ChecklistTemplateItemCreateNestedOneWithoutChecklistItemsInput
+  }
+
+  export type ChecklistItemUncheckedCreateInput = {
+    id?: string
+    visitId: string
+    templateItemId?: string | null
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    visit?: VisitUpdateOneRequiredWithoutChecklistItemsNestedInput
+    templateItem?: ChecklistTemplateItemUpdateOneWithoutChecklistItemsNestedInput
+  }
+
+  export type ChecklistItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: StringFieldUpdateOperationsInput | string
+    templateItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistItemCreateManyInput = {
+    id?: string
+    visitId: string
+    templateItemId?: string | null
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: StringFieldUpdateOperationsInput | string
+    templateItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistTemplateCreateInput = {
+    id?: string
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+    client?: ClientCreateNestedOneWithoutChecklistTemplatesInput
+    items?: ChecklistTemplateItemCreateNestedManyWithoutTemplateInput
+  }
+
+  export type ChecklistTemplateUncheckedCreateInput = {
+    id?: string
+    clientId?: string | null
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+    items?: ChecklistTemplateItemUncheckedCreateNestedManyWithoutTemplateInput
+  }
+
+  export type ChecklistTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneWithoutChecklistTemplatesNestedInput
+    items?: ChecklistTemplateItemUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type ChecklistTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ChecklistTemplateItemUncheckedUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type ChecklistTemplateCreateManyInput = {
+    id?: string
+    clientId?: string | null
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ChecklistTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChecklistTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChecklistTemplateItemCreateInput = {
+    id?: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+    template: ChecklistTemplateCreateNestedOneWithoutItemsInput
+    checklistItems?: ChecklistItemCreateNestedManyWithoutTemplateItemInput
+  }
+
+  export type ChecklistTemplateItemUncheckedCreateInput = {
+    id?: string
+    templateId: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+    checklistItems?: ChecklistItemUncheckedCreateNestedManyWithoutTemplateItemInput
+  }
+
+  export type ChecklistTemplateItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    template?: ChecklistTemplateUpdateOneRequiredWithoutItemsNestedInput
+    checklistItems?: ChecklistItemUpdateManyWithoutTemplateItemNestedInput
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    checklistItems?: ChecklistItemUncheckedUpdateManyWithoutTemplateItemNestedInput
+  }
+
+  export type ChecklistTemplateItemCreateManyInput = {
+    id?: string
+    templateId: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistTemplateItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type AdminOrderByRelevanceInput = {
+    fields: AdminOrderByRelevanceFieldEnum | AdminOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AdminCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdminMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdminMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type ClientUserListRelationFilter = {
+    every?: ClientUserWhereInput
+    some?: ClientUserWhereInput
+    none?: ClientUserWhereInput
+  }
+
+  export type TicketListRelationFilter = {
+    every?: TicketWhereInput
+    some?: TicketWhereInput
+    none?: TicketWhereInput
+  }
+
+  export type TimeEntryListRelationFilter = {
+    every?: TimeEntryWhereInput
+    some?: TimeEntryWhereInput
+    none?: TimeEntryWhereInput
+  }
+
+  export type InvoiceListRelationFilter = {
+    every?: InvoiceWhereInput
+    some?: InvoiceWhereInput
+    none?: InvoiceWhereInput
+  }
+
+  export type AssetListRelationFilter = {
+    every?: AssetWhereInput
+    some?: AssetWhereInput
+    none?: AssetWhereInput
+  }
+
+  export type ContractListRelationFilter = {
+    every?: ContractWhereInput
+    some?: ContractWhereInput
+    none?: ContractWhereInput
+  }
+
+  export type VisitListRelationFilter = {
+    every?: VisitWhereInput
+    some?: VisitWhereInput
+    none?: VisitWhereInput
+  }
+
+  export type ChecklistTemplateListRelationFilter = {
+    every?: ChecklistTemplateWhereInput
+    some?: ChecklistTemplateWhereInput
+    none?: ChecklistTemplateWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type ClientUserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TicketOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TimeEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvoiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContractOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VisitOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChecklistTemplateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientOrderByRelevanceInput = {
+    fields: ClientOrderByRelevanceFieldEnum | ClientOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ClientCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    vatNumber?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    language?: SortOrder
+    contractType?: SortOrder
+    retainerHours?: SortOrder
+    retainerFee?: SortOrder
+    hourlyRate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientAvgOrderByAggregateInput = {
+    retainerHours?: SortOrder
+    retainerFee?: SortOrder
+    hourlyRate?: SortOrder
+  }
+
+  export type ClientMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    vatNumber?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    language?: SortOrder
+    contractType?: SortOrder
+    retainerHours?: SortOrder
+    retainerFee?: SortOrder
+    hourlyRate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    vatNumber?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    language?: SortOrder
+    contractType?: SortOrder
+    retainerHours?: SortOrder
+    retainerFee?: SortOrder
+    hourlyRate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientSumOrderByAggregateInput = {
+    retainerHours?: SortOrder
+    retainerFee?: SortOrder
+    hourlyRate?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type ClientScalarRelationFilter = {
+    is?: ClientWhereInput
+    isNot?: ClientWhereInput
+  }
+
+  export type ClientUserOrderByRelevanceInput = {
+    fields: ClientUserOrderByRelevanceFieldEnum | ClientUserOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ClientUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    role?: SortOrder
+    portalToken?: SortOrder
+    tokenExpiresAt?: SortOrder
+    lastLoginAt?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientUserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    role?: SortOrder
+    portalToken?: SortOrder
+    tokenExpiresAt?: SortOrder
+    lastLoginAt?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    role?: SortOrder
+    portalToken?: SortOrder
+    tokenExpiresAt?: SortOrder
+    lastLoginAt?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type VisitNullableScalarRelationFilter = {
+    is?: VisitWhereInput | null
+    isNot?: VisitWhereInput | null
+  }
+
+  export type TicketOrderByRelevanceInput = {
+    fields: TicketOrderByRelevanceFieldEnum | TicketOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type TicketCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    visitId?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    source?: SortOrder
+    sourceRef?: SortOrder
+    isBillable?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TicketMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    visitId?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    source?: SortOrder
+    sourceRef?: SortOrder
+    isBillable?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TicketMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    visitId?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    source?: SortOrder
+    sourceRef?: SortOrder
+    isBillable?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type TicketNullableScalarRelationFilter = {
+    is?: TicketWhereInput | null
+    isNot?: TicketWhereInput | null
+  }
+
+  export type InvoiceNullableScalarRelationFilter = {
+    is?: InvoiceWhereInput | null
+    isNot?: InvoiceWhereInput | null
+  }
+
+  export type TimeEntryOrderByRelevanceInput = {
+    fields: TimeEntryOrderByRelevanceFieldEnum | TimeEntryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type TimeEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    ticketId?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+    isBillable?: SortOrder
+    isInvoiced?: SortOrder
+    loggedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TimeEntryAvgOrderByAggregateInput = {
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+  }
+
+  export type TimeEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    ticketId?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+    isBillable?: SortOrder
+    isInvoiced?: SortOrder
+    loggedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TimeEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    ticketId?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+    isBillable?: SortOrder
+    isInvoiced?: SortOrder
+    loggedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TimeEntrySumOrderByAggregateInput = {
+    durationMinutes?: SortOrder
+    hourlyRate?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type InvoiceOrderByRelevanceInput = {
+    fields: InvoiceOrderByRelevanceFieldEnum | InvoiceOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type InvoiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    vatRate?: SortOrder
+    vatAmount?: SortOrder
+    total?: SortOrder
+  }
+
+  export type AssetOrderByRelevanceInput = {
+    fields: AssetOrderByRelevanceFieldEnum | AssetOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AssetCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    serialNumber?: SortOrder
+    assignedTo?: SortOrder
+    status?: SortOrder
+    sensitivity?: SortOrder
+    showSerialInPortal?: SortOrder
+    notes?: SortOrder
+    warrantyExpiresAt?: SortOrder
+    purchasedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AssetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    serialNumber?: SortOrder
+    assignedTo?: SortOrder
+    status?: SortOrder
+    sensitivity?: SortOrder
+    showSerialInPortal?: SortOrder
+    notes?: SortOrder
+    warrantyExpiresAt?: SortOrder
+    purchasedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AssetMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    serialNumber?: SortOrder
+    assignedTo?: SortOrder
+    status?: SortOrder
+    sensitivity?: SortOrder
+    showSerialInPortal?: SortOrder
+    notes?: SortOrder
+    warrantyExpiresAt?: SortOrder
+    purchasedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContractOrderByRelevanceInput = {
+    fields: ContractOrderByRelevanceFieldEnum | ContractOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ContractCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    vendor?: SortOrder
+    type?: SortOrder
+    renewalDate?: SortOrder
+    costPerYear?: SortOrder
+    autoRenews?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContractAvgOrderByAggregateInput = {
+    costPerYear?: SortOrder
+  }
+
+  export type ContractMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    vendor?: SortOrder
+    type?: SortOrder
+    renewalDate?: SortOrder
+    costPerYear?: SortOrder
+    autoRenews?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContractMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    vendor?: SortOrder
+    type?: SortOrder
+    renewalDate?: SortOrder
+    costPerYear?: SortOrder
+    autoRenews?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContractSumOrderByAggregateInput = {
+    costPerYear?: SortOrder
+  }
+
+  export type ChecklistItemListRelationFilter = {
+    every?: ChecklistItemWhereInput
+    some?: ChecklistItemWhereInput
+    none?: ChecklistItemWhereInput
+  }
+
+  export type ChecklistItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VisitOrderByRelevanceInput = {
+    fields: VisitOrderByRelevanceFieldEnum | VisitOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type VisitCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    visitedAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type VisitMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    visitedAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type VisitMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    visitedAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type VisitScalarRelationFilter = {
+    is?: VisitWhereInput
+    isNot?: VisitWhereInput
+  }
+
+  export type ChecklistTemplateItemNullableScalarRelationFilter = {
+    is?: ChecklistTemplateItemWhereInput | null
+    isNot?: ChecklistTemplateItemWhereInput | null
+  }
+
+  export type ChecklistItemOrderByRelevanceInput = {
+    fields: ChecklistItemOrderByRelevanceFieldEnum | ChecklistItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ChecklistItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    visitId?: SortOrder
+    templateItemId?: SortOrder
+    label?: SortOrder
+    status?: SortOrder
+    resultNote?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistItemAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    visitId?: SortOrder
+    templateItemId?: SortOrder
+    label?: SortOrder
+    status?: SortOrder
+    resultNote?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    visitId?: SortOrder
+    templateItemId?: SortOrder
+    label?: SortOrder
+    status?: SortOrder
+    resultNote?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistItemSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type ClientNullableScalarRelationFilter = {
+    is?: ClientWhereInput | null
+    isNot?: ClientWhereInput | null
+  }
+
+  export type ChecklistTemplateItemListRelationFilter = {
+    every?: ChecklistTemplateItemWhereInput
+    some?: ChecklistTemplateItemWhereInput
+    none?: ChecklistTemplateItemWhereInput
+  }
+
+  export type ChecklistTemplateItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChecklistTemplateOrderByRelevanceInput = {
+    fields: ChecklistTemplateOrderByRelevanceFieldEnum | ChecklistTemplateOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ChecklistTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChecklistTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChecklistTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChecklistTemplateScalarRelationFilter = {
+    is?: ChecklistTemplateWhereInput
+    isNot?: ChecklistTemplateWhereInput
+  }
+
+  export type ChecklistTemplateItemOrderByRelevanceInput = {
+    fields: ChecklistTemplateItemOrderByRelevanceFieldEnum | ChecklistTemplateItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ChecklistTemplateItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    label?: SortOrder
+    instruction?: SortOrder
+    section?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistTemplateItemAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistTemplateItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    label?: SortOrder
+    instruction?: SortOrder
+    section?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistTemplateItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    label?: SortOrder
+    instruction?: SortOrder
+    section?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type ChecklistTemplateItemSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type ClientUserCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
+    createMany?: ClientUserCreateManyClientInputEnvelope
+    connect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+  }
+
+  export type TicketCreateNestedManyWithoutClientInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type TimeEntryCreateNestedManyWithoutClientInput = {
+    create?: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput> | TimeEntryCreateWithoutClientInput[] | TimeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutClientInput | TimeEntryCreateOrConnectWithoutClientInput[]
+    createMany?: TimeEntryCreateManyClientInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type InvoiceCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type AssetCreateNestedManyWithoutClientInput = {
+    create?: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput> | AssetCreateWithoutClientInput[] | AssetUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutClientInput | AssetCreateOrConnectWithoutClientInput[]
+    createMany?: AssetCreateManyClientInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type ContractCreateNestedManyWithoutClientInput = {
+    create?: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput> | ContractCreateWithoutClientInput[] | ContractUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ContractCreateOrConnectWithoutClientInput | ContractCreateOrConnectWithoutClientInput[]
+    createMany?: ContractCreateManyClientInputEnvelope
+    connect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+  }
+
+  export type VisitCreateNestedManyWithoutClientInput = {
+    create?: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput> | VisitCreateWithoutClientInput[] | VisitUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: VisitCreateOrConnectWithoutClientInput | VisitCreateOrConnectWithoutClientInput[]
+    createMany?: VisitCreateManyClientInputEnvelope
+    connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+  }
+
+  export type ChecklistTemplateCreateNestedManyWithoutClientInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput> | ChecklistTemplateCreateWithoutClientInput[] | ChecklistTemplateUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutClientInput | ChecklistTemplateCreateOrConnectWithoutClientInput[]
+    createMany?: ChecklistTemplateCreateManyClientInputEnvelope
+    connect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+  }
+
+  export type ClientUserUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
+    createMany?: ClientUserCreateManyClientInputEnvelope
+    connect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+  }
+
+  export type TicketUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type TimeEntryUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput> | TimeEntryCreateWithoutClientInput[] | TimeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutClientInput | TimeEntryCreateOrConnectWithoutClientInput[]
+    createMany?: TimeEntryCreateManyClientInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type AssetUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput> | AssetCreateWithoutClientInput[] | AssetUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutClientInput | AssetCreateOrConnectWithoutClientInput[]
+    createMany?: AssetCreateManyClientInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type ContractUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput> | ContractCreateWithoutClientInput[] | ContractUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ContractCreateOrConnectWithoutClientInput | ContractCreateOrConnectWithoutClientInput[]
+    createMany?: ContractCreateManyClientInputEnvelope
+    connect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+  }
+
+  export type VisitUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput> | VisitCreateWithoutClientInput[] | VisitUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: VisitCreateOrConnectWithoutClientInput | VisitCreateOrConnectWithoutClientInput[]
+    createMany?: VisitCreateManyClientInputEnvelope
+    connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+  }
+
+  export type ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput> | ChecklistTemplateCreateWithoutClientInput[] | ChecklistTemplateUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutClientInput | ChecklistTemplateCreateOrConnectWithoutClientInput[]
+    createMany?: ChecklistTemplateCreateManyClientInputEnvelope
+    connect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type ClientUserUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
+    upsert?: ClientUserUpsertWithWhereUniqueWithoutClientInput | ClientUserUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientUserCreateManyClientInputEnvelope
+    set?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    disconnect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    delete?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    connect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    update?: ClientUserUpdateWithWhereUniqueWithoutClientInput | ClientUserUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientUserUpdateManyWithWhereWithoutClientInput | ClientUserUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientUserScalarWhereInput | ClientUserScalarWhereInput[]
+  }
+
+  export type TicketUpdateManyWithoutClientNestedInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type TimeEntryUpdateManyWithoutClientNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput> | TimeEntryCreateWithoutClientInput[] | TimeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutClientInput | TimeEntryCreateOrConnectWithoutClientInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutClientInput | TimeEntryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: TimeEntryCreateManyClientInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutClientInput | TimeEntryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutClientInput | TimeEntryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type InvoiceUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type AssetUpdateManyWithoutClientNestedInput = {
+    create?: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput> | AssetCreateWithoutClientInput[] | AssetUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutClientInput | AssetCreateOrConnectWithoutClientInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutClientInput | AssetUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: AssetCreateManyClientInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutClientInput | AssetUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutClientInput | AssetUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type ContractUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput> | ContractCreateWithoutClientInput[] | ContractUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ContractCreateOrConnectWithoutClientInput | ContractCreateOrConnectWithoutClientInput[]
+    upsert?: ContractUpsertWithWhereUniqueWithoutClientInput | ContractUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ContractCreateManyClientInputEnvelope
+    set?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    disconnect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    delete?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    connect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    update?: ContractUpdateWithWhereUniqueWithoutClientInput | ContractUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ContractUpdateManyWithWhereWithoutClientInput | ContractUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ContractScalarWhereInput | ContractScalarWhereInput[]
+  }
+
+  export type VisitUpdateManyWithoutClientNestedInput = {
+    create?: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput> | VisitCreateWithoutClientInput[] | VisitUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: VisitCreateOrConnectWithoutClientInput | VisitCreateOrConnectWithoutClientInput[]
+    upsert?: VisitUpsertWithWhereUniqueWithoutClientInput | VisitUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: VisitCreateManyClientInputEnvelope
+    set?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    disconnect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    delete?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    update?: VisitUpdateWithWhereUniqueWithoutClientInput | VisitUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: VisitUpdateManyWithWhereWithoutClientInput | VisitUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: VisitScalarWhereInput | VisitScalarWhereInput[]
+  }
+
+  export type ChecklistTemplateUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput> | ChecklistTemplateCreateWithoutClientInput[] | ChecklistTemplateUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutClientInput | ChecklistTemplateCreateOrConnectWithoutClientInput[]
+    upsert?: ChecklistTemplateUpsertWithWhereUniqueWithoutClientInput | ChecklistTemplateUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ChecklistTemplateCreateManyClientInputEnvelope
+    set?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    disconnect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    delete?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    connect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    update?: ChecklistTemplateUpdateWithWhereUniqueWithoutClientInput | ChecklistTemplateUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ChecklistTemplateUpdateManyWithWhereWithoutClientInput | ChecklistTemplateUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ChecklistTemplateScalarWhereInput | ChecklistTemplateScalarWhereInput[]
+  }
+
+  export type ClientUserUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
+    upsert?: ClientUserUpsertWithWhereUniqueWithoutClientInput | ClientUserUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientUserCreateManyClientInputEnvelope
+    set?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    disconnect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    delete?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    connect?: ClientUserWhereUniqueInput | ClientUserWhereUniqueInput[]
+    update?: ClientUserUpdateWithWhereUniqueWithoutClientInput | ClientUserUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientUserUpdateManyWithWhereWithoutClientInput | ClientUserUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientUserScalarWhereInput | ClientUserScalarWhereInput[]
+  }
+
+  export type TicketUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput> | TimeEntryCreateWithoutClientInput[] | TimeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutClientInput | TimeEntryCreateOrConnectWithoutClientInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutClientInput | TimeEntryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: TimeEntryCreateManyClientInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutClientInput | TimeEntryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutClientInput | TimeEntryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type AssetUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput> | AssetCreateWithoutClientInput[] | AssetUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutClientInput | AssetCreateOrConnectWithoutClientInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutClientInput | AssetUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: AssetCreateManyClientInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutClientInput | AssetUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutClientInput | AssetUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type ContractUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput> | ContractCreateWithoutClientInput[] | ContractUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ContractCreateOrConnectWithoutClientInput | ContractCreateOrConnectWithoutClientInput[]
+    upsert?: ContractUpsertWithWhereUniqueWithoutClientInput | ContractUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ContractCreateManyClientInputEnvelope
+    set?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    disconnect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    delete?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    connect?: ContractWhereUniqueInput | ContractWhereUniqueInput[]
+    update?: ContractUpdateWithWhereUniqueWithoutClientInput | ContractUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ContractUpdateManyWithWhereWithoutClientInput | ContractUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ContractScalarWhereInput | ContractScalarWhereInput[]
+  }
+
+  export type VisitUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput> | VisitCreateWithoutClientInput[] | VisitUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: VisitCreateOrConnectWithoutClientInput | VisitCreateOrConnectWithoutClientInput[]
+    upsert?: VisitUpsertWithWhereUniqueWithoutClientInput | VisitUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: VisitCreateManyClientInputEnvelope
+    set?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    disconnect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    delete?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
+    update?: VisitUpdateWithWhereUniqueWithoutClientInput | VisitUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: VisitUpdateManyWithWhereWithoutClientInput | VisitUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: VisitScalarWhereInput | VisitScalarWhereInput[]
+  }
+
+  export type ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput> | ChecklistTemplateCreateWithoutClientInput[] | ChecklistTemplateUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutClientInput | ChecklistTemplateCreateOrConnectWithoutClientInput[]
+    upsert?: ChecklistTemplateUpsertWithWhereUniqueWithoutClientInput | ChecklistTemplateUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ChecklistTemplateCreateManyClientInputEnvelope
+    set?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    disconnect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    delete?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    connect?: ChecklistTemplateWhereUniqueInput | ChecklistTemplateWhereUniqueInput[]
+    update?: ChecklistTemplateUpdateWithWhereUniqueWithoutClientInput | ChecklistTemplateUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ChecklistTemplateUpdateManyWithWhereWithoutClientInput | ChecklistTemplateUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ChecklistTemplateScalarWhereInput | ChecklistTemplateScalarWhereInput[]
+  }
+
+  export type ClientCreateNestedOneWithoutUsersInput = {
+    create?: XOR<ClientCreateWithoutUsersInput, ClientUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUsersInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ClientUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<ClientCreateWithoutUsersInput, ClientUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUsersInput
+    upsert?: ClientUpsertWithoutUsersInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutUsersInput, ClientUpdateWithoutUsersInput>, ClientUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type ClientCreateNestedOneWithoutTicketsInput = {
+    create?: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTicketsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type VisitCreateNestedOneWithoutTicketsInput = {
+    create?: XOR<VisitCreateWithoutTicketsInput, VisitUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: VisitCreateOrConnectWithoutTicketsInput
+    connect?: VisitWhereUniqueInput
+  }
+
+  export type TimeEntryCreateNestedManyWithoutTicketInput = {
+    create?: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput> | TimeEntryCreateWithoutTicketInput[] | TimeEntryUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutTicketInput | TimeEntryCreateOrConnectWithoutTicketInput[]
+    createMany?: TimeEntryCreateManyTicketInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type TimeEntryUncheckedCreateNestedManyWithoutTicketInput = {
+    create?: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput> | TimeEntryCreateWithoutTicketInput[] | TimeEntryUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutTicketInput | TimeEntryCreateOrConnectWithoutTicketInput[]
+    createMany?: TimeEntryCreateManyTicketInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type ClientUpdateOneRequiredWithoutTicketsNestedInput = {
+    create?: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTicketsInput
+    upsert?: ClientUpsertWithoutTicketsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutTicketsInput, ClientUpdateWithoutTicketsInput>, ClientUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type VisitUpdateOneWithoutTicketsNestedInput = {
+    create?: XOR<VisitCreateWithoutTicketsInput, VisitUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: VisitCreateOrConnectWithoutTicketsInput
+    upsert?: VisitUpsertWithoutTicketsInput
+    disconnect?: VisitWhereInput | boolean
+    delete?: VisitWhereInput | boolean
+    connect?: VisitWhereUniqueInput
+    update?: XOR<XOR<VisitUpdateToOneWithWhereWithoutTicketsInput, VisitUpdateWithoutTicketsInput>, VisitUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type TimeEntryUpdateManyWithoutTicketNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput> | TimeEntryCreateWithoutTicketInput[] | TimeEntryUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutTicketInput | TimeEntryCreateOrConnectWithoutTicketInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutTicketInput | TimeEntryUpsertWithWhereUniqueWithoutTicketInput[]
+    createMany?: TimeEntryCreateManyTicketInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutTicketInput | TimeEntryUpdateWithWhereUniqueWithoutTicketInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutTicketInput | TimeEntryUpdateManyWithWhereWithoutTicketInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutTicketNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput> | TimeEntryCreateWithoutTicketInput[] | TimeEntryUncheckedCreateWithoutTicketInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutTicketInput | TimeEntryCreateOrConnectWithoutTicketInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutTicketInput | TimeEntryUpsertWithWhereUniqueWithoutTicketInput[]
+    createMany?: TimeEntryCreateManyTicketInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutTicketInput | TimeEntryUpdateWithWhereUniqueWithoutTicketInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutTicketInput | TimeEntryUpdateManyWithWhereWithoutTicketInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type ClientCreateNestedOneWithoutTimeEntriesInput = {
+    create?: XOR<ClientCreateWithoutTimeEntriesInput, ClientUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTimeEntriesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type TicketCreateNestedOneWithoutTimeEntriesInput = {
+    create?: XOR<TicketCreateWithoutTimeEntriesInput, TicketUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: TicketCreateOrConnectWithoutTimeEntriesInput
+    connect?: TicketWhereUniqueInput
+  }
+
+  export type InvoiceCreateNestedOneWithoutTimeEntriesInput = {
+    create?: XOR<InvoiceCreateWithoutTimeEntriesInput, InvoiceUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTimeEntriesInput
+    connect?: InvoiceWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ClientUpdateOneRequiredWithoutTimeEntriesNestedInput = {
+    create?: XOR<ClientCreateWithoutTimeEntriesInput, ClientUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTimeEntriesInput
+    upsert?: ClientUpsertWithoutTimeEntriesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutTimeEntriesInput, ClientUpdateWithoutTimeEntriesInput>, ClientUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type TicketUpdateOneWithoutTimeEntriesNestedInput = {
+    create?: XOR<TicketCreateWithoutTimeEntriesInput, TicketUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: TicketCreateOrConnectWithoutTimeEntriesInput
+    upsert?: TicketUpsertWithoutTimeEntriesInput
+    disconnect?: TicketWhereInput | boolean
+    delete?: TicketWhereInput | boolean
+    connect?: TicketWhereUniqueInput
+    update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutTimeEntriesInput, TicketUpdateWithoutTimeEntriesInput>, TicketUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type InvoiceUpdateOneWithoutTimeEntriesNestedInput = {
+    create?: XOR<InvoiceCreateWithoutTimeEntriesInput, InvoiceUncheckedCreateWithoutTimeEntriesInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTimeEntriesInput
+    upsert?: InvoiceUpsertWithoutTimeEntriesInput
+    disconnect?: InvoiceWhereInput | boolean
+    delete?: InvoiceWhereInput | boolean
+    connect?: InvoiceWhereUniqueInput
+    update?: XOR<XOR<InvoiceUpdateToOneWithWhereWithoutTimeEntriesInput, InvoiceUpdateWithoutTimeEntriesInput>, InvoiceUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type ClientCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutInvoicesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type TimeEntryCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput> | TimeEntryCreateWithoutInvoiceInput[] | TimeEntryUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutInvoiceInput | TimeEntryCreateOrConnectWithoutInvoiceInput[]
+    createMany?: TimeEntryCreateManyInvoiceInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type TimeEntryUncheckedCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput> | TimeEntryCreateWithoutInvoiceInput[] | TimeEntryUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutInvoiceInput | TimeEntryCreateOrConnectWithoutInvoiceInput[]
+    createMany?: TimeEntryCreateManyInvoiceInputEnvelope
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+  }
+
+  export type ClientUpdateOneRequiredWithoutInvoicesNestedInput = {
+    create?: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutInvoicesInput
+    upsert?: ClientUpsertWithoutInvoicesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutInvoicesInput, ClientUpdateWithoutInvoicesInput>, ClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type TimeEntryUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput> | TimeEntryCreateWithoutInvoiceInput[] | TimeEntryUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutInvoiceInput | TimeEntryCreateOrConnectWithoutInvoiceInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput | TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: TimeEntryCreateManyInvoiceInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutInvoiceInput | TimeEntryUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutInvoiceInput | TimeEntryUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput> | TimeEntryCreateWithoutInvoiceInput[] | TimeEntryUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: TimeEntryCreateOrConnectWithoutInvoiceInput | TimeEntryCreateOrConnectWithoutInvoiceInput[]
+    upsert?: TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput | TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: TimeEntryCreateManyInvoiceInputEnvelope
+    set?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    disconnect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    delete?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    connect?: TimeEntryWhereUniqueInput | TimeEntryWhereUniqueInput[]
+    update?: TimeEntryUpdateWithWhereUniqueWithoutInvoiceInput | TimeEntryUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: TimeEntryUpdateManyWithWhereWithoutInvoiceInput | TimeEntryUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+  }
+
+  export type ClientCreateNestedOneWithoutAssetsInput = {
+    create?: XOR<ClientCreateWithoutAssetsInput, ClientUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutAssetsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ClientUpdateOneRequiredWithoutAssetsNestedInput = {
+    create?: XOR<ClientCreateWithoutAssetsInput, ClientUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutAssetsInput
+    upsert?: ClientUpsertWithoutAssetsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutAssetsInput, ClientUpdateWithoutAssetsInput>, ClientUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type ClientCreateNestedOneWithoutContractsInput = {
+    create?: XOR<ClientCreateWithoutContractsInput, ClientUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutContractsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ClientUpdateOneRequiredWithoutContractsNestedInput = {
+    create?: XOR<ClientCreateWithoutContractsInput, ClientUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutContractsInput
+    upsert?: ClientUpsertWithoutContractsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutContractsInput, ClientUpdateWithoutContractsInput>, ClientUncheckedUpdateWithoutContractsInput>
+  }
+
+  export type ClientCreateNestedOneWithoutVisitsInput = {
+    create?: XOR<ClientCreateWithoutVisitsInput, ClientUncheckedCreateWithoutVisitsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutVisitsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ChecklistItemCreateNestedManyWithoutVisitInput = {
+    create?: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput> | ChecklistItemCreateWithoutVisitInput[] | ChecklistItemUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutVisitInput | ChecklistItemCreateOrConnectWithoutVisitInput[]
+    createMany?: ChecklistItemCreateManyVisitInputEnvelope
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+  }
+
+  export type TicketCreateNestedManyWithoutVisitInput = {
+    create?: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput> | TicketCreateWithoutVisitInput[] | TicketUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutVisitInput | TicketCreateOrConnectWithoutVisitInput[]
+    createMany?: TicketCreateManyVisitInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type ChecklistItemUncheckedCreateNestedManyWithoutVisitInput = {
+    create?: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput> | ChecklistItemCreateWithoutVisitInput[] | ChecklistItemUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutVisitInput | ChecklistItemCreateOrConnectWithoutVisitInput[]
+    createMany?: ChecklistItemCreateManyVisitInputEnvelope
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+  }
+
+  export type TicketUncheckedCreateNestedManyWithoutVisitInput = {
+    create?: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput> | TicketCreateWithoutVisitInput[] | TicketUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutVisitInput | TicketCreateOrConnectWithoutVisitInput[]
+    createMany?: TicketCreateManyVisitInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type ClientUpdateOneRequiredWithoutVisitsNestedInput = {
+    create?: XOR<ClientCreateWithoutVisitsInput, ClientUncheckedCreateWithoutVisitsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutVisitsInput
+    upsert?: ClientUpsertWithoutVisitsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutVisitsInput, ClientUpdateWithoutVisitsInput>, ClientUncheckedUpdateWithoutVisitsInput>
+  }
+
+  export type ChecklistItemUpdateManyWithoutVisitNestedInput = {
+    create?: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput> | ChecklistItemCreateWithoutVisitInput[] | ChecklistItemUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutVisitInput | ChecklistItemCreateOrConnectWithoutVisitInput[]
+    upsert?: ChecklistItemUpsertWithWhereUniqueWithoutVisitInput | ChecklistItemUpsertWithWhereUniqueWithoutVisitInput[]
+    createMany?: ChecklistItemCreateManyVisitInputEnvelope
+    set?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    disconnect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    delete?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    update?: ChecklistItemUpdateWithWhereUniqueWithoutVisitInput | ChecklistItemUpdateWithWhereUniqueWithoutVisitInput[]
+    updateMany?: ChecklistItemUpdateManyWithWhereWithoutVisitInput | ChecklistItemUpdateManyWithWhereWithoutVisitInput[]
+    deleteMany?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+  }
+
+  export type TicketUpdateManyWithoutVisitNestedInput = {
+    create?: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput> | TicketCreateWithoutVisitInput[] | TicketUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutVisitInput | TicketCreateOrConnectWithoutVisitInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutVisitInput | TicketUpsertWithWhereUniqueWithoutVisitInput[]
+    createMany?: TicketCreateManyVisitInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutVisitInput | TicketUpdateWithWhereUniqueWithoutVisitInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutVisitInput | TicketUpdateManyWithWhereWithoutVisitInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type ChecklistItemUncheckedUpdateManyWithoutVisitNestedInput = {
+    create?: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput> | ChecklistItemCreateWithoutVisitInput[] | ChecklistItemUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutVisitInput | ChecklistItemCreateOrConnectWithoutVisitInput[]
+    upsert?: ChecklistItemUpsertWithWhereUniqueWithoutVisitInput | ChecklistItemUpsertWithWhereUniqueWithoutVisitInput[]
+    createMany?: ChecklistItemCreateManyVisitInputEnvelope
+    set?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    disconnect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    delete?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    update?: ChecklistItemUpdateWithWhereUniqueWithoutVisitInput | ChecklistItemUpdateWithWhereUniqueWithoutVisitInput[]
+    updateMany?: ChecklistItemUpdateManyWithWhereWithoutVisitInput | ChecklistItemUpdateManyWithWhereWithoutVisitInput[]
+    deleteMany?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+  }
+
+  export type TicketUncheckedUpdateManyWithoutVisitNestedInput = {
+    create?: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput> | TicketCreateWithoutVisitInput[] | TicketUncheckedCreateWithoutVisitInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutVisitInput | TicketCreateOrConnectWithoutVisitInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutVisitInput | TicketUpsertWithWhereUniqueWithoutVisitInput[]
+    createMany?: TicketCreateManyVisitInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutVisitInput | TicketUpdateWithWhereUniqueWithoutVisitInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutVisitInput | TicketUpdateManyWithWhereWithoutVisitInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type VisitCreateNestedOneWithoutChecklistItemsInput = {
+    create?: XOR<VisitCreateWithoutChecklistItemsInput, VisitUncheckedCreateWithoutChecklistItemsInput>
+    connectOrCreate?: VisitCreateOrConnectWithoutChecklistItemsInput
+    connect?: VisitWhereUniqueInput
+  }
+
+  export type ChecklistTemplateItemCreateNestedOneWithoutChecklistItemsInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedCreateWithoutChecklistItemsInput>
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutChecklistItemsInput
+    connect?: ChecklistTemplateItemWhereUniqueInput
+  }
+
+  export type VisitUpdateOneRequiredWithoutChecklistItemsNestedInput = {
+    create?: XOR<VisitCreateWithoutChecklistItemsInput, VisitUncheckedCreateWithoutChecklistItemsInput>
+    connectOrCreate?: VisitCreateOrConnectWithoutChecklistItemsInput
+    upsert?: VisitUpsertWithoutChecklistItemsInput
+    connect?: VisitWhereUniqueInput
+    update?: XOR<XOR<VisitUpdateToOneWithWhereWithoutChecklistItemsInput, VisitUpdateWithoutChecklistItemsInput>, VisitUncheckedUpdateWithoutChecklistItemsInput>
+  }
+
+  export type ChecklistTemplateItemUpdateOneWithoutChecklistItemsNestedInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedCreateWithoutChecklistItemsInput>
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutChecklistItemsInput
+    upsert?: ChecklistTemplateItemUpsertWithoutChecklistItemsInput
+    disconnect?: ChecklistTemplateItemWhereInput | boolean
+    delete?: ChecklistTemplateItemWhereInput | boolean
+    connect?: ChecklistTemplateItemWhereUniqueInput
+    update?: XOR<XOR<ChecklistTemplateItemUpdateToOneWithWhereWithoutChecklistItemsInput, ChecklistTemplateItemUpdateWithoutChecklistItemsInput>, ChecklistTemplateItemUncheckedUpdateWithoutChecklistItemsInput>
+  }
+
+  export type ClientCreateNestedOneWithoutChecklistTemplatesInput = {
+    create?: XOR<ClientCreateWithoutChecklistTemplatesInput, ClientUncheckedCreateWithoutChecklistTemplatesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutChecklistTemplatesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ChecklistTemplateItemCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput> | ChecklistTemplateItemCreateWithoutTemplateInput[] | ChecklistTemplateItemUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutTemplateInput | ChecklistTemplateItemCreateOrConnectWithoutTemplateInput[]
+    createMany?: ChecklistTemplateItemCreateManyTemplateInputEnvelope
+    connect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+  }
+
+  export type ChecklistTemplateItemUncheckedCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput> | ChecklistTemplateItemCreateWithoutTemplateInput[] | ChecklistTemplateItemUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutTemplateInput | ChecklistTemplateItemCreateOrConnectWithoutTemplateInput[]
+    createMany?: ChecklistTemplateItemCreateManyTemplateInputEnvelope
+    connect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+  }
+
+  export type ClientUpdateOneWithoutChecklistTemplatesNestedInput = {
+    create?: XOR<ClientCreateWithoutChecklistTemplatesInput, ClientUncheckedCreateWithoutChecklistTemplatesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutChecklistTemplatesInput
+    upsert?: ClientUpsertWithoutChecklistTemplatesInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutChecklistTemplatesInput, ClientUpdateWithoutChecklistTemplatesInput>, ClientUncheckedUpdateWithoutChecklistTemplatesInput>
+  }
+
+  export type ChecklistTemplateItemUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput> | ChecklistTemplateItemCreateWithoutTemplateInput[] | ChecklistTemplateItemUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutTemplateInput | ChecklistTemplateItemCreateOrConnectWithoutTemplateInput[]
+    upsert?: ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput | ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: ChecklistTemplateItemCreateManyTemplateInputEnvelope
+    set?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    disconnect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    delete?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    connect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    update?: ChecklistTemplateItemUpdateWithWhereUniqueWithoutTemplateInput | ChecklistTemplateItemUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: ChecklistTemplateItemUpdateManyWithWhereWithoutTemplateInput | ChecklistTemplateItemUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: ChecklistTemplateItemScalarWhereInput | ChecklistTemplateItemScalarWhereInput[]
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput> | ChecklistTemplateItemCreateWithoutTemplateInput[] | ChecklistTemplateItemUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: ChecklistTemplateItemCreateOrConnectWithoutTemplateInput | ChecklistTemplateItemCreateOrConnectWithoutTemplateInput[]
+    upsert?: ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput | ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: ChecklistTemplateItemCreateManyTemplateInputEnvelope
+    set?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    disconnect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    delete?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    connect?: ChecklistTemplateItemWhereUniqueInput | ChecklistTemplateItemWhereUniqueInput[]
+    update?: ChecklistTemplateItemUpdateWithWhereUniqueWithoutTemplateInput | ChecklistTemplateItemUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: ChecklistTemplateItemUpdateManyWithWhereWithoutTemplateInput | ChecklistTemplateItemUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: ChecklistTemplateItemScalarWhereInput | ChecklistTemplateItemScalarWhereInput[]
+  }
+
+  export type ChecklistTemplateCreateNestedOneWithoutItemsInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutItemsInput, ChecklistTemplateUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutItemsInput
+    connect?: ChecklistTemplateWhereUniqueInput
+  }
+
+  export type ChecklistItemCreateNestedManyWithoutTemplateItemInput = {
+    create?: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput> | ChecklistItemCreateWithoutTemplateItemInput[] | ChecklistItemUncheckedCreateWithoutTemplateItemInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutTemplateItemInput | ChecklistItemCreateOrConnectWithoutTemplateItemInput[]
+    createMany?: ChecklistItemCreateManyTemplateItemInputEnvelope
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+  }
+
+  export type ChecklistItemUncheckedCreateNestedManyWithoutTemplateItemInput = {
+    create?: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput> | ChecklistItemCreateWithoutTemplateItemInput[] | ChecklistItemUncheckedCreateWithoutTemplateItemInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutTemplateItemInput | ChecklistItemCreateOrConnectWithoutTemplateItemInput[]
+    createMany?: ChecklistItemCreateManyTemplateItemInputEnvelope
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+  }
+
+  export type ChecklistTemplateUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<ChecklistTemplateCreateWithoutItemsInput, ChecklistTemplateUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ChecklistTemplateCreateOrConnectWithoutItemsInput
+    upsert?: ChecklistTemplateUpsertWithoutItemsInput
+    connect?: ChecklistTemplateWhereUniqueInput
+    update?: XOR<XOR<ChecklistTemplateUpdateToOneWithWhereWithoutItemsInput, ChecklistTemplateUpdateWithoutItemsInput>, ChecklistTemplateUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ChecklistItemUpdateManyWithoutTemplateItemNestedInput = {
+    create?: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput> | ChecklistItemCreateWithoutTemplateItemInput[] | ChecklistItemUncheckedCreateWithoutTemplateItemInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutTemplateItemInput | ChecklistItemCreateOrConnectWithoutTemplateItemInput[]
+    upsert?: ChecklistItemUpsertWithWhereUniqueWithoutTemplateItemInput | ChecklistItemUpsertWithWhereUniqueWithoutTemplateItemInput[]
+    createMany?: ChecklistItemCreateManyTemplateItemInputEnvelope
+    set?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    disconnect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    delete?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    update?: ChecklistItemUpdateWithWhereUniqueWithoutTemplateItemInput | ChecklistItemUpdateWithWhereUniqueWithoutTemplateItemInput[]
+    updateMany?: ChecklistItemUpdateManyWithWhereWithoutTemplateItemInput | ChecklistItemUpdateManyWithWhereWithoutTemplateItemInput[]
+    deleteMany?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+  }
+
+  export type ChecklistItemUncheckedUpdateManyWithoutTemplateItemNestedInput = {
+    create?: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput> | ChecklistItemCreateWithoutTemplateItemInput[] | ChecklistItemUncheckedCreateWithoutTemplateItemInput[]
+    connectOrCreate?: ChecklistItemCreateOrConnectWithoutTemplateItemInput | ChecklistItemCreateOrConnectWithoutTemplateItemInput[]
+    upsert?: ChecklistItemUpsertWithWhereUniqueWithoutTemplateItemInput | ChecklistItemUpsertWithWhereUniqueWithoutTemplateItemInput[]
+    createMany?: ChecklistItemCreateManyTemplateItemInputEnvelope
+    set?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    disconnect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    delete?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    connect?: ChecklistItemWhereUniqueInput | ChecklistItemWhereUniqueInput[]
+    update?: ChecklistItemUpdateWithWhereUniqueWithoutTemplateItemInput | ChecklistItemUpdateWithWhereUniqueWithoutTemplateItemInput[]
+    updateMany?: ChecklistItemUpdateManyWithWhereWithoutTemplateItemInput | ChecklistItemUpdateManyWithWhereWithoutTemplateItemInput[]
+    deleteMany?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type ClientUserCreateWithoutClientInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientUserUncheckedCreateWithoutClientInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientUserCreateOrConnectWithoutClientInput = {
+    where: ClientUserWhereUniqueInput
+    create: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientUserCreateManyClientInputEnvelope = {
+    data: ClientUserCreateManyClientInput | ClientUserCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketCreateWithoutClientInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    visit?: VisitCreateNestedOneWithoutTicketsInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketUncheckedCreateWithoutClientInput = {
+    id?: string
+    visitId?: string | null
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketCreateOrConnectWithoutClientInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
+  }
+
+  export type TicketCreateManyClientInputEnvelope = {
+    data: TicketCreateManyClientInput | TicketCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TimeEntryCreateWithoutClientInput = {
+    id?: string
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+    ticket?: TicketCreateNestedOneWithoutTimeEntriesInput
+    invoice?: InvoiceCreateNestedOneWithoutTimeEntriesInput
+  }
+
+  export type TimeEntryUncheckedCreateWithoutClientInput = {
+    id?: string
+    ticketId?: string | null
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryCreateOrConnectWithoutClientInput = {
+    where: TimeEntryWhereUniqueInput
+    create: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput>
+  }
+
+  export type TimeEntryCreateManyClientInputEnvelope = {
+    data: TimeEntryCreateManyClientInput | TimeEntryCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvoiceCreateWithoutClientInput = {
+    id?: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutClientInput = {
+    id?: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceCreateManyClientInputEnvelope = {
+    data: InvoiceCreateManyClientInput | InvoiceCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssetCreateWithoutClientInput = {
+    id?: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssetUncheckedCreateWithoutClientInput = {
+    id?: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssetCreateOrConnectWithoutClientInput = {
+    where: AssetWhereUniqueInput
+    create: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput>
+  }
+
+  export type AssetCreateManyClientInputEnvelope = {
+    data: AssetCreateManyClientInput | AssetCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContractCreateWithoutClientInput = {
+    id?: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContractUncheckedCreateWithoutClientInput = {
+    id?: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContractCreateOrConnectWithoutClientInput = {
+    where: ContractWhereUniqueInput
+    create: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput>
+  }
+
+  export type ContractCreateManyClientInputEnvelope = {
+    data: ContractCreateManyClientInput | ContractCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VisitCreateWithoutClientInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    checklistItems?: ChecklistItemCreateNestedManyWithoutVisitInput
+    tickets?: TicketCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitUncheckedCreateWithoutClientInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    checklistItems?: ChecklistItemUncheckedCreateNestedManyWithoutVisitInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitCreateOrConnectWithoutClientInput = {
+    where: VisitWhereUniqueInput
+    create: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput>
+  }
+
+  export type VisitCreateManyClientInputEnvelope = {
+    data: VisitCreateManyClientInput | VisitCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChecklistTemplateCreateWithoutClientInput = {
+    id?: string
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+    items?: ChecklistTemplateItemCreateNestedManyWithoutTemplateInput
+  }
+
+  export type ChecklistTemplateUncheckedCreateWithoutClientInput = {
+    id?: string
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+    items?: ChecklistTemplateItemUncheckedCreateNestedManyWithoutTemplateInput
+  }
+
+  export type ChecklistTemplateCreateOrConnectWithoutClientInput = {
+    where: ChecklistTemplateWhereUniqueInput
+    create: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput>
+  }
+
+  export type ChecklistTemplateCreateManyClientInputEnvelope = {
+    data: ChecklistTemplateCreateManyClientInput | ChecklistTemplateCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUserUpsertWithWhereUniqueWithoutClientInput = {
+    where: ClientUserWhereUniqueInput
+    update: XOR<ClientUserUpdateWithoutClientInput, ClientUserUncheckedUpdateWithoutClientInput>
+    create: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientUserUpdateWithWhereUniqueWithoutClientInput = {
+    where: ClientUserWhereUniqueInput
+    data: XOR<ClientUserUpdateWithoutClientInput, ClientUserUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ClientUserUpdateManyWithWhereWithoutClientInput = {
+    where: ClientUserScalarWhereInput
+    data: XOR<ClientUserUpdateManyMutationInput, ClientUserUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ClientUserScalarWhereInput = {
+    AND?: ClientUserScalarWhereInput | ClientUserScalarWhereInput[]
+    OR?: ClientUserScalarWhereInput[]
+    NOT?: ClientUserScalarWhereInput | ClientUserScalarWhereInput[]
+    id?: StringFilter<"ClientUser"> | string
+    clientId?: StringFilter<"ClientUser"> | string
+    name?: StringFilter<"ClientUser"> | string
+    email?: StringFilter<"ClientUser"> | string
+    passwordHash?: StringNullableFilter<"ClientUser"> | string | null
+    role?: StringFilter<"ClientUser"> | string
+    portalToken?: StringFilter<"ClientUser"> | string
+    tokenExpiresAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"ClientUser"> | Date | string | null
+    isActive?: BoolFilter<"ClientUser"> | boolean
+    createdAt?: DateTimeFilter<"ClientUser"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientUser"> | Date | string
+  }
+
+  export type TicketUpsertWithWhereUniqueWithoutClientInput = {
+    where: TicketWhereUniqueInput
+    update: XOR<TicketUpdateWithoutClientInput, TicketUncheckedUpdateWithoutClientInput>
+    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
+  }
+
+  export type TicketUpdateWithWhereUniqueWithoutClientInput = {
+    where: TicketWhereUniqueInput
+    data: XOR<TicketUpdateWithoutClientInput, TicketUncheckedUpdateWithoutClientInput>
+  }
+
+  export type TicketUpdateManyWithWhereWithoutClientInput = {
+    where: TicketScalarWhereInput
+    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type TicketScalarWhereInput = {
+    AND?: TicketScalarWhereInput | TicketScalarWhereInput[]
+    OR?: TicketScalarWhereInput[]
+    NOT?: TicketScalarWhereInput | TicketScalarWhereInput[]
+    id?: StringFilter<"Ticket"> | string
+    clientId?: StringFilter<"Ticket"> | string
+    visitId?: StringNullableFilter<"Ticket"> | string | null
+    reference?: StringFilter<"Ticket"> | string
+    title?: StringFilter<"Ticket"> | string
+    description?: StringNullableFilter<"Ticket"> | string | null
+    status?: StringFilter<"Ticket"> | string
+    priority?: StringFilter<"Ticket"> | string
+    source?: StringFilter<"Ticket"> | string
+    sourceRef?: StringNullableFilter<"Ticket"> | string | null
+    isBillable?: BoolFilter<"Ticket"> | boolean
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    createdAt?: DateTimeFilter<"Ticket"> | Date | string
+    updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+  }
+
+  export type TimeEntryUpsertWithWhereUniqueWithoutClientInput = {
+    where: TimeEntryWhereUniqueInput
+    update: XOR<TimeEntryUpdateWithoutClientInput, TimeEntryUncheckedUpdateWithoutClientInput>
+    create: XOR<TimeEntryCreateWithoutClientInput, TimeEntryUncheckedCreateWithoutClientInput>
+  }
+
+  export type TimeEntryUpdateWithWhereUniqueWithoutClientInput = {
+    where: TimeEntryWhereUniqueInput
+    data: XOR<TimeEntryUpdateWithoutClientInput, TimeEntryUncheckedUpdateWithoutClientInput>
+  }
+
+  export type TimeEntryUpdateManyWithWhereWithoutClientInput = {
+    where: TimeEntryScalarWhereInput
+    data: XOR<TimeEntryUpdateManyMutationInput, TimeEntryUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type TimeEntryScalarWhereInput = {
+    AND?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+    OR?: TimeEntryScalarWhereInput[]
+    NOT?: TimeEntryScalarWhereInput | TimeEntryScalarWhereInput[]
+    id?: StringFilter<"TimeEntry"> | string
+    clientId?: StringFilter<"TimeEntry"> | string
+    ticketId?: StringNullableFilter<"TimeEntry"> | string | null
+    invoiceId?: StringNullableFilter<"TimeEntry"> | string | null
+    description?: StringFilter<"TimeEntry"> | string
+    durationMinutes?: IntFilter<"TimeEntry"> | number
+    hourlyRate?: DecimalFilter<"TimeEntry"> | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFilter<"TimeEntry"> | boolean
+    isInvoiced?: BoolFilter<"TimeEntry"> | boolean
+    loggedAt?: DateTimeFilter<"TimeEntry"> | Date | string
+    createdAt?: DateTimeFilter<"TimeEntry"> | Date | string
+  }
+
+  export type InvoiceUpsertWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutClientInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type InvoiceScalarWhereInput = {
+    AND?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    OR?: InvoiceScalarWhereInput[]
+    NOT?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    clientId?: StringFilter<"Invoice"> | string
+    number?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    periodStart?: DateTimeFilter<"Invoice"> | Date | string
+    periodEnd?: DateTimeFilter<"Invoice"> | Date | string
+    subtotal?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFilter<"Invoice"> | Date | string
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+  }
+
+  export type AssetUpsertWithWhereUniqueWithoutClientInput = {
+    where: AssetWhereUniqueInput
+    update: XOR<AssetUpdateWithoutClientInput, AssetUncheckedUpdateWithoutClientInput>
+    create: XOR<AssetCreateWithoutClientInput, AssetUncheckedCreateWithoutClientInput>
+  }
+
+  export type AssetUpdateWithWhereUniqueWithoutClientInput = {
+    where: AssetWhereUniqueInput
+    data: XOR<AssetUpdateWithoutClientInput, AssetUncheckedUpdateWithoutClientInput>
+  }
+
+  export type AssetUpdateManyWithWhereWithoutClientInput = {
+    where: AssetScalarWhereInput
+    data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type AssetScalarWhereInput = {
+    AND?: AssetScalarWhereInput | AssetScalarWhereInput[]
+    OR?: AssetScalarWhereInput[]
+    NOT?: AssetScalarWhereInput | AssetScalarWhereInput[]
+    id?: StringFilter<"Asset"> | string
+    clientId?: StringFilter<"Asset"> | string
+    name?: StringFilter<"Asset"> | string
+    type?: StringFilter<"Asset"> | string
+    serialNumber?: StringNullableFilter<"Asset"> | string | null
+    assignedTo?: StringNullableFilter<"Asset"> | string | null
+    status?: StringFilter<"Asset"> | string
+    sensitivity?: StringFilter<"Asset"> | string
+    showSerialInPortal?: BoolFilter<"Asset"> | boolean
+    notes?: StringNullableFilter<"Asset"> | string | null
+    warrantyExpiresAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    purchasedAt?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    createdAt?: DateTimeFilter<"Asset"> | Date | string
+    updatedAt?: DateTimeFilter<"Asset"> | Date | string
+  }
+
+  export type ContractUpsertWithWhereUniqueWithoutClientInput = {
+    where: ContractWhereUniqueInput
+    update: XOR<ContractUpdateWithoutClientInput, ContractUncheckedUpdateWithoutClientInput>
+    create: XOR<ContractCreateWithoutClientInput, ContractUncheckedCreateWithoutClientInput>
+  }
+
+  export type ContractUpdateWithWhereUniqueWithoutClientInput = {
+    where: ContractWhereUniqueInput
+    data: XOR<ContractUpdateWithoutClientInput, ContractUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ContractUpdateManyWithWhereWithoutClientInput = {
+    where: ContractScalarWhereInput
+    data: XOR<ContractUpdateManyMutationInput, ContractUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ContractScalarWhereInput = {
+    AND?: ContractScalarWhereInput | ContractScalarWhereInput[]
+    OR?: ContractScalarWhereInput[]
+    NOT?: ContractScalarWhereInput | ContractScalarWhereInput[]
+    id?: StringFilter<"Contract"> | string
+    clientId?: StringFilter<"Contract"> | string
+    name?: StringFilter<"Contract"> | string
+    vendor?: StringNullableFilter<"Contract"> | string | null
+    type?: StringFilter<"Contract"> | string
+    renewalDate?: DateTimeFilter<"Contract"> | Date | string
+    costPerYear?: DecimalNullableFilter<"Contract"> | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFilter<"Contract"> | boolean
+    notes?: StringNullableFilter<"Contract"> | string | null
+    createdAt?: DateTimeFilter<"Contract"> | Date | string
+    updatedAt?: DateTimeFilter<"Contract"> | Date | string
+  }
+
+  export type VisitUpsertWithWhereUniqueWithoutClientInput = {
+    where: VisitWhereUniqueInput
+    update: XOR<VisitUpdateWithoutClientInput, VisitUncheckedUpdateWithoutClientInput>
+    create: XOR<VisitCreateWithoutClientInput, VisitUncheckedCreateWithoutClientInput>
+  }
+
+  export type VisitUpdateWithWhereUniqueWithoutClientInput = {
+    where: VisitWhereUniqueInput
+    data: XOR<VisitUpdateWithoutClientInput, VisitUncheckedUpdateWithoutClientInput>
+  }
+
+  export type VisitUpdateManyWithWhereWithoutClientInput = {
+    where: VisitScalarWhereInput
+    data: XOR<VisitUpdateManyMutationInput, VisitUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type VisitScalarWhereInput = {
+    AND?: VisitScalarWhereInput | VisitScalarWhereInput[]
+    OR?: VisitScalarWhereInput[]
+    NOT?: VisitScalarWhereInput | VisitScalarWhereInput[]
+    id?: StringFilter<"Visit"> | string
+    clientId?: StringFilter<"Visit"> | string
+    type?: StringFilter<"Visit"> | string
+    status?: StringFilter<"Visit"> | string
+    notes?: StringNullableFilter<"Visit"> | string | null
+    visitedAt?: DateTimeFilter<"Visit"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
+  }
+
+  export type ChecklistTemplateUpsertWithWhereUniqueWithoutClientInput = {
+    where: ChecklistTemplateWhereUniqueInput
+    update: XOR<ChecklistTemplateUpdateWithoutClientInput, ChecklistTemplateUncheckedUpdateWithoutClientInput>
+    create: XOR<ChecklistTemplateCreateWithoutClientInput, ChecklistTemplateUncheckedCreateWithoutClientInput>
+  }
+
+  export type ChecklistTemplateUpdateWithWhereUniqueWithoutClientInput = {
+    where: ChecklistTemplateWhereUniqueInput
+    data: XOR<ChecklistTemplateUpdateWithoutClientInput, ChecklistTemplateUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ChecklistTemplateUpdateManyWithWhereWithoutClientInput = {
+    where: ChecklistTemplateScalarWhereInput
+    data: XOR<ChecklistTemplateUpdateManyMutationInput, ChecklistTemplateUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ChecklistTemplateScalarWhereInput = {
+    AND?: ChecklistTemplateScalarWhereInput | ChecklistTemplateScalarWhereInput[]
+    OR?: ChecklistTemplateScalarWhereInput[]
+    NOT?: ChecklistTemplateScalarWhereInput | ChecklistTemplateScalarWhereInput[]
+    id?: StringFilter<"ChecklistTemplate"> | string
+    clientId?: StringNullableFilter<"ChecklistTemplate"> | string | null
+    name?: StringFilter<"ChecklistTemplate"> | string
+    isDefault?: BoolFilter<"ChecklistTemplate"> | boolean
+    createdAt?: DateTimeFilter<"ChecklistTemplate"> | Date | string
+  }
+
+  export type ClientCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutUsersInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutUsersInput, ClientUncheckedCreateWithoutUsersInput>
+  }
+
+  export type ClientUpsertWithoutUsersInput = {
+    update: XOR<ClientUpdateWithoutUsersInput, ClientUncheckedUpdateWithoutUsersInput>
+    create: XOR<ClientCreateWithoutUsersInput, ClientUncheckedCreateWithoutUsersInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutUsersInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutUsersInput, ClientUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type ClientUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutTicketsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
+  }
+
+  export type VisitCreateWithoutTicketsInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    client: ClientCreateNestedOneWithoutVisitsInput
+    checklistItems?: ChecklistItemCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitUncheckedCreateWithoutTicketsInput = {
+    id?: string
+    clientId: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    checklistItems?: ChecklistItemUncheckedCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitCreateOrConnectWithoutTicketsInput = {
+    where: VisitWhereUniqueInput
+    create: XOR<VisitCreateWithoutTicketsInput, VisitUncheckedCreateWithoutTicketsInput>
+  }
+
+  export type TimeEntryCreateWithoutTicketInput = {
+    id?: string
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+    client: ClientCreateNestedOneWithoutTimeEntriesInput
+    invoice?: InvoiceCreateNestedOneWithoutTimeEntriesInput
+  }
+
+  export type TimeEntryUncheckedCreateWithoutTicketInput = {
+    id?: string
+    clientId: string
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryCreateOrConnectWithoutTicketInput = {
+    where: TimeEntryWhereUniqueInput
+    create: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput>
+  }
+
+  export type TimeEntryCreateManyTicketInputEnvelope = {
+    data: TimeEntryCreateManyTicketInput | TimeEntryCreateManyTicketInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutTicketsInput = {
+    update: XOR<ClientUpdateWithoutTicketsInput, ClientUncheckedUpdateWithoutTicketsInput>
+    create: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutTicketsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutTicketsInput, ClientUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type ClientUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type VisitUpsertWithoutTicketsInput = {
+    update: XOR<VisitUpdateWithoutTicketsInput, VisitUncheckedUpdateWithoutTicketsInput>
+    create: XOR<VisitCreateWithoutTicketsInput, VisitUncheckedCreateWithoutTicketsInput>
+    where?: VisitWhereInput
+  }
+
+  export type VisitUpdateToOneWithWhereWithoutTicketsInput = {
+    where?: VisitWhereInput
+    data: XOR<VisitUpdateWithoutTicketsInput, VisitUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type VisitUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: ClientUpdateOneRequiredWithoutVisitsNestedInput
+    checklistItems?: ChecklistItemUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitUncheckedUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checklistItems?: ChecklistItemUncheckedUpdateManyWithoutVisitNestedInput
+  }
+
+  export type TimeEntryUpsertWithWhereUniqueWithoutTicketInput = {
+    where: TimeEntryWhereUniqueInput
+    update: XOR<TimeEntryUpdateWithoutTicketInput, TimeEntryUncheckedUpdateWithoutTicketInput>
+    create: XOR<TimeEntryCreateWithoutTicketInput, TimeEntryUncheckedCreateWithoutTicketInput>
+  }
+
+  export type TimeEntryUpdateWithWhereUniqueWithoutTicketInput = {
+    where: TimeEntryWhereUniqueInput
+    data: XOR<TimeEntryUpdateWithoutTicketInput, TimeEntryUncheckedUpdateWithoutTicketInput>
+  }
+
+  export type TimeEntryUpdateManyWithWhereWithoutTicketInput = {
+    where: TimeEntryScalarWhereInput
+    data: XOR<TimeEntryUpdateManyMutationInput, TimeEntryUncheckedUpdateManyWithoutTicketInput>
+  }
+
+  export type ClientCreateWithoutTimeEntriesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutTimeEntriesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutTimeEntriesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutTimeEntriesInput, ClientUncheckedCreateWithoutTimeEntriesInput>
+  }
+
+  export type TicketCreateWithoutTimeEntriesInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutTicketsInput
+    visit?: VisitCreateNestedOneWithoutTicketsInput
+  }
+
+  export type TicketUncheckedCreateWithoutTimeEntriesInput = {
+    id?: string
+    clientId: string
+    visitId?: string | null
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TicketCreateOrConnectWithoutTimeEntriesInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutTimeEntriesInput, TicketUncheckedCreateWithoutTimeEntriesInput>
+  }
+
+  export type InvoiceCreateWithoutTimeEntriesInput = {
+    id?: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutTimeEntriesInput = {
+    id?: string
+    clientId: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceCreateOrConnectWithoutTimeEntriesInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutTimeEntriesInput, InvoiceUncheckedCreateWithoutTimeEntriesInput>
+  }
+
+  export type ClientUpsertWithoutTimeEntriesInput = {
+    update: XOR<ClientUpdateWithoutTimeEntriesInput, ClientUncheckedUpdateWithoutTimeEntriesInput>
+    create: XOR<ClientCreateWithoutTimeEntriesInput, ClientUncheckedCreateWithoutTimeEntriesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutTimeEntriesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutTimeEntriesInput, ClientUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type ClientUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type TicketUpsertWithoutTimeEntriesInput = {
+    update: XOR<TicketUpdateWithoutTimeEntriesInput, TicketUncheckedUpdateWithoutTimeEntriesInput>
+    create: XOR<TicketCreateWithoutTimeEntriesInput, TicketUncheckedCreateWithoutTimeEntriesInput>
+    where?: TicketWhereInput
+  }
+
+  export type TicketUpdateToOneWithWhereWithoutTimeEntriesInput = {
+    where?: TicketWhereInput
+    data: XOR<TicketUpdateWithoutTimeEntriesInput, TicketUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type TicketUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
+    visit?: VisitUpdateOneWithoutTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitId?: NullableStringFieldUpdateOperationsInput | string | null
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpsertWithoutTimeEntriesInput = {
+    update: XOR<InvoiceUpdateWithoutTimeEntriesInput, InvoiceUncheckedUpdateWithoutTimeEntriesInput>
+    create: XOR<InvoiceCreateWithoutTimeEntriesInput, InvoiceUncheckedCreateWithoutTimeEntriesInput>
+    where?: InvoiceWhereInput
+  }
+
+  export type InvoiceUpdateToOneWithWhereWithoutTimeEntriesInput = {
+    where?: InvoiceWhereInput
+    data: XOR<InvoiceUpdateWithoutTimeEntriesInput, InvoiceUncheckedUpdateWithoutTimeEntriesInput>
+  }
+
+  export type InvoiceUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutTimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientCreateWithoutInvoicesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutInvoicesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type TimeEntryCreateWithoutInvoiceInput = {
+    id?: string
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+    client: ClientCreateNestedOneWithoutTimeEntriesInput
+    ticket?: TicketCreateNestedOneWithoutTimeEntriesInput
+  }
+
+  export type TimeEntryUncheckedCreateWithoutInvoiceInput = {
+    id?: string
+    clientId: string
+    ticketId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryCreateOrConnectWithoutInvoiceInput = {
+    where: TimeEntryWhereUniqueInput
+    create: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type TimeEntryCreateManyInvoiceInputEnvelope = {
+    data: TimeEntryCreateManyInvoiceInput | TimeEntryCreateManyInvoiceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutInvoicesInput = {
+    update: XOR<ClientUpdateWithoutInvoicesInput, ClientUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutInvoicesInput, ClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ClientUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput = {
+    where: TimeEntryWhereUniqueInput
+    update: XOR<TimeEntryUpdateWithoutInvoiceInput, TimeEntryUncheckedUpdateWithoutInvoiceInput>
+    create: XOR<TimeEntryCreateWithoutInvoiceInput, TimeEntryUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type TimeEntryUpdateWithWhereUniqueWithoutInvoiceInput = {
+    where: TimeEntryWhereUniqueInput
+    data: XOR<TimeEntryUpdateWithoutInvoiceInput, TimeEntryUncheckedUpdateWithoutInvoiceInput>
+  }
+
+  export type TimeEntryUpdateManyWithWhereWithoutInvoiceInput = {
+    where: TimeEntryScalarWhereInput
+    data: XOR<TimeEntryUpdateManyMutationInput, TimeEntryUncheckedUpdateManyWithoutInvoiceInput>
+  }
+
+  export type ClientCreateWithoutAssetsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutAssetsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutAssetsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutAssetsInput, ClientUncheckedCreateWithoutAssetsInput>
+  }
+
+  export type ClientUpsertWithoutAssetsInput = {
+    update: XOR<ClientUpdateWithoutAssetsInput, ClientUncheckedUpdateWithoutAssetsInput>
+    create: XOR<ClientCreateWithoutAssetsInput, ClientUncheckedCreateWithoutAssetsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutAssetsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutAssetsInput, ClientUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type ClientUpdateWithoutAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutContractsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutContractsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutContractsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutContractsInput, ClientUncheckedCreateWithoutContractsInput>
+  }
+
+  export type ClientUpsertWithoutContractsInput = {
+    update: XOR<ClientUpdateWithoutContractsInput, ClientUncheckedUpdateWithoutContractsInput>
+    create: XOR<ClientCreateWithoutContractsInput, ClientUncheckedCreateWithoutContractsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutContractsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutContractsInput, ClientUncheckedUpdateWithoutContractsInput>
+  }
+
+  export type ClientUpdateWithoutContractsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutContractsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutVisitsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutVisitsInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutVisitsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutVisitsInput, ClientUncheckedCreateWithoutVisitsInput>
+  }
+
+  export type ChecklistItemCreateWithoutVisitInput = {
+    id?: string
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+    templateItem?: ChecklistTemplateItemCreateNestedOneWithoutChecklistItemsInput
+  }
+
+  export type ChecklistItemUncheckedCreateWithoutVisitInput = {
+    id?: string
+    templateItemId?: string | null
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistItemCreateOrConnectWithoutVisitInput = {
+    where: ChecklistItemWhereUniqueInput
+    create: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput>
+  }
+
+  export type ChecklistItemCreateManyVisitInputEnvelope = {
+    data: ChecklistItemCreateManyVisitInput | ChecklistItemCreateManyVisitInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketCreateWithoutVisitInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutTicketsInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketUncheckedCreateWithoutVisitInput = {
+    id?: string
+    clientId: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketCreateOrConnectWithoutVisitInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput>
+  }
+
+  export type TicketCreateManyVisitInputEnvelope = {
+    data: TicketCreateManyVisitInput | TicketCreateManyVisitInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutVisitsInput = {
+    update: XOR<ClientUpdateWithoutVisitsInput, ClientUncheckedUpdateWithoutVisitsInput>
+    create: XOR<ClientCreateWithoutVisitsInput, ClientUncheckedCreateWithoutVisitsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutVisitsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutVisitsInput, ClientUncheckedUpdateWithoutVisitsInput>
+  }
+
+  export type ClientUpdateWithoutVisitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutVisitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ChecklistItemUpsertWithWhereUniqueWithoutVisitInput = {
+    where: ChecklistItemWhereUniqueInput
+    update: XOR<ChecklistItemUpdateWithoutVisitInput, ChecklistItemUncheckedUpdateWithoutVisitInput>
+    create: XOR<ChecklistItemCreateWithoutVisitInput, ChecklistItemUncheckedCreateWithoutVisitInput>
+  }
+
+  export type ChecklistItemUpdateWithWhereUniqueWithoutVisitInput = {
+    where: ChecklistItemWhereUniqueInput
+    data: XOR<ChecklistItemUpdateWithoutVisitInput, ChecklistItemUncheckedUpdateWithoutVisitInput>
+  }
+
+  export type ChecklistItemUpdateManyWithWhereWithoutVisitInput = {
+    where: ChecklistItemScalarWhereInput
+    data: XOR<ChecklistItemUpdateManyMutationInput, ChecklistItemUncheckedUpdateManyWithoutVisitInput>
+  }
+
+  export type ChecklistItemScalarWhereInput = {
+    AND?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+    OR?: ChecklistItemScalarWhereInput[]
+    NOT?: ChecklistItemScalarWhereInput | ChecklistItemScalarWhereInput[]
+    id?: StringFilter<"ChecklistItem"> | string
+    visitId?: StringFilter<"ChecklistItem"> | string
+    templateItemId?: StringNullableFilter<"ChecklistItem"> | string | null
+    label?: StringFilter<"ChecklistItem"> | string
+    status?: StringFilter<"ChecklistItem"> | string
+    resultNote?: StringNullableFilter<"ChecklistItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistItem"> | number
+  }
+
+  export type TicketUpsertWithWhereUniqueWithoutVisitInput = {
+    where: TicketWhereUniqueInput
+    update: XOR<TicketUpdateWithoutVisitInput, TicketUncheckedUpdateWithoutVisitInput>
+    create: XOR<TicketCreateWithoutVisitInput, TicketUncheckedCreateWithoutVisitInput>
+  }
+
+  export type TicketUpdateWithWhereUniqueWithoutVisitInput = {
+    where: TicketWhereUniqueInput
+    data: XOR<TicketUpdateWithoutVisitInput, TicketUncheckedUpdateWithoutVisitInput>
+  }
+
+  export type TicketUpdateManyWithWhereWithoutVisitInput = {
+    where: TicketScalarWhereInput
+    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutVisitInput>
+  }
+
+  export type VisitCreateWithoutChecklistItemsInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    client: ClientCreateNestedOneWithoutVisitsInput
+    tickets?: TicketCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitUncheckedCreateWithoutChecklistItemsInput = {
+    id?: string
+    clientId: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+    tickets?: TicketUncheckedCreateNestedManyWithoutVisitInput
+  }
+
+  export type VisitCreateOrConnectWithoutChecklistItemsInput = {
+    where: VisitWhereUniqueInput
+    create: XOR<VisitCreateWithoutChecklistItemsInput, VisitUncheckedCreateWithoutChecklistItemsInput>
+  }
+
+  export type ChecklistTemplateItemCreateWithoutChecklistItemsInput = {
+    id?: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+    template: ChecklistTemplateCreateNestedOneWithoutItemsInput
+  }
+
+  export type ChecklistTemplateItemUncheckedCreateWithoutChecklistItemsInput = {
+    id?: string
+    templateId: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistTemplateItemCreateOrConnectWithoutChecklistItemsInput = {
+    where: ChecklistTemplateItemWhereUniqueInput
+    create: XOR<ChecklistTemplateItemCreateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedCreateWithoutChecklistItemsInput>
+  }
+
+  export type VisitUpsertWithoutChecklistItemsInput = {
+    update: XOR<VisitUpdateWithoutChecklistItemsInput, VisitUncheckedUpdateWithoutChecklistItemsInput>
+    create: XOR<VisitCreateWithoutChecklistItemsInput, VisitUncheckedCreateWithoutChecklistItemsInput>
+    where?: VisitWhereInput
+  }
+
+  export type VisitUpdateToOneWithWhereWithoutChecklistItemsInput = {
+    where?: VisitWhereInput
+    data: XOR<VisitUpdateWithoutChecklistItemsInput, VisitUncheckedUpdateWithoutChecklistItemsInput>
+  }
+
+  export type VisitUpdateWithoutChecklistItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: ClientUpdateOneRequiredWithoutVisitsNestedInput
+    tickets?: TicketUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitUncheckedUpdateWithoutChecklistItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tickets?: TicketUncheckedUpdateManyWithoutVisitNestedInput
+  }
+
+  export type ChecklistTemplateItemUpsertWithoutChecklistItemsInput = {
+    update: XOR<ChecklistTemplateItemUpdateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedUpdateWithoutChecklistItemsInput>
+    create: XOR<ChecklistTemplateItemCreateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedCreateWithoutChecklistItemsInput>
+    where?: ChecklistTemplateItemWhereInput
+  }
+
+  export type ChecklistTemplateItemUpdateToOneWithWhereWithoutChecklistItemsInput = {
+    where?: ChecklistTemplateItemWhereInput
+    data: XOR<ChecklistTemplateItemUpdateWithoutChecklistItemsInput, ChecklistTemplateItemUncheckedUpdateWithoutChecklistItemsInput>
+  }
+
+  export type ChecklistTemplateItemUpdateWithoutChecklistItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    template?: ChecklistTemplateUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateWithoutChecklistItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ClientCreateWithoutChecklistTemplatesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutChecklistTemplatesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutChecklistTemplatesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutChecklistTemplatesInput, ClientUncheckedCreateWithoutChecklistTemplatesInput>
+  }
+
+  export type ChecklistTemplateItemCreateWithoutTemplateInput = {
+    id?: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+    checklistItems?: ChecklistItemCreateNestedManyWithoutTemplateItemInput
+  }
+
+  export type ChecklistTemplateItemUncheckedCreateWithoutTemplateInput = {
+    id?: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+    checklistItems?: ChecklistItemUncheckedCreateNestedManyWithoutTemplateItemInput
+  }
+
+  export type ChecklistTemplateItemCreateOrConnectWithoutTemplateInput = {
+    where: ChecklistTemplateItemWhereUniqueInput
+    create: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type ChecklistTemplateItemCreateManyTemplateInputEnvelope = {
+    data: ChecklistTemplateItemCreateManyTemplateInput | ChecklistTemplateItemCreateManyTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutChecklistTemplatesInput = {
+    update: XOR<ClientUpdateWithoutChecklistTemplatesInput, ClientUncheckedUpdateWithoutChecklistTemplatesInput>
+    create: XOR<ClientCreateWithoutChecklistTemplatesInput, ClientUncheckedCreateWithoutChecklistTemplatesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutChecklistTemplatesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutChecklistTemplatesInput, ClientUncheckedUpdateWithoutChecklistTemplatesInput>
+  }
+
+  export type ClientUpdateWithoutChecklistTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutChecklistTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput = {
+    where: ChecklistTemplateItemWhereUniqueInput
+    update: XOR<ChecklistTemplateItemUpdateWithoutTemplateInput, ChecklistTemplateItemUncheckedUpdateWithoutTemplateInput>
+    create: XOR<ChecklistTemplateItemCreateWithoutTemplateInput, ChecklistTemplateItemUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type ChecklistTemplateItemUpdateWithWhereUniqueWithoutTemplateInput = {
+    where: ChecklistTemplateItemWhereUniqueInput
+    data: XOR<ChecklistTemplateItemUpdateWithoutTemplateInput, ChecklistTemplateItemUncheckedUpdateWithoutTemplateInput>
+  }
+
+  export type ChecklistTemplateItemUpdateManyWithWhereWithoutTemplateInput = {
+    where: ChecklistTemplateItemScalarWhereInput
+    data: XOR<ChecklistTemplateItemUpdateManyMutationInput, ChecklistTemplateItemUncheckedUpdateManyWithoutTemplateInput>
+  }
+
+  export type ChecklistTemplateItemScalarWhereInput = {
+    AND?: ChecklistTemplateItemScalarWhereInput | ChecklistTemplateItemScalarWhereInput[]
+    OR?: ChecklistTemplateItemScalarWhereInput[]
+    NOT?: ChecklistTemplateItemScalarWhereInput | ChecklistTemplateItemScalarWhereInput[]
+    id?: StringFilter<"ChecklistTemplateItem"> | string
+    templateId?: StringFilter<"ChecklistTemplateItem"> | string
+    label?: StringFilter<"ChecklistTemplateItem"> | string
+    instruction?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    section?: StringNullableFilter<"ChecklistTemplateItem"> | string | null
+    sortOrder?: IntFilter<"ChecklistTemplateItem"> | number
+  }
+
+  export type ChecklistTemplateCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+    client?: ClientCreateNestedOneWithoutChecklistTemplatesInput
+  }
+
+  export type ChecklistTemplateUncheckedCreateWithoutItemsInput = {
+    id?: string
+    clientId?: string | null
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ChecklistTemplateCreateOrConnectWithoutItemsInput = {
+    where: ChecklistTemplateWhereUniqueInput
+    create: XOR<ChecklistTemplateCreateWithoutItemsInput, ChecklistTemplateUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ChecklistItemCreateWithoutTemplateItemInput = {
+    id?: string
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+    visit: VisitCreateNestedOneWithoutChecklistItemsInput
+  }
+
+  export type ChecklistItemUncheckedCreateWithoutTemplateItemInput = {
+    id?: string
+    visitId: string
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistItemCreateOrConnectWithoutTemplateItemInput = {
+    where: ChecklistItemWhereUniqueInput
+    create: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput>
+  }
+
+  export type ChecklistItemCreateManyTemplateItemInputEnvelope = {
+    data: ChecklistItemCreateManyTemplateItemInput | ChecklistItemCreateManyTemplateItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChecklistTemplateUpsertWithoutItemsInput = {
+    update: XOR<ChecklistTemplateUpdateWithoutItemsInput, ChecklistTemplateUncheckedUpdateWithoutItemsInput>
+    create: XOR<ChecklistTemplateCreateWithoutItemsInput, ChecklistTemplateUncheckedCreateWithoutItemsInput>
+    where?: ChecklistTemplateWhereInput
+  }
+
+  export type ChecklistTemplateUpdateToOneWithWhereWithoutItemsInput = {
+    where?: ChecklistTemplateWhereInput
+    data: XOR<ChecklistTemplateUpdateWithoutItemsInput, ChecklistTemplateUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ChecklistTemplateUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneWithoutChecklistTemplatesNestedInput
+  }
+
+  export type ChecklistTemplateUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChecklistItemUpsertWithWhereUniqueWithoutTemplateItemInput = {
+    where: ChecklistItemWhereUniqueInput
+    update: XOR<ChecklistItemUpdateWithoutTemplateItemInput, ChecklistItemUncheckedUpdateWithoutTemplateItemInput>
+    create: XOR<ChecklistItemCreateWithoutTemplateItemInput, ChecklistItemUncheckedCreateWithoutTemplateItemInput>
+  }
+
+  export type ChecklistItemUpdateWithWhereUniqueWithoutTemplateItemInput = {
+    where: ChecklistItemWhereUniqueInput
+    data: XOR<ChecklistItemUpdateWithoutTemplateItemInput, ChecklistItemUncheckedUpdateWithoutTemplateItemInput>
+  }
+
+  export type ChecklistItemUpdateManyWithWhereWithoutTemplateItemInput = {
+    where: ChecklistItemScalarWhereInput
+    data: XOR<ChecklistItemUpdateManyMutationInput, ChecklistItemUncheckedUpdateManyWithoutTemplateItemInput>
+  }
+
+  export type ClientUserCreateManyClientInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    role?: string
+    portalToken?: string
+    tokenExpiresAt?: Date | string | null
+    lastLoginAt?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TicketCreateManyClientInput = {
+    id?: string
+    visitId?: string | null
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeEntryCreateManyClientInput = {
+    id?: string
+    ticketId?: string | null
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type InvoiceCreateManyClientInput = {
+    id?: string
+    number: string
+    status?: string
+    periodStart: Date | string
+    periodEnd: Date | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    vatRate?: Decimal | DecimalJsLike | number | string
+    vatAmount: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    dueDate: Date | string
+    paidAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssetCreateManyClientInput = {
+    id?: string
+    name: string
+    type: string
+    serialNumber?: string | null
+    assignedTo?: string | null
+    status?: string
+    sensitivity?: string
+    showSerialInPortal?: boolean
+    notes?: string | null
+    warrantyExpiresAt?: Date | string | null
+    purchasedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContractCreateManyClientInput = {
+    id?: string
+    name: string
+    vendor?: string | null
+    type: string
+    renewalDate: Date | string
+    costPerYear?: Decimal | DecimalJsLike | number | string | null
+    autoRenews?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VisitCreateManyClientInput = {
+    id?: string
+    type?: string
+    status?: string
+    notes?: string | null
+    visitedAt: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type ChecklistTemplateCreateManyClientInput = {
+    id?: string
+    name: string
+    isDefault?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ClientUserUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUserUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUserUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    portalToken?: StringFieldUpdateOperationsInput | string
+    tokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TicketUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    visit?: VisitUpdateOneWithoutTicketsNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: NullableStringFieldUpdateOperationsInput | string | null
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: NullableStringFieldUpdateOperationsInput | string | null
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticket?: TicketUpdateOneWithoutTimeEntriesNestedInput
+    invoice?: InvoiceUpdateOneWithoutTimeEntriesNestedInput
+  }
+
+  export type TimeEntryUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssetUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sensitivity?: StringFieldUpdateOperationsInput | string
+    showSerialInPortal?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purchasedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContractUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendor?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    renewalDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    costPerYear?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    autoRenews?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VisitUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checklistItems?: ChecklistItemUpdateManyWithoutVisitNestedInput
+    tickets?: TicketUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checklistItems?: ChecklistItemUncheckedUpdateManyWithoutVisitNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutVisitNestedInput
+  }
+
+  export type VisitUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ChecklistTemplateUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ChecklistTemplateItemUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type ChecklistTemplateUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ChecklistTemplateItemUncheckedUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type ChecklistTemplateUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryCreateManyTicketInput = {
+    id?: string
+    clientId: string
+    invoiceId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryUpdateWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTimeEntriesNestedInput
+    invoice?: InvoiceUpdateOneWithoutTimeEntriesNestedInput
+  }
+
+  export type TimeEntryUncheckedUpdateWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutTicketInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    invoiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryCreateManyInvoiceInput = {
+    id?: string
+    clientId: string
+    ticketId?: string | null
+    description: string
+    durationMinutes: number
+    hourlyRate: Decimal | DecimalJsLike | number | string
+    isBillable?: boolean
+    isInvoiced?: boolean
+    loggedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type TimeEntryUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTimeEntriesNestedInput
+    ticket?: TicketUpdateOneWithoutTimeEntriesNestedInput
+  }
+
+  export type TimeEntryUncheckedUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeEntryUncheckedUpdateManyWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    ticketId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    durationMinutes?: IntFieldUpdateOperationsInput | number
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    isInvoiced?: BoolFieldUpdateOperationsInput | boolean
+    loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChecklistItemCreateManyVisitInput = {
+    id?: string
+    templateItemId?: string | null
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type TicketCreateManyVisitInput = {
+    id?: string
+    clientId: string
+    reference: string
+    title: string
+    description?: string | null
+    status?: string
+    priority?: string
+    source?: string
+    sourceRef?: string | null
+    isBillable?: boolean
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChecklistItemUpdateWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    templateItem?: ChecklistTemplateItemUpdateOneWithoutChecklistItemsNestedInput
+  }
+
+  export type ChecklistItemUncheckedUpdateWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistItemUncheckedUpdateManyWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TicketUpdateWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutVisitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    priority?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    sourceRef?: NullableStringFieldUpdateOperationsInput | string | null
+    isBillable?: BoolFieldUpdateOperationsInput | boolean
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChecklistTemplateItemCreateManyTemplateInput = {
+    id?: string
+    label: string
+    instruction?: string | null
+    section?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistTemplateItemUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    checklistItems?: ChecklistItemUpdateManyWithoutTemplateItemNestedInput
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    checklistItems?: ChecklistItemUncheckedUpdateManyWithoutTemplateItemNestedInput
+  }
+
+  export type ChecklistTemplateItemUncheckedUpdateManyWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    instruction?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistItemCreateManyTemplateItemInput = {
+    id?: string
+    visitId: string
+    label: string
+    status?: string
+    resultNote?: string | null
+    sortOrder?: number
+  }
+
+  export type ChecklistItemUpdateWithoutTemplateItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    visit?: VisitUpdateOneRequiredWithoutChecklistItemsNestedInput
+  }
+
+  export type ChecklistItemUncheckedUpdateWithoutTemplateItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChecklistItemUncheckedUpdateManyWithoutTemplateItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    resultNote?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+
+
+  /**
+   * Batch Payload for updateMany & deleteMany & createMany
+   */
+
+  export type BatchPayload = {
+    count: number
+  }
+
+  /**
+   * DMMF
+   */
+  export const dmmf: runtime.BaseDMMF
+}

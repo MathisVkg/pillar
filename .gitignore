@@ -45,5 +45,5 @@ next-env.d.ts
 # prisma migrations lock (keep migrations folder but not the lock)
 /prisma/migrations/migration_lock.toml
 
-# Prisma generated client
-packages/database/generated/
+# Prisma generated client — committed so Docker build can use it
+# packages/database/generated/

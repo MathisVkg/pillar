@@ -47,7 +47,15 @@ COPY --from=builder --chown=nextjs:nodejs \
 COPY --from=builder --chown=nextjs:nodejs \
   /app/apps/main/public ./public
 
-# Prisma engine files
+# Prisma generated client (contains the linux-musl engine binary)
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/packages/database/generated ./packages/database/generated
+
+# Fallback path Prisma also searches
+COPY --from=builder --chown=nextjs:nodejs \
+  /app/packages/database/generated/client ./generated/client
+
+# Prisma engine files from node_modules
 COPY --from=builder --chown=nextjs:nodejs \
   /app/node_modules/.prisma ./node_modules/.prisma
 
