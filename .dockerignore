@@ -1,7 +1,7 @@
 .git
-.next
 *.md
 .env*
 !.env.example
 apps/main/.next
 apps/main/node_modules
+packages/database/generated
