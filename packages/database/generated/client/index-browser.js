@@ -278,6 +278,21 @@ exports.Prisma.ChecklistTemplateItemScalarFieldEnum = {
   sortOrder: 'sortOrder'
 };
 
+exports.Prisma.ExpenseScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  vendor: 'vendor',
+  description: 'description',
+  amountExcl: 'amountExcl',
+  vatAmount: 'vatAmount',
+  category: 'category',
+  expenseDate: 'expenseDate',
+  receiptUrl: 'receiptUrl',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -396,6 +411,16 @@ exports.Prisma.ChecklistTemplateItemOrderByRelevanceFieldEnum = {
   section: 'section'
 };
 
+exports.Prisma.ExpenseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  vendor: 'vendor',
+  description: 'description',
+  category: 'category',
+  receiptUrl: 'receiptUrl',
+  notes: 'notes'
+};
+
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
@@ -409,7 +434,8 @@ exports.Prisma.ModelName = {
   Visit: 'Visit',
   ChecklistItem: 'ChecklistItem',
   ChecklistTemplate: 'ChecklistTemplate',
-  ChecklistTemplateItem: 'ChecklistTemplateItem'
+  ChecklistTemplateItem: 'ChecklistTemplateItem',
+  Expense: 'Expense'
 };
 
 /**

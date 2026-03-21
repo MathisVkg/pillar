@@ -65,6 +65,7 @@ model Client {
   contracts       Contract[]
   visits          Visit[]
   checklistTemplates ChecklistTemplate[]
+  expenses        Expense[]
 
   @@map("client")
 }
@@ -316,4 +317,32 @@ model ChecklistTemplateItem {
   checklistItems  ChecklistItem[]
 
   @@map("checklist_template_item")
+}
+
+// ============================================================
+// BOOKS EXTENSION
+// Financial tables for Pillar Books (books.pillar-it.be)
+// client_id is nullable on all Books tables:
+//   NULL  = your own company records
+//   value = a client's records (future extension)
+// ============================================================
+model Expense {
+  id            String    @id @default(uuid())
+  clientId      String?   // NULL = your company · populated = client record
+  vendor        String
+  description   String?   @db.Text
+  amountExcl    Decimal   @db.Decimal(10, 2) // excl. VAT
+  vatAmount     Decimal   @default(0) @db.Decimal(10, 2)
+  category      String    // software_license | hosting | telecom |
+                          // hardware | office | vehicle | other
+  expenseDate   DateTime  @db.Date
+  receiptUrl    String?   // uploaded receipt photo or document
+  notes         String?   @db.Text // internal notes
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  client        Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@map("expense")
 }
