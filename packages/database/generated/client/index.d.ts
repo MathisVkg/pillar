@@ -15989,6 +15989,7 @@ export namespace Prisma {
     receivedAt: Date | null
     documentUrl: string | null
     notes: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16003,6 +16004,7 @@ export namespace Prisma {
     receivedAt: Date | null
     documentUrl: string | null
     notes: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16017,6 +16019,7 @@ export namespace Prisma {
     receivedAt: number
     documentUrl: number
     notes: number
+    status: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -16043,6 +16046,7 @@ export namespace Prisma {
     receivedAt?: true
     documentUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16057,6 +16061,7 @@ export namespace Prisma {
     receivedAt?: true
     documentUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16071,6 +16076,7 @@ export namespace Prisma {
     receivedAt?: true
     documentUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -16172,6 +16178,7 @@ export namespace Prisma {
     receivedAt: Date
     documentUrl: string | null
     notes: string | null
+    status: string
     createdAt: Date
     updatedAt: Date
     _count: ExternalIncomeCountAggregateOutputType | null
@@ -16205,6 +16212,7 @@ export namespace Prisma {
     receivedAt?: boolean
     documentUrl?: boolean
     notes?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     client?: boolean | ExternalIncome$clientArgs<ExtArgs>
@@ -16222,11 +16230,12 @@ export namespace Prisma {
     receivedAt?: boolean
     documentUrl?: boolean
     notes?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ExternalIncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "source" | "description" | "amountExcl" | "vatAmount" | "receivedAt" | "documentUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["externalIncome"]>
+  export type ExternalIncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "source" | "description" | "amountExcl" | "vatAmount" | "receivedAt" | "documentUrl" | "notes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["externalIncome"]>
   export type ExternalIncomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | ExternalIncome$clientArgs<ExtArgs>
   }
@@ -16246,6 +16255,7 @@ export namespace Prisma {
       receivedAt: Date
       documentUrl: string | null
       notes: string | null
+      status: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["externalIncome"]>
@@ -16627,6 +16637,7 @@ export namespace Prisma {
     readonly receivedAt: FieldRef<"ExternalIncome", 'DateTime'>
     readonly documentUrl: FieldRef<"ExternalIncome", 'String'>
     readonly notes: FieldRef<"ExternalIncome", 'String'>
+    readonly status: FieldRef<"ExternalIncome", 'String'>
     readonly createdAt: FieldRef<"ExternalIncome", 'DateTime'>
     readonly updatedAt: FieldRef<"ExternalIncome", 'DateTime'>
   }
@@ -18274,6 +18285,7 @@ export namespace Prisma {
     receivedAt: 'receivedAt',
     documentUrl: 'documentUrl',
     notes: 'notes',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18475,7 +18487,8 @@ export namespace Prisma {
     source: 'source',
     description: 'description',
     documentUrl: 'documentUrl',
-    notes: 'notes'
+    notes: 'notes',
+    status: 'status'
   };
 
   export type ExternalIncomeOrderByRelevanceFieldEnum = (typeof ExternalIncomeOrderByRelevanceFieldEnum)[keyof typeof ExternalIncomeOrderByRelevanceFieldEnum]
@@ -19694,6 +19707,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
     notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    status?: StringFilter<"ExternalIncome"> | string
     createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
@@ -19709,6 +19723,7 @@ export namespace Prisma {
     receivedAt?: SortOrder
     documentUrl?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     client?: ClientOrderByWithRelationInput
@@ -19728,6 +19743,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
     notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    status?: StringFilter<"ExternalIncome"> | string
     createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
@@ -19743,6 +19759,7 @@ export namespace Prisma {
     receivedAt?: SortOrder
     documentUrl?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ExternalIncomeCountOrderByAggregateInput
@@ -19765,6 +19782,7 @@ export namespace Prisma {
     receivedAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
     documentUrl?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
     notes?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
+    status?: StringWithAggregatesFilter<"ExternalIncome"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
   }
@@ -21113,6 +21131,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     client?: ClientCreateNestedOneWithoutExternalIncomesInput
@@ -21128,6 +21147,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21141,6 +21161,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneWithoutExternalIncomesNestedInput
@@ -21156,6 +21177,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21170,6 +21192,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21183,6 +21206,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21197,6 +21221,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22376,6 +22401,7 @@ export namespace Prisma {
     receivedAt?: SortOrder
     documentUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22395,6 +22421,7 @@ export namespace Prisma {
     receivedAt?: SortOrder
     documentUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22409,6 +22436,7 @@ export namespace Prisma {
     receivedAt?: SortOrder
     documentUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -24096,6 +24124,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24109,6 +24138,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24483,6 +24513,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
     notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    status?: StringFilter<"ExternalIncome"> | string
     createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
     updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
   }
@@ -26723,6 +26754,7 @@ export namespace Prisma {
     receivedAt: Date | string
     documentUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27114,6 +27146,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27127,6 +27160,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27140,6 +27174,7 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

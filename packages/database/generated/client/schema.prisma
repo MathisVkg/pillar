@@ -359,6 +359,8 @@ model ExternalIncome {
   receivedAt  DateTime @db.Date
   documentUrl String? // optional attached document
   notes       String?  @db.Text
+  status      String   @default("paid")
+  // draft | waiting | paid
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

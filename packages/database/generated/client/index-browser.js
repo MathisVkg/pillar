@@ -303,6 +303,7 @@ exports.Prisma.ExternalIncomeScalarFieldEnum = {
   receivedAt: 'receivedAt',
   documentUrl: 'documentUrl',
   notes: 'notes',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -453,7 +454,8 @@ exports.Prisma.ExternalIncomeOrderByRelevanceFieldEnum = {
   source: 'source',
   description: 'description',
   documentUrl: 'documentUrl',
-  notes: 'notes'
+  notes: 'notes',
+  status: 'status'
 };
 
 exports.Prisma.IncomeEntryOrderByRelevanceFieldEnum = {

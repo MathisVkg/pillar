@@ -18,6 +18,8 @@ interface VatQuarter {
 
 interface Summary {
   incomeThisMonth: number;
+  pillarIncomeThisMonth: number;
+  externalIncomeThisMonth: number;
   vatCollectedThisMonth: number;
   expensesThisMonth: number;
   vatPaidThisMonth: number;
@@ -318,7 +320,16 @@ export default function DashboardPage() {
               iconColor: "var(--accent)",
               name: t("dashboard.pillarInvoices"),
               meta: data.currentMonth,
-              amount: formatEuro(data.incomeThisMonth),
+              amount: formatEuro(data.pillarIncomeThisMonth),
+              amountColor: "var(--income)",
+            },
+            {
+              icon: "E",
+              iconBg: "var(--income-l)",
+              iconColor: "var(--income)",
+              name: t("dashboard.externalIncome"),
+              meta: t("income.external"),
+              amount: formatEuro(data.externalIncomeThisMonth),
               amountColor: "var(--income)",
             },
             {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@pillar/database";
+import { syncPillarIncome } from "@/lib/sync-income";
 
 function startOfMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -35,18 +36,40 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Sync paid invoices to income_entry (idempotent)
+  await syncPillarIncome();
+
   const now = new Date();
   const monthStart = startOfMonth(now);
   const monthEnd = endOfMonth(now);
   const qStart = startOfQuarter(now);
   const qEnd = endOfQuarter(now);
 
-  // ── Income this month (paid Pillar invoices) ──────────────────────────────
-  const incomeAgg = await prisma.invoice.aggregate({
+  // ── Income this month — unified via income_entry ──────────────────────────
+  const incomeEntryAgg = await prisma.incomeEntry.aggregate({
+    _sum: { amountExcl: true, vatAmount: true },
+    where: {
+      clientId: null,
+      receivedAt: { gte: monthStart, lte: monthEnd },
+    },
+  });
+
+  // ── Pillar income this month (paid invoices) ──────────────────────────────
+  const pillarIncomeAgg = await prisma.invoice.aggregate({
     _sum: { subtotal: true, vatAmount: true },
     where: {
       status: "paid",
       paidAt: { gte: monthStart, lte: monthEnd },
+    },
+  });
+
+  // ── External income this month (paid only) ───────────────────────────────
+  // TODO: add status: "paid" filter after running prisma migrate
+  const externalIncomeAgg = await prisma.externalIncome.aggregate({
+    _sum: { amountExcl: true, vatAmount: true },
+    where: {
+      clientId: null,
+      receivedAt: { gte: monthStart, lte: monthEnd },
     },
   });
 
@@ -65,12 +88,12 @@ export async function GET() {
     where: { status: { in: ["sent", "draft"] } },
   });
 
-  // ── VAT quarter ───────────────────────────────────────────────────────────
-  const vatCollectedAgg = await prisma.invoice.aggregate({
+  // ── VAT quarter (from income_entry — covers all sources) ──────────────────
+  const vatCollectedAgg = await prisma.incomeEntry.aggregate({
     _sum: { vatAmount: true },
     where: {
-      status: "paid",
-      paidAt: { gte: qStart, lte: qEnd },
+      clientId: null,
+      receivedAt: { gte: qStart, lte: qEnd },
     },
   });
 
@@ -82,7 +105,7 @@ export async function GET() {
     },
   });
 
-  // ── 6-month rolling chart ─────────────────────────────────────────────────
+  // ── 6-month rolling chart (income from income_entry) ─────────────────────
   const chartData: Array<{ month: string; income: number; expenses: number }> = [];
 
   for (let i = 5; i >= 0; i--) {
@@ -91,11 +114,11 @@ export async function GET() {
     const mEnd = endOfMonth(d);
 
     const [inc, exp] = await Promise.all([
-      prisma.invoice.aggregate({
-        _sum: { subtotal: true },
+      prisma.incomeEntry.aggregate({
+        _sum: { amountExcl: true },
         where: {
-          status: "paid",
-          paidAt: { gte: mStart, lte: mEnd },
+          clientId: null,
+          receivedAt: { gte: mStart, lte: mEnd },
         },
       }),
       prisma.expense.aggregate({
@@ -109,13 +132,15 @@ export async function GET() {
 
     chartData.push({
       month: monthLabel(d),
-      income: Number(inc._sum?.subtotal ?? 0),
+      income: Number(inc._sum?.amountExcl ?? 0),
       expenses: Number(exp._sum?.amountExcl ?? 0),
     });
   }
 
-  const incomeThisMonth = Number(incomeAgg._sum?.subtotal ?? 0);
-  const vatCollectedThisMonth = Number(incomeAgg._sum?.vatAmount ?? 0);
+  const pillarIncomeThisMonth = Number(pillarIncomeAgg._sum?.subtotal ?? 0);
+  const externalIncomeThisMonth = Number(externalIncomeAgg._sum?.amountExcl ?? 0);
+  const incomeThisMonth = pillarIncomeThisMonth + externalIncomeThisMonth;
+  const vatCollectedThisMonth = Number(incomeEntryAgg._sum?.vatAmount ?? 0);
   const expensesThisMonth = Number(expenseAgg._sum?.amountExcl ?? 0);
   const vatPaidThisMonth = Number(expenseAgg._sum?.vatAmount ?? 0);
   const totalVatCollected = Number(vatCollectedAgg._sum?.vatAmount ?? 0);
@@ -125,6 +150,8 @@ export async function GET() {
 
   return NextResponse.json({
     incomeThisMonth,
+    pillarIncomeThisMonth,
+    externalIncomeThisMonth,
     vatCollectedThisMonth,
     expensesThisMonth,
     vatPaidThisMonth,
