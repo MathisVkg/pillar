@@ -78,6 +78,16 @@ export type ChecklistTemplateItem = $Result.DefaultSelection<Prisma.$ChecklistTe
  * 
  */
 export type Expense = $Result.DefaultSelection<Prisma.$ExpensePayload>
+/**
+ * Model ExternalIncome
+ * 
+ */
+export type ExternalIncome = $Result.DefaultSelection<Prisma.$ExternalIncomePayload>
+/**
+ * Model IncomeEntry
+ * 
+ */
+export type IncomeEntry = $Result.DefaultSelection<Prisma.$IncomeEntryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -326,6 +336,26 @@ export class PrismaClient<
     * ```
     */
   get expense(): Prisma.ExpenseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.externalIncome`: Exposes CRUD operations for the **ExternalIncome** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExternalIncomes
+    * const externalIncomes = await prisma.externalIncome.findMany()
+    * ```
+    */
+  get externalIncome(): Prisma.ExternalIncomeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.incomeEntry`: Exposes CRUD operations for the **IncomeEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IncomeEntries
+    * const incomeEntries = await prisma.incomeEntry.findMany()
+    * ```
+    */
+  get incomeEntry(): Prisma.IncomeEntryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -779,7 +809,9 @@ export namespace Prisma {
     ChecklistItem: 'ChecklistItem',
     ChecklistTemplate: 'ChecklistTemplate',
     ChecklistTemplateItem: 'ChecklistTemplateItem',
-    Expense: 'Expense'
+    Expense: 'Expense',
+    ExternalIncome: 'ExternalIncome',
+    IncomeEntry: 'IncomeEntry'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -798,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "client" | "clientUser" | "ticket" | "timeEntry" | "invoice" | "asset" | "contract" | "visit" | "checklistItem" | "checklistTemplate" | "checklistTemplateItem" | "expense"
+      modelProps: "admin" | "client" | "clientUser" | "ticket" | "timeEntry" | "invoice" | "asset" | "contract" | "visit" | "checklistItem" | "checklistTemplate" | "checklistTemplateItem" | "expense" | "externalIncome" | "incomeEntry"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1660,6 +1692,138 @@ export namespace Prisma {
           }
         }
       }
+      ExternalIncome: {
+        payload: Prisma.$ExternalIncomePayload<ExtArgs>
+        fields: Prisma.ExternalIncomeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExternalIncomeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExternalIncomeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          findFirst: {
+            args: Prisma.ExternalIncomeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExternalIncomeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          findMany: {
+            args: Prisma.ExternalIncomeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>[]
+          }
+          create: {
+            args: Prisma.ExternalIncomeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          createMany: {
+            args: Prisma.ExternalIncomeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ExternalIncomeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          update: {
+            args: Prisma.ExternalIncomeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          deleteMany: {
+            args: Prisma.ExternalIncomeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExternalIncomeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ExternalIncomeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalIncomePayload>
+          }
+          aggregate: {
+            args: Prisma.ExternalIncomeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExternalIncome>
+          }
+          groupBy: {
+            args: Prisma.ExternalIncomeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExternalIncomeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExternalIncomeCountArgs<ExtArgs>
+            result: $Utils.Optional<ExternalIncomeCountAggregateOutputType> | number
+          }
+        }
+      }
+      IncomeEntry: {
+        payload: Prisma.$IncomeEntryPayload<ExtArgs>
+        fields: Prisma.IncomeEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IncomeEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IncomeEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.IncomeEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IncomeEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          findMany: {
+            args: Prisma.IncomeEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>[]
+          }
+          create: {
+            args: Prisma.IncomeEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          createMany: {
+            args: Prisma.IncomeEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.IncomeEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          update: {
+            args: Prisma.IncomeEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.IncomeEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IncomeEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.IncomeEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.IncomeEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIncomeEntry>
+          }
+          groupBy: {
+            args: Prisma.IncomeEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IncomeEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IncomeEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<IncomeEntryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1769,6 +1933,8 @@ export namespace Prisma {
     checklistTemplate?: ChecklistTemplateOmit
     checklistTemplateItem?: ChecklistTemplateItemOmit
     expense?: ExpenseOmit
+    externalIncome?: ExternalIncomeOmit
+    incomeEntry?: IncomeEntryOmit
   }
 
   /* Types for Logging */
@@ -1858,6 +2024,8 @@ export namespace Prisma {
     visits: number
     checklistTemplates: number
     expenses: number
+    externalIncomes: number
+    incomeEntries: number
   }
 
   export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1870,6 +2038,8 @@ export namespace Prisma {
     visits?: boolean | ClientCountOutputTypeCountVisitsArgs
     checklistTemplates?: boolean | ClientCountOutputTypeCountChecklistTemplatesArgs
     expenses?: boolean | ClientCountOutputTypeCountExpensesArgs
+    externalIncomes?: boolean | ClientCountOutputTypeCountExternalIncomesArgs
+    incomeEntries?: boolean | ClientCountOutputTypeCountIncomeEntriesArgs
   }
 
   // Custom InputTypes
@@ -1944,6 +2114,20 @@ export namespace Prisma {
    */
   export type ClientCountOutputTypeCountExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountExternalIncomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalIncomeWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountIncomeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeEntryWhereInput
   }
 
 
@@ -3284,6 +3468,8 @@ export namespace Prisma {
     visits?: boolean | Client$visitsArgs<ExtArgs>
     checklistTemplates?: boolean | Client$checklistTemplatesArgs<ExtArgs>
     expenses?: boolean | Client$expensesArgs<ExtArgs>
+    externalIncomes?: boolean | Client$externalIncomesArgs<ExtArgs>
+    incomeEntries?: boolean | Client$incomeEntriesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -3317,6 +3503,8 @@ export namespace Prisma {
     visits?: boolean | Client$visitsArgs<ExtArgs>
     checklistTemplates?: boolean | Client$checklistTemplatesArgs<ExtArgs>
     expenses?: boolean | Client$expensesArgs<ExtArgs>
+    externalIncomes?: boolean | Client$externalIncomesArgs<ExtArgs>
+    incomeEntries?: boolean | Client$incomeEntriesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3332,6 +3520,8 @@ export namespace Prisma {
       visits: Prisma.$VisitPayload<ExtArgs>[]
       checklistTemplates: Prisma.$ChecklistTemplatePayload<ExtArgs>[]
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
+      externalIncomes: Prisma.$ExternalIncomePayload<ExtArgs>[]
+      incomeEntries: Prisma.$IncomeEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3697,6 +3887,8 @@ export namespace Prisma {
     visits<T extends Client$visitsArgs<ExtArgs> = {}>(args?: Subset<T, Client$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     checklistTemplates<T extends Client$checklistTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Client$checklistTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expenses<T extends Client$expensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    externalIncomes<T extends Client$externalIncomesArgs<ExtArgs> = {}>(args?: Subset<T, Client$externalIncomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    incomeEntries<T extends Client$incomeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Client$incomeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4296,6 +4488,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Client.externalIncomes
+   */
+  export type Client$externalIncomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    where?: ExternalIncomeWhereInput
+    orderBy?: ExternalIncomeOrderByWithRelationInput | ExternalIncomeOrderByWithRelationInput[]
+    cursor?: ExternalIncomeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExternalIncomeScalarFieldEnum | ExternalIncomeScalarFieldEnum[]
+  }
+
+  /**
+   * Client.incomeEntries
+   */
+  export type Client$incomeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    where?: IncomeEntryWhereInput
+    orderBy?: IncomeEntryOrderByWithRelationInput | IncomeEntryOrderByWithRelationInput[]
+    cursor?: IncomeEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IncomeEntryScalarFieldEnum | IncomeEntryScalarFieldEnum[]
   }
 
   /**
@@ -15718,6 +15958,2088 @@ export namespace Prisma {
 
 
   /**
+   * Model ExternalIncome
+   */
+
+  export type AggregateExternalIncome = {
+    _count: ExternalIncomeCountAggregateOutputType | null
+    _avg: ExternalIncomeAvgAggregateOutputType | null
+    _sum: ExternalIncomeSumAggregateOutputType | null
+    _min: ExternalIncomeMinAggregateOutputType | null
+    _max: ExternalIncomeMaxAggregateOutputType | null
+  }
+
+  export type ExternalIncomeAvgAggregateOutputType = {
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+  }
+
+  export type ExternalIncomeSumAggregateOutputType = {
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+  }
+
+  export type ExternalIncomeMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    source: string | null
+    description: string | null
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+    receivedAt: Date | null
+    documentUrl: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExternalIncomeMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    source: string | null
+    description: string | null
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+    receivedAt: Date | null
+    documentUrl: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExternalIncomeCountAggregateOutputType = {
+    id: number
+    clientId: number
+    source: number
+    description: number
+    amountExcl: number
+    vatAmount: number
+    receivedAt: number
+    documentUrl: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ExternalIncomeAvgAggregateInputType = {
+    amountExcl?: true
+    vatAmount?: true
+  }
+
+  export type ExternalIncomeSumAggregateInputType = {
+    amountExcl?: true
+    vatAmount?: true
+  }
+
+  export type ExternalIncomeMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    source?: true
+    description?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    documentUrl?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExternalIncomeMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    source?: true
+    description?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    documentUrl?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExternalIncomeCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    source?: true
+    description?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    documentUrl?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ExternalIncomeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalIncome to aggregate.
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalIncomes to fetch.
+     */
+    orderBy?: ExternalIncomeOrderByWithRelationInput | ExternalIncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExternalIncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalIncomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalIncomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExternalIncomes
+    **/
+    _count?: true | ExternalIncomeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExternalIncomeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExternalIncomeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExternalIncomeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExternalIncomeMaxAggregateInputType
+  }
+
+  export type GetExternalIncomeAggregateType<T extends ExternalIncomeAggregateArgs> = {
+        [P in keyof T & keyof AggregateExternalIncome]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExternalIncome[P]>
+      : GetScalarType<T[P], AggregateExternalIncome[P]>
+  }
+
+
+
+
+  export type ExternalIncomeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalIncomeWhereInput
+    orderBy?: ExternalIncomeOrderByWithAggregationInput | ExternalIncomeOrderByWithAggregationInput[]
+    by: ExternalIncomeScalarFieldEnum[] | ExternalIncomeScalarFieldEnum
+    having?: ExternalIncomeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExternalIncomeCountAggregateInputType | true
+    _avg?: ExternalIncomeAvgAggregateInputType
+    _sum?: ExternalIncomeSumAggregateInputType
+    _min?: ExternalIncomeMinAggregateInputType
+    _max?: ExternalIncomeMaxAggregateInputType
+  }
+
+  export type ExternalIncomeGroupByOutputType = {
+    id: string
+    clientId: string | null
+    source: string
+    description: string | null
+    amountExcl: Decimal
+    vatAmount: Decimal
+    receivedAt: Date
+    documentUrl: string | null
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ExternalIncomeCountAggregateOutputType | null
+    _avg: ExternalIncomeAvgAggregateOutputType | null
+    _sum: ExternalIncomeSumAggregateOutputType | null
+    _min: ExternalIncomeMinAggregateOutputType | null
+    _max: ExternalIncomeMaxAggregateOutputType | null
+  }
+
+  type GetExternalIncomeGroupByPayload<T extends ExternalIncomeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExternalIncomeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExternalIncomeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExternalIncomeGroupByOutputType[P]>
+            : GetScalarType<T[P], ExternalIncomeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExternalIncomeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    source?: boolean
+    description?: boolean
+    amountExcl?: boolean
+    vatAmount?: boolean
+    receivedAt?: boolean
+    documentUrl?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ExternalIncome$clientArgs<ExtArgs>
+  }, ExtArgs["result"]["externalIncome"]>
+
+
+
+  export type ExternalIncomeSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    source?: boolean
+    description?: boolean
+    amountExcl?: boolean
+    vatAmount?: boolean
+    receivedAt?: boolean
+    documentUrl?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ExternalIncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "source" | "description" | "amountExcl" | "vatAmount" | "receivedAt" | "documentUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["externalIncome"]>
+  export type ExternalIncomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ExternalIncome$clientArgs<ExtArgs>
+  }
+
+  export type $ExternalIncomePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExternalIncome"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string | null
+      source: string
+      description: string | null
+      amountExcl: Prisma.Decimal
+      vatAmount: Prisma.Decimal
+      receivedAt: Date
+      documentUrl: string | null
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["externalIncome"]>
+    composites: {}
+  }
+
+  type ExternalIncomeGetPayload<S extends boolean | null | undefined | ExternalIncomeDefaultArgs> = $Result.GetResult<Prisma.$ExternalIncomePayload, S>
+
+  type ExternalIncomeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExternalIncomeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExternalIncomeCountAggregateInputType | true
+    }
+
+  export interface ExternalIncomeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExternalIncome'], meta: { name: 'ExternalIncome' } }
+    /**
+     * Find zero or one ExternalIncome that matches the filter.
+     * @param {ExternalIncomeFindUniqueArgs} args - Arguments to find a ExternalIncome
+     * @example
+     * // Get one ExternalIncome
+     * const externalIncome = await prisma.externalIncome.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExternalIncomeFindUniqueArgs>(args: SelectSubset<T, ExternalIncomeFindUniqueArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExternalIncome that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExternalIncomeFindUniqueOrThrowArgs} args - Arguments to find a ExternalIncome
+     * @example
+     * // Get one ExternalIncome
+     * const externalIncome = await prisma.externalIncome.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExternalIncomeFindUniqueOrThrowArgs>(args: SelectSubset<T, ExternalIncomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalIncome that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeFindFirstArgs} args - Arguments to find a ExternalIncome
+     * @example
+     * // Get one ExternalIncome
+     * const externalIncome = await prisma.externalIncome.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExternalIncomeFindFirstArgs>(args?: SelectSubset<T, ExternalIncomeFindFirstArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalIncome that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeFindFirstOrThrowArgs} args - Arguments to find a ExternalIncome
+     * @example
+     * // Get one ExternalIncome
+     * const externalIncome = await prisma.externalIncome.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExternalIncomeFindFirstOrThrowArgs>(args?: SelectSubset<T, ExternalIncomeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExternalIncomes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExternalIncomes
+     * const externalIncomes = await prisma.externalIncome.findMany()
+     * 
+     * // Get first 10 ExternalIncomes
+     * const externalIncomes = await prisma.externalIncome.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const externalIncomeWithIdOnly = await prisma.externalIncome.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExternalIncomeFindManyArgs>(args?: SelectSubset<T, ExternalIncomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExternalIncome.
+     * @param {ExternalIncomeCreateArgs} args - Arguments to create a ExternalIncome.
+     * @example
+     * // Create one ExternalIncome
+     * const ExternalIncome = await prisma.externalIncome.create({
+     *   data: {
+     *     // ... data to create a ExternalIncome
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExternalIncomeCreateArgs>(args: SelectSubset<T, ExternalIncomeCreateArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExternalIncomes.
+     * @param {ExternalIncomeCreateManyArgs} args - Arguments to create many ExternalIncomes.
+     * @example
+     * // Create many ExternalIncomes
+     * const externalIncome = await prisma.externalIncome.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExternalIncomeCreateManyArgs>(args?: SelectSubset<T, ExternalIncomeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ExternalIncome.
+     * @param {ExternalIncomeDeleteArgs} args - Arguments to delete one ExternalIncome.
+     * @example
+     * // Delete one ExternalIncome
+     * const ExternalIncome = await prisma.externalIncome.delete({
+     *   where: {
+     *     // ... filter to delete one ExternalIncome
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExternalIncomeDeleteArgs>(args: SelectSubset<T, ExternalIncomeDeleteArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExternalIncome.
+     * @param {ExternalIncomeUpdateArgs} args - Arguments to update one ExternalIncome.
+     * @example
+     * // Update one ExternalIncome
+     * const externalIncome = await prisma.externalIncome.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExternalIncomeUpdateArgs>(args: SelectSubset<T, ExternalIncomeUpdateArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExternalIncomes.
+     * @param {ExternalIncomeDeleteManyArgs} args - Arguments to filter ExternalIncomes to delete.
+     * @example
+     * // Delete a few ExternalIncomes
+     * const { count } = await prisma.externalIncome.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExternalIncomeDeleteManyArgs>(args?: SelectSubset<T, ExternalIncomeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExternalIncomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExternalIncomes
+     * const externalIncome = await prisma.externalIncome.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExternalIncomeUpdateManyArgs>(args: SelectSubset<T, ExternalIncomeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ExternalIncome.
+     * @param {ExternalIncomeUpsertArgs} args - Arguments to update or create a ExternalIncome.
+     * @example
+     * // Update or create a ExternalIncome
+     * const externalIncome = await prisma.externalIncome.upsert({
+     *   create: {
+     *     // ... data to create a ExternalIncome
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExternalIncome we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExternalIncomeUpsertArgs>(args: SelectSubset<T, ExternalIncomeUpsertArgs<ExtArgs>>): Prisma__ExternalIncomeClient<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExternalIncomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeCountArgs} args - Arguments to filter ExternalIncomes to count.
+     * @example
+     * // Count the number of ExternalIncomes
+     * const count = await prisma.externalIncome.count({
+     *   where: {
+     *     // ... the filter for the ExternalIncomes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExternalIncomeCountArgs>(
+      args?: Subset<T, ExternalIncomeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExternalIncomeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExternalIncome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExternalIncomeAggregateArgs>(args: Subset<T, ExternalIncomeAggregateArgs>): Prisma.PrismaPromise<GetExternalIncomeAggregateType<T>>
+
+    /**
+     * Group by ExternalIncome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalIncomeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExternalIncomeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExternalIncomeGroupByArgs['orderBy'] }
+        : { orderBy?: ExternalIncomeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExternalIncomeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExternalIncomeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExternalIncome model
+   */
+  readonly fields: ExternalIncomeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExternalIncome.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExternalIncomeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ExternalIncome$clientArgs<ExtArgs> = {}>(args?: Subset<T, ExternalIncome$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExternalIncome model
+   */
+  interface ExternalIncomeFieldRefs {
+    readonly id: FieldRef<"ExternalIncome", 'String'>
+    readonly clientId: FieldRef<"ExternalIncome", 'String'>
+    readonly source: FieldRef<"ExternalIncome", 'String'>
+    readonly description: FieldRef<"ExternalIncome", 'String'>
+    readonly amountExcl: FieldRef<"ExternalIncome", 'Decimal'>
+    readonly vatAmount: FieldRef<"ExternalIncome", 'Decimal'>
+    readonly receivedAt: FieldRef<"ExternalIncome", 'DateTime'>
+    readonly documentUrl: FieldRef<"ExternalIncome", 'String'>
+    readonly notes: FieldRef<"ExternalIncome", 'String'>
+    readonly createdAt: FieldRef<"ExternalIncome", 'DateTime'>
+    readonly updatedAt: FieldRef<"ExternalIncome", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExternalIncome findUnique
+   */
+  export type ExternalIncomeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalIncome to fetch.
+     */
+    where: ExternalIncomeWhereUniqueInput
+  }
+
+  /**
+   * ExternalIncome findUniqueOrThrow
+   */
+  export type ExternalIncomeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalIncome to fetch.
+     */
+    where: ExternalIncomeWhereUniqueInput
+  }
+
+  /**
+   * ExternalIncome findFirst
+   */
+  export type ExternalIncomeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalIncome to fetch.
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalIncomes to fetch.
+     */
+    orderBy?: ExternalIncomeOrderByWithRelationInput | ExternalIncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalIncomes.
+     */
+    cursor?: ExternalIncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalIncomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalIncomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalIncomes.
+     */
+    distinct?: ExternalIncomeScalarFieldEnum | ExternalIncomeScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalIncome findFirstOrThrow
+   */
+  export type ExternalIncomeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalIncome to fetch.
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalIncomes to fetch.
+     */
+    orderBy?: ExternalIncomeOrderByWithRelationInput | ExternalIncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalIncomes.
+     */
+    cursor?: ExternalIncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalIncomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalIncomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalIncomes.
+     */
+    distinct?: ExternalIncomeScalarFieldEnum | ExternalIncomeScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalIncome findMany
+   */
+  export type ExternalIncomeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalIncomes to fetch.
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalIncomes to fetch.
+     */
+    orderBy?: ExternalIncomeOrderByWithRelationInput | ExternalIncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExternalIncomes.
+     */
+    cursor?: ExternalIncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalIncomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalIncomes.
+     */
+    skip?: number
+    distinct?: ExternalIncomeScalarFieldEnum | ExternalIncomeScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalIncome create
+   */
+  export type ExternalIncomeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExternalIncome.
+     */
+    data: XOR<ExternalIncomeCreateInput, ExternalIncomeUncheckedCreateInput>
+  }
+
+  /**
+   * ExternalIncome createMany
+   */
+  export type ExternalIncomeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExternalIncomes.
+     */
+    data: ExternalIncomeCreateManyInput | ExternalIncomeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExternalIncome update
+   */
+  export type ExternalIncomeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExternalIncome.
+     */
+    data: XOR<ExternalIncomeUpdateInput, ExternalIncomeUncheckedUpdateInput>
+    /**
+     * Choose, which ExternalIncome to update.
+     */
+    where: ExternalIncomeWhereUniqueInput
+  }
+
+  /**
+   * ExternalIncome updateMany
+   */
+  export type ExternalIncomeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExternalIncomes.
+     */
+    data: XOR<ExternalIncomeUpdateManyMutationInput, ExternalIncomeUncheckedUpdateManyInput>
+    /**
+     * Filter which ExternalIncomes to update
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * Limit how many ExternalIncomes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalIncome upsert
+   */
+  export type ExternalIncomeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExternalIncome to update in case it exists.
+     */
+    where: ExternalIncomeWhereUniqueInput
+    /**
+     * In case the ExternalIncome found by the `where` argument doesn't exist, create a new ExternalIncome with this data.
+     */
+    create: XOR<ExternalIncomeCreateInput, ExternalIncomeUncheckedCreateInput>
+    /**
+     * In case the ExternalIncome was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExternalIncomeUpdateInput, ExternalIncomeUncheckedUpdateInput>
+  }
+
+  /**
+   * ExternalIncome delete
+   */
+  export type ExternalIncomeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+    /**
+     * Filter which ExternalIncome to delete.
+     */
+    where: ExternalIncomeWhereUniqueInput
+  }
+
+  /**
+   * ExternalIncome deleteMany
+   */
+  export type ExternalIncomeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalIncomes to delete
+     */
+    where?: ExternalIncomeWhereInput
+    /**
+     * Limit how many ExternalIncomes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalIncome.client
+   */
+  export type ExternalIncome$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+  }
+
+  /**
+   * ExternalIncome without action
+   */
+  export type ExternalIncomeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalIncome
+     */
+    select?: ExternalIncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalIncome
+     */
+    omit?: ExternalIncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalIncomeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IncomeEntry
+   */
+
+  export type AggregateIncomeEntry = {
+    _count: IncomeEntryCountAggregateOutputType | null
+    _avg: IncomeEntryAvgAggregateOutputType | null
+    _sum: IncomeEntrySumAggregateOutputType | null
+    _min: IncomeEntryMinAggregateOutputType | null
+    _max: IncomeEntryMaxAggregateOutputType | null
+  }
+
+  export type IncomeEntryAvgAggregateOutputType = {
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+  }
+
+  export type IncomeEntrySumAggregateOutputType = {
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+  }
+
+  export type IncomeEntryMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    sourceType: string | null
+    sourceId: string | null
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+    receivedAt: Date | null
+    label: string | null
+    createdAt: Date | null
+  }
+
+  export type IncomeEntryMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    sourceType: string | null
+    sourceId: string | null
+    amountExcl: Decimal | null
+    vatAmount: Decimal | null
+    receivedAt: Date | null
+    label: string | null
+    createdAt: Date | null
+  }
+
+  export type IncomeEntryCountAggregateOutputType = {
+    id: number
+    clientId: number
+    sourceType: number
+    sourceId: number
+    amountExcl: number
+    vatAmount: number
+    receivedAt: number
+    label: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type IncomeEntryAvgAggregateInputType = {
+    amountExcl?: true
+    vatAmount?: true
+  }
+
+  export type IncomeEntrySumAggregateInputType = {
+    amountExcl?: true
+    vatAmount?: true
+  }
+
+  export type IncomeEntryMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    sourceType?: true
+    sourceId?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    label?: true
+    createdAt?: true
+  }
+
+  export type IncomeEntryMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    sourceType?: true
+    sourceId?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    label?: true
+    createdAt?: true
+  }
+
+  export type IncomeEntryCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    sourceType?: true
+    sourceId?: true
+    amountExcl?: true
+    vatAmount?: true
+    receivedAt?: true
+    label?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type IncomeEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IncomeEntry to aggregate.
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeEntries to fetch.
+     */
+    orderBy?: IncomeEntryOrderByWithRelationInput | IncomeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IncomeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IncomeEntries
+    **/
+    _count?: true | IncomeEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IncomeEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IncomeEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IncomeEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IncomeEntryMaxAggregateInputType
+  }
+
+  export type GetIncomeEntryAggregateType<T extends IncomeEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateIncomeEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIncomeEntry[P]>
+      : GetScalarType<T[P], AggregateIncomeEntry[P]>
+  }
+
+
+
+
+  export type IncomeEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeEntryWhereInput
+    orderBy?: IncomeEntryOrderByWithAggregationInput | IncomeEntryOrderByWithAggregationInput[]
+    by: IncomeEntryScalarFieldEnum[] | IncomeEntryScalarFieldEnum
+    having?: IncomeEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IncomeEntryCountAggregateInputType | true
+    _avg?: IncomeEntryAvgAggregateInputType
+    _sum?: IncomeEntrySumAggregateInputType
+    _min?: IncomeEntryMinAggregateInputType
+    _max?: IncomeEntryMaxAggregateInputType
+  }
+
+  export type IncomeEntryGroupByOutputType = {
+    id: string
+    clientId: string | null
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal
+    vatAmount: Decimal
+    receivedAt: Date
+    label: string
+    createdAt: Date
+    _count: IncomeEntryCountAggregateOutputType | null
+    _avg: IncomeEntryAvgAggregateOutputType | null
+    _sum: IncomeEntrySumAggregateOutputType | null
+    _min: IncomeEntryMinAggregateOutputType | null
+    _max: IncomeEntryMaxAggregateOutputType | null
+  }
+
+  type GetIncomeEntryGroupByPayload<T extends IncomeEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IncomeEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IncomeEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IncomeEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], IncomeEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IncomeEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    sourceType?: boolean
+    sourceId?: boolean
+    amountExcl?: boolean
+    vatAmount?: boolean
+    receivedAt?: boolean
+    label?: boolean
+    createdAt?: boolean
+    client?: boolean | IncomeEntry$clientArgs<ExtArgs>
+  }, ExtArgs["result"]["incomeEntry"]>
+
+
+
+  export type IncomeEntrySelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    sourceType?: boolean
+    sourceId?: boolean
+    amountExcl?: boolean
+    vatAmount?: boolean
+    receivedAt?: boolean
+    label?: boolean
+    createdAt?: boolean
+  }
+
+  export type IncomeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "sourceType" | "sourceId" | "amountExcl" | "vatAmount" | "receivedAt" | "label" | "createdAt", ExtArgs["result"]["incomeEntry"]>
+  export type IncomeEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | IncomeEntry$clientArgs<ExtArgs>
+  }
+
+  export type $IncomeEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IncomeEntry"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string | null
+      sourceType: string
+      sourceId: string
+      amountExcl: Prisma.Decimal
+      vatAmount: Prisma.Decimal
+      receivedAt: Date
+      label: string
+      createdAt: Date
+    }, ExtArgs["result"]["incomeEntry"]>
+    composites: {}
+  }
+
+  type IncomeEntryGetPayload<S extends boolean | null | undefined | IncomeEntryDefaultArgs> = $Result.GetResult<Prisma.$IncomeEntryPayload, S>
+
+  type IncomeEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IncomeEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IncomeEntryCountAggregateInputType | true
+    }
+
+  export interface IncomeEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IncomeEntry'], meta: { name: 'IncomeEntry' } }
+    /**
+     * Find zero or one IncomeEntry that matches the filter.
+     * @param {IncomeEntryFindUniqueArgs} args - Arguments to find a IncomeEntry
+     * @example
+     * // Get one IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IncomeEntryFindUniqueArgs>(args: SelectSubset<T, IncomeEntryFindUniqueArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IncomeEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IncomeEntryFindUniqueOrThrowArgs} args - Arguments to find a IncomeEntry
+     * @example
+     * // Get one IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IncomeEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, IncomeEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IncomeEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryFindFirstArgs} args - Arguments to find a IncomeEntry
+     * @example
+     * // Get one IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IncomeEntryFindFirstArgs>(args?: SelectSubset<T, IncomeEntryFindFirstArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IncomeEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryFindFirstOrThrowArgs} args - Arguments to find a IncomeEntry
+     * @example
+     * // Get one IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IncomeEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, IncomeEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IncomeEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IncomeEntries
+     * const incomeEntries = await prisma.incomeEntry.findMany()
+     * 
+     * // Get first 10 IncomeEntries
+     * const incomeEntries = await prisma.incomeEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const incomeEntryWithIdOnly = await prisma.incomeEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IncomeEntryFindManyArgs>(args?: SelectSubset<T, IncomeEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IncomeEntry.
+     * @param {IncomeEntryCreateArgs} args - Arguments to create a IncomeEntry.
+     * @example
+     * // Create one IncomeEntry
+     * const IncomeEntry = await prisma.incomeEntry.create({
+     *   data: {
+     *     // ... data to create a IncomeEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends IncomeEntryCreateArgs>(args: SelectSubset<T, IncomeEntryCreateArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IncomeEntries.
+     * @param {IncomeEntryCreateManyArgs} args - Arguments to create many IncomeEntries.
+     * @example
+     * // Create many IncomeEntries
+     * const incomeEntry = await prisma.incomeEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IncomeEntryCreateManyArgs>(args?: SelectSubset<T, IncomeEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a IncomeEntry.
+     * @param {IncomeEntryDeleteArgs} args - Arguments to delete one IncomeEntry.
+     * @example
+     * // Delete one IncomeEntry
+     * const IncomeEntry = await prisma.incomeEntry.delete({
+     *   where: {
+     *     // ... filter to delete one IncomeEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IncomeEntryDeleteArgs>(args: SelectSubset<T, IncomeEntryDeleteArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IncomeEntry.
+     * @param {IncomeEntryUpdateArgs} args - Arguments to update one IncomeEntry.
+     * @example
+     * // Update one IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IncomeEntryUpdateArgs>(args: SelectSubset<T, IncomeEntryUpdateArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IncomeEntries.
+     * @param {IncomeEntryDeleteManyArgs} args - Arguments to filter IncomeEntries to delete.
+     * @example
+     * // Delete a few IncomeEntries
+     * const { count } = await prisma.incomeEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IncomeEntryDeleteManyArgs>(args?: SelectSubset<T, IncomeEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IncomeEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IncomeEntries
+     * const incomeEntry = await prisma.incomeEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IncomeEntryUpdateManyArgs>(args: SelectSubset<T, IncomeEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one IncomeEntry.
+     * @param {IncomeEntryUpsertArgs} args - Arguments to update or create a IncomeEntry.
+     * @example
+     * // Update or create a IncomeEntry
+     * const incomeEntry = await prisma.incomeEntry.upsert({
+     *   create: {
+     *     // ... data to create a IncomeEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IncomeEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IncomeEntryUpsertArgs>(args: SelectSubset<T, IncomeEntryUpsertArgs<ExtArgs>>): Prisma__IncomeEntryClient<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IncomeEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryCountArgs} args - Arguments to filter IncomeEntries to count.
+     * @example
+     * // Count the number of IncomeEntries
+     * const count = await prisma.incomeEntry.count({
+     *   where: {
+     *     // ... the filter for the IncomeEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends IncomeEntryCountArgs>(
+      args?: Subset<T, IncomeEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IncomeEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IncomeEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IncomeEntryAggregateArgs>(args: Subset<T, IncomeEntryAggregateArgs>): Prisma.PrismaPromise<GetIncomeEntryAggregateType<T>>
+
+    /**
+     * Group by IncomeEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IncomeEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IncomeEntryGroupByArgs['orderBy'] }
+        : { orderBy?: IncomeEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IncomeEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIncomeEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IncomeEntry model
+   */
+  readonly fields: IncomeEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IncomeEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IncomeEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends IncomeEntry$clientArgs<ExtArgs> = {}>(args?: Subset<T, IncomeEntry$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IncomeEntry model
+   */
+  interface IncomeEntryFieldRefs {
+    readonly id: FieldRef<"IncomeEntry", 'String'>
+    readonly clientId: FieldRef<"IncomeEntry", 'String'>
+    readonly sourceType: FieldRef<"IncomeEntry", 'String'>
+    readonly sourceId: FieldRef<"IncomeEntry", 'String'>
+    readonly amountExcl: FieldRef<"IncomeEntry", 'Decimal'>
+    readonly vatAmount: FieldRef<"IncomeEntry", 'Decimal'>
+    readonly receivedAt: FieldRef<"IncomeEntry", 'DateTime'>
+    readonly label: FieldRef<"IncomeEntry", 'String'>
+    readonly createdAt: FieldRef<"IncomeEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IncomeEntry findUnique
+   */
+  export type IncomeEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeEntry to fetch.
+     */
+    where: IncomeEntryWhereUniqueInput
+  }
+
+  /**
+   * IncomeEntry findUniqueOrThrow
+   */
+  export type IncomeEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeEntry to fetch.
+     */
+    where: IncomeEntryWhereUniqueInput
+  }
+
+  /**
+   * IncomeEntry findFirst
+   */
+  export type IncomeEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeEntry to fetch.
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeEntries to fetch.
+     */
+    orderBy?: IncomeEntryOrderByWithRelationInput | IncomeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IncomeEntries.
+     */
+    cursor?: IncomeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IncomeEntries.
+     */
+    distinct?: IncomeEntryScalarFieldEnum | IncomeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeEntry findFirstOrThrow
+   */
+  export type IncomeEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeEntry to fetch.
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeEntries to fetch.
+     */
+    orderBy?: IncomeEntryOrderByWithRelationInput | IncomeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IncomeEntries.
+     */
+    cursor?: IncomeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IncomeEntries.
+     */
+    distinct?: IncomeEntryScalarFieldEnum | IncomeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeEntry findMany
+   */
+  export type IncomeEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeEntries to fetch.
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeEntries to fetch.
+     */
+    orderBy?: IncomeEntryOrderByWithRelationInput | IncomeEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IncomeEntries.
+     */
+    cursor?: IncomeEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeEntries.
+     */
+    skip?: number
+    distinct?: IncomeEntryScalarFieldEnum | IncomeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeEntry create
+   */
+  export type IncomeEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IncomeEntry.
+     */
+    data: XOR<IncomeEntryCreateInput, IncomeEntryUncheckedCreateInput>
+  }
+
+  /**
+   * IncomeEntry createMany
+   */
+  export type IncomeEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IncomeEntries.
+     */
+    data: IncomeEntryCreateManyInput | IncomeEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IncomeEntry update
+   */
+  export type IncomeEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IncomeEntry.
+     */
+    data: XOR<IncomeEntryUpdateInput, IncomeEntryUncheckedUpdateInput>
+    /**
+     * Choose, which IncomeEntry to update.
+     */
+    where: IncomeEntryWhereUniqueInput
+  }
+
+  /**
+   * IncomeEntry updateMany
+   */
+  export type IncomeEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IncomeEntries.
+     */
+    data: XOR<IncomeEntryUpdateManyMutationInput, IncomeEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which IncomeEntries to update
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * Limit how many IncomeEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IncomeEntry upsert
+   */
+  export type IncomeEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IncomeEntry to update in case it exists.
+     */
+    where: IncomeEntryWhereUniqueInput
+    /**
+     * In case the IncomeEntry found by the `where` argument doesn't exist, create a new IncomeEntry with this data.
+     */
+    create: XOR<IncomeEntryCreateInput, IncomeEntryUncheckedCreateInput>
+    /**
+     * In case the IncomeEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IncomeEntryUpdateInput, IncomeEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * IncomeEntry delete
+   */
+  export type IncomeEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+    /**
+     * Filter which IncomeEntry to delete.
+     */
+    where: IncomeEntryWhereUniqueInput
+  }
+
+  /**
+   * IncomeEntry deleteMany
+   */
+  export type IncomeEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IncomeEntries to delete
+     */
+    where?: IncomeEntryWhereInput
+    /**
+     * Limit how many IncomeEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IncomeEntry.client
+   */
+  export type IncomeEntry$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+  }
+
+  /**
+   * IncomeEntry without action
+   */
+  export type IncomeEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeEntry
+     */
+    select?: IncomeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeEntry
+     */
+    omit?: IncomeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15942,6 +18264,38 @@ export namespace Prisma {
   export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
 
 
+  export const ExternalIncomeScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    source: 'source',
+    description: 'description',
+    amountExcl: 'amountExcl',
+    vatAmount: 'vatAmount',
+    receivedAt: 'receivedAt',
+    documentUrl: 'documentUrl',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ExternalIncomeScalarFieldEnum = (typeof ExternalIncomeScalarFieldEnum)[keyof typeof ExternalIncomeScalarFieldEnum]
+
+
+  export const IncomeEntryScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    sourceType: 'sourceType',
+    sourceId: 'sourceId',
+    amountExcl: 'amountExcl',
+    vatAmount: 'vatAmount',
+    receivedAt: 'receivedAt',
+    label: 'label',
+    createdAt: 'createdAt'
+  };
+
+  export type IncomeEntryScalarFieldEnum = (typeof IncomeEntryScalarFieldEnum)[keyof typeof IncomeEntryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -16115,6 +18469,29 @@ export namespace Prisma {
   export type ExpenseOrderByRelevanceFieldEnum = (typeof ExpenseOrderByRelevanceFieldEnum)[keyof typeof ExpenseOrderByRelevanceFieldEnum]
 
 
+  export const ExternalIncomeOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    source: 'source',
+    description: 'description',
+    documentUrl: 'documentUrl',
+    notes: 'notes'
+  };
+
+  export type ExternalIncomeOrderByRelevanceFieldEnum = (typeof ExternalIncomeOrderByRelevanceFieldEnum)[keyof typeof ExternalIncomeOrderByRelevanceFieldEnum]
+
+
+  export const IncomeEntryOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    sourceType: 'sourceType',
+    sourceId: 'sourceId',
+    label: 'label'
+  };
+
+  export type IncomeEntryOrderByRelevanceFieldEnum = (typeof IncomeEntryOrderByRelevanceFieldEnum)[keyof typeof IncomeEntryOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -16245,6 +18622,8 @@ export namespace Prisma {
     visits?: VisitListRelationFilter
     checklistTemplates?: ChecklistTemplateListRelationFilter
     expenses?: ExpenseListRelationFilter
+    externalIncomes?: ExternalIncomeListRelationFilter
+    incomeEntries?: IncomeEntryListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -16271,6 +18650,8 @@ export namespace Prisma {
     visits?: VisitOrderByRelationAggregateInput
     checklistTemplates?: ChecklistTemplateOrderByRelationAggregateInput
     expenses?: ExpenseOrderByRelationAggregateInput
+    externalIncomes?: ExternalIncomeOrderByRelationAggregateInput
+    incomeEntries?: IncomeEntryOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
   }
 
@@ -16301,6 +18682,8 @@ export namespace Prisma {
     visits?: VisitListRelationFilter
     checklistTemplates?: ChecklistTemplateListRelationFilter
     expenses?: ExpenseListRelationFilter
+    externalIncomes?: ExternalIncomeListRelationFilter
+    incomeEntries?: IncomeEntryListRelationFilter
   }, "id" | "slug">
 
   export type ClientOrderByWithAggregationInput = {
@@ -17298,6 +19681,172 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
   }
 
+  export type ExternalIncomeWhereInput = {
+    AND?: ExternalIncomeWhereInput | ExternalIncomeWhereInput[]
+    OR?: ExternalIncomeWhereInput[]
+    NOT?: ExternalIncomeWhereInput | ExternalIncomeWhereInput[]
+    id?: StringFilter<"ExternalIncome"> | string
+    clientId?: StringNullableFilter<"ExternalIncome"> | string | null
+    source?: StringFilter<"ExternalIncome"> | string
+    description?: StringNullableFilter<"ExternalIncome"> | string | null
+    amountExcl?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
+    notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }
+
+  export type ExternalIncomeOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    source?: SortOrder
+    description?: SortOrderInput | SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    documentUrl?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: ExternalIncomeOrderByRelevanceInput
+  }
+
+  export type ExternalIncomeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExternalIncomeWhereInput | ExternalIncomeWhereInput[]
+    OR?: ExternalIncomeWhereInput[]
+    NOT?: ExternalIncomeWhereInput | ExternalIncomeWhereInput[]
+    clientId?: StringNullableFilter<"ExternalIncome"> | string | null
+    source?: StringFilter<"ExternalIncome"> | string
+    description?: StringNullableFilter<"ExternalIncome"> | string | null
+    amountExcl?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
+    notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }, "id">
+
+  export type ExternalIncomeOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    source?: SortOrder
+    description?: SortOrderInput | SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    documentUrl?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ExternalIncomeCountOrderByAggregateInput
+    _avg?: ExternalIncomeAvgOrderByAggregateInput
+    _max?: ExternalIncomeMaxOrderByAggregateInput
+    _min?: ExternalIncomeMinOrderByAggregateInput
+    _sum?: ExternalIncomeSumOrderByAggregateInput
+  }
+
+  export type ExternalIncomeScalarWhereWithAggregatesInput = {
+    AND?: ExternalIncomeScalarWhereWithAggregatesInput | ExternalIncomeScalarWhereWithAggregatesInput[]
+    OR?: ExternalIncomeScalarWhereWithAggregatesInput[]
+    NOT?: ExternalIncomeScalarWhereWithAggregatesInput | ExternalIncomeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExternalIncome"> | string
+    clientId?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
+    source?: StringWithAggregatesFilter<"ExternalIncome"> | string
+    description?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
+    amountExcl?: DecimalWithAggregatesFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalWithAggregatesFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
+    documentUrl?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"ExternalIncome"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ExternalIncome"> | Date | string
+  }
+
+  export type IncomeEntryWhereInput = {
+    AND?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
+    OR?: IncomeEntryWhereInput[]
+    NOT?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
+    id?: StringFilter<"IncomeEntry"> | string
+    clientId?: StringNullableFilter<"IncomeEntry"> | string | null
+    sourceType?: StringFilter<"IncomeEntry"> | string
+    sourceId?: StringFilter<"IncomeEntry"> | string
+    amountExcl?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+    label?: StringFilter<"IncomeEntry"> | string
+    createdAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }
+
+  export type IncomeEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    sourceType?: SortOrder
+    sourceId?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    label?: SortOrder
+    createdAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: IncomeEntryOrderByRelevanceInput
+  }
+
+  export type IncomeEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
+    OR?: IncomeEntryWhereInput[]
+    NOT?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
+    clientId?: StringNullableFilter<"IncomeEntry"> | string | null
+    sourceType?: StringFilter<"IncomeEntry"> | string
+    sourceId?: StringFilter<"IncomeEntry"> | string
+    amountExcl?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+    label?: StringFilter<"IncomeEntry"> | string
+    createdAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }, "id">
+
+  export type IncomeEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    sourceType?: SortOrder
+    sourceId?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    label?: SortOrder
+    createdAt?: SortOrder
+    _count?: IncomeEntryCountOrderByAggregateInput
+    _avg?: IncomeEntryAvgOrderByAggregateInput
+    _max?: IncomeEntryMaxOrderByAggregateInput
+    _min?: IncomeEntryMinOrderByAggregateInput
+    _sum?: IncomeEntrySumOrderByAggregateInput
+  }
+
+  export type IncomeEntryScalarWhereWithAggregatesInput = {
+    AND?: IncomeEntryScalarWhereWithAggregatesInput | IncomeEntryScalarWhereWithAggregatesInput[]
+    OR?: IncomeEntryScalarWhereWithAggregatesInput[]
+    NOT?: IncomeEntryScalarWhereWithAggregatesInput | IncomeEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IncomeEntry"> | string
+    clientId?: StringNullableWithAggregatesFilter<"IncomeEntry"> | string | null
+    sourceType?: StringWithAggregatesFilter<"IncomeEntry"> | string
+    sourceId?: StringWithAggregatesFilter<"IncomeEntry"> | string
+    amountExcl?: DecimalWithAggregatesFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalWithAggregatesFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeWithAggregatesFilter<"IncomeEntry"> | Date | string
+    label?: StringWithAggregatesFilter<"IncomeEntry"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"IncomeEntry"> | Date | string
+  }
+
   export type AdminCreateInput = {
     id?: string
     email: string
@@ -17378,6 +19927,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -17404,6 +19955,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientUpdateInput = {
@@ -17430,6 +19983,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -17456,6 +20011,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -18547,6 +21104,186 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExternalIncomeCreateInput = {
+    id?: string
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: ClientCreateNestedOneWithoutExternalIncomesInput
+  }
+
+  export type ExternalIncomeUncheckedCreateInput = {
+    id?: string
+    clientId?: string | null
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExternalIncomeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneWithoutExternalIncomesNestedInput
+  }
+
+  export type ExternalIncomeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExternalIncomeCreateManyInput = {
+    id?: string
+    clientId?: string | null
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExternalIncomeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExternalIncomeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryCreateInput = {
+    id?: string
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
+    client?: ClientCreateNestedOneWithoutIncomeEntriesInput
+  }
+
+  export type IncomeEntryUncheckedCreateInput = {
+    id?: string
+    clientId?: string | null
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
+  }
+
+  export type IncomeEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneWithoutIncomeEntriesNestedInput
+  }
+
+  export type IncomeEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryCreateManyInput = {
+    id?: string
+    clientId?: string | null
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
+  }
+
+  export type IncomeEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -18742,6 +21479,18 @@ export namespace Prisma {
     none?: ExpenseWhereInput
   }
 
+  export type ExternalIncomeListRelationFilter = {
+    every?: ExternalIncomeWhereInput
+    some?: ExternalIncomeWhereInput
+    none?: ExternalIncomeWhereInput
+  }
+
+  export type IncomeEntryListRelationFilter = {
+    every?: IncomeEntryWhereInput
+    some?: IncomeEntryWhereInput
+    none?: IncomeEntryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18780,6 +21529,14 @@ export namespace Prisma {
   }
 
   export type ExpenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExternalIncomeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IncomeEntryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19603,6 +22360,116 @@ export namespace Prisma {
     vatAmount?: SortOrder
   }
 
+  export type ExternalIncomeOrderByRelevanceInput = {
+    fields: ExternalIncomeOrderByRelevanceFieldEnum | ExternalIncomeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ExternalIncomeCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    source?: SortOrder
+    description?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    documentUrl?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExternalIncomeAvgOrderByAggregateInput = {
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+  }
+
+  export type ExternalIncomeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    source?: SortOrder
+    description?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    documentUrl?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExternalIncomeMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    source?: SortOrder
+    description?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    documentUrl?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExternalIncomeSumOrderByAggregateInput = {
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+  }
+
+  export type IncomeEntryOrderByRelevanceInput = {
+    fields: IncomeEntryOrderByRelevanceFieldEnum | IncomeEntryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type IncomeEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    sourceType?: SortOrder
+    sourceId?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    label?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeEntryAvgOrderByAggregateInput = {
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+  }
+
+  export type IncomeEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    sourceType?: SortOrder
+    sourceId?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    label?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    sourceType?: SortOrder
+    sourceId?: SortOrder
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+    receivedAt?: SortOrder
+    label?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeEntrySumOrderByAggregateInput = {
+    amountExcl?: SortOrder
+    vatAmount?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -19674,6 +22541,20 @@ export namespace Prisma {
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
   }
 
+  export type ExternalIncomeCreateNestedManyWithoutClientInput = {
+    create?: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput> | ExternalIncomeCreateWithoutClientInput[] | ExternalIncomeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ExternalIncomeCreateOrConnectWithoutClientInput | ExternalIncomeCreateOrConnectWithoutClientInput[]
+    createMany?: ExternalIncomeCreateManyClientInputEnvelope
+    connect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+  }
+
+  export type IncomeEntryCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput> | IncomeEntryCreateWithoutClientInput[] | IncomeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncomeEntryCreateOrConnectWithoutClientInput | IncomeEntryCreateOrConnectWithoutClientInput[]
+    createMany?: IncomeEntryCreateManyClientInputEnvelope
+    connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+  }
+
   export type ClientUserUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
@@ -19735,6 +22616,20 @@ export namespace Prisma {
     connectOrCreate?: ExpenseCreateOrConnectWithoutClientInput | ExpenseCreateOrConnectWithoutClientInput[]
     createMany?: ExpenseCreateManyClientInputEnvelope
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type ExternalIncomeUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput> | ExternalIncomeCreateWithoutClientInput[] | ExternalIncomeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ExternalIncomeCreateOrConnectWithoutClientInput | ExternalIncomeCreateOrConnectWithoutClientInput[]
+    createMany?: ExternalIncomeCreateManyClientInputEnvelope
+    connect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+  }
+
+  export type IncomeEntryUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput> | IncomeEntryCreateWithoutClientInput[] | IncomeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncomeEntryCreateOrConnectWithoutClientInput | IncomeEntryCreateOrConnectWithoutClientInput[]
+    createMany?: IncomeEntryCreateManyClientInputEnvelope
+    connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -19895,6 +22790,34 @@ export namespace Prisma {
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
+  export type ExternalIncomeUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput> | ExternalIncomeCreateWithoutClientInput[] | ExternalIncomeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ExternalIncomeCreateOrConnectWithoutClientInput | ExternalIncomeCreateOrConnectWithoutClientInput[]
+    upsert?: ExternalIncomeUpsertWithWhereUniqueWithoutClientInput | ExternalIncomeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ExternalIncomeCreateManyClientInputEnvelope
+    set?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    disconnect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    delete?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    connect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    update?: ExternalIncomeUpdateWithWhereUniqueWithoutClientInput | ExternalIncomeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ExternalIncomeUpdateManyWithWhereWithoutClientInput | ExternalIncomeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ExternalIncomeScalarWhereInput | ExternalIncomeScalarWhereInput[]
+  }
+
+  export type IncomeEntryUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput> | IncomeEntryCreateWithoutClientInput[] | IncomeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncomeEntryCreateOrConnectWithoutClientInput | IncomeEntryCreateOrConnectWithoutClientInput[]
+    upsert?: IncomeEntryUpsertWithWhereUniqueWithoutClientInput | IncomeEntryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncomeEntryCreateManyClientInputEnvelope
+    set?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    disconnect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    delete?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    update?: IncomeEntryUpdateWithWhereUniqueWithoutClientInput | IncomeEntryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncomeEntryUpdateManyWithWhereWithoutClientInput | IncomeEntryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
+  }
+
   export type ClientUserUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
@@ -20019,6 +22942,34 @@ export namespace Prisma {
     update?: ExpenseUpdateWithWhereUniqueWithoutClientInput | ExpenseUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: ExpenseUpdateManyWithWhereWithoutClientInput | ExpenseUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
+  export type ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput> | ExternalIncomeCreateWithoutClientInput[] | ExternalIncomeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ExternalIncomeCreateOrConnectWithoutClientInput | ExternalIncomeCreateOrConnectWithoutClientInput[]
+    upsert?: ExternalIncomeUpsertWithWhereUniqueWithoutClientInput | ExternalIncomeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ExternalIncomeCreateManyClientInputEnvelope
+    set?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    disconnect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    delete?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    connect?: ExternalIncomeWhereUniqueInput | ExternalIncomeWhereUniqueInput[]
+    update?: ExternalIncomeUpdateWithWhereUniqueWithoutClientInput | ExternalIncomeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ExternalIncomeUpdateManyWithWhereWithoutClientInput | ExternalIncomeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ExternalIncomeScalarWhereInput | ExternalIncomeScalarWhereInput[]
+  }
+
+  export type IncomeEntryUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput> | IncomeEntryCreateWithoutClientInput[] | IncomeEntryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncomeEntryCreateOrConnectWithoutClientInput | IncomeEntryCreateOrConnectWithoutClientInput[]
+    upsert?: IncomeEntryUpsertWithWhereUniqueWithoutClientInput | IncomeEntryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncomeEntryCreateManyClientInputEnvelope
+    set?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    disconnect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    delete?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+    update?: IncomeEntryUpdateWithWhereUniqueWithoutClientInput | IncomeEntryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncomeEntryUpdateManyWithWhereWithoutClientInput | IncomeEntryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutUsersInput = {
@@ -20505,6 +23456,38 @@ export namespace Prisma {
     delete?: ClientWhereInput | boolean
     connect?: ClientWhereUniqueInput
     update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutExpensesInput, ClientUpdateWithoutExpensesInput>, ClientUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type ClientCreateNestedOneWithoutExternalIncomesInput = {
+    create?: XOR<ClientCreateWithoutExternalIncomesInput, ClientUncheckedCreateWithoutExternalIncomesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutExternalIncomesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ClientUpdateOneWithoutExternalIncomesNestedInput = {
+    create?: XOR<ClientCreateWithoutExternalIncomesInput, ClientUncheckedCreateWithoutExternalIncomesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutExternalIncomesInput
+    upsert?: ClientUpsertWithoutExternalIncomesInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutExternalIncomesInput, ClientUpdateWithoutExternalIncomesInput>, ClientUncheckedUpdateWithoutExternalIncomesInput>
+  }
+
+  export type ClientCreateNestedOneWithoutIncomeEntriesInput = {
+    create?: XOR<ClientCreateWithoutIncomeEntriesInput, ClientUncheckedCreateWithoutIncomeEntriesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncomeEntriesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ClientUpdateOneWithoutIncomeEntriesNestedInput = {
+    create?: XOR<ClientCreateWithoutIncomeEntriesInput, ClientUncheckedCreateWithoutIncomeEntriesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncomeEntriesInput
+    upsert?: ClientUpsertWithoutIncomeEntriesInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutIncomeEntriesInput, ClientUpdateWithoutIncomeEntriesInput>, ClientUncheckedUpdateWithoutIncomeEntriesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -21104,6 +24087,74 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExternalIncomeCreateWithoutClientInput = {
+    id?: string
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExternalIncomeUncheckedCreateWithoutClientInput = {
+    id?: string
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExternalIncomeCreateOrConnectWithoutClientInput = {
+    where: ExternalIncomeWhereUniqueInput
+    create: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput>
+  }
+
+  export type ExternalIncomeCreateManyClientInputEnvelope = {
+    data: ExternalIncomeCreateManyClientInput | ExternalIncomeCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IncomeEntryCreateWithoutClientInput = {
+    id?: string
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
+  }
+
+  export type IncomeEntryUncheckedCreateWithoutClientInput = {
+    id?: string
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
+  }
+
+  export type IncomeEntryCreateOrConnectWithoutClientInput = {
+    where: IncomeEntryWhereUniqueInput
+    create: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncomeEntryCreateManyClientInputEnvelope = {
+    data: IncomeEntryCreateManyClientInput | IncomeEntryCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientUserUpsertWithWhereUniqueWithoutClientInput = {
     where: ClientUserWhereUniqueInput
     update: XOR<ClientUserUpdateWithoutClientInput, ClientUserUncheckedUpdateWithoutClientInput>
@@ -21403,6 +24454,70 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
   }
 
+  export type ExternalIncomeUpsertWithWhereUniqueWithoutClientInput = {
+    where: ExternalIncomeWhereUniqueInput
+    update: XOR<ExternalIncomeUpdateWithoutClientInput, ExternalIncomeUncheckedUpdateWithoutClientInput>
+    create: XOR<ExternalIncomeCreateWithoutClientInput, ExternalIncomeUncheckedCreateWithoutClientInput>
+  }
+
+  export type ExternalIncomeUpdateWithWhereUniqueWithoutClientInput = {
+    where: ExternalIncomeWhereUniqueInput
+    data: XOR<ExternalIncomeUpdateWithoutClientInput, ExternalIncomeUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ExternalIncomeUpdateManyWithWhereWithoutClientInput = {
+    where: ExternalIncomeScalarWhereInput
+    data: XOR<ExternalIncomeUpdateManyMutationInput, ExternalIncomeUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ExternalIncomeScalarWhereInput = {
+    AND?: ExternalIncomeScalarWhereInput | ExternalIncomeScalarWhereInput[]
+    OR?: ExternalIncomeScalarWhereInput[]
+    NOT?: ExternalIncomeScalarWhereInput | ExternalIncomeScalarWhereInput[]
+    id?: StringFilter<"ExternalIncome"> | string
+    clientId?: StringNullableFilter<"ExternalIncome"> | string | null
+    source?: StringFilter<"ExternalIncome"> | string
+    description?: StringNullableFilter<"ExternalIncome"> | string | null
+    amountExcl?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"ExternalIncome"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    documentUrl?: StringNullableFilter<"ExternalIncome"> | string | null
+    notes?: StringNullableFilter<"ExternalIncome"> | string | null
+    createdAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+    updatedAt?: DateTimeFilter<"ExternalIncome"> | Date | string
+  }
+
+  export type IncomeEntryUpsertWithWhereUniqueWithoutClientInput = {
+    where: IncomeEntryWhereUniqueInput
+    update: XOR<IncomeEntryUpdateWithoutClientInput, IncomeEntryUncheckedUpdateWithoutClientInput>
+    create: XOR<IncomeEntryCreateWithoutClientInput, IncomeEntryUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncomeEntryUpdateWithWhereUniqueWithoutClientInput = {
+    where: IncomeEntryWhereUniqueInput
+    data: XOR<IncomeEntryUpdateWithoutClientInput, IncomeEntryUncheckedUpdateWithoutClientInput>
+  }
+
+  export type IncomeEntryUpdateManyWithWhereWithoutClientInput = {
+    where: IncomeEntryScalarWhereInput
+    data: XOR<IncomeEntryUpdateManyMutationInput, IncomeEntryUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type IncomeEntryScalarWhereInput = {
+    AND?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
+    OR?: IncomeEntryScalarWhereInput[]
+    NOT?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
+    id?: StringFilter<"IncomeEntry"> | string
+    clientId?: StringNullableFilter<"IncomeEntry"> | string | null
+    sourceType?: StringFilter<"IncomeEntry"> | string
+    sourceId?: StringFilter<"IncomeEntry"> | string
+    amountExcl?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFilter<"IncomeEntry"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+    label?: StringFilter<"IncomeEntry"> | string
+    createdAt?: DateTimeFilter<"IncomeEntry"> | Date | string
+  }
+
   export type ClientCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -21426,6 +24541,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutUsersInput = {
@@ -21451,6 +24568,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutUsersInput = {
@@ -21492,6 +24611,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutUsersInput = {
@@ -21517,6 +24638,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutTicketsInput = {
@@ -21542,6 +24665,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTicketsInput = {
@@ -21567,6 +24692,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTicketsInput = {
@@ -21671,6 +24798,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTicketsInput = {
@@ -21696,6 +24825,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type VisitUpsertWithoutTicketsInput = {
@@ -21770,6 +24901,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTimeEntriesInput = {
@@ -21795,6 +24928,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTimeEntriesInput = {
@@ -21916,6 +25051,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTimeEntriesInput = {
@@ -21941,6 +25078,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type TicketUpsertWithoutTimeEntriesInput = {
@@ -22058,6 +25197,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutInvoicesInput = {
@@ -22083,6 +25224,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutInvoicesInput = {
@@ -22160,6 +25303,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutInvoicesInput = {
@@ -22185,6 +25330,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput = {
@@ -22226,6 +25373,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutAssetsInput = {
@@ -22251,6 +25400,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutAssetsInput = {
@@ -22292,6 +25443,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutAssetsInput = {
@@ -22317,6 +25470,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutContractsInput = {
@@ -22342,6 +25497,8 @@ export namespace Prisma {
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutContractsInput = {
@@ -22367,6 +25524,8 @@ export namespace Prisma {
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutContractsInput = {
@@ -22408,6 +25567,8 @@ export namespace Prisma {
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutContractsInput = {
@@ -22433,6 +25594,8 @@ export namespace Prisma {
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutVisitsInput = {
@@ -22458,6 +25621,8 @@ export namespace Prisma {
     contracts?: ContractCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutVisitsInput = {
@@ -22483,6 +25648,8 @@ export namespace Prisma {
     contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutVisitsInput = {
@@ -22596,6 +25763,8 @@ export namespace Prisma {
     contracts?: ContractUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutVisitsInput = {
@@ -22621,6 +25790,8 @@ export namespace Prisma {
     contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ChecklistItemUpsertWithWhereUniqueWithoutVisitInput = {
@@ -22803,6 +25974,8 @@ export namespace Prisma {
     contracts?: ContractCreateNestedManyWithoutClientInput
     visits?: VisitCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutChecklistTemplatesInput = {
@@ -22828,6 +26001,8 @@ export namespace Prisma {
     contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutChecklistTemplatesInput = {
@@ -22897,6 +26072,8 @@ export namespace Prisma {
     contracts?: ContractUpdateManyWithoutClientNestedInput
     visits?: VisitUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutChecklistTemplatesInput = {
@@ -22922,6 +26099,8 @@ export namespace Prisma {
     contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput = {
@@ -23067,6 +26246,8 @@ export namespace Prisma {
     contracts?: ContractCreateNestedManyWithoutClientInput
     visits?: VisitCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutExpensesInput = {
@@ -23092,6 +26273,8 @@ export namespace Prisma {
     contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
     visits?: VisitUncheckedCreateNestedManyWithoutClientInput
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutExpensesInput = {
@@ -23133,6 +26316,8 @@ export namespace Prisma {
     contracts?: ContractUpdateManyWithoutClientNestedInput
     visits?: VisitUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutExpensesInput = {
@@ -23158,6 +26343,256 @@ export namespace Prisma {
     contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
     visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutExternalIncomesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+    expenses?: ExpenseCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutExternalIncomesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutExternalIncomesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutExternalIncomesInput, ClientUncheckedCreateWithoutExternalIncomesInput>
+  }
+
+  export type ClientUpsertWithoutExternalIncomesInput = {
+    update: XOR<ClientUpdateWithoutExternalIncomesInput, ClientUncheckedUpdateWithoutExternalIncomesInput>
+    create: XOR<ClientCreateWithoutExternalIncomesInput, ClientUncheckedCreateWithoutExternalIncomesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutExternalIncomesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutExternalIncomesInput, ClientUncheckedUpdateWithoutExternalIncomesInput>
+  }
+
+  export type ClientUpdateWithoutExternalIncomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutExternalIncomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutIncomeEntriesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+    expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutIncomeEntriesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutIncomeEntriesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutIncomeEntriesInput, ClientUncheckedCreateWithoutIncomeEntriesInput>
+  }
+
+  export type ClientUpsertWithoutIncomeEntriesInput = {
+    update: XOR<ClientUpdateWithoutIncomeEntriesInput, ClientUncheckedUpdateWithoutIncomeEntriesInput>
+    create: XOR<ClientCreateWithoutIncomeEntriesInput, ClientUncheckedCreateWithoutIncomeEntriesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutIncomeEntriesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutIncomeEntriesInput, ClientUncheckedUpdateWithoutIncomeEntriesInput>
+  }
+
+  export type ClientUpdateWithoutIncomeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutIncomeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUserCreateManyClientInput = {
@@ -23277,6 +26712,30 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ExternalIncomeCreateManyClientInput = {
+    id?: string
+    source: string
+    description?: string | null
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    documentUrl?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IncomeEntryCreateManyClientInput = {
+    id?: string
+    sourceType: string
+    sourceId: string
+    amountExcl: Decimal | DecimalJsLike | number | string
+    vatAmount?: Decimal | DecimalJsLike | number | string
+    receivedAt: Date | string
+    label: string
+    createdAt?: Date | string
   }
 
   export type ClientUserUpdateWithoutClientInput = {
@@ -23644,6 +27103,78 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExternalIncomeUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExternalIncomeUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExternalIncomeUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeEntryUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceType?: StringFieldUpdateOperationsInput | string
+    sourceId?: StringFieldUpdateOperationsInput | string
+    amountExcl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TimeEntryCreateManyTicketInput = {

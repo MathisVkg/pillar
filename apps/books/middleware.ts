@@ -18,7 +18,7 @@ export default auth((req) => {
   const session = req.auth;
 
   // ── 1. Always public — no auth, no locale check ───────────────────────────
-  if (pathname.startsWith("/api/auth")) {
+  if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 

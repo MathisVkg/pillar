@@ -66,6 +66,8 @@ model Client {
   visits          Visit[]
   checklistTemplates ChecklistTemplate[]
   expenses        Expense[]
+  externalIncomes ExternalIncome[]
+  incomeEntries   IncomeEntry[]
 
   @@map("client")
 }
@@ -345,4 +347,42 @@ model Expense {
   client        Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
   @@map("expense")
+}
+
+model ExternalIncome {
+  id            String    @id @default(uuid())
+  clientId      String?   // NULL = your company · populated = client
+  source        String    // e.g. "Proximus consulting", "Hardware resale"
+  description   String?   @db.Text
+  amountExcl    Decimal   @db.Decimal(10, 2)
+  vatAmount     Decimal   @default(0) @db.Decimal(10, 2)
+  receivedAt    DateTime  @db.Date
+  documentUrl   String?   // optional attached document
+  notes         String?   @db.Text
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  client        Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@map("external_income")
+}
+
+model IncomeEntry {
+  id              String    @id @default(uuid())
+  clientId        String?   // NULL = your company · populated = client
+  sourceType      String    // "pillar" | "external"
+  sourceId        String    // invoice.id OR external_income.id
+                            // depending on sourceType — no DB FK
+                            // by design (polymorphic reference)
+  amountExcl      Decimal   @db.Decimal(10, 2)
+  vatAmount       Decimal   @default(0) @db.Decimal(10, 2)
+  receivedAt      DateTime  // when money was received
+  label           String    // auto-filled: invoice number + client, or source
+  createdAt       DateTime  @default(now())
+
+  // Relations
+  client          Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@map("income_entry")
 }

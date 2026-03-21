@@ -293,6 +293,32 @@ exports.Prisma.ExpenseScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ExternalIncomeScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  source: 'source',
+  description: 'description',
+  amountExcl: 'amountExcl',
+  vatAmount: 'vatAmount',
+  receivedAt: 'receivedAt',
+  documentUrl: 'documentUrl',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IncomeEntryScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  sourceType: 'sourceType',
+  sourceId: 'sourceId',
+  amountExcl: 'amountExcl',
+  vatAmount: 'vatAmount',
+  receivedAt: 'receivedAt',
+  label: 'label',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -421,6 +447,23 @@ exports.Prisma.ExpenseOrderByRelevanceFieldEnum = {
   notes: 'notes'
 };
 
+exports.Prisma.ExternalIncomeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  source: 'source',
+  description: 'description',
+  documentUrl: 'documentUrl',
+  notes: 'notes'
+};
+
+exports.Prisma.IncomeEntryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  sourceType: 'sourceType',
+  sourceId: 'sourceId',
+  label: 'label'
+};
+
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
@@ -435,7 +478,9 @@ exports.Prisma.ModelName = {
   ChecklistItem: 'ChecklistItem',
   ChecklistTemplate: 'ChecklistTemplate',
   ChecklistTemplateItem: 'ChecklistTemplateItem',
-  Expense: 'Expense'
+  Expense: 'Expense',
+  ExternalIncome: 'ExternalIncome',
+  IncomeEntry: 'IncomeEntry'
 };
 
 /**
