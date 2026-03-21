@@ -64,11 +64,11 @@ export async function GET() {
   });
 
   // ── External income this month (paid only) ───────────────────────────────
-  // TODO: add status: "paid" filter after running prisma migrate
   const externalIncomeAgg = await prisma.externalIncome.aggregate({
     _sum: { amountExcl: true, vatAmount: true },
     where: {
       clientId: null,
+      status: "paid",
       receivedAt: { gte: monthStart, lte: monthEnd },
     },
   });
