@@ -10,6 +10,18 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        app:
+          - name: main
+            dockerfile: Dockerfile
+          # Add new apps here when ready:
+          # - name: camera
+          #   dockerfile: apps/camera/Dockerfile
+          # - name: books
+          #   dockerfile: apps/books/Dockerfile
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,12 +32,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push ${{ matrix.app.name }}
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile
+          file: ${{ matrix.app.dockerfile }}
           push: true
           tags: |
-            ghcr.io/mathisvkg/pillar:latest
-            ghcr.io/mathisvkg/pillar:${{ github.sha }}
+            ghcr.io/mathisvkg/pillar-${{ matrix.app.name }}:latest
+            ghcr.io/mathisvkg/pillar-${{ matrix.app.name }}:${{ github.sha }}
