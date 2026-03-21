@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* ── Books design tokens ─────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --brand:        #0F172A;
+  --accent:       #2563EB;
+  --accent-l:     #DBEAFE;
+
+  /* Income signal — emerald */
+  --income:       #059669;
+  --income-mid:   #10B981;
+  --income-l:     #D1FAE5;
+  --income-ll:    #ECFDF5;
+
+  /* Expense signal — violet */
+  --expense:      #7C3AED;
+  --expense-l:    #EDE9FE;
+  --expense-ll:   #F5F3FF;
+
+  /* VAT signal — sky blue */
+  --vat:          #0284C7;
+  --vat-l:        #E0F2FE;
+  --vat-ll:       #F0F9FF;
+
+  /* Status */
+  --ok:           #16A34A;
+  --warn:         #D97706;
+  --warn-l:       #FEF3C7;
+  --danger:       #DC2626;
+  --danger-l:     #FEE2E2;
+
+  /* Surfaces */
+  --surface:      #FFFFFF;
+  --ground:       #F8FAFC;
+  --border:       #EBEBEB;
+  --border-md:    #E2E5EB;
+
+  /* Text */
+  --text:         #111111;
+  --muted:        #737373;
+  --subtle:       #A3A3A3;
+
+  /* Typography */
+  --font-display: 'Archivo', sans-serif;
+  --font-sans:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'Geist Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--ground);
+  color: var(--text);
+}
