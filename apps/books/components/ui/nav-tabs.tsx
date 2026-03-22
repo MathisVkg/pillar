@@ -13,6 +13,9 @@ export default function NavTabs() {
     { label: t("nav.overview"), href: `/${lang}/dashboard` },
     { label: t("nav.income"), href: `/${lang}/income` },
     { label: t("nav.expenses"), href: `/${lang}/expenses` },
+    { label: t("nav.recurring"), href: `/${lang}/recurring` },
+    { label: t("nav.vat"), href: `/${lang}/vat` },
+    { label: t("nav.pl"), href: `/${lang}/pl` },
     { label: t("nav.export"), href: `/${lang}/export` },
   ];
 

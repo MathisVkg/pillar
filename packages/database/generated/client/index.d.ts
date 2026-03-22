@@ -88,6 +88,11 @@ export type ExternalIncome = $Result.DefaultSelection<Prisma.$ExternalIncomePayl
  * 
  */
 export type IncomeEntry = $Result.DefaultSelection<Prisma.$IncomeEntryPayload>
+/**
+ * Model RecurringExpense
+ * 
+ */
+export type RecurringExpense = $Result.DefaultSelection<Prisma.$RecurringExpensePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -356,6 +361,16 @@ export class PrismaClient<
     * ```
     */
   get incomeEntry(): Prisma.IncomeEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recurringExpense`: Exposes CRUD operations for the **RecurringExpense** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RecurringExpenses
+    * const recurringExpenses = await prisma.recurringExpense.findMany()
+    * ```
+    */
+  get recurringExpense(): Prisma.RecurringExpenseDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -811,7 +826,8 @@ export namespace Prisma {
     ChecklistTemplateItem: 'ChecklistTemplateItem',
     Expense: 'Expense',
     ExternalIncome: 'ExternalIncome',
-    IncomeEntry: 'IncomeEntry'
+    IncomeEntry: 'IncomeEntry',
+    RecurringExpense: 'RecurringExpense'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -830,7 +846,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "client" | "clientUser" | "ticket" | "timeEntry" | "invoice" | "asset" | "contract" | "visit" | "checklistItem" | "checklistTemplate" | "checklistTemplateItem" | "expense" | "externalIncome" | "incomeEntry"
+      modelProps: "admin" | "client" | "clientUser" | "ticket" | "timeEntry" | "invoice" | "asset" | "contract" | "visit" | "checklistItem" | "checklistTemplate" | "checklistTemplateItem" | "expense" | "externalIncome" | "incomeEntry" | "recurringExpense"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1824,6 +1840,72 @@ export namespace Prisma {
           }
         }
       }
+      RecurringExpense: {
+        payload: Prisma.$RecurringExpensePayload<ExtArgs>
+        fields: Prisma.RecurringExpenseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecurringExpenseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecurringExpenseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          findFirst: {
+            args: Prisma.RecurringExpenseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecurringExpenseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          findMany: {
+            args: Prisma.RecurringExpenseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>[]
+          }
+          create: {
+            args: Prisma.RecurringExpenseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          createMany: {
+            args: Prisma.RecurringExpenseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.RecurringExpenseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          update: {
+            args: Prisma.RecurringExpenseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          deleteMany: {
+            args: Prisma.RecurringExpenseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecurringExpenseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RecurringExpenseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecurringExpensePayload>
+          }
+          aggregate: {
+            args: Prisma.RecurringExpenseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecurringExpense>
+          }
+          groupBy: {
+            args: Prisma.RecurringExpenseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecurringExpenseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecurringExpenseCountArgs<ExtArgs>
+            result: $Utils.Optional<RecurringExpenseCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1935,6 +2017,7 @@ export namespace Prisma {
     expense?: ExpenseOmit
     externalIncome?: ExternalIncomeOmit
     incomeEntry?: IncomeEntryOmit
+    recurringExpense?: RecurringExpenseOmit
   }
 
   /* Types for Logging */
@@ -2026,6 +2109,7 @@ export namespace Prisma {
     expenses: number
     externalIncomes: number
     incomeEntries: number
+    recurringExpenses: number
   }
 
   export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2040,6 +2124,7 @@ export namespace Prisma {
     expenses?: boolean | ClientCountOutputTypeCountExpensesArgs
     externalIncomes?: boolean | ClientCountOutputTypeCountExternalIncomesArgs
     incomeEntries?: boolean | ClientCountOutputTypeCountIncomeEntriesArgs
+    recurringExpenses?: boolean | ClientCountOutputTypeCountRecurringExpensesArgs
   }
 
   // Custom InputTypes
@@ -2128,6 +2213,13 @@ export namespace Prisma {
    */
   export type ClientCountOutputTypeCountIncomeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IncomeEntryWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountRecurringExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecurringExpenseWhereInput
   }
 
 
@@ -3470,6 +3562,7 @@ export namespace Prisma {
     expenses?: boolean | Client$expensesArgs<ExtArgs>
     externalIncomes?: boolean | Client$externalIncomesArgs<ExtArgs>
     incomeEntries?: boolean | Client$incomeEntriesArgs<ExtArgs>
+    recurringExpenses?: boolean | Client$recurringExpensesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -3505,6 +3598,7 @@ export namespace Prisma {
     expenses?: boolean | Client$expensesArgs<ExtArgs>
     externalIncomes?: boolean | Client$externalIncomesArgs<ExtArgs>
     incomeEntries?: boolean | Client$incomeEntriesArgs<ExtArgs>
+    recurringExpenses?: boolean | Client$recurringExpensesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3522,6 +3616,7 @@ export namespace Prisma {
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
       externalIncomes: Prisma.$ExternalIncomePayload<ExtArgs>[]
       incomeEntries: Prisma.$IncomeEntryPayload<ExtArgs>[]
+      recurringExpenses: Prisma.$RecurringExpensePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3889,6 +3984,7 @@ export namespace Prisma {
     expenses<T extends Client$expensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     externalIncomes<T extends Client$externalIncomesArgs<ExtArgs> = {}>(args?: Subset<T, Client$externalIncomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomeEntries<T extends Client$incomeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Client$incomeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recurringExpenses<T extends Client$recurringExpensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$recurringExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4536,6 +4632,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IncomeEntryScalarFieldEnum | IncomeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Client.recurringExpenses
+   */
+  export type Client$recurringExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    where?: RecurringExpenseWhereInput
+    orderBy?: RecurringExpenseOrderByWithRelationInput | RecurringExpenseOrderByWithRelationInput[]
+    cursor?: RecurringExpenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecurringExpenseScalarFieldEnum | RecurringExpenseScalarFieldEnum[]
   }
 
   /**
@@ -14927,6 +15047,7 @@ export namespace Prisma {
     expenseDate: Date | null
     receiptUrl: string | null
     notes: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14942,6 +15063,7 @@ export namespace Prisma {
     expenseDate: Date | null
     receiptUrl: string | null
     notes: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14957,6 +15079,7 @@ export namespace Prisma {
     expenseDate: number
     receiptUrl: number
     notes: number
+    status: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14984,6 +15107,7 @@ export namespace Prisma {
     expenseDate?: true
     receiptUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -14999,6 +15123,7 @@ export namespace Prisma {
     expenseDate?: true
     receiptUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15014,6 +15139,7 @@ export namespace Prisma {
     expenseDate?: true
     receiptUrl?: true
     notes?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -15116,6 +15242,7 @@ export namespace Prisma {
     expenseDate: Date
     receiptUrl: string | null
     notes: string | null
+    status: string
     createdAt: Date
     updatedAt: Date
     _count: ExpenseCountAggregateOutputType | null
@@ -15150,6 +15277,7 @@ export namespace Prisma {
     expenseDate?: boolean
     receiptUrl?: boolean
     notes?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     client?: boolean | Expense$clientArgs<ExtArgs>
@@ -15168,11 +15296,12 @@ export namespace Prisma {
     expenseDate?: boolean
     receiptUrl?: boolean
     notes?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "vendor" | "description" | "amountExcl" | "vatAmount" | "category" | "expenseDate" | "receiptUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["expense"]>
+  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "vendor" | "description" | "amountExcl" | "vatAmount" | "category" | "expenseDate" | "receiptUrl" | "notes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["expense"]>
   export type ExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | Expense$clientArgs<ExtArgs>
   }
@@ -15193,6 +15322,7 @@ export namespace Prisma {
       expenseDate: Date
       receiptUrl: string | null
       notes: string | null
+      status: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["expense"]>
@@ -15575,6 +15705,7 @@ export namespace Prisma {
     readonly expenseDate: FieldRef<"Expense", 'DateTime'>
     readonly receiptUrl: FieldRef<"Expense", 'String'>
     readonly notes: FieldRef<"Expense", 'String'>
+    readonly status: FieldRef<"Expense", 'String'>
     readonly createdAt: FieldRef<"Expense", 'DateTime'>
     readonly updatedAt: FieldRef<"Expense", 'DateTime'>
   }
@@ -18051,6 +18182,1043 @@ export namespace Prisma {
 
 
   /**
+   * Model RecurringExpense
+   */
+
+  export type AggregateRecurringExpense = {
+    _count: RecurringExpenseCountAggregateOutputType | null
+    _avg: RecurringExpenseAvgAggregateOutputType | null
+    _sum: RecurringExpenseSumAggregateOutputType | null
+    _min: RecurringExpenseMinAggregateOutputType | null
+    _max: RecurringExpenseMaxAggregateOutputType | null
+  }
+
+  export type RecurringExpenseAvgAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type RecurringExpenseSumAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type RecurringExpenseMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    category: string | null
+    frequency: string | null
+    amount: Decimal | null
+    isActive: boolean | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecurringExpenseMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    name: string | null
+    category: string | null
+    frequency: string | null
+    amount: Decimal | null
+    isActive: boolean | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecurringExpenseCountAggregateOutputType = {
+    id: number
+    clientId: number
+    name: number
+    category: number
+    frequency: number
+    amount: number
+    isActive: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RecurringExpenseAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type RecurringExpenseSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type RecurringExpenseMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    category?: true
+    frequency?: true
+    amount?: true
+    isActive?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecurringExpenseMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    category?: true
+    frequency?: true
+    amount?: true
+    isActive?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecurringExpenseCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    name?: true
+    category?: true
+    frequency?: true
+    amount?: true
+    isActive?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RecurringExpenseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecurringExpense to aggregate.
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecurringExpenses to fetch.
+     */
+    orderBy?: RecurringExpenseOrderByWithRelationInput | RecurringExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecurringExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecurringExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecurringExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RecurringExpenses
+    **/
+    _count?: true | RecurringExpenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RecurringExpenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RecurringExpenseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecurringExpenseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecurringExpenseMaxAggregateInputType
+  }
+
+  export type GetRecurringExpenseAggregateType<T extends RecurringExpenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecurringExpense]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecurringExpense[P]>
+      : GetScalarType<T[P], AggregateRecurringExpense[P]>
+  }
+
+
+
+
+  export type RecurringExpenseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecurringExpenseWhereInput
+    orderBy?: RecurringExpenseOrderByWithAggregationInput | RecurringExpenseOrderByWithAggregationInput[]
+    by: RecurringExpenseScalarFieldEnum[] | RecurringExpenseScalarFieldEnum
+    having?: RecurringExpenseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecurringExpenseCountAggregateInputType | true
+    _avg?: RecurringExpenseAvgAggregateInputType
+    _sum?: RecurringExpenseSumAggregateInputType
+    _min?: RecurringExpenseMinAggregateInputType
+    _max?: RecurringExpenseMaxAggregateInputType
+  }
+
+  export type RecurringExpenseGroupByOutputType = {
+    id: string
+    clientId: string | null
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal
+    isActive: boolean
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RecurringExpenseCountAggregateOutputType | null
+    _avg: RecurringExpenseAvgAggregateOutputType | null
+    _sum: RecurringExpenseSumAggregateOutputType | null
+    _min: RecurringExpenseMinAggregateOutputType | null
+    _max: RecurringExpenseMaxAggregateOutputType | null
+  }
+
+  type GetRecurringExpenseGroupByPayload<T extends RecurringExpenseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecurringExpenseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecurringExpenseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecurringExpenseGroupByOutputType[P]>
+            : GetScalarType<T[P], RecurringExpenseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecurringExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    category?: boolean
+    frequency?: boolean
+    amount?: boolean
+    isActive?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | RecurringExpense$clientArgs<ExtArgs>
+  }, ExtArgs["result"]["recurringExpense"]>
+
+
+
+  export type RecurringExpenseSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    name?: boolean
+    category?: boolean
+    frequency?: boolean
+    amount?: boolean
+    isActive?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RecurringExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "name" | "category" | "frequency" | "amount" | "isActive" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["recurringExpense"]>
+  export type RecurringExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | RecurringExpense$clientArgs<ExtArgs>
+  }
+
+  export type $RecurringExpensePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RecurringExpense"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string | null
+      name: string
+      category: string
+      frequency: string
+      amount: Prisma.Decimal
+      isActive: boolean
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["recurringExpense"]>
+    composites: {}
+  }
+
+  type RecurringExpenseGetPayload<S extends boolean | null | undefined | RecurringExpenseDefaultArgs> = $Result.GetResult<Prisma.$RecurringExpensePayload, S>
+
+  type RecurringExpenseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecurringExpenseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecurringExpenseCountAggregateInputType | true
+    }
+
+  export interface RecurringExpenseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RecurringExpense'], meta: { name: 'RecurringExpense' } }
+    /**
+     * Find zero or one RecurringExpense that matches the filter.
+     * @param {RecurringExpenseFindUniqueArgs} args - Arguments to find a RecurringExpense
+     * @example
+     * // Get one RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecurringExpenseFindUniqueArgs>(args: SelectSubset<T, RecurringExpenseFindUniqueArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RecurringExpense that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecurringExpenseFindUniqueOrThrowArgs} args - Arguments to find a RecurringExpense
+     * @example
+     * // Get one RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecurringExpenseFindUniqueOrThrowArgs>(args: SelectSubset<T, RecurringExpenseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecurringExpense that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseFindFirstArgs} args - Arguments to find a RecurringExpense
+     * @example
+     * // Get one RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecurringExpenseFindFirstArgs>(args?: SelectSubset<T, RecurringExpenseFindFirstArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecurringExpense that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseFindFirstOrThrowArgs} args - Arguments to find a RecurringExpense
+     * @example
+     * // Get one RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecurringExpenseFindFirstOrThrowArgs>(args?: SelectSubset<T, RecurringExpenseFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RecurringExpenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RecurringExpenses
+     * const recurringExpenses = await prisma.recurringExpense.findMany()
+     * 
+     * // Get first 10 RecurringExpenses
+     * const recurringExpenses = await prisma.recurringExpense.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recurringExpenseWithIdOnly = await prisma.recurringExpense.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecurringExpenseFindManyArgs>(args?: SelectSubset<T, RecurringExpenseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RecurringExpense.
+     * @param {RecurringExpenseCreateArgs} args - Arguments to create a RecurringExpense.
+     * @example
+     * // Create one RecurringExpense
+     * const RecurringExpense = await prisma.recurringExpense.create({
+     *   data: {
+     *     // ... data to create a RecurringExpense
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecurringExpenseCreateArgs>(args: SelectSubset<T, RecurringExpenseCreateArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RecurringExpenses.
+     * @param {RecurringExpenseCreateManyArgs} args - Arguments to create many RecurringExpenses.
+     * @example
+     * // Create many RecurringExpenses
+     * const recurringExpense = await prisma.recurringExpense.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecurringExpenseCreateManyArgs>(args?: SelectSubset<T, RecurringExpenseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RecurringExpense.
+     * @param {RecurringExpenseDeleteArgs} args - Arguments to delete one RecurringExpense.
+     * @example
+     * // Delete one RecurringExpense
+     * const RecurringExpense = await prisma.recurringExpense.delete({
+     *   where: {
+     *     // ... filter to delete one RecurringExpense
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecurringExpenseDeleteArgs>(args: SelectSubset<T, RecurringExpenseDeleteArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RecurringExpense.
+     * @param {RecurringExpenseUpdateArgs} args - Arguments to update one RecurringExpense.
+     * @example
+     * // Update one RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecurringExpenseUpdateArgs>(args: SelectSubset<T, RecurringExpenseUpdateArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RecurringExpenses.
+     * @param {RecurringExpenseDeleteManyArgs} args - Arguments to filter RecurringExpenses to delete.
+     * @example
+     * // Delete a few RecurringExpenses
+     * const { count } = await prisma.recurringExpense.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecurringExpenseDeleteManyArgs>(args?: SelectSubset<T, RecurringExpenseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecurringExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RecurringExpenses
+     * const recurringExpense = await prisma.recurringExpense.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecurringExpenseUpdateManyArgs>(args: SelectSubset<T, RecurringExpenseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RecurringExpense.
+     * @param {RecurringExpenseUpsertArgs} args - Arguments to update or create a RecurringExpense.
+     * @example
+     * // Update or create a RecurringExpense
+     * const recurringExpense = await prisma.recurringExpense.upsert({
+     *   create: {
+     *     // ... data to create a RecurringExpense
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RecurringExpense we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecurringExpenseUpsertArgs>(args: SelectSubset<T, RecurringExpenseUpsertArgs<ExtArgs>>): Prisma__RecurringExpenseClient<$Result.GetResult<Prisma.$RecurringExpensePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RecurringExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseCountArgs} args - Arguments to filter RecurringExpenses to count.
+     * @example
+     * // Count the number of RecurringExpenses
+     * const count = await prisma.recurringExpense.count({
+     *   where: {
+     *     // ... the filter for the RecurringExpenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecurringExpenseCountArgs>(
+      args?: Subset<T, RecurringExpenseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecurringExpenseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RecurringExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecurringExpenseAggregateArgs>(args: Subset<T, RecurringExpenseAggregateArgs>): Prisma.PrismaPromise<GetRecurringExpenseAggregateType<T>>
+
+    /**
+     * Group by RecurringExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecurringExpenseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecurringExpenseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecurringExpenseGroupByArgs['orderBy'] }
+        : { orderBy?: RecurringExpenseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecurringExpenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecurringExpenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RecurringExpense model
+   */
+  readonly fields: RecurringExpenseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RecurringExpense.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecurringExpenseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends RecurringExpense$clientArgs<ExtArgs> = {}>(args?: Subset<T, RecurringExpense$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RecurringExpense model
+   */
+  interface RecurringExpenseFieldRefs {
+    readonly id: FieldRef<"RecurringExpense", 'String'>
+    readonly clientId: FieldRef<"RecurringExpense", 'String'>
+    readonly name: FieldRef<"RecurringExpense", 'String'>
+    readonly category: FieldRef<"RecurringExpense", 'String'>
+    readonly frequency: FieldRef<"RecurringExpense", 'String'>
+    readonly amount: FieldRef<"RecurringExpense", 'Decimal'>
+    readonly isActive: FieldRef<"RecurringExpense", 'Boolean'>
+    readonly notes: FieldRef<"RecurringExpense", 'String'>
+    readonly createdAt: FieldRef<"RecurringExpense", 'DateTime'>
+    readonly updatedAt: FieldRef<"RecurringExpense", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RecurringExpense findUnique
+   */
+  export type RecurringExpenseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which RecurringExpense to fetch.
+     */
+    where: RecurringExpenseWhereUniqueInput
+  }
+
+  /**
+   * RecurringExpense findUniqueOrThrow
+   */
+  export type RecurringExpenseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which RecurringExpense to fetch.
+     */
+    where: RecurringExpenseWhereUniqueInput
+  }
+
+  /**
+   * RecurringExpense findFirst
+   */
+  export type RecurringExpenseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which RecurringExpense to fetch.
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecurringExpenses to fetch.
+     */
+    orderBy?: RecurringExpenseOrderByWithRelationInput | RecurringExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecurringExpenses.
+     */
+    cursor?: RecurringExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecurringExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecurringExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecurringExpenses.
+     */
+    distinct?: RecurringExpenseScalarFieldEnum | RecurringExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * RecurringExpense findFirstOrThrow
+   */
+  export type RecurringExpenseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which RecurringExpense to fetch.
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecurringExpenses to fetch.
+     */
+    orderBy?: RecurringExpenseOrderByWithRelationInput | RecurringExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecurringExpenses.
+     */
+    cursor?: RecurringExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecurringExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecurringExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecurringExpenses.
+     */
+    distinct?: RecurringExpenseScalarFieldEnum | RecurringExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * RecurringExpense findMany
+   */
+  export type RecurringExpenseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which RecurringExpenses to fetch.
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecurringExpenses to fetch.
+     */
+    orderBy?: RecurringExpenseOrderByWithRelationInput | RecurringExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RecurringExpenses.
+     */
+    cursor?: RecurringExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecurringExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecurringExpenses.
+     */
+    skip?: number
+    distinct?: RecurringExpenseScalarFieldEnum | RecurringExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * RecurringExpense create
+   */
+  export type RecurringExpenseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RecurringExpense.
+     */
+    data: XOR<RecurringExpenseCreateInput, RecurringExpenseUncheckedCreateInput>
+  }
+
+  /**
+   * RecurringExpense createMany
+   */
+  export type RecurringExpenseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RecurringExpenses.
+     */
+    data: RecurringExpenseCreateManyInput | RecurringExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RecurringExpense update
+   */
+  export type RecurringExpenseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RecurringExpense.
+     */
+    data: XOR<RecurringExpenseUpdateInput, RecurringExpenseUncheckedUpdateInput>
+    /**
+     * Choose, which RecurringExpense to update.
+     */
+    where: RecurringExpenseWhereUniqueInput
+  }
+
+  /**
+   * RecurringExpense updateMany
+   */
+  export type RecurringExpenseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RecurringExpenses.
+     */
+    data: XOR<RecurringExpenseUpdateManyMutationInput, RecurringExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which RecurringExpenses to update
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * Limit how many RecurringExpenses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecurringExpense upsert
+   */
+  export type RecurringExpenseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RecurringExpense to update in case it exists.
+     */
+    where: RecurringExpenseWhereUniqueInput
+    /**
+     * In case the RecurringExpense found by the `where` argument doesn't exist, create a new RecurringExpense with this data.
+     */
+    create: XOR<RecurringExpenseCreateInput, RecurringExpenseUncheckedCreateInput>
+    /**
+     * In case the RecurringExpense was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecurringExpenseUpdateInput, RecurringExpenseUncheckedUpdateInput>
+  }
+
+  /**
+   * RecurringExpense delete
+   */
+  export type RecurringExpenseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+    /**
+     * Filter which RecurringExpense to delete.
+     */
+    where: RecurringExpenseWhereUniqueInput
+  }
+
+  /**
+   * RecurringExpense deleteMany
+   */
+  export type RecurringExpenseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecurringExpenses to delete
+     */
+    where?: RecurringExpenseWhereInput
+    /**
+     * Limit how many RecurringExpenses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecurringExpense.client
+   */
+  export type RecurringExpense$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+  }
+
+  /**
+   * RecurringExpense without action
+   */
+  export type RecurringExpenseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecurringExpense
+     */
+    select?: RecurringExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecurringExpense
+     */
+    omit?: RecurringExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecurringExpenseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -18268,6 +19436,7 @@ export namespace Prisma {
     expenseDate: 'expenseDate',
     receiptUrl: 'receiptUrl',
     notes: 'notes',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18306,6 +19475,22 @@ export namespace Prisma {
   };
 
   export type IncomeEntryScalarFieldEnum = (typeof IncomeEntryScalarFieldEnum)[keyof typeof IncomeEntryScalarFieldEnum]
+
+
+  export const RecurringExpenseScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    category: 'category',
+    frequency: 'frequency',
+    amount: 'amount',
+    isActive: 'isActive',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RecurringExpenseScalarFieldEnum = (typeof RecurringExpenseScalarFieldEnum)[keyof typeof RecurringExpenseScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18475,7 +19660,8 @@ export namespace Prisma {
     description: 'description',
     category: 'category',
     receiptUrl: 'receiptUrl',
-    notes: 'notes'
+    notes: 'notes',
+    status: 'status'
   };
 
   export type ExpenseOrderByRelevanceFieldEnum = (typeof ExpenseOrderByRelevanceFieldEnum)[keyof typeof ExpenseOrderByRelevanceFieldEnum]
@@ -18503,6 +19689,18 @@ export namespace Prisma {
   };
 
   export type IncomeEntryOrderByRelevanceFieldEnum = (typeof IncomeEntryOrderByRelevanceFieldEnum)[keyof typeof IncomeEntryOrderByRelevanceFieldEnum]
+
+
+  export const RecurringExpenseOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    name: 'name',
+    category: 'category',
+    frequency: 'frequency',
+    notes: 'notes'
+  };
+
+  export type RecurringExpenseOrderByRelevanceFieldEnum = (typeof RecurringExpenseOrderByRelevanceFieldEnum)[keyof typeof RecurringExpenseOrderByRelevanceFieldEnum]
 
 
   /**
@@ -18637,6 +19835,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     externalIncomes?: ExternalIncomeListRelationFilter
     incomeEntries?: IncomeEntryListRelationFilter
+    recurringExpenses?: RecurringExpenseListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -18665,6 +19864,7 @@ export namespace Prisma {
     expenses?: ExpenseOrderByRelationAggregateInput
     externalIncomes?: ExternalIncomeOrderByRelationAggregateInput
     incomeEntries?: IncomeEntryOrderByRelationAggregateInput
+    recurringExpenses?: RecurringExpenseOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
   }
 
@@ -18697,6 +19897,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     externalIncomes?: ExternalIncomeListRelationFilter
     incomeEntries?: IncomeEntryListRelationFilter
+    recurringExpenses?: RecurringExpenseListRelationFilter
   }, "id" | "slug">
 
   export type ClientOrderByWithAggregationInput = {
@@ -19615,6 +20816,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFilter<"Expense"> | Date | string
     receiptUrl?: StringNullableFilter<"Expense"> | string | null
     notes?: StringNullableFilter<"Expense"> | string | null
+    status?: StringFilter<"Expense"> | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
@@ -19631,6 +20833,7 @@ export namespace Prisma {
     expenseDate?: SortOrder
     receiptUrl?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     client?: ClientOrderByWithRelationInput
@@ -19651,6 +20854,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFilter<"Expense"> | Date | string
     receiptUrl?: StringNullableFilter<"Expense"> | string | null
     notes?: StringNullableFilter<"Expense"> | string | null
+    status?: StringFilter<"Expense"> | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
@@ -19667,6 +20871,7 @@ export namespace Prisma {
     expenseDate?: SortOrder
     receiptUrl?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ExpenseCountOrderByAggregateInput
@@ -19690,6 +20895,7 @@ export namespace Prisma {
     expenseDate?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
     receiptUrl?: StringNullableWithAggregatesFilter<"Expense"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    status?: StringWithAggregatesFilter<"Expense"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
   }
@@ -19865,6 +21071,89 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"IncomeEntry"> | Date | string
   }
 
+  export type RecurringExpenseWhereInput = {
+    AND?: RecurringExpenseWhereInput | RecurringExpenseWhereInput[]
+    OR?: RecurringExpenseWhereInput[]
+    NOT?: RecurringExpenseWhereInput | RecurringExpenseWhereInput[]
+    id?: StringFilter<"RecurringExpense"> | string
+    clientId?: StringNullableFilter<"RecurringExpense"> | string | null
+    name?: StringFilter<"RecurringExpense"> | string
+    category?: StringFilter<"RecurringExpense"> | string
+    frequency?: StringFilter<"RecurringExpense"> | string
+    amount?: DecimalFilter<"RecurringExpense"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"RecurringExpense"> | boolean
+    notes?: StringNullableFilter<"RecurringExpense"> | string | null
+    createdAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }
+
+  export type RecurringExpenseOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    frequency?: SortOrder
+    amount?: SortOrder
+    isActive?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: RecurringExpenseOrderByRelevanceInput
+  }
+
+  export type RecurringExpenseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RecurringExpenseWhereInput | RecurringExpenseWhereInput[]
+    OR?: RecurringExpenseWhereInput[]
+    NOT?: RecurringExpenseWhereInput | RecurringExpenseWhereInput[]
+    clientId?: StringNullableFilter<"RecurringExpense"> | string | null
+    name?: StringFilter<"RecurringExpense"> | string
+    category?: StringFilter<"RecurringExpense"> | string
+    frequency?: StringFilter<"RecurringExpense"> | string
+    amount?: DecimalFilter<"RecurringExpense"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"RecurringExpense"> | boolean
+    notes?: StringNullableFilter<"RecurringExpense"> | string | null
+    createdAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+    client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+  }, "id">
+
+  export type RecurringExpenseOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    frequency?: SortOrder
+    amount?: SortOrder
+    isActive?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RecurringExpenseCountOrderByAggregateInput
+    _avg?: RecurringExpenseAvgOrderByAggregateInput
+    _max?: RecurringExpenseMaxOrderByAggregateInput
+    _min?: RecurringExpenseMinOrderByAggregateInput
+    _sum?: RecurringExpenseSumOrderByAggregateInput
+  }
+
+  export type RecurringExpenseScalarWhereWithAggregatesInput = {
+    AND?: RecurringExpenseScalarWhereWithAggregatesInput | RecurringExpenseScalarWhereWithAggregatesInput[]
+    OR?: RecurringExpenseScalarWhereWithAggregatesInput[]
+    NOT?: RecurringExpenseScalarWhereWithAggregatesInput | RecurringExpenseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RecurringExpense"> | string
+    clientId?: StringNullableWithAggregatesFilter<"RecurringExpense"> | string | null
+    name?: StringWithAggregatesFilter<"RecurringExpense"> | string
+    category?: StringWithAggregatesFilter<"RecurringExpense"> | string
+    frequency?: StringWithAggregatesFilter<"RecurringExpense"> | string
+    amount?: DecimalWithAggregatesFilter<"RecurringExpense"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter<"RecurringExpense"> | boolean
+    notes?: StringNullableWithAggregatesFilter<"RecurringExpense"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"RecurringExpense"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RecurringExpense"> | Date | string
+  }
+
   export type AdminCreateInput = {
     id?: string
     email: string
@@ -19947,6 +21236,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -19975,6 +21265,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientUpdateInput = {
@@ -20003,6 +21294,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -20031,6 +21323,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -21028,6 +22321,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     client?: ClientCreateNestedOneWithoutExpensesInput
@@ -21044,6 +22338,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21058,6 +22353,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneWithoutExpensesNestedInput
@@ -21074,6 +22370,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21089,6 +22386,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21103,6 +22401,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21118,6 +22417,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21307,6 +22607,96 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     label?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseCreateInput = {
+    id?: string
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: ClientCreateNestedOneWithoutRecurringExpensesInput
+  }
+
+  export type RecurringExpenseUncheckedCreateInput = {
+    id?: string
+    clientId?: string | null
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecurringExpenseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneWithoutRecurringExpensesNestedInput
+  }
+
+  export type RecurringExpenseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseCreateManyInput = {
+    id?: string
+    clientId?: string | null
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecurringExpenseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -21516,6 +22906,12 @@ export namespace Prisma {
     none?: IncomeEntryWhereInput
   }
 
+  export type RecurringExpenseListRelationFilter = {
+    every?: RecurringExpenseWhereInput
+    some?: RecurringExpenseWhereInput
+    none?: RecurringExpenseWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -21562,6 +22958,10 @@ export namespace Prisma {
   }
 
   export type IncomeEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecurringExpenseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22341,6 +23741,7 @@ export namespace Prisma {
     expenseDate?: SortOrder
     receiptUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22361,6 +23762,7 @@ export namespace Prisma {
     expenseDate?: SortOrder
     receiptUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22376,6 +23778,7 @@ export namespace Prisma {
     expenseDate?: SortOrder
     receiptUrl?: SortOrder
     notes?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22498,6 +23901,59 @@ export namespace Prisma {
     vatAmount?: SortOrder
   }
 
+  export type RecurringExpenseOrderByRelevanceInput = {
+    fields: RecurringExpenseOrderByRelevanceFieldEnum | RecurringExpenseOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type RecurringExpenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    frequency?: SortOrder
+    amount?: SortOrder
+    isActive?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecurringExpenseAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type RecurringExpenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    frequency?: SortOrder
+    amount?: SortOrder
+    isActive?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecurringExpenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    frequency?: SortOrder
+    amount?: SortOrder
+    isActive?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecurringExpenseSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -22583,6 +24039,13 @@ export namespace Prisma {
     connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
   }
 
+  export type RecurringExpenseCreateNestedManyWithoutClientInput = {
+    create?: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput> | RecurringExpenseCreateWithoutClientInput[] | RecurringExpenseUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: RecurringExpenseCreateOrConnectWithoutClientInput | RecurringExpenseCreateOrConnectWithoutClientInput[]
+    createMany?: RecurringExpenseCreateManyClientInputEnvelope
+    connect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+  }
+
   export type ClientUserUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
@@ -22658,6 +24121,13 @@ export namespace Prisma {
     connectOrCreate?: IncomeEntryCreateOrConnectWithoutClientInput | IncomeEntryCreateOrConnectWithoutClientInput[]
     createMany?: IncomeEntryCreateManyClientInputEnvelope
     connect?: IncomeEntryWhereUniqueInput | IncomeEntryWhereUniqueInput[]
+  }
+
+  export type RecurringExpenseUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput> | RecurringExpenseCreateWithoutClientInput[] | RecurringExpenseUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: RecurringExpenseCreateOrConnectWithoutClientInput | RecurringExpenseCreateOrConnectWithoutClientInput[]
+    createMany?: RecurringExpenseCreateManyClientInputEnvelope
+    connect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -22846,6 +24316,20 @@ export namespace Prisma {
     deleteMany?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
   }
 
+  export type RecurringExpenseUpdateManyWithoutClientNestedInput = {
+    create?: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput> | RecurringExpenseCreateWithoutClientInput[] | RecurringExpenseUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: RecurringExpenseCreateOrConnectWithoutClientInput | RecurringExpenseCreateOrConnectWithoutClientInput[]
+    upsert?: RecurringExpenseUpsertWithWhereUniqueWithoutClientInput | RecurringExpenseUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: RecurringExpenseCreateManyClientInputEnvelope
+    set?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    disconnect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    delete?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    connect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    update?: RecurringExpenseUpdateWithWhereUniqueWithoutClientInput | RecurringExpenseUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: RecurringExpenseUpdateManyWithWhereWithoutClientInput | RecurringExpenseUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: RecurringExpenseScalarWhereInput | RecurringExpenseScalarWhereInput[]
+  }
+
   export type ClientUserUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<ClientUserCreateWithoutClientInput, ClientUserUncheckedCreateWithoutClientInput> | ClientUserCreateWithoutClientInput[] | ClientUserUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ClientUserCreateOrConnectWithoutClientInput | ClientUserCreateOrConnectWithoutClientInput[]
@@ -22998,6 +24482,20 @@ export namespace Prisma {
     update?: IncomeEntryUpdateWithWhereUniqueWithoutClientInput | IncomeEntryUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: IncomeEntryUpdateManyWithWhereWithoutClientInput | IncomeEntryUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: IncomeEntryScalarWhereInput | IncomeEntryScalarWhereInput[]
+  }
+
+  export type RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput> | RecurringExpenseCreateWithoutClientInput[] | RecurringExpenseUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: RecurringExpenseCreateOrConnectWithoutClientInput | RecurringExpenseCreateOrConnectWithoutClientInput[]
+    upsert?: RecurringExpenseUpsertWithWhereUniqueWithoutClientInput | RecurringExpenseUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: RecurringExpenseCreateManyClientInputEnvelope
+    set?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    disconnect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    delete?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    connect?: RecurringExpenseWhereUniqueInput | RecurringExpenseWhereUniqueInput[]
+    update?: RecurringExpenseUpdateWithWhereUniqueWithoutClientInput | RecurringExpenseUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: RecurringExpenseUpdateManyWithWhereWithoutClientInput | RecurringExpenseUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: RecurringExpenseScalarWhereInput | RecurringExpenseScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutUsersInput = {
@@ -23516,6 +25014,22 @@ export namespace Prisma {
     delete?: ClientWhereInput | boolean
     connect?: ClientWhereUniqueInput
     update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutIncomeEntriesInput, ClientUpdateWithoutIncomeEntriesInput>, ClientUncheckedUpdateWithoutIncomeEntriesInput>
+  }
+
+  export type ClientCreateNestedOneWithoutRecurringExpensesInput = {
+    create?: XOR<ClientCreateWithoutRecurringExpensesInput, ClientUncheckedCreateWithoutRecurringExpensesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutRecurringExpensesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ClientUpdateOneWithoutRecurringExpensesNestedInput = {
+    create?: XOR<ClientCreateWithoutRecurringExpensesInput, ClientUncheckedCreateWithoutRecurringExpensesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutRecurringExpensesInput
+    upsert?: ClientUpsertWithoutRecurringExpensesInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutRecurringExpensesInput, ClientUpdateWithoutRecurringExpensesInput>, ClientUncheckedUpdateWithoutRecurringExpensesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -24087,6 +25601,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24101,6 +25616,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24182,6 +25698,40 @@ export namespace Prisma {
 
   export type IncomeEntryCreateManyClientInputEnvelope = {
     data: IncomeEntryCreateManyClientInput | IncomeEntryCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RecurringExpenseCreateWithoutClientInput = {
+    id?: string
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecurringExpenseUncheckedCreateWithoutClientInput = {
+    id?: string
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecurringExpenseCreateOrConnectWithoutClientInput = {
+    where: RecurringExpenseWhereUniqueInput
+    create: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput>
+  }
+
+  export type RecurringExpenseCreateManyClientInputEnvelope = {
+    data: RecurringExpenseCreateManyClientInput | RecurringExpenseCreateManyClientInput[]
     skipDuplicates?: boolean
   }
 
@@ -24480,6 +26030,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFilter<"Expense"> | Date | string
     receiptUrl?: StringNullableFilter<"Expense"> | string | null
     notes?: StringNullableFilter<"Expense"> | string | null
+    status?: StringFilter<"Expense"> | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
   }
@@ -24549,6 +26100,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"IncomeEntry"> | Date | string
   }
 
+  export type RecurringExpenseUpsertWithWhereUniqueWithoutClientInput = {
+    where: RecurringExpenseWhereUniqueInput
+    update: XOR<RecurringExpenseUpdateWithoutClientInput, RecurringExpenseUncheckedUpdateWithoutClientInput>
+    create: XOR<RecurringExpenseCreateWithoutClientInput, RecurringExpenseUncheckedCreateWithoutClientInput>
+  }
+
+  export type RecurringExpenseUpdateWithWhereUniqueWithoutClientInput = {
+    where: RecurringExpenseWhereUniqueInput
+    data: XOR<RecurringExpenseUpdateWithoutClientInput, RecurringExpenseUncheckedUpdateWithoutClientInput>
+  }
+
+  export type RecurringExpenseUpdateManyWithWhereWithoutClientInput = {
+    where: RecurringExpenseScalarWhereInput
+    data: XOR<RecurringExpenseUpdateManyMutationInput, RecurringExpenseUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type RecurringExpenseScalarWhereInput = {
+    AND?: RecurringExpenseScalarWhereInput | RecurringExpenseScalarWhereInput[]
+    OR?: RecurringExpenseScalarWhereInput[]
+    NOT?: RecurringExpenseScalarWhereInput | RecurringExpenseScalarWhereInput[]
+    id?: StringFilter<"RecurringExpense"> | string
+    clientId?: StringNullableFilter<"RecurringExpense"> | string | null
+    name?: StringFilter<"RecurringExpense"> | string
+    category?: StringFilter<"RecurringExpense"> | string
+    frequency?: StringFilter<"RecurringExpense"> | string
+    amount?: DecimalFilter<"RecurringExpense"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"RecurringExpense"> | boolean
+    notes?: StringNullableFilter<"RecurringExpense"> | string | null
+    createdAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"RecurringExpense"> | Date | string
+  }
+
   export type ClientCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -24574,6 +26157,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutUsersInput = {
@@ -24601,6 +26185,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutUsersInput = {
@@ -24644,6 +26229,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutUsersInput = {
@@ -24671,6 +26257,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutTicketsInput = {
@@ -24698,6 +26285,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTicketsInput = {
@@ -24725,6 +26313,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTicketsInput = {
@@ -24831,6 +26420,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTicketsInput = {
@@ -24858,6 +26448,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type VisitUpsertWithoutTicketsInput = {
@@ -24934,6 +26525,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTimeEntriesInput = {
@@ -24961,6 +26553,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTimeEntriesInput = {
@@ -25084,6 +26677,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTimeEntriesInput = {
@@ -25111,6 +26705,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type TicketUpsertWithoutTimeEntriesInput = {
@@ -25230,6 +26825,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutInvoicesInput = {
@@ -25257,6 +26853,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutInvoicesInput = {
@@ -25336,6 +26933,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutInvoicesInput = {
@@ -25363,6 +26961,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type TimeEntryUpsertWithWhereUniqueWithoutInvoiceInput = {
@@ -25406,6 +27005,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutAssetsInput = {
@@ -25433,6 +27033,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutAssetsInput = {
@@ -25476,6 +27077,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutAssetsInput = {
@@ -25503,6 +27105,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutContractsInput = {
@@ -25530,6 +27133,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutContractsInput = {
@@ -25557,6 +27161,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutContractsInput = {
@@ -25600,6 +27205,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutContractsInput = {
@@ -25627,6 +27233,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutVisitsInput = {
@@ -25654,6 +27261,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutVisitsInput = {
@@ -25681,6 +27289,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutVisitsInput = {
@@ -25796,6 +27405,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutVisitsInput = {
@@ -25823,6 +27433,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ChecklistItemUpsertWithWhereUniqueWithoutVisitInput = {
@@ -26007,6 +27618,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutChecklistTemplatesInput = {
@@ -26034,6 +27646,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutChecklistTemplatesInput = {
@@ -26105,6 +27718,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutChecklistTemplatesInput = {
@@ -26132,6 +27746,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ChecklistTemplateItemUpsertWithWhereUniqueWithoutTemplateInput = {
@@ -26279,6 +27894,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutExpensesInput = {
@@ -26306,6 +27922,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutExpensesInput = {
@@ -26349,6 +27966,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutExpensesInput = {
@@ -26376,6 +27994,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutExternalIncomesInput = {
@@ -26403,6 +28022,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutExternalIncomesInput = {
@@ -26430,6 +28050,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutExternalIncomesInput = {
@@ -26473,6 +28094,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutExternalIncomesInput = {
@@ -26500,6 +28122,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateWithoutIncomeEntriesInput = {
@@ -26527,6 +28150,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
     expenses?: ExpenseCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutIncomeEntriesInput = {
@@ -26554,6 +28178,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
     externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    recurringExpenses?: RecurringExpenseUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutIncomeEntriesInput = {
@@ -26597,6 +28222,7 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutIncomeEntriesInput = {
@@ -26624,6 +28250,135 @@ export namespace Prisma {
     checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
     externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    recurringExpenses?: RecurringExpenseUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutRecurringExpensesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserCreateNestedManyWithoutClientInput
+    tickets?: TicketCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    assets?: AssetCreateNestedManyWithoutClientInput
+    contracts?: ContractCreateNestedManyWithoutClientInput
+    visits?: VisitCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateCreateNestedManyWithoutClientInput
+    expenses?: ExpenseCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutRecurringExpensesInput = {
+    id?: string
+    name: string
+    slug: string
+    vatNumber?: string | null
+    address?: string | null
+    city?: string | null
+    language?: string
+    contractType?: string
+    retainerHours?: number | null
+    retainerFee?: Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ClientUserUncheckedCreateNestedManyWithoutClientInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    assets?: AssetUncheckedCreateNestedManyWithoutClientInput
+    contracts?: ContractUncheckedCreateNestedManyWithoutClientInput
+    visits?: VisitUncheckedCreateNestedManyWithoutClientInput
+    checklistTemplates?: ChecklistTemplateUncheckedCreateNestedManyWithoutClientInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutClientInput
+    externalIncomes?: ExternalIncomeUncheckedCreateNestedManyWithoutClientInput
+    incomeEntries?: IncomeEntryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutRecurringExpensesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutRecurringExpensesInput, ClientUncheckedCreateWithoutRecurringExpensesInput>
+  }
+
+  export type ClientUpsertWithoutRecurringExpensesInput = {
+    update: XOR<ClientUpdateWithoutRecurringExpensesInput, ClientUncheckedUpdateWithoutRecurringExpensesInput>
+    create: XOR<ClientCreateWithoutRecurringExpensesInput, ClientUncheckedCreateWithoutRecurringExpensesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutRecurringExpensesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutRecurringExpensesInput, ClientUncheckedUpdateWithoutRecurringExpensesInput>
+  }
+
+  export type ClientUpdateWithoutRecurringExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUpdateManyWithoutClientNestedInput
+    tickets?: TicketUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    assets?: AssetUpdateManyWithoutClientNestedInput
+    contracts?: ContractUpdateManyWithoutClientNestedInput
+    visits?: VisitUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutRecurringExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    contractType?: StringFieldUpdateOperationsInput | string
+    retainerHours?: NullableIntFieldUpdateOperationsInput | number | null
+    retainerFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    hourlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ClientUserUncheckedUpdateManyWithoutClientNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutClientNestedInput
+    contracts?: ContractUncheckedUpdateManyWithoutClientNestedInput
+    visits?: VisitUncheckedUpdateManyWithoutClientNestedInput
+    checklistTemplates?: ChecklistTemplateUncheckedUpdateManyWithoutClientNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutClientNestedInput
+    externalIncomes?: ExternalIncomeUncheckedUpdateManyWithoutClientNestedInput
+    incomeEntries?: IncomeEntryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUserCreateManyClientInput = {
@@ -26741,6 +28496,7 @@ export namespace Prisma {
     expenseDate: Date | string
     receiptUrl?: string | null
     notes?: string | null
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26768,6 +28524,18 @@ export namespace Prisma {
     receivedAt: Date | string
     label: string
     createdAt?: Date | string
+  }
+
+  export type RecurringExpenseCreateManyClientInput = {
+    id?: string
+    name: string
+    category: string
+    frequency: string
+    amount: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ClientUserUpdateWithoutClientInput = {
@@ -27105,6 +28873,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27119,6 +28888,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27133,6 +28903,7 @@ export namespace Prisma {
     expenseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     receiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27210,6 +28981,42 @@ export namespace Prisma {
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     label?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecurringExpenseUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TimeEntryCreateManyTicketInput = {

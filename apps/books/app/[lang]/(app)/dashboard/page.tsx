@@ -202,13 +202,19 @@ export default function DashboardPage() {
           valueColor="var(--text)"
           sub={t("dashboard.indicative")}
         />
-        <KpiCard
-          accent="var(--vat)"
-          label={t("dashboard.vatBalance").replace("{period}", data.vatQuarter.period)}
-          value={formatEuro(data.vatQuarter.balance)}
-          valueColor="var(--vat)"
-          sub={`${t("dashboard.indicative")} · ${data.vatQuarter.period}`}
-        />
+        {(() => {
+          const vatBalance = data.vatQuarter.balance;
+          const vatCredit = vatBalance < 0;
+          return (
+            <KpiCard
+              accent="var(--vat)"
+              label={t("dashboard.vatBalance").replace("{period}", data.vatQuarter.period)}
+              value={vatCredit ? `+${formatEuro(Math.abs(vatBalance))}` : formatEuro(vatBalance)}
+              valueColor={vatCredit ? "var(--income)" : "var(--vat)"}
+              sub={`${t("dashboard.indicative")} · ${data.vatQuarter.period}`}
+            />
+          );
+        })()}
       </div>
 
       {/* 6-month bar chart */}
@@ -395,66 +401,93 @@ export default function DashboardPage() {
               {t("dashboard.vatEstimate").replace("{period}", data.vatQuarter.period)}
             </div>
           </div>
-          {[
-            {
-              label: t("dashboard.collectedOnSales"),
-              amount: `+${formatEuro(data.vatQuarter.totalVatCollected)}`,
-              color: "var(--income)",
-              bold: false,
-            },
-            {
-              label: t("dashboard.paidOnPurchases"),
-              amount: `−${formatEuro(data.vatQuarter.totalVatPaid)}`,
-              color: "var(--expense)",
-              bold: false,
-            },
-            {
-              label: t("dashboard.toSetAside"),
-              amount: formatEuro(data.vatQuarter.balance),
-              color: "var(--vat)",
-              bold: true,
-            },
-          ].map((row) => (
-            <div
-              key={row.label}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "10px 18px",
-                borderBottom: "1px solid #f9f9f9",
-                fontSize: "12px",
-              }}
-            >
-              <div style={{ color: row.bold ? "var(--text)" : "var(--muted)", fontWeight: row.bold ? 600 : 400 }}>
-                {row.label}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
-                  color: row.color,
-                  fontSize: row.bold ? "15px" : "13px",
-                }}
-              >
-                {row.amount}
-              </div>
-            </div>
-          ))}
-          <div
-            style={{
-              margin: "0 18px 14px",
-              marginTop: "10px",
-              padding: "8px 12px",
-              background: "var(--vat-ll)",
-              borderRadius: "8px",
-              fontSize: "11px",
-              color: "var(--vat)",
-              lineHeight: 1.5,
-            }}
-          >
-            {t("dashboard.vatDisclaimer")}
-          </div>
+          {(() => {
+            const vatBalance = data.vatQuarter.balance;
+            const vatOwed = vatBalance > 0;
+            const vatCredit = vatBalance < 0;
+            const balanceLabel = vatCredit
+              ? t("dashboard.vatCreditFromState")
+              : t("dashboard.vatOwedToState");
+            const balanceColor = vatCredit
+              ? "var(--income)"
+              : vatOwed
+              ? "var(--vat)"
+              : "var(--muted)";
+            const balanceAmount = vatCredit
+              ? `+${formatEuro(Math.abs(vatBalance))}`
+              : formatEuro(vatBalance);
+            const disclaimerBg = vatCredit ? "var(--income-ll)" : "var(--vat-ll)";
+            const disclaimerColor = vatCredit ? "var(--income)" : "var(--vat)";
+            const disclaimerText = vatOwed
+              ? t("dashboard.vatOwedNote")
+              : vatCredit
+              ? t("dashboard.vatCreditNote")
+              : t("dashboard.vatDisclaimer");
+
+            return (
+              <>
+                {[
+                  {
+                    label: t("dashboard.collectedOnSales"),
+                    amount: `+${formatEuro(data.vatQuarter.totalVatCollected)}`,
+                    color: "var(--income)",
+                    bold: false,
+                  },
+                  {
+                    label: t("dashboard.paidOnPurchases"),
+                    amount: `\u2212${formatEuro(data.vatQuarter.totalVatPaid)}`,
+                    color: "var(--expense)",
+                    bold: false,
+                  },
+                  {
+                    label: balanceLabel,
+                    amount: balanceAmount,
+                    color: balanceColor,
+                    bold: true,
+                  },
+                ].map((row) => (
+                  <div
+                    key={row.label}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "10px 18px",
+                      borderBottom: "1px solid #f9f9f9",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div style={{ color: row.bold ? "var(--text)" : "var(--muted)", fontWeight: row.bold ? 600 : 400 }}>
+                      {row.label}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontWeight: 600,
+                        color: row.color,
+                        fontSize: row.bold ? "15px" : "13px",
+                      }}
+                    >
+                      {row.amount}
+                    </div>
+                  </div>
+                ))}
+                <div
+                  style={{
+                    margin: "10px 18px 14px",
+                    padding: "8px 12px",
+                    background: disclaimerBg,
+                    borderRadius: "8px",
+                    fontSize: "11px",
+                    color: disclaimerColor,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {disclaimerText}
+                </div>
+              </>
+            );
+          })()}
         </div>
 
       </div>
