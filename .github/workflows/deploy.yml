@@ -15,12 +15,9 @@ jobs:
       matrix:
         app:
           - name: main
-            dockerfile: Dockerfile
-          # Add new apps here when ready:
-          # - name: camera
-          #   dockerfile: apps/camera/Dockerfile
-          # - name: finpilot
-          #   dockerfile: apps/finpilot/Dockerfile
+            app_dir: main
+          - name: finpilot
+            app_dir: finpilot
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +33,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ${{ matrix.app.dockerfile }}
+          file: Dockerfile
+          build-args: APP=${{ matrix.app.app_dir }}
           push: true
           tags: |
             ghcr.io/mathisvkg/pillar-${{ matrix.app.name }}:latest
