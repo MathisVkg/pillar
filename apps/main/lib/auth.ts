@@ -30,7 +30,7 @@ declare module "@auth/core/jwt" {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	pages: {
-		signIn: "/admin/login",
+		signIn: "/fr/admin/login",
 	},
 	session: { strategy: "jwt" },
 	providers: [
@@ -102,6 +102,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		}),
 	],
 	callbacks: {
+		authorized({ auth, request }) {
+			const pathname = request.nextUrl.pathname;
+			const locale = pathname.split("/")[1] || "fr";
+			// Allow all login pages through without auth
+			if (pathname.includes("/login")) return true;
+			if (!auth) return Response.redirect(new URL(`/${locale}/admin/login`, request.nextUrl));
+			return true;
+		},
 		async jwt({ token, user }) {
 			if (user) {
 				token.id = user.id as string;

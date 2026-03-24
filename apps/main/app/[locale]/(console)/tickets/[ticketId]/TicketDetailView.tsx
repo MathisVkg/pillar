@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 
@@ -150,6 +150,7 @@ const actionBtn = (color?: string): React.CSSProperties => ({
 export default function TicketDetailView({ ticket: initial }: { ticket: Ticket }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [ticket, setTicket] = useState(initial);
 
@@ -256,7 +257,7 @@ export default function TicketDetailView({ ticket: initial }: { ticket: Ticket }
 			setConfirmingDelete(false);
 			return;
 		}
-		router.push("/tickets");
+		router.push(`/${locale}/tickets`);
 	}
 
 	// ── Log time form ─────────────────────────────────────────────────────────
@@ -378,7 +379,7 @@ export default function TicketDetailView({ ticket: initial }: { ticket: Ticket }
 	return (
 		<div>
 			{/* Back */}
-			<Link href="/tickets" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--con-subtle)", textDecoration: "none", letterSpacing: "0.04em", display: "inline-block", marginBottom: "16px" }}>
+			<Link href={`/${locale}/tickets`} style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--con-subtle)", textDecoration: "none", letterSpacing: "0.04em", display: "inline-block", marginBottom: "16px" }}>
 				{t("tickets.backToTickets")}
 			</Link>
 

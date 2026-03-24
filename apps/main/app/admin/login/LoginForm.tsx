@@ -1,12 +1,36 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
-import { adminLogin } from "./actions";
 
 export default function LoginForm({ locale }: { locale: string }) {
   const { t } = useTranslation();
-  const [state, formAction, pending] = useActionState(adminLogin, undefined);
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setPending(true);
+
+    const form = e.currentTarget;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+
+    const result = await signIn("admin", { email, password, redirect: false });
+
+    setPending(false);
+
+    if (result?.error) {
+      setError(t("auth.invalidCredentials"));
+      return;
+    }
+
+    router.push(`/${locale}/dashboard`);
+  }
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
@@ -31,9 +55,7 @@ export default function LoginForm({ locale }: { locale: string }) {
   };
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
-      <input type="hidden" name="locale" value={locale} />
-
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label style={labelStyle}>{t("auth.email")}</label>
         <input
@@ -60,7 +82,7 @@ export default function LoginForm({ locale }: { locale: string }) {
         />
       </div>
 
-      {state?.error && (
+      {error && (
         <p
           style={{
             fontFamily: "var(--font-mono)",
@@ -71,7 +93,7 @@ export default function LoginForm({ locale }: { locale: string }) {
             borderRadius: "3px",
           }}
         >
-          {state.error}
+          {error}
         </p>
       )}
 

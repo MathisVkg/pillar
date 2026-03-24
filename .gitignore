@@ -3,6 +3,8 @@
 .next/
 # dependencies
 /node_modules
+apps/main/node_modules
+apps/finpilot/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -44,6 +46,3 @@ next-env.d.ts
 
 # prisma migrations lock (keep migrations folder but not the lock)
 /prisma/migrations/migration_lock.toml
-
-# Prisma generated client — committed so Docker build can use it
-# packages/database/generated/

@@ -323,9 +323,8 @@ model ChecklistTemplateItem {
 }
 
 // ============================================================
-// BOOKS EXTENSION
-// Financial tables for Pillar Books (books.pillar-it.be)
-// client_id is nullable on all Books tables:
+// FINPILOT — finance tool (finpilot.pillar-it.be)
+// client_id is nullable on all FinPilot tables:
 //   NULL  = your own company records
 //   value = a client's records (future extension)
 // ============================================================
@@ -349,7 +348,7 @@ model Expense {
   // Relations
   client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
-  @@map("expense")
+  @@map("finpilot_expense")
 }
 
 model ExternalIncome {
@@ -370,7 +369,7 @@ model ExternalIncome {
   // Relations
   client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
-  @@map("external_income")
+  @@map("finpilot_external_income")
 }
 
 model IncomeEntry {
@@ -389,7 +388,7 @@ model IncomeEntry {
   // Relations
   client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
-  @@map("income_entry")
+  @@map("finpilot_income_entry")
 }
 
 // ============================================================
@@ -413,5 +412,5 @@ model RecurringExpense {
   // Relations
   client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
-  @@map("recurring_expense")
+  @@map("finpilot_recurring_expense")
 }

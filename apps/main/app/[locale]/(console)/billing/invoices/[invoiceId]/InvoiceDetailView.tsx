@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 
@@ -146,6 +146,7 @@ const TD: React.CSSProperties = {
 export default function InvoiceDetailView({ invoice: initial }: { invoice: InvoiceDetail }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [invoice, setInvoice] = useState(initial);
 	const [actionPending, setActionPending] = useState<string | null>(null);
@@ -333,7 +334,7 @@ export default function InvoiceDetailView({ invoice: initial }: { invoice: Invoi
 
 			{/* Back link */}
 			<Link
-				href="/billing/invoices"
+				href={`/${locale}/billing/invoices`}
 				style={{ ...MONO, fontSize: "10px", color: "var(--con-subtle)", textDecoration: "none", letterSpacing: "0.04em", display: "inline-block", marginBottom: "16px" }}
 			>
 				{t("billing.backToBilling")}
@@ -604,7 +605,7 @@ export default function InvoiceDetailView({ invoice: initial }: { invoice: Invoi
 										</td>
 										<td style={TD}>
 											{e.ticket ? (
-												<Link href={`/tickets/${e.ticket.id}`} style={{ color: "#2563EB", fontWeight: 700, textDecoration: "none", ...MONO, fontSize: "11px" }}>
+												<Link href={`/${locale}/tickets/${e.ticket.id}`} style={{ color: "#2563EB", fontWeight: 700, textDecoration: "none", ...MONO, fontSize: "11px" }}>
 													{e.ticket.reference}
 												</Link>
 											) : (

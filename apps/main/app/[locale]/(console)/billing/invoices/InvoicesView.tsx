@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 
@@ -143,6 +143,7 @@ export default function InvoicesView({
 }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [status, setStatus] = useState(filterStatus ?? "");
 	const [clientId, setClientId] = useState(filterClientId ?? "");
@@ -153,7 +154,7 @@ export default function InvoicesView({
 		if (s) p.set("status", s);
 		if (c) p.set("clientId", c);
 		const qs = p.toString();
-		router.push(qs ? `/billing/invoices?${qs}` : "/billing/invoices");
+		router.push(qs ? `/${locale}/billing/invoices?${qs}` : `/${locale}/billing/invoices`);
 	}
 
 	function handleStatusChange(v: string) {
@@ -176,7 +177,7 @@ export default function InvoicesView({
 			<div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
 				<div>
 					<Link
-						href="/billing"
+						href={`/${locale}/billing`}
 						style={{
 							fontFamily: "var(--font-mono)",
 							fontSize: "10px",
@@ -272,7 +273,7 @@ export default function InvoicesView({
 									<tr
 										key={inv.id}
 										style={{ cursor: "pointer", opacity: isVoided ? 0.5 : 1 }}
-										onClick={() => router.push(`/billing/invoices/${inv.id}`)}
+										onClick={() => router.push(`/${locale}/billing/invoices/${inv.id}`)}
 										onMouseEnter={(e) => (e.currentTarget.style.background = "var(--con-bg)")}
 										onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
 									>

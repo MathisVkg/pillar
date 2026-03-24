@@ -8,11 +8,14 @@ import QuickLogWidget from "./QuickLogWidget";
 
 export default async function ConsoleLayout({
 	children,
+	params,
 }: {
 	children: React.ReactNode;
+	params: Promise<{ locale: string }>;
 }) {
+	const { locale } = await params;
 	const session = await auth();
-	if (!session?.user?.isAdmin) redirect("/admin/login");
+	if (!session?.user?.isAdmin) redirect(`/${locale}/admin/login`);
 
 	const admin = await prisma.admin.findUnique({
 		where: { id: session.user.id },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 
@@ -62,6 +62,7 @@ const labelStyle: React.CSSProperties = {
 export default function ClientsView({ clients: initial }: { clients: Client[] }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [showDeactivated, setShowDeactivated] = useState(false);
 	const [showForm, setShowForm] = useState(false);
@@ -340,7 +341,7 @@ export default function ClientsView({ clients: initial }: { clients: Client[] })
 								>
 									<td style={TD}>
 										<Link
-											href={`/clients/${c.id}`}
+											href={`/${locale}/clients/${c.id}`}
 											style={{ color: c.isActive ? "var(--con-text)" : "var(--con-subtle)", fontWeight: 600, textDecoration: "none" }}
 										>
 											{c.name}
@@ -389,7 +390,7 @@ export default function ClientsView({ clients: initial }: { clients: Client[] })
 									<td style={{ ...TD, textAlign: "right" }}>
 										<div style={{ display: "flex", gap: "6px", justifyContent: "flex-end" }}>
 											<Link
-												href={`/clients/${c.id}`}
+												href={`/${locale}/clients/${c.id}`}
 												style={{
 													fontFamily: "var(--font-mono)",
 													fontSize: "9px",
@@ -407,7 +408,7 @@ export default function ClientsView({ clients: initial }: { clients: Client[] })
 											</Link>
 											{c.isActive && (
 												<Link
-													href={`/clients/${c.id}?tab=portal`}
+													href={`/${locale}/clients/${c.id}?tab=portal`}
 													style={{
 														fontFamily: "var(--font-mono)",
 														fontSize: "9px",

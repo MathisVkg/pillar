@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from "@/components/LangProvider";
 
@@ -156,6 +156,7 @@ function WarrantyCell({ dateStr, t }: { dateStr: string | null; t: (k: string) =
 export default function AssetsView({ assets, clients, filterClientId, filterType, filterStatus, embeddedClientId }: Props) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 	const isEmbedded = Boolean(embeddedClientId);
 
 	const [search, setSearch] = useState("");
@@ -186,7 +187,7 @@ export default function AssetsView({ assets, clients, filterClientId, filterType
 		if (tp) params.set("type", tp);
 		if (s) params.set("status", s);
 		const qs = params.toString();
-		router.push(qs ? `/assets?${qs}` : "/assets");
+		router.push(qs ? `/${locale}/assets?${qs}` : `/${locale}/assets`);
 	}
 
 	function handleFilterChange(field: "client" | "type" | "status", value: string) {
@@ -494,14 +495,14 @@ export default function AssetsView({ assets, clients, filterClientId, filterType
 									<tr
 										key={asset.id}
 										style={{ cursor: "pointer" }}
-										onClick={() => router.push(`/assets/${asset.id}`)}
+										onClick={() => router.push(`/${locale}/assets/${asset.id}`)}
 										onMouseEnter={(e) => (e.currentTarget.style.background = "var(--con-hover, rgba(148,163,184,0.05))")}
 										onMouseLeave={(e) => (e.currentTarget.style.background = "")}
 									>
 										{!isEmbedded && (
 											<td style={TD}>
 												<Link
-													href={`/clients/${asset.client.id}`}
+													href={`/${locale}/clients/${asset.client.id}`}
 													onClick={(e) => e.stopPropagation()}
 													style={{ color: "var(--con-text)", textDecoration: "none" }}
 												>

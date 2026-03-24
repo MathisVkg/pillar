@@ -2,7 +2,6 @@
 
 import { signIn } from "@/lib/auth";
 import { prisma } from "@pillar/database";
-import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 
 export async function portalLogin(
@@ -16,7 +15,7 @@ export async function portalLogin(
   try {
     await signIn("portal", { email, password, redirect: false });
   } catch (err) {
-    if (err instanceof AuthError) {
+    if (err instanceof Error && err.message.includes("CredentialsSignin")) {
       return { error: "Invalid email or password." };
     }
     throw err;

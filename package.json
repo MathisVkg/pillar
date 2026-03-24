@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm run dev --workspace=apps/main",
     "build": "npm run build --workspace=apps/main",
-    "dev:books": "npm run dev --workspace=apps/books",
-    "build:books": "npm run build --workspace=apps/books"
+    "dev:finpilot": "npm run dev --workspace=apps/finpilot",
+    "build:finpilot": "npm run build --workspace=apps/finpilot"
   }
 }

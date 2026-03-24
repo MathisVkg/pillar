@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from "@/components/LangProvider";
 
@@ -103,6 +103,7 @@ function Badge({ label, colors }: { label: string; colors: { bg: string; color: 
 export default function AssetDetailView({ asset: initial }: { asset: Asset }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [asset, setAsset] = useState(initial);
 	const [saving, setSaving] = useState(false);
@@ -182,7 +183,7 @@ export default function AssetDetailView({ asset: initial }: { asset: Asset }) {
 		setDeleting(true);
 		const res = await fetch(`/api/assets/${asset.id}`, { method: "DELETE" });
 		if (res.ok) {
-			router.push("/assets");
+			router.push(`/${locale}/assets`);
 		} else {
 			setDeleting(false);
 			setConfirmDelete(false);
@@ -194,7 +195,7 @@ export default function AssetDetailView({ asset: initial }: { asset: Asset }) {
 			{/* Back + header */}
 			<div style={{ marginBottom: "20px" }}>
 				<Link
-					href="/assets"
+					href={`/${locale}/assets`}
 					style={{
 						fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--con-muted)",
 						textDecoration: "none", letterSpacing: "0.04em",
@@ -242,7 +243,7 @@ export default function AssetDetailView({ asset: initial }: { asset: Asset }) {
 						{t("assets.client")}:{" "}
 					</span>
 					<Link
-						href={`/clients/${asset.client.id}`}
+						href={`/${locale}/clients/${asset.client.id}`}
 						style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--accent)", textDecoration: "none" }}
 					>
 						{asset.client.name}

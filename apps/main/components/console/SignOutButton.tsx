@@ -1,12 +1,16 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 export default function ConsoleSignOutButton() {
+	const pathname = usePathname();
+	const locale = pathname.split("/")[1] || "fr";
+
 	return (
 		<button
 			type="button"
-			onClick={() => signOut({ redirectTo: "/admin/login" })}
+			onClick={() => signOut({ redirectTo: `/${locale}/admin/login` })}
 			style={{
 				fontFamily: "var(--font-mono)",
 				fontSize: "11px",

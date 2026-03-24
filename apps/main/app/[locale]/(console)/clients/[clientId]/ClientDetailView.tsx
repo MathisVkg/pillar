@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 import PortalUsersView, { type PortalUser } from "./PortalUsersView";
@@ -168,6 +168,7 @@ export default function ClientDetailView({
 }: Props) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [client, setClient] = useState(initial);
 	const [tickets, setTickets] = useState(initialTickets);
@@ -238,7 +239,7 @@ export default function ClientDetailView({
 		}
 		const invoice = await res.json();
 		setShowInvoiceModal(false);
-		router.push(`/billing/invoices/${invoice.id}`);
+		router.push(`/${locale}/billing/invoices/${invoice.id}`);
 	}
 
 	// Time entry edit
@@ -606,7 +607,7 @@ export default function ClientDetailView({
 
 			{/* Back link */}
 			<Link
-				href="/clients"
+				href={`/${locale}/clients`}
 				style={{
 					fontFamily: "var(--font-mono)",
 					fontSize: "10px",
@@ -987,7 +988,7 @@ export default function ClientDetailView({
 													{new Date(tk.createdAt).toLocaleDateString(undefined, { day: "numeric", month: "short" })}
 												</td>
 												<td style={{ ...TD, textAlign: "right" }}>
-													<Link href={`/tickets/${tk.id}`} style={{
+													<Link href={`/${locale}/tickets/${tk.id}`} style={{
 														fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.06em",
 														textTransform: "uppercase", color: "var(--con-muted)",
 														border: "1px solid var(--con-border)", borderRadius: "3px",
@@ -1162,7 +1163,7 @@ export default function ClientDetailView({
 															</td>
 															<td style={TD}>
 																{e.ticket ? (
-																	<Link href={`/tickets/${e.ticket.id}`} style={{ color: "var(--accent)", fontWeight: 700, textDecoration: "none", fontFamily: "var(--font-mono)", fontSize: "12px" }}>
+																	<Link href={`/${locale}/tickets/${e.ticket.id}`} style={{ color: "var(--accent)", fontWeight: 700, textDecoration: "none", fontFamily: "var(--font-mono)", fontSize: "12px" }}>
 																		{e.ticket.reference}
 																	</Link>
 																) : (

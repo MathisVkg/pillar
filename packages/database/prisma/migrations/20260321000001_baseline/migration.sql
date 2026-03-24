@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
     `id` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `passwordHash` VARCHAR(191) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `admin` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `client` (
+CREATE TABLE IF NOT EXISTS `client` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `client` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `client_user` (
+CREATE TABLE IF NOT EXISTS `client_user` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `client_user` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `ticket` (
+CREATE TABLE IF NOT EXISTS `ticket` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `visitId` VARCHAR(191) NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `ticket` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `time_entry` (
+CREATE TABLE IF NOT EXISTS `time_entry` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `ticketId` VARCHAR(191) NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `time_entry` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `invoice` (
+CREATE TABLE IF NOT EXISTS `invoice` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `number` VARCHAR(191) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `invoice` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `asset` (
+CREATE TABLE IF NOT EXISTS `asset` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE `asset` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `contract` (
+CREATE TABLE IF NOT EXISTS `contract` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `contract` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `visit` (
+CREATE TABLE IF NOT EXISTS `visit` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NOT NULL,
     `type` VARCHAR(191) NOT NULL DEFAULT 'adhoc',
@@ -162,7 +162,7 @@ CREATE TABLE `visit` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `checklist_item` (
+CREATE TABLE IF NOT EXISTS `checklist_item` (
     `id` VARCHAR(191) NOT NULL,
     `visitId` VARCHAR(191) NOT NULL,
     `templateItemId` VARCHAR(191) NULL,
@@ -175,7 +175,7 @@ CREATE TABLE `checklist_item` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `checklist_template` (
+CREATE TABLE IF NOT EXISTS `checklist_template` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -186,7 +186,7 @@ CREATE TABLE `checklist_template` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `checklist_template_item` (
+CREATE TABLE IF NOT EXISTS `checklist_template_item` (
     `id` VARCHAR(191) NOT NULL,
     `templateId` VARCHAR(191) NOT NULL,
     `label` VARCHAR(191) NOT NULL,
@@ -198,7 +198,7 @@ CREATE TABLE `checklist_template_item` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `expense` (
+CREATE TABLE IF NOT EXISTS `finpilot_expense` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NULL,
     `vendor` VARCHAR(191) NOT NULL,
@@ -216,7 +216,7 @@ CREATE TABLE `expense` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `external_income` (
+CREATE TABLE IF NOT EXISTS `finpilot_external_income` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NULL,
     `source` VARCHAR(191) NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE `external_income` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `income_entry` (
+CREATE TABLE IF NOT EXISTS `finpilot_income_entry` (
     `id` VARCHAR(191) NOT NULL,
     `clientId` VARCHAR(191) NULL,
     `sourceType` VARCHAR(191) NOT NULL,
@@ -244,6 +244,22 @@ CREATE TABLE `income_entry` (
     `receivedAt` DATETIME(3) NOT NULL,
     `label` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE IF NOT EXISTS `finpilot_recurring_expense` (
+    `id` VARCHAR(191) NOT NULL,
+    `clientId` VARCHAR(191) NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `category` VARCHAR(191) NOT NULL,
+    `frequency` VARCHAR(191) NOT NULL,
+    `amount` DECIMAL(10, 2) NOT NULL,
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
+    `notes` TEXT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

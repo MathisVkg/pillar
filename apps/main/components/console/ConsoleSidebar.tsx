@@ -85,6 +85,7 @@ const NAV = [
 
 export default function ConsoleSidebar() {
   const pathname = usePathname();
+  const locale = pathname.split("/")[1] || "fr";
 
   return (
     <nav
@@ -101,13 +102,14 @@ export default function ConsoleSidebar() {
       }}
     >
       {NAV.map(({ href, label, icon, exact }) => {
+        const fullHref = `/${locale}${href}`;
         const active = exact
-          ? pathname === href || (pathname.startsWith(href) && !pathname.startsWith("/billing/invoices"))
-          : pathname === href || (!exact && href !== "/dashboard" && pathname.startsWith(href));
+          ? pathname === fullHref || (pathname.startsWith(fullHref) && !pathname.startsWith(`/${locale}/billing/invoices`))
+          : pathname === fullHref || (!exact && href !== "/dashboard" && pathname.startsWith(fullHref));
         return (
           <Link
             key={href}
-            href={href}
+            href={fullHref}
             title={label}
             style={{
               display: "flex",

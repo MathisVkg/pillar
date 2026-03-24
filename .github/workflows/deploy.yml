@@ -19,8 +19,8 @@ jobs:
           # Add new apps here when ready:
           # - name: camera
           #   dockerfile: apps/camera/Dockerfile
-          # - name: books
-          #   dockerfile: apps/books/Dockerfile
+          # - name: finpilot
+          #   dockerfile: apps/finpilot/Dockerfile
 
     steps:
       - uses: actions/checkout@v4

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 
 export type Ticket = {
@@ -129,6 +129,7 @@ const SOURCE_LABEL_KEYS: Record<string, string> = {
 export default function TicketsView({ tickets, clients, filterClientId, filterStatus, filterPriority, showDeactivated }: Props) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	// Filter state (mirrors URL params)
 	const [clientId, setClientId] = useState(filterClientId ?? "");
@@ -153,7 +154,7 @@ export default function TicketsView({ tickets, clients, filterClientId, filterSt
 		if (p) params.set("priority", p);
 		if (deact) params.set("showDeactivated", "1");
 		const qs = params.toString();
-		router.push(qs ? `/tickets?${qs}` : "/tickets");
+		router.push(qs ? `/${locale}/tickets?${qs}` : `/${locale}/tickets`);
 	}
 
 	function handleFilterChange(field: "client" | "status" | "priority", value: string) {
@@ -432,7 +433,7 @@ export default function TicketsView({ tickets, clients, filterClientId, filterSt
 								<tr
 									key={tk.id}
 									style={{ cursor: "pointer", opacity: tk.client.isActive ? 1 : 0.6 }}
-									onClick={() => router.push(`/tickets/${tk.id}`)}
+									onClick={() => router.push(`/${locale}/tickets/${tk.id}`)}
 									onMouseEnter={(e) => (e.currentTarget.style.background = "var(--con-bg)")}
 									onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
 								>

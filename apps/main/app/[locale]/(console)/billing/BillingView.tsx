@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useTranslation } from "@/components/LangProvider";
 import Link from "next/link";
 
@@ -293,7 +293,7 @@ function ClientCard({
 											</td>
 											<td style={TD}>
 												{e.ticket ? (
-													<Link href={`/tickets/${e.ticket.id}`} style={{
+													<Link href={`/${locale}/tickets/${e.ticket.id}`} style={{
 														color: "#2563EB", fontWeight: 700, textDecoration: "none",
 														...MONO, fontSize: "11px",
 													}}>
@@ -368,6 +368,7 @@ function ClientCard({
 export default function BillingView({ initialData }: { initialData: ClientBilling[] }) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [data, setData] = useState(initialData);
 
@@ -392,7 +393,7 @@ export default function BillingView({ initialData }: { initialData: ClientBillin
 					{t("billing.title")}
 				</h1>
 				<Link
-					href="/billing/invoices"
+					href={`/${locale}/billing/invoices`}
 					style={{
 						...MONO, fontSize: "9px", letterSpacing: "0.06em", textTransform: "uppercase",
 						color: "var(--con-muted)", border: "1px solid var(--con-border)",
