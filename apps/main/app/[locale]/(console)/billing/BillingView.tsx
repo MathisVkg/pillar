@@ -113,6 +113,7 @@ function ClientCard({
 	onInvoiced: (clientId: string) => void;
 }) {
 	const { t } = useTranslation();
+	const { locale } = useParams<{ locale: string }>();
 
 	const [generating, setGenerating] = useState(false);
 	const [flash, setFlash] = useState<"success" | "error" | null>(null);
