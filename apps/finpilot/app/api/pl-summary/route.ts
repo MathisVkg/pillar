@@ -1,25 +1,22 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import { getQuarterRange, getYearRange, parseYear } from "@/lib/date-ranges";
 
 async function getExpenseSum(
-  year: number,
-  monthStart: number,
-  monthEnd: number,
-  dayStart: number,
-  dayEnd: number
+  startDateOnly: string,
+  endDateOnly: string,
 ): Promise<{ amountExcl: number; vatAmount: number }> {
-  const startStr = `${year}-${String(monthStart).padStart(2, "0")}-${String(dayStart).padStart(2, "0")}`;
-  const endStr = `${year}-${String(monthEnd).padStart(2, "0")}-${String(dayEnd).padStart(2, "0")}`;
-
-  const result = await prisma.$queryRaw<Array<{ amountExcl: number; vatAmount: number }>>`
+  const result = await prisma.$queryRaw<
+    Array<{ amountExcl: number; vatAmount: number }>
+  >`
     SELECT
       COALESCE(SUM(amountExcl), 0) as amountExcl,
       COALESCE(SUM(vatAmount), 0) as vatAmount
     FROM finpilot_expense
     WHERE clientId IS NULL
-    AND expenseDate >= ${startStr}
-    AND expenseDate <= ${endStr}
+    AND expenseDate >= ${startDateOnly}
+    AND expenseDate <= ${endDateOnly}
   `;
 
   return {
@@ -32,30 +29,22 @@ const QUARTERS = (year: number) => [
   {
     label: "Q1",
     period: `Jan \u2013 Mar ${year}`,
-    incomeStart: new Date(`${year}-01-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-03-31T23:59:59.999Z`),
-    monthStart: 1, monthEnd: 3, dayStart: 1, dayEnd: 31,
+    range: getQuarterRange(year, 1),
   },
   {
     label: "Q2",
     period: `Apr \u2013 Jun ${year}`,
-    incomeStart: new Date(`${year}-04-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-06-30T23:59:59.999Z`),
-    monthStart: 4, monthEnd: 6, dayStart: 1, dayEnd: 30,
+    range: getQuarterRange(year, 2),
   },
   {
     label: "Q3",
     period: `Jul \u2013 Sep ${year}`,
-    incomeStart: new Date(`${year}-07-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-09-30T23:59:59.999Z`),
-    monthStart: 7, monthEnd: 9, dayStart: 1, dayEnd: 30,
+    range: getQuarterRange(year, 3),
   },
   {
     label: "Q4",
     period: `Oct \u2013 Dec ${year}`,
-    incomeStart: new Date(`${year}-10-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-12-31T23:59:59.999Z`),
-    monthStart: 10, monthEnd: 12, dayStart: 1, dayEnd: 31,
+    range: getQuarterRange(year, 4),
   },
 ];
 
@@ -66,12 +55,16 @@ export async function GET(req: Request) {
   }
 
   const url = new URL(req.url);
-  const year = parseInt(
-    url.searchParams.get("year") ?? String(new Date().getFullYear())
-  );
+  const year = parseYear(url.searchParams.get("year"));
 
-  const yearStart = new Date(`${year}-01-01T00:00:00.000Z`);
-  const yearEnd = new Date(`${year}-12-31T23:59:59.999Z`);
+  if (year === null) {
+    return NextResponse.json(
+      { error: "year must be a valid year" },
+      { status: 400 },
+    );
+  }
+
+  const yearRange = getYearRange(year);
 
   // ── Annual revenue ─────────────────────────────────────────────────────────
 
@@ -79,14 +72,17 @@ export async function GET(req: Request) {
     await Promise.all([
       prisma.incomeEntry.aggregate({
         _sum: { amountExcl: true },
-        where: { clientId: null, receivedAt: { gte: yearStart, lte: yearEnd } },
+        where: {
+          clientId: null,
+          receivedAt: { gte: yearRange.start, lte: yearRange.end },
+        },
       }),
       prisma.incomeEntry.aggregate({
         _sum: { amountExcl: true },
         where: {
           clientId: null,
           sourceType: "pillar",
-          receivedAt: { gte: yearStart, lte: yearEnd },
+          receivedAt: { gte: yearRange.start, lte: yearRange.end },
         },
       }),
       prisma.incomeEntry.aggregate({
@@ -94,27 +90,32 @@ export async function GET(req: Request) {
         where: {
           clientId: null,
           sourceType: "external",
-          receivedAt: { gte: yearStart, lte: yearEnd },
+          receivedAt: { gte: yearRange.start, lte: yearRange.end },
         },
       }),
     ]);
 
   // ── Annual expenses ────────────────────────────────────────────────────────
 
-  const annualExpenses = await getExpenseSum(year, 1, 12, 1, 31);
+  const annualExpenses = await getExpenseSum(
+    yearRange.startDateOnly,
+    yearRange.endDateOnly,
+  );
 
-  const categoryRows = await prisma.$queryRaw<Array<{ category: string; total: number }>>`
+  const categoryRows = await prisma.$queryRaw<
+    Array<{ category: string; total: number }>
+  >`
     SELECT category,
            COALESCE(SUM(amountExcl), 0) as total
     FROM finpilot_expense
     WHERE clientId IS NULL
-    AND expenseDate >= ${`${year}-01-01`}
-    AND expenseDate <= ${`${year}-12-31`}
+    AND expenseDate >= ${yearRange.startDateOnly}
+    AND expenseDate <= ${yearRange.endDateOnly}
     GROUP BY category
   `;
 
   const expensesByCategory = Object.fromEntries(
-    categoryRows.map((r) => [r.category, Number(r.total)])
+    categoryRows.map((r) => [r.category, Number(r.total)]),
   );
 
   // ── Recurring reference ────────────────────────────────────────────────────
@@ -135,7 +136,10 @@ export async function GET(req: Request) {
 
   const vatCollectedAgg = await prisma.incomeEntry.aggregate({
     _sum: { vatAmount: true },
-    where: { clientId: null, receivedAt: { gte: yearStart, lte: yearEnd } },
+    where: {
+      clientId: null,
+      receivedAt: { gte: yearRange.start, lte: yearRange.end },
+    },
   });
 
   const vatPaid = annualExpenses.vatAmount;
@@ -149,10 +153,10 @@ export async function GET(req: Request) {
           _sum: { amountExcl: true },
           where: {
             clientId: null,
-            receivedAt: { gte: q.incomeStart, lte: q.incomeEnd },
+            receivedAt: { gte: q.range.start, lte: q.range.end },
           },
         }),
-        getExpenseSum(year, q.monthStart, q.monthEnd, q.dayStart, q.dayEnd),
+        getExpenseSum(q.range.startDateOnly, q.range.endDateOnly),
       ]);
 
       const revenue = Number(rev._sum?.amountExcl ?? 0);
@@ -165,7 +169,7 @@ export async function GET(req: Request) {
         expenses,
         result: revenue - expenses,
       };
-    })
+    }),
   );
 
   // ── Compute totals ─────────────────────────────────────────────────────────

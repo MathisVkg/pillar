@@ -1,6 +1,7 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import { getDateOnlyRange } from "@/lib/date-ranges";
 
 function formatAmount(n: number): string {
   return n.toFixed(2).replace(".", ",");
@@ -15,9 +16,7 @@ function formatDate(d: Date | string): string {
 }
 
 function csvRow(fields: string[]): string {
-  return fields
-    .map((f) => `"${String(f).replace(/"/g, '""')}"`)
-    .join(",");
+  return fields.map((f) => `"${String(f).replace(/"/g, '""')}"`).join(",");
 }
 
 export async function GET(request: Request) {
@@ -31,17 +30,24 @@ export async function GET(request: Request) {
   const to = searchParams.get("to");
 
   if (!from || !to) {
-    return NextResponse.json({ error: "from and to are required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "from and to are required" },
+      { status: 400 },
+    );
   }
 
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const range = getDateOnlyRange(from, to);
+  if (!range) {
+    return NextResponse.json(
+      { error: "from and to must be valid dates" },
+      { status: 400 },
+    );
+  }
 
   const expenses = await prisma.expense.findMany({
     where: {
       clientId: null,
-      expenseDate: { gte: fromDate, lte: toDate },
+      expenseDate: { gte: range.start, lte: range.end },
     },
     orderBy: { expenseDate: "asc" },
   });
@@ -91,7 +97,7 @@ export async function GET(request: Request) {
 
   const csvString = [headers, ...rows, totalsRow].join("\r\n");
 
-  return new Response("\uFEFF" + csvString, {
+  return new Response(`\uFEFF${csvString}`, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": `attachment; filename="pillar-finpilot-depenses-${from}-${to}.csv"`,

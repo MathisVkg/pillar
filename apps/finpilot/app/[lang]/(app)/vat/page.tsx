@@ -27,8 +27,11 @@ interface VatSummary {
   totalVatCollected: number;
   totalVatPaid: number;
   totalExpenses: number;
+  totalExpensesExclVat: number;
+  totalExpensesInclVat: number;
   totalExpensesWithVat: number;
   effectiveVatRate: number;
+  vatExpenseShare: number;
   netVatPosition: number;
   quarters: Quarter[];
 }

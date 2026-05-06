@@ -1,6 +1,7 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import { getQuarterRange, getYearRange, parseYear } from "@/lib/date-ranges";
 
 interface QuarterExpense {
   id: string;
@@ -22,23 +23,19 @@ interface Quarter {
 }
 
 async function getExpenseSum(
-  year: number,
-  monthStart: number,
-  monthEnd: number,
-  dayStart: number,
-  dayEnd: number
+  startDateOnly: string,
+  endDateOnly: string,
 ): Promise<{ amountExcl: number; vatAmount: number }> {
-  const startStr = `${year}-${String(monthStart).padStart(2, "0")}-${String(dayStart).padStart(2, "0")}`;
-  const endStr = `${year}-${String(monthEnd).padStart(2, "0")}-${String(dayEnd).padStart(2, "0")}`;
-
-  const result = await prisma.$queryRaw<Array<{ amountExcl: number; vatAmount: number }>>`
+  const result = await prisma.$queryRaw<
+    Array<{ amountExcl: number; vatAmount: number }>
+  >`
     SELECT
       COALESCE(SUM(amountExcl), 0) as amountExcl,
       COALESCE(SUM(vatAmount), 0) as vatAmount
     FROM finpilot_expense
     WHERE clientId IS NULL
-    AND expenseDate >= ${startStr}
-    AND expenseDate <= ${endStr}
+    AND expenseDate >= ${startDateOnly}
+    AND expenseDate <= ${endDateOnly}
   `;
 
   return {
@@ -48,31 +45,27 @@ async function getExpenseSum(
 }
 
 async function getExpensesWithVat(
-  year: number,
-  monthStart: number,
-  monthEnd: number,
-  dayStart: number,
-  dayEnd: number
+  startDateOnly: string,
+  endDateOnly: string,
 ): Promise<QuarterExpense[]> {
-  const startStr = `${year}-${String(monthStart).padStart(2, "0")}-${String(dayStart).padStart(2, "0")}`;
-  const endStr = `${year}-${String(monthEnd).padStart(2, "0")}-${String(dayEnd).padStart(2, "0")}`;
-
-  const rows = await prisma.$queryRaw<Array<{
-    id: string;
-    vendor: string;
-    category: string;
-    expenseDate: Date;
-    amountExcl: number;
-    vatAmount: number;
-    status: string;
-  }>>`
+  const rows = await prisma.$queryRaw<
+    Array<{
+      id: string;
+      vendor: string;
+      category: string;
+      expenseDate: Date;
+      amountExcl: number;
+      vatAmount: number;
+      status: string;
+    }>
+  >`
     SELECT id, vendor, category, expenseDate,
            amountExcl, vatAmount, status
     FROM finpilot_expense
     WHERE clientId IS NULL
     AND vatAmount > 0
-    AND expenseDate >= ${startStr}
-    AND expenseDate <= ${endStr}
+    AND expenseDate >= ${startDateOnly}
+    AND expenseDate <= ${endDateOnly}
     ORDER BY expenseDate ASC
   `;
 
@@ -87,34 +80,30 @@ async function getExpensesWithVat(
   }));
 }
 
+function roundPercent(value: number): number {
+  return Math.round(value * 100 * 10) / 10;
+}
+
 const QUARTERS = (year: number) => [
   {
     label: "Q1",
     period: `Jan – Mar ${year}`,
-    incomeStart: new Date(`${year}-01-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-03-31T23:59:59.999Z`),
-    monthStart: 1, monthEnd: 3, dayStart: 1, dayEnd: 31,
+    range: getQuarterRange(year, 1),
   },
   {
     label: "Q2",
     period: `Apr – Jun ${year}`,
-    incomeStart: new Date(`${year}-04-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-06-30T23:59:59.999Z`),
-    monthStart: 4, monthEnd: 6, dayStart: 1, dayEnd: 30,
+    range: getQuarterRange(year, 2),
   },
   {
     label: "Q3",
     period: `Jul – Sep ${year}`,
-    incomeStart: new Date(`${year}-07-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-09-30T23:59:59.999Z`),
-    monthStart: 7, monthEnd: 9, dayStart: 1, dayEnd: 30,
+    range: getQuarterRange(year, 3),
   },
   {
     label: "Q4",
     period: `Oct – Dec ${year}`,
-    incomeStart: new Date(`${year}-10-01T00:00:00.000Z`),
-    incomeEnd:   new Date(`${year}-12-31T23:59:59.999Z`),
-    monthStart: 10, monthEnd: 12, dayStart: 1, dayEnd: 31,
+    range: getQuarterRange(year, 4),
   },
 ];
 
@@ -125,10 +114,15 @@ export async function GET(req: Request) {
   }
 
   const url = new URL(req.url);
-  const year = parseInt(url.searchParams.get("year") ?? String(new Date().getFullYear()));
+  const year = parseYear(url.searchParams.get("year"));
+  if (year === null) {
+    return NextResponse.json(
+      { error: "year must be a valid year" },
+      { status: 400 },
+    );
+  }
 
-  const yearStart = new Date(`${year}-01-01T00:00:00.000Z`);
-  const yearEnd = new Date(`${year}-12-31T23:59:59.999Z`);
+  const yearRange = getYearRange(year);
 
   // ── Annual aggregates ──────────────────────────────────────────────────────
 
@@ -137,10 +131,10 @@ export async function GET(req: Request) {
       _sum: { vatAmount: true },
       where: {
         clientId: null,
-        receivedAt: { gte: yearStart, lte: yearEnd },
+        receivedAt: { gte: yearRange.start, lte: yearRange.end },
       },
     }),
-    getExpenseSum(year, 1, 12, 1, 31),
+    getExpenseSum(yearRange.startDateOnly, yearRange.endDateOnly),
   ]);
 
   const withVatRows = await prisma.$queryRaw<Array<{ total: number }>>`
@@ -148,18 +142,25 @@ export async function GET(req: Request) {
     FROM finpilot_expense
     WHERE clientId IS NULL
     AND vatAmount > 0
-    AND expenseDate >= ${`${year}-01-01`}
-    AND expenseDate <= ${`${year}-12-31`}
+    AND expenseDate >= ${yearRange.startDateOnly}
+    AND expenseDate <= ${yearRange.endDateOnly}
   `;
 
   const totalVatCollected = Number(annualVatCollectedAgg._sum?.vatAmount ?? 0);
-  const totalExpenses = annualExpenses.amountExcl + annualExpenses.vatAmount;
+  const totalExpensesExclVat = annualExpenses.amountExcl;
+  const totalExpensesInclVat =
+    annualExpenses.amountExcl + annualExpenses.vatAmount;
+  const totalExpenses = totalExpensesInclVat;
   const totalExpensesWithVat = Number(withVatRows[0]?.total ?? 0);
   const totalVatPaid = annualExpenses.vatAmount;
 
   const effectiveVatRate =
-    totalExpenses > 0
-      ? Math.round((totalExpensesWithVat / totalExpenses) * 100 * 10) / 10
+    totalExpensesExclVat > 0
+      ? roundPercent(totalVatPaid / totalExpensesExclVat)
+      : 0;
+  const vatExpenseShare =
+    totalExpensesInclVat > 0
+      ? roundPercent(totalExpensesWithVat / totalExpensesInclVat)
       : 0;
 
   // ── Per-quarter data ───────────────────────────────────────────────────────
@@ -167,15 +168,15 @@ export async function GET(req: Request) {
   const quarters: Quarter[] = await Promise.all(
     QUARTERS(year).map(async (q) => {
       const [expSum, vatCollectedAgg, expenses] = await Promise.all([
-        getExpenseSum(year, q.monthStart, q.monthEnd, q.dayStart, q.dayEnd),
+        getExpenseSum(q.range.startDateOnly, q.range.endDateOnly),
         prisma.incomeEntry.aggregate({
           _sum: { vatAmount: true },
           where: {
             clientId: null,
-            receivedAt: { gte: q.incomeStart, lte: q.incomeEnd },
+            receivedAt: { gte: q.range.start, lte: q.range.end },
           },
         }),
-        getExpensesWithVat(year, q.monthStart, q.monthEnd, q.dayStart, q.dayEnd),
+        getExpensesWithVat(q.range.startDateOnly, q.range.endDateOnly),
       ]);
 
       const vatPaid = expSum.vatAmount;
@@ -189,7 +190,7 @@ export async function GET(req: Request) {
         balance: vatCollected - vatPaid,
         expenses,
       };
-    })
+    }),
   );
 
   return NextResponse.json({
@@ -197,8 +198,11 @@ export async function GET(req: Request) {
     totalVatCollected,
     totalVatPaid,
     totalExpenses,
+    totalExpensesExclVat,
+    totalExpensesInclVat,
     totalExpensesWithVat,
     effectiveVatRate,
+    vatExpenseShare,
     netVatPosition: totalVatCollected - totalVatPaid,
     quarters,
   });
