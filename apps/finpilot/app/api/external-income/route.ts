@@ -1,6 +1,11 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import {
+  parseExternalIncomeStatus,
+  parseNonNegativeAmount,
+  parseRequiredDate,
+} from "@/lib/validation";
 
 export async function GET() {
   const session = await auth();
@@ -28,7 +33,7 @@ export async function GET() {
       status: e.status,
       createdAt: e.createdAt.toISOString(),
       updatedAt: e.updatedAt.toISOString(),
-    }))
+    })),
   );
 }
 
@@ -39,16 +44,45 @@ export async function POST(req: Request) {
   }
 
   const body = await req.json();
-  const { source, description, amountExcl, vatAmount, receivedAt, documentUrl, notes, status } = body;
+  const {
+    source,
+    description,
+    amountExcl,
+    vatAmount,
+    receivedAt,
+    documentUrl,
+    notes,
+    status,
+  } = body;
 
   if (!source || amountExcl == null || !receivedAt) {
     return NextResponse.json(
       { error: "source, amountExcl and receivedAt are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
-  const resolvedStatus: string = status ?? "paid";
+  const amountResult = parseNonNegativeAmount(amountExcl, "amountExcl");
+  if (!amountResult.ok) {
+    return NextResponse.json({ error: amountResult.error }, { status: 400 });
+  }
+
+  const vatResult = parseNonNegativeAmount(vatAmount ?? 0, "vatAmount");
+  if (!vatResult.ok) {
+    return NextResponse.json({ error: vatResult.error }, { status: 400 });
+  }
+
+  const dateResult = parseRequiredDate(receivedAt, "receivedAt");
+  if (!dateResult.ok) {
+    return NextResponse.json({ error: dateResult.error }, { status: 400 });
+  }
+
+  const statusResult = parseExternalIncomeStatus(status ?? "paid");
+  if (!statusResult.ok) {
+    return NextResponse.json({ error: statusResult.error }, { status: 400 });
+  }
+
+  const resolvedStatus = statusResult.value;
 
   const created = await prisma.$transaction(async (tx) => {
     const externalIncome = await tx.externalIncome.create({
@@ -56,9 +90,9 @@ export async function POST(req: Request) {
         clientId: null,
         source,
         description: description ?? null,
-        amountExcl,
-        vatAmount: vatAmount ?? 0,
-        receivedAt: new Date(receivedAt),
+        amountExcl: amountResult.value,
+        vatAmount: vatResult.value,
+        receivedAt: dateResult.value,
         documentUrl: documentUrl ?? null,
         notes: notes ?? null,
         status: resolvedStatus,
@@ -97,6 +131,6 @@ export async function POST(req: Request) {
       createdAt: created.createdAt.toISOString(),
       updatedAt: created.updatedAt.toISOString(),
     },
-    { status: 201 }
+    { status: 201 },
   );
 }

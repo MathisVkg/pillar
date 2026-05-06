@@ -388,6 +388,7 @@ model IncomeEntry {
   // Relations
   client          Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
+  @@unique([sourceType, sourceId])
   @@map("finpilot_income_entry")
 }
 

@@ -1,10 +1,16 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import {
+  parseExpenseCategory,
+  parseNonNegativeAmount,
+  parseOptionalBoolean,
+  parseRecurringFrequency,
+} from "@/lib/validation";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
   if (!session?.user?.isAdmin) {
@@ -22,12 +28,40 @@ export async function PATCH(
 
   const body = await req.json();
 
+  const categoryResult =
+    body.category !== undefined ? parseExpenseCategory(body.category) : null;
+  if (categoryResult && !categoryResult.ok) {
+    return NextResponse.json({ error: categoryResult.error }, { status: 400 });
+  }
+
+  const frequencyResult =
+    body.frequency !== undefined
+      ? parseRecurringFrequency(body.frequency)
+      : null;
+  if (frequencyResult && !frequencyResult.ok) {
+    return NextResponse.json({ error: frequencyResult.error }, { status: 400 });
+  }
+
+  const amountResult =
+    body.amount !== undefined
+      ? parseNonNegativeAmount(body.amount, "amount")
+      : null;
+  if (amountResult && !amountResult.ok) {
+    return NextResponse.json({ error: amountResult.error }, { status: 400 });
+  }
+
+  const isActiveResult = parseOptionalBoolean(body.isActive, "isActive");
+  if (!isActiveResult.ok) {
+    return NextResponse.json({ error: isActiveResult.error }, { status: 400 });
+  }
+
   const updateData: Record<string, unknown> = {};
   if (body.name !== undefined) updateData.name = body.name;
-  if (body.category !== undefined) updateData.category = body.category;
-  if (body.frequency !== undefined) updateData.frequency = body.frequency;
-  if (body.amount !== undefined) updateData.amount = parseFloat(body.amount);
-  if (body.isActive !== undefined) updateData.isActive = Boolean(body.isActive);
+  if (categoryResult?.ok) updateData.category = categoryResult.value;
+  if (frequencyResult?.ok) updateData.frequency = frequencyResult.value;
+  if (amountResult?.ok) updateData.amount = amountResult.value;
+  if (isActiveResult.value !== undefined)
+    updateData.isActive = isActiveResult.value;
   if (body.notes !== undefined) updateData.notes = body.notes ?? null;
 
   const updated = await prisma.recurringExpense.update({
@@ -49,8 +83,8 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
   if (!session?.user?.isAdmin) {

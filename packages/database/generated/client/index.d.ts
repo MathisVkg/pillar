@@ -21025,6 +21025,7 @@ export namespace Prisma {
 
   export type IncomeEntryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    sourceType_sourceId?: IncomeEntrySourceTypeSourceIdCompoundUniqueInput
     AND?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
     OR?: IncomeEntryWhereInput[]
     NOT?: IncomeEntryWhereInput | IncomeEntryWhereInput[]
@@ -21037,7 +21038,7 @@ export namespace Prisma {
     label?: StringFilter<"IncomeEntry"> | string
     createdAt?: DateTimeFilter<"IncomeEntry"> | Date | string
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
-  }, "id">
+  }, "id" | "sourceType_sourceId">
 
   export type IncomeEntryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23853,6 +23854,11 @@ export namespace Prisma {
     fields: IncomeEntryOrderByRelevanceFieldEnum | IncomeEntryOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type IncomeEntrySourceTypeSourceIdCompoundUniqueInput = {
+    sourceType: string
+    sourceId: string
   }
 
   export type IncomeEntryCountOrderByAggregateInput = {

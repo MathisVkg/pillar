@@ -1,6 +1,13 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import {
+  parseExpenseCategory,
+  parseExpenseStatus,
+  parseNonNegativeAmount,
+  parseOptionalBoolean,
+  parseRequiredDate,
+} from "@/lib/validation";
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
@@ -75,18 +82,55 @@ export async function POST(req: Request) {
   if (!vendor || amountTotal === undefined || !category || !expenseDate) {
     return NextResponse.json(
       { error: "vendor, amountTotal, category, expenseDate are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
-  const total = Number(amountTotal);
+  const totalResult = parseNonNegativeAmount(amountTotal, "amountTotal");
+  if (!totalResult.ok) {
+    return NextResponse.json({ error: totalResult.error }, { status: 400 });
+  }
+
+  const categoryResult = parseExpenseCategory(category);
+  if (!categoryResult.ok) {
+    return NextResponse.json({ error: categoryResult.error }, { status: 400 });
+  }
+
+  const dateResult = parseRequiredDate(expenseDate, "expenseDate");
+  if (!dateResult.ok) {
+    return NextResponse.json({ error: dateResult.error }, { status: 400 });
+  }
+
+  const hasVatResult = parseOptionalBoolean(hasVat, "hasVat");
+  if (!hasVatResult.ok) {
+    return NextResponse.json({ error: hasVatResult.error }, { status: 400 });
+  }
+
+  const statusResult = parseExpenseStatus(status ?? "paid");
+  if (!statusResult.ok) {
+    return NextResponse.json({ error: statusResult.error }, { status: 400 });
+  }
+
+  const total = totalResult.value;
   let amountExcl: number;
   let vatAmount: number;
 
-  if (hasVat) {
-    vatAmount = bodyVatAmount !== undefined
-      ? round2(Number(bodyVatAmount))
-      : round2((total / 1.21) * 0.21);
+  if (hasVatResult.value) {
+    if (bodyVatAmount !== undefined) {
+      const vatResult = parseNonNegativeAmount(bodyVatAmount, "vatAmount");
+      if (!vatResult.ok) {
+        return NextResponse.json({ error: vatResult.error }, { status: 400 });
+      }
+      if (vatResult.value > total) {
+        return NextResponse.json(
+          { error: "vatAmount must be less than or equal to amountTotal" },
+          { status: 400 },
+        );
+      }
+      vatAmount = round2(vatResult.value);
+    } else {
+      vatAmount = round2((total / 1.21) * 0.21);
+    }
     amountExcl = round2(total - vatAmount);
   } else {
     vatAmount = 0;
@@ -100,11 +144,11 @@ export async function POST(req: Request) {
       description: description ?? null,
       amountExcl,
       vatAmount,
-      category,
-      expenseDate: new Date(expenseDate),
+      category: categoryResult.value,
+      expenseDate: dateResult.value,
       receiptUrl: receiptUrl ?? null,
       notes: notes ?? null,
-      status: status ?? "paid",
+      status: statusResult.value,
     },
   });
 

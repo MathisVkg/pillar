@@ -1,10 +1,15 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import {
+  parseExternalIncomeStatus,
+  parseNonNegativeAmount,
+  parseRequiredDate,
+} from "@/lib/validation";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
   if (!session?.user?.isAdmin) {
@@ -20,20 +25,56 @@ export async function PATCH(
 
   const body = await req.json();
   const oldStatus = existing.status;
-  const newStatus: string = body.status ?? oldStatus;
+  const statusResult =
+    body.status !== undefined
+      ? parseExternalIncomeStatus(body.status)
+      : parseExternalIncomeStatus(oldStatus);
+  if (!statusResult.ok) {
+    return NextResponse.json({ error: statusResult.error }, { status: 400 });
+  }
+
+  const amountResult =
+    body.amountExcl !== undefined
+      ? parseNonNegativeAmount(body.amountExcl, "amountExcl")
+      : null;
+  if (amountResult && !amountResult.ok) {
+    return NextResponse.json({ error: amountResult.error }, { status: 400 });
+  }
+
+  const vatResult =
+    body.vatAmount !== undefined
+      ? parseNonNegativeAmount(body.vatAmount, "vatAmount")
+      : null;
+  if (vatResult && !vatResult.ok) {
+    return NextResponse.json({ error: vatResult.error }, { status: 400 });
+  }
+
+  const dateResult =
+    body.receivedAt !== undefined
+      ? parseRequiredDate(body.receivedAt, "receivedAt")
+      : null;
+  if (dateResult && !dateResult.ok) {
+    return NextResponse.json({ error: dateResult.error }, { status: 400 });
+  }
+
+  const newStatus = statusResult.value;
 
   const updated = await prisma.$transaction(async (tx) => {
     const record = await tx.externalIncome.update({
       where: { id },
       data: {
         ...(body.source !== undefined && { source: body.source }),
-        ...(body.description !== undefined && { description: body.description }),
-        ...(body.amountExcl !== undefined && { amountExcl: body.amountExcl }),
-        ...(body.vatAmount !== undefined && { vatAmount: body.vatAmount }),
-        ...(body.receivedAt !== undefined && { receivedAt: new Date(body.receivedAt) }),
-        ...(body.documentUrl !== undefined && { documentUrl: body.documentUrl }),
+        ...(body.description !== undefined && {
+          description: body.description,
+        }),
+        ...(amountResult?.ok && { amountExcl: amountResult.value }),
+        ...(vatResult?.ok && { vatAmount: vatResult.value }),
+        ...(dateResult?.ok && { receivedAt: dateResult.value }),
+        ...(body.documentUrl !== undefined && {
+          documentUrl: body.documentUrl,
+        }),
         ...(body.notes !== undefined && { notes: body.notes }),
-        ...(body.status !== undefined && { status: body.status }),
+        ...(body.status !== undefined && { status: newStatus }),
       },
     });
 
@@ -105,7 +146,7 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
   if (!session?.user?.isAdmin) {

@@ -1,6 +1,11 @@
+import { prisma } from "@pillar/database";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { prisma } from "@pillar/database";
+import {
+  parseExpenseCategory,
+  parseNonNegativeAmount,
+  parseRecurringFrequency,
+} from "@/lib/validation";
 
 function serializeRecurringExpense(r: {
   id: string;
@@ -53,24 +58,32 @@ export async function POST(req: Request) {
   if (!name || !category || !frequency || amount === undefined) {
     return NextResponse.json(
       { error: "name, category, frequency, amount are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
-  if (!["monthly", "quarterly", "yearly"].includes(frequency)) {
-    return NextResponse.json(
-      { error: "frequency must be monthly | quarterly | yearly" },
-      { status: 400 }
-    );
+  const categoryResult = parseExpenseCategory(category);
+  if (!categoryResult.ok) {
+    return NextResponse.json({ error: categoryResult.error }, { status: 400 });
+  }
+
+  const frequencyResult = parseRecurringFrequency(frequency);
+  if (!frequencyResult.ok) {
+    return NextResponse.json({ error: frequencyResult.error }, { status: 400 });
+  }
+
+  const amountResult = parseNonNegativeAmount(amount, "amount");
+  if (!amountResult.ok) {
+    return NextResponse.json({ error: amountResult.error }, { status: 400 });
   }
 
   const item = await prisma.recurringExpense.create({
     data: {
       clientId: null,
       name,
-      category,
-      frequency,
-      amount: Number(amount),
+      category: categoryResult.value,
+      frequency: frequencyResult.value,
+      amount: amountResult.value,
       isActive: true,
       notes: notes ?? null,
     },
