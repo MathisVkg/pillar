@@ -1,6 +1,10 @@
 import { prisma } from "@pillar/database";
-import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import {
+	isInvoiceStatus,
+	VALID_INVOICE_STATUS_TRANSITIONS,
+} from "@/lib/billing/invoice-status";
 
 type Params = { params: Promise<{ invoiceId: string }> };
 
@@ -100,13 +104,6 @@ export async function GET(_req: Request, { params }: Params) {
 
 // ─── PATCH ─────────────────────────────────────────────────────────────────────
 
-const VALID_STATUS_TRANSITIONS: Record<string, string[]> = {
-	draft: ["sent"],
-	sent: ["paid"],
-	paid: [],
-	overdue: ["paid"],
-};
-
 export async function PATCH(req: Request, { params }: Params) {
 	const session = await auth();
 	if (!session?.user?.isAdmin) {
@@ -138,7 +135,16 @@ export async function PATCH(req: Request, { params }: Params) {
 
 	// Validate status transition
 	if (status !== undefined) {
-		const allowed = VALID_STATUS_TRANSITIONS[existing.status] ?? [];
+		if (!isInvoiceStatus(status)) {
+			return NextResponse.json(
+				{ error: `Invalid invoice status "${status}"` },
+				{ status: 400 },
+			);
+		}
+
+		const allowed = isInvoiceStatus(existing.status)
+			? VALID_INVOICE_STATUS_TRANSITIONS[existing.status]
+			: [];
 		if (!allowed.includes(status)) {
 			return NextResponse.json(
 				{ error: `Cannot transition from "${existing.status}" to "${status}"` },

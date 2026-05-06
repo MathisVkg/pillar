@@ -105,10 +105,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		authorized({ auth, request }) {
 			const pathname = request.nextUrl.pathname;
 			const locale = pathname.split("/")[1] || "fr";
+			const isPortalRoute = pathname.includes("/portal");
+			const hasPortalToken = request.nextUrl.searchParams.has("portal_token");
+
 			// Allow all login pages through without auth
 			if (pathname.includes("/login")) return true;
-			if (!auth) return Response.redirect(new URL(`/${locale}/admin/login`, request.nextUrl));
-			return true;
+			if (auth) return true;
+			if (isPortalRoute && hasPortalToken) return true;
+			if (isPortalRoute) return Response.redirect(new URL(`/${locale}/login`, request.nextUrl));
+
+			return Response.redirect(new URL(`/${locale}/admin/login`, request.nextUrl));
 		},
 		async jwt({ token, user }) {
 			if (user) {

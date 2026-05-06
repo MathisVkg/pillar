@@ -1,8 +1,9 @@
 import { prisma } from "@pillar/database";
-import { auth } from "@/lib/auth";
-import { getT, type Lang } from "@/lib/i18n";
 import type { Metadata } from "next";
-import InvoicesView, { type InvoiceRow, type ClientOption } from "./InvoicesView";
+import { auth } from "@/lib/auth";
+import { isInvoiceStatus } from "@/lib/billing/invoice-status";
+import { getT, type Lang } from "@/lib/i18n";
+import InvoicesView, { type ClientOption, type InvoiceRow } from "./InvoicesView";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
 	const { locale } = await params;
@@ -14,17 +15,12 @@ type Props = {
 	searchParams: Promise<{ status?: string; clientId?: string }>;
 };
 
-const VALID_STATUSES = ["draft", "sent", "paid"] as const;
-
 export default async function InvoicesPage({ searchParams }: Props) {
 	await auth();
 
 	const { status, clientId } = await searchParams;
 
-	const validStatus =
-		status && VALID_STATUSES.includes(status as (typeof VALID_STATUSES)[number])
-			? status
-			: undefined;
+	const validStatus = isInvoiceStatus(status) ? status : undefined;
 
 	const [rawInvoices, allClients] = await Promise.all([
 		prisma.invoice.findMany({
