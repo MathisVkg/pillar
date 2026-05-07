@@ -84,12 +84,12 @@ export default function DashboardPage() {
   // ── Loading skeleton ───────────────────────────────────────────────────────
   if (!data) {
     return (
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ marginBottom: "24px" }}>
           <div style={{ height: "28px", width: "200px", background: "var(--border)", borderRadius: "6px", marginBottom: "8px" }} />
           <div style={{ height: "14px", width: "280px", background: "var(--border)", borderRadius: "4px" }} />
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "20px" }}>
+        <div className="fp-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "20px" }}>
           <SkeletonCard accent="var(--income)" />
           <SkeletonCard accent="var(--expense)" />
           <SkeletonCard accent="var(--brand)" />
@@ -152,7 +152,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
       {/* Greeting */}
       <div style={{ marginBottom: "24px" }}>
         <div
@@ -174,6 +174,7 @@ export default function DashboardPage() {
 
       {/* KPI grid */}
       <div
+        className="fp-grid-4"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
@@ -295,7 +296,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Two-column section */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+      <div className="fp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
 
         {/* Income by source */}
         <div

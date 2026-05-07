@@ -20,22 +20,15 @@ export default function NavTabs() {
   ];
 
   return (
-    <div
-      style={{
-        background: "var(--surface)",
-        borderBottom: "1px solid var(--border)",
-        padding: "0 24px",
-        display: "flex",
-        gap: 0,
-        flexShrink: 0,
-      }}
-    >
+    <div className="fp-nav-tabs">
       {TABS.map((tab) => {
-        const isActive = pathname === tab.href || pathname.startsWith(`${tab.href}/`);
+        const isActive =
+          pathname === tab.href || pathname.startsWith(`${tab.href}/`);
         return (
           <Link
             key={tab.href}
             href={tab.href}
+            className="fp-nav-tab"
             style={{
               padding: "12px 16px",
               fontSize: "13px",

@@ -134,6 +134,7 @@ function RecurringForm({
   return (
     <form onSubmit={handleSubmit}>
       <div
+        className="fp-form-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1fr 2fr auto",
@@ -414,10 +415,10 @@ export default function RecurringPage() {
   }
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
       {/* Toolbar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px", gap: "12px" }}>
         <div>
           <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
             {t("recurringExpenses.title")}
@@ -446,6 +447,7 @@ export default function RecurringPage() {
 
       {/* KPI grid */}
       <div
+        className="fp-grid-4"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
@@ -536,6 +538,7 @@ export default function RecurringPage() {
               <div key={item.id}>
                 {/* Row */}
                 <div
+                  className="fp-mobile-row"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -572,7 +575,7 @@ export default function RecurringPage() {
                   </div>
 
                   {/* Body */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
+                  <div data-mobile-main style={{ flex: 1, minWidth: 0 }}>
                     <div
                       style={{
                         fontSize: "13px",

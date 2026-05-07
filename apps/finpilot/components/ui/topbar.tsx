@@ -9,18 +9,7 @@ export default function Topbar() {
   const initials = "YO";
 
   return (
-    <div
-      style={{
-        background: "var(--surface)",
-        borderBottom: "1px solid var(--border)",
-        height: "56px",
-        padding: "0 24px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexShrink: 0,
-      }}
-    >
+    <div className="fp-topbar">
       {/* Wordmark */}
       <div
         style={{
@@ -31,13 +20,13 @@ export default function Topbar() {
           letterSpacing: "-0.5px",
         }}
       >
-        pillar{" "}
-        <span style={{ color: "var(--income-mid)" }}>finpilot</span>
+        pillar <span style={{ color: "var(--income-mid)" }}>finpilot</span>
       </div>
 
       {/* Right: period + lang switcher + avatar */}
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <div className="fp-topbar-right">
         <span
+          className="fp-topbar-period"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "11px",

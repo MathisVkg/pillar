@@ -286,7 +286,7 @@ export default function IncomePage() {
         </div>
         <form ref={formRef} onSubmit={onSubmit}>
           {/* Row 1 */}
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "8px", marginBottom: "8px" }}>
+          <div className="fp-form-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "8px", marginBottom: "8px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <label style={{ fontSize: "11px", color: "var(--muted)", fontWeight: 500 }}>{t("income.source")}</label>
               <input name="source" type="text" style={inputStyle} defaultValue={defaultValues?.source ?? ""} required />
@@ -309,7 +309,7 @@ export default function IncomePage() {
             </div>
           </div>
           {/* Row 2 */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr auto", gap: "8px", alignItems: "end" }}>
+          <div className="fp-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 3fr auto", gap: "8px", alignItems: "end" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <label style={{ fontSize: "11px", color: "var(--muted)", fontWeight: 500 }}>{t("expenses.date")}</label>
               <input name="receivedAt" type="date" style={inputStyle} defaultValue={defaultValues ? toDateInput(defaultValues.receivedAt ?? today) : today} required />
@@ -342,10 +342,10 @@ export default function IncomePage() {
   }
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
       {/* Toolbar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px", gap: "12px" }}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
           {t("income.title")}
         </div>
@@ -378,7 +378,7 @@ export default function IncomePage() {
       />
 
       {/* Filter chips — source left, status right */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", gap: "6px" }}>
           <button style={chipStyle(sourceFilter === "all")} onClick={() => setSourceFilter("all")}>{t("income.allSources")}</button>
           <button style={chipStyle(sourceFilter === "pillar")} onClick={() => setSourceFilter("pillar")}>{t("income.pillarOnly")}</button>
@@ -415,7 +415,7 @@ export default function IncomePage() {
           displayed.map((entry) => (
             <div key={entry.id}>
               {/* Entry row */}
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "13px 18px", borderBottom: "1px solid #f5f5f5" }}>
+              <div className="fp-mobile-row" style={{ display: "flex", alignItems: "center", gap: "12px", padding: "13px 18px", borderBottom: "1px solid #f5f5f5" }}>
                 {/* Source icon */}
                 <div
                   style={{ width: "36px", height: "36px", borderRadius: "10px", background: entry.sourceType === "pillar" ? "var(--accent-l)" : "var(--income-l)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: entry.sourceType === "pillar" ? "var(--accent)" : "var(--income)", flexShrink: 0 }}
@@ -423,7 +423,7 @@ export default function IncomePage() {
                   {entry.sourceType === "pillar" ? "P" : "E"}
                 </div>
 
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div data-mobile-main style={{ flex: 1, minWidth: 0 }}>
                   {entry.sourceType === "pillar" ? (
                     <>
                       <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--text)" }}>

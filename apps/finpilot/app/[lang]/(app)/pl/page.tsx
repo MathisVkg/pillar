@@ -215,8 +215,8 @@ export default function PLPage() {
 
   if (loading || !data) {
     return (
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+      <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
           <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
             {t("pl.title")}
           </div>
@@ -242,10 +242,10 @@ export default function PLPage() {
     .sort(([, a], [, b]) => b - a);
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
       {/* Toolbar */}
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "20px" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
         <div>
           <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
             {t("pl.title")}
@@ -260,7 +260,7 @@ export default function PLPage() {
       </div>
 
       {/* KPI cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "20px" }}>
+      <div className="fp-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "20px" }}>
         <KpiCard
           accent="var(--income)"
           label={t("pl.revenueLabel").replace("{year}", String(data.year))}
@@ -292,7 +292,7 @@ export default function PLPage() {
       </div>
 
       {/* Two-column breakdown */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "20px" }}>
+      <div className="fp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "20px" }}>
 
         {/* Revenue breakdown */}
         <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "20px" }}>
@@ -382,7 +382,7 @@ export default function PLPage() {
         <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)", marginBottom: "12px" }}>
           {t("pl.quarterlyBreakdown")}
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px" }}>
+        <div className="fp-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px" }}>
           {quarters.map((q) => (
             <div
               key={q.label}
@@ -428,6 +428,7 @@ export default function PLPage() {
 
       {/* Bottom summary strip */}
       <div
+        className="fp-pl-summary-grid"
         style={{
           background: "var(--brand)",
           borderRadius: "14px",

@@ -217,6 +217,7 @@ function ExpenseForm({
     <form onSubmit={handleSubmit}>
       {/* Row 1 */}
       <div
+        className="fp-form-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr auto",
@@ -284,6 +285,7 @@ function ExpenseForm({
 
       {/* Row 2 */}
       <div
+        className="fp-form-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr 2fr auto",
@@ -583,10 +585,10 @@ export default function ExpensesPage() {
   }
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
       {/* Toolbar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px", gap: "12px" }}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
           {t("expenses.title")}
         </div>
@@ -653,7 +655,7 @@ export default function ExpensesPage() {
       />
 
       {/* Filter chips */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
           <button style={chipStyle(categoryFilter === "all")} onClick={() => setCategoryFilter("all")}>
             {t("common.all")}
@@ -725,7 +727,7 @@ export default function ExpensesPage() {
               {group.items.map((expense) => (
             <div key={expense.id}>
               {/* Row */}
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "13px 18px", borderBottom: "1px solid #f5f5f5" }}>
+              <div className="fp-mobile-row" style={{ display: "flex", alignItems: "center", gap: "12px", padding: "13px 18px", borderBottom: "1px solid #f5f5f5" }}>
                 {/* Icon */}
                 <div
                   style={{
@@ -746,7 +748,7 @@ export default function ExpensesPage() {
                 </div>
 
                 {/* Body */}
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div data-mobile-main style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--text)" }}>{expense.vendor}</div>
                   <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
                     {formatDate(expense.expenseDate)} · {t(CATEGORY_KEYS[expense.category as Category] ?? "expenses.categoryOther")}

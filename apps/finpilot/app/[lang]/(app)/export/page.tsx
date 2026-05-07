@@ -228,7 +228,7 @@ export default function ExportPage() {
   ];
 
   return (
-    <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "640px", margin: "0 auto" }}>
       {/* Page header */}
       <div style={{ marginBottom: "24px" }}>
         <div
@@ -252,7 +252,7 @@ export default function ExportPage() {
       <div style={cardStyle}>
         <div style={cardTitleStyle}>{t("exportPage.dateRange")}</div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+        <div className="fp-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
           <div>
             <label style={labelStyle}>{t("exportPage.from")}</label>
             <input

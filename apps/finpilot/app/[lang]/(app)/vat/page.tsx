@@ -313,50 +313,52 @@ export default function VatPage() {
             {t("vatSummary.noExpenses")}
           </div>
         ) : (
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr>
-                <th style={thStyle}>{t("vatSummary.tableDate")}</th>
-                <th style={thStyle}>{t("vatSummary.tableVendor")}</th>
-                <th style={thStyle}>{t("vatSummary.tableCategory")}</th>
-                <th style={thRightStyle}>{t("vatSummary.tableExcl")}</th>
-                <th style={thRightStyle}>{t("vatSummary.tableVat")}</th>
-                <th style={thRightStyle}>{t("vatSummary.tableTotal")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {q.expenses.map((e) => (
-                <tr key={e.id}>
-                  <td style={{ ...tdStyle, fontFamily: "var(--font-mono)", fontSize: "12px", whiteSpace: "nowrap" }}>
-                    {formatDate(e.expenseDate)}
-                  </td>
-                  <td style={tdStyle}>{e.vendor}</td>
-                  <td style={{ ...tdStyle, color: "var(--muted)", fontSize: "12px" }}>
-                    {t(CATEGORIES[e.category] ?? "expenses.categoryOther")}
-                  </td>
-                  <td style={tdRightStyle}>{formatEuro(e.amountExcl)}</td>
-                  <td style={{ ...tdRightStyle, color: "var(--expense)" }}>{formatEuro(e.vatAmount)}</td>
-                  <td style={tdRightStyle}>{formatEuro(e.amountExcl + e.vatAmount)}</td>
+          <div className="fp-responsive-table">
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>{t("vatSummary.tableDate")}</th>
+                  <th style={thStyle}>{t("vatSummary.tableVendor")}</th>
+                  <th style={thStyle}>{t("vatSummary.tableCategory")}</th>
+                  <th style={thRightStyle}>{t("vatSummary.tableExcl")}</th>
+                  <th style={thRightStyle}>{t("vatSummary.tableVat")}</th>
+                  <th style={thRightStyle}>{t("vatSummary.tableTotal")}</th>
                 </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr style={{ background: "#fafafa" }}>
-                <td colSpan={3} style={{ ...tdStyle, fontWeight: 600, fontSize: "12px", borderTop: "2px solid var(--border)", borderBottom: "none" }}>
-                  Total
-                </td>
-                <td style={{ ...tdRightStyle, fontWeight: 600, borderTop: "2px solid var(--border)", borderBottom: "none" }}>
-                  {formatEuro(sumExcl)}
-                </td>
-                <td style={{ ...tdRightStyle, fontWeight: 600, color: "var(--expense)", borderTop: "2px solid var(--border)", borderBottom: "none" }}>
-                  {formatEuro(sumVat)}
-                </td>
-                <td style={{ ...tdRightStyle, fontWeight: 600, borderTop: "2px solid var(--border)", borderBottom: "none" }}>
-                  {formatEuro(sumTotal)}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody>
+                {q.expenses.map((e) => (
+                  <tr key={e.id}>
+                    <td style={{ ...tdStyle, fontFamily: "var(--font-mono)", fontSize: "12px", whiteSpace: "nowrap" }}>
+                      {formatDate(e.expenseDate)}
+                    </td>
+                    <td style={tdStyle}>{e.vendor}</td>
+                    <td style={{ ...tdStyle, color: "var(--muted)", fontSize: "12px" }}>
+                      {t(CATEGORIES[e.category] ?? "expenses.categoryOther")}
+                    </td>
+                    <td style={tdRightStyle}>{formatEuro(e.amountExcl)}</td>
+                    <td style={{ ...tdRightStyle, color: "var(--expense)" }}>{formatEuro(e.vatAmount)}</td>
+                    <td style={tdRightStyle}>{formatEuro(e.amountExcl + e.vatAmount)}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr style={{ background: "#fafafa" }}>
+                  <td colSpan={3} style={{ ...tdStyle, fontWeight: 600, fontSize: "12px", borderTop: "2px solid var(--border)", borderBottom: "none" }}>
+                    Total
+                  </td>
+                  <td style={{ ...tdRightStyle, fontWeight: 600, borderTop: "2px solid var(--border)", borderBottom: "none" }}>
+                    {formatEuro(sumExcl)}
+                  </td>
+                  <td style={{ ...tdRightStyle, fontWeight: 600, color: "var(--expense)", borderTop: "2px solid var(--border)", borderBottom: "none" }}>
+                    {formatEuro(sumVat)}
+                  </td>
+                  <td style={{ ...tdRightStyle, fontWeight: 600, borderTop: "2px solid var(--border)", borderBottom: "none" }}>
+                    {formatEuro(sumTotal)}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         )}
       </div>
     );
@@ -367,10 +369,10 @@ export default function VatPage() {
   const expandedQ = data?.quarters.find((q) => q.label === expandedQuarter) ?? null;
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
       {/* Toolbar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
           {t("vatSummary.title")}
         </div>
@@ -403,7 +405,7 @@ export default function VatPage() {
       ) : (
         <>
           {/* KPI cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px", marginBottom: "16px" }}>
+          <div className="fp-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px", marginBottom: "16px" }}>
             <KpiCard
               accent="var(--income)"
               label={t("vatSummary.vatCollected").replace("{year}", String(data.year))}
@@ -431,7 +433,7 @@ export default function VatPage() {
           <NetBanner net={data.netVatPosition} />
 
           {/* Quarter grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+          <div className="fp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
             {data.quarters.map((q) => (
               <QuarterCard key={q.label} q={q} />
             ))}
