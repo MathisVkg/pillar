@@ -115,6 +115,54 @@ const actionBtnStyle: React.CSSProperties = {
   flexShrink: 0,
 };
 
+function EditIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+    </svg>
+  );
+}
+
+function DeleteIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 6h18" />
+      <path d="M8 6V4h8v2" />
+      <path d="M19 6l-1 14H6L5 6" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
+    </svg>
+  );
+}
+
+function calculateDefaultVat(amountExcl: string): string {
+  if (amountExcl.trim() === "") return "0";
+  const parsed = Number(amountExcl);
+  if (!Number.isFinite(parsed) || parsed < 0) return "0";
+  return (Math.round(parsed * 0.21 * 100) / 100).toFixed(2);
+}
+
 function toDateInputValue(iso: string | null): string {
   if (!iso) return "";
   return new Date(iso).toISOString().split("T")[0];
@@ -169,13 +217,27 @@ function CompanyAssetForm({
 }) {
   const { t } = useTranslation();
   const [values, setValues] = useState<FormValues>(initial ?? emptyForm());
+  const [vatEditedManually, setVatEditedManually] = useState(false);
 
   useEffect(() => {
     setValues(initial ?? emptyForm());
+    setVatEditedManually(false);
   }, [initial]);
 
   const update = (field: keyof FormValues, value: string) => {
-    setValues((current) => ({ ...current, [field]: value }));
+    if (field === "vatAmount") {
+      setVatEditedManually(true);
+      setValues((current) => ({ ...current, vatAmount: value }));
+      return;
+    }
+
+    setValues((current) => {
+      const next = { ...current, [field]: value };
+      if (field === "purchasePriceExcl" && !vatEditedManually) {
+        next.vatAmount = calculateDefaultVat(value);
+      }
+      return next;
+    });
   };
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
@@ -422,6 +484,7 @@ export default function CompanyAssetsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<CompanyAsset | null>(null);
+  const [formVersion, setFormVersion] = useState(0);
   const [statusFilter, setStatusFilter] = useState<"all" | AssetStatus>("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -453,7 +516,7 @@ export default function CompanyAssetsPage() {
       (acc, asset) => {
         if (asset.status === "active") acc.activeAssets++;
         acc.totalValue += asset.purchasePriceExcl;
-        if (!asset.serialNumber) acc.missingSerials++;
+        acc.totalVat += asset.vatAmount;
         if (asset.warrantyUntil) {
           const warranty = new Date(asset.warrantyUntil);
           if (warranty >= now && warranty <= soon) acc.warrantySoon++;
@@ -464,7 +527,7 @@ export default function CompanyAssetsPage() {
         activeAssets: 0,
         totalValue: 0,
         warrantySoon: 0,
-        missingSerials: 0,
+        totalVat: 0,
       },
     );
   }, [assets]);
@@ -526,6 +589,7 @@ export default function CompanyAssetsPage() {
       }
 
       setEditing(null);
+      setFormVersion((version) => version + 1);
       await loadAssets();
     } catch (err) {
       setError(err instanceof Error ? err.message : t("common.error"));
@@ -567,7 +631,10 @@ export default function CompanyAssetsPage() {
       label: t("companyAssets.warrantyExpiringSoon"),
       value: kpis.warrantySoon,
     },
-    { label: t("companyAssets.missingSerials"), value: kpis.missingSerials },
+    {
+      label: t("companyAssets.totalVat"),
+      value: formatEuro(kpis.totalVat),
+    },
   ];
 
   return (
@@ -672,9 +739,13 @@ export default function CompanyAssetsPage() {
         }}
       >
         <CompanyAssetForm
+          key={`${editing?.id ?? "new"}-${formVersion}`}
           initial={editing ? toFormValues(editing) : undefined}
           onSave={handleSave}
-          onCancel={() => setEditing(null)}
+          onCancel={() => {
+            setEditing(null);
+            setFormVersion((version) => version + 1);
+          }}
           submitting={submitting}
           error={error}
         />
@@ -916,8 +987,9 @@ export default function CompanyAssetsPage() {
                           onClick={() => setEditing(asset)}
                           style={actionBtnStyle}
                           aria-label={t("companyAssets.editAsset")}
+                          title={t("companyAssets.editAsset")}
                         >
-                          {t("common.edit")}
+                          <EditIcon />
                         </button>
                         <button
                           type="button"
@@ -927,8 +999,9 @@ export default function CompanyAssetsPage() {
                             color: "var(--danger)",
                           }}
                           aria-label={t("companyAssets.deleteAsset")}
+                          title={t("companyAssets.deleteAsset")}
                         >
-                          {t("common.delete")}
+                          <DeleteIcon />
                         </button>
                       </div>
                     </td>

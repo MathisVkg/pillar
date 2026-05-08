@@ -239,7 +239,7 @@ const nl = {
     activeAssets: "Active assets",
     totalPurchaseValue: "Purchase value excl. VAT",
     warrantyExpiringSoon: "Warranty expiring soon",
-    missingSerials: "Missing serial numbers",
+    totalVat: "Total VAT",
     name: "Name",
     namePlaceholder: "e.g. MacBook Pro",
     purchaseDate: "Purchase date",

@@ -83,6 +83,47 @@ const actionBtnStyle: React.CSSProperties = {
   flexShrink: 0,
 };
 
+function EditIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+    </svg>
+  );
+}
+
+function DeleteIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 6h18" />
+      <path d="M8 6V4h8v2" />
+      <path d="M19 6l-1 14H6L5 6" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
+    </svg>
+  );
+}
+
 function toDateInputValue(iso: string): string {
   return new Date(iso).toISOString().split("T")[0];
 }
@@ -386,6 +427,7 @@ export default function RoadBookPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<RoadBookEntry | null>(null);
+  const [formVersion, setFormVersion] = useState(0);
   const [typeFilter, setTypeFilter] = useState<"all" | RoadBookType>("all");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -503,6 +545,7 @@ export default function RoadBookPage() {
       }
 
       setEditing(null);
+      setFormVersion((version) => version + 1);
       await loadEntries();
     } catch (err) {
       setError(err instanceof Error ? err.message : t("common.error"));
@@ -644,9 +687,13 @@ export default function RoadBookPage() {
         }}
       >
         <RoadBookForm
+          key={`${editing?.id ?? "new"}-${formVersion}`}
           initial={editing ? toFormValues(editing) : undefined}
           onSave={handleSave}
-          onCancel={() => setEditing(null)}
+          onCancel={() => {
+            setEditing(null);
+            setFormVersion((version) => version + 1);
+          }}
           submitting={submitting}
           error={error}
         />
@@ -873,8 +920,9 @@ export default function RoadBookPage() {
                           onClick={() => setEditing(entry)}
                           style={actionBtnStyle}
                           aria-label={t("roadBook.editEntry")}
+                          title={t("roadBook.editEntry")}
                         >
-                          {t("common.edit")}
+                          <EditIcon />
                         </button>
                         <button
                           type="button"
@@ -884,8 +932,9 @@ export default function RoadBookPage() {
                             color: "var(--danger)",
                           }}
                           aria-label={t("roadBook.deleteEntry")}
+                          title={t("roadBook.deleteEntry")}
                         >
-                          {t("common.delete")}
+                          <DeleteIcon />
                         </button>
                       </div>
                     </td>

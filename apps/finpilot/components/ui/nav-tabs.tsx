@@ -10,7 +10,10 @@ export default function NavTabs() {
   const lang = useLang();
   const { t } = useTranslation();
   const [extraOpen, setExtraOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const extraRef = useRef<HTMLDivElement>(null);
+  const extraButtonRef = useRef<HTMLButtonElement>(null);
+  const extraMenuRef = useRef<HTMLDivElement>(null);
 
   const TABS = [
     { label: t("nav.overview"), href: `/${lang}/dashboard` },
@@ -31,7 +34,11 @@ export default function NavTabs() {
 
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
-      if (!extraRef.current?.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (
+        !extraRef.current?.contains(target) &&
+        !extraMenuRef.current?.contains(target)
+      ) {
         setExtraOpen(false);
       }
     }
@@ -40,13 +47,34 @@ export default function NavTabs() {
       if (event.key === "Escape") setExtraOpen(false);
     }
 
+    function handleViewportChange() {
+      setExtraOpen(false);
+    }
+
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("scroll", handleViewportChange, true);
     return () => {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("scroll", handleViewportChange, true);
     };
   }, []);
+
+  function toggleExtra() {
+    const rect = extraButtonRef.current?.getBoundingClientRect();
+    if (rect) {
+      const menuWidth = 190;
+      const left = Math.min(rect.left, window.innerWidth - menuWidth - 12);
+      setMenuPosition({
+        top: rect.bottom + 6,
+        left: Math.max(12, left),
+      });
+    }
+    setExtraOpen((open) => !open);
+  }
 
   return (
     <div className="fp-nav-tabs">
@@ -81,10 +109,11 @@ export default function NavTabs() {
         style={{ position: "relative", flex: "0 0 auto" }}
       >
         <button
+          ref={extraButtonRef}
           type="button"
           aria-haspopup="menu"
           aria-expanded={extraOpen}
-          onClick={() => setExtraOpen((open) => !open)}
+          onClick={toggleExtra}
           style={{
             padding: "12px 16px",
             minHeight: "44px",
@@ -106,11 +135,12 @@ export default function NavTabs() {
 
         {extraOpen && (
           <div
+            ref={extraMenuRef}
             role="menu"
             style={{
-              position: "absolute",
-              top: "calc(100% + 6px)",
-              right: 0,
+              position: "fixed",
+              top: `${menuPosition.top}px`,
+              left: `${menuPosition.left}px`,
               minWidth: "190px",
               maxWidth: "calc(100vw - 24px)",
               padding: "6px",

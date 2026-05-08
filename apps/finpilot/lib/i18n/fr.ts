@@ -248,7 +248,7 @@ const fr = {
     activeAssets: "Actifs en service",
     totalPurchaseValue: "Valeur d\u2019achat HTVA",
     warrantyExpiringSoon: "Garanties bient\u00F4t expir\u00E9es",
-    missingSerials: "Num\u00E9ros de s\u00E9rie manquants",
+    totalVat: "TVA totale",
     name: "Nom",
     namePlaceholder: "ex. MacBook Pro",
     purchaseDate: "Date d\u2019achat",
