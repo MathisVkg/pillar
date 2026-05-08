@@ -1,6 +1,12 @@
 # Dependencies
 node_modules/
 
+# Package manager / tool caches
+.npm/
+.yarn/
+.pnpm-store/
+.cache/
+
 # Next.js
 .next/
 out/
@@ -22,8 +28,15 @@ coverage/
 *.tsbuildinfo
 next-env.d.ts
 
-# Prisma generated client
+# Prisma
+# @pillar/database imports packages/database/generated/client directly, but the
+# client is generated during local/deploy builds with `npm run db:generate`.
+# Keep generated Prisma output and engine caches out of Git.
 packages/database/generated/
+packages/database/node_modules/.cache/prisma/
+**/.prisma/client/
+*.tmp
+*.tmp.*
 
 # Logs
 npm-debug.log*
