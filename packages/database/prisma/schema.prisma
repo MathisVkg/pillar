@@ -69,6 +69,8 @@ model Client {
   externalIncomes     ExternalIncome[]
   incomeEntries       IncomeEntry[]
   recurringExpenses   RecurringExpense[]
+  roadBookEntries     RoadBookEntry[]
+  companyAssets       CompanyAsset[]
 
   @@map("client")
 }
@@ -414,4 +416,64 @@ model RecurringExpense {
   client      Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
   @@map("finpilot_recurring_expense")
+}
+
+// ============================================================
+// ROAD BOOK
+// Manual vehicle trip log for professional and personal trips.
+// client_id nullable for future client extension.
+// ============================================================
+model RoadBookEntry {
+  id            String    @id @default(uuid())
+  clientId      String?   // NULL = your company
+  tripDate      DateTime  @db.Date
+  type          String    // professional | personal
+  vehicleName   String
+  startLocation String
+  endLocation   String
+  purpose       String?   @db.Text
+  odometerStart Int?
+  odometerEnd   Int?
+  distanceKm    Decimal   @db.Decimal(10, 2)
+  notes         String?   @db.Text
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  client        Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@index([clientId, tripDate])
+  @@index([clientId, type])
+  @@map("finpilot_road_book_entry")
+}
+
+// ============================================================
+// COMPANY ASSET
+// Manual company inventory/tracking records only.
+// client_id nullable for future client extension.
+// ============================================================
+model CompanyAsset {
+  id                String    @id @default(uuid())
+  clientId          String?   // NULL = your company
+  name              String
+  category          String
+  vendor            String?
+  purchaseDate      DateTime  @db.Date
+  purchasePriceExcl Decimal   @db.Decimal(10, 2)
+  vatAmount         Decimal   @default(0) @db.Decimal(10, 2)
+  serialNumber      String?
+  warrantyUntil     DateTime? @db.Date
+  status            String    @default("active")
+                              // active | sold | retired | lost
+  location          String?
+  notes             String?   @db.Text
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  client            Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@index([clientId, status])
+  @@index([clientId, purchaseDate])
+  @@map("finpilot_company_asset")
 }
