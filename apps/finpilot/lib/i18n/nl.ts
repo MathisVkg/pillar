@@ -11,6 +11,8 @@ const nl = {
     add: "Toevoegen",
     filter: "Filteren",
     all: "Alle",
+    status: "Status",
+    total: "Totaal",
     noData: "Nog geen gegevens",
   },
   auth: {
@@ -80,6 +82,8 @@ const nl = {
     statusDraft: "Draft",
     editEntry: "Edit entry",
     deleteEntry: "Delete entry",
+    countSingular: "entry",
+    countPlural: "entries",
   },
   expenses: {
     title: "Uitgaven",
@@ -110,6 +114,10 @@ const nl = {
     categoryOffice: "Kantoor",
     categoryVehicle: "Voertuig",
     categoryOther: "Overig",
+    allMonths: "All months",
+    noVat: "No VAT",
+    countSingular: "expense",
+    countPlural: "expenses",
   },
   pl: {
     title: "Profit & Loss",
@@ -129,8 +137,12 @@ const nl = {
     expensesLabel: "Total expenses \u00B7 {year}",
     resultLabel: "Operating result \u00B7 {year}",
     exclVat: "excl. VAT \u00B7 all sources",
+    exclVatShort: "excl. VAT",
     revenueMinusExpenses: "revenue \u2013 expenses",
     resultOverRevenue: "operating result / revenue",
+    vatPosition: "VAT position",
+    vatOwedPrefix: "Owed:",
+    vatCreditPrefix: "Credit:",
     disclaimer: "All figures are indicative estimates. Consult your accountant for tax declarations and precise financial statements.",
   },
   vatSummary: {
@@ -154,6 +166,7 @@ const nl = {
     tableExcl: "Excl. VAT",
     tableVat: "VAT",
     tableTotal: "Total",
+    expensesWithVatTitle: "{quarter} expenses with VAT \u00B7 {period}",
   },
   recurringExpenses: {
     title: "Recurring expenses",
@@ -173,6 +186,15 @@ const nl = {
     freqMonthly: "Monthly",
     freqQuarterly: "Quarterly",
     freqYearly: "Yearly",
+    frequency: "Frequency",
+    vendorPlaceholder: "e.g. Proximus Mobile",
+    monthlyItemsOnly: "monthly items only \u00B7 per month",
+    quarterlyItemsOnly: "quarterly items only \u00B7 per quarter",
+    yearlyItemsOnly: "yearly items only \u00B7 per year",
+    annualProjectionSub: "all items \u00B7 full year cost",
+    countSingular: "recurring expense",
+    countPlural: "recurring expenses",
+    perYearShort: "/yr",
   },
   exportPage: {
     title: "Export",
@@ -190,6 +212,9 @@ const nl = {
     atLeastOne: "Select at least one file to export.",
     formatNote: "Files open correctly in Excel and LibreOffice. Decimal separator: comma (Belgian format).",
     quickPeriods: "Quick periods",
+    incomeSub: "income_entry \u00B7 paid entries only",
+    expensesSub: "expense \u00B7 all entries",
+    vatSub: "indicative \u00B7 for reference",
   },
 } as const;
 

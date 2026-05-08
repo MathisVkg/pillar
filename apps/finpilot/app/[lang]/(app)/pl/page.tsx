@@ -118,7 +118,14 @@ export default function PLPage() {
           borderTop: `3px solid ${accent}`,
         }}
       >
-        <div style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 500, marginBottom: "8px" }}>
+        <div
+          style={{
+            fontSize: "12px",
+            color: "var(--muted)",
+            fontWeight: 500,
+            marginBottom: "8px",
+          }}
+        >
           {label}
         </div>
         <div
@@ -189,11 +196,24 @@ export default function PLPage() {
           </div>
         )}
         {!icon && <div style={{ width: "28px", flexShrink: 0 }} />}
-        <div style={{ flex: 1, fontSize: "13px", fontWeight: bold ? 600 : 400, color: bold ? "var(--text)" : "var(--muted)" }}>
+        <div
+          style={{
+            flex: 1,
+            fontSize: "13px",
+            fontWeight: bold ? 600 : 400,
+            color: bold ? "var(--text)" : "var(--muted)",
+          }}
+        >
           {label}
         </div>
         {pct && (
-          <div style={{ fontSize: "11px", color: "var(--subtle)", fontFamily: "var(--font-mono)" }}>
+          <div
+            style={{
+              fontSize: "11px",
+              color: "var(--subtle)",
+              fontFamily: "var(--font-mono)",
+            }}
+          >
             {pct}
           </div>
         )}
@@ -216,24 +236,58 @@ export default function PLPage() {
   if (loading || !data) {
     return (
       <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
+        <div
+          className="fp-mobile-stack"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "20px",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "20px",
+              fontWeight: 700,
+              color: "var(--text)",
+              letterSpacing: "-0.4px",
+            }}
+          >
             {t("pl.title")}
           </div>
-          <select value={year} onChange={(e) => setYear(Number(e.target.value))} style={yearSelectStyle}>
-            {YEAR_OPTIONS.map((y) => <option key={y} value={y}>{y}</option>)}
+          <select
+            value={year}
+            onChange={(e) => setYear(Number(e.target.value))}
+            style={yearSelectStyle}
+          >
+            {YEAR_OPTIONS.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
           </select>
         </div>
-        <div style={{ padding: "60px", textAlign: "center", color: "var(--subtle)", fontSize: "13px" }}>
+        <div
+          style={{
+            padding: "60px",
+            textAlign: "center",
+            color: "var(--subtle)",
+            fontSize: "13px",
+          }}
+        >
           {t("common.loading")}
         </div>
       </div>
     );
   }
 
-  const { revenue, expenses, recurringRef, result, vatPosition, quarters } = data;
+  const { revenue, expenses, recurringRef, result, vatPosition, quarters } =
+    data;
 
-  const resultAccent = result.operating >= 0 ? "var(--income)" : "var(--danger)";
+  const resultAccent =
+    result.operating >= 0 ? "var(--income)" : "var(--danger)";
   const resultColor = result.operating >= 0 ? "var(--income)" : "var(--danger)";
 
   // Category rows sorted by amount DESC, only > 0
@@ -243,24 +297,62 @@ export default function PLPage() {
 
   return (
     <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-
       {/* Toolbar */}
-      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
+      <div
+        className="fp-mobile-stack"
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          gap: "12px",
+        }}
+      >
         <div>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "20px",
+              fontWeight: 700,
+              color: "var(--text)",
+              letterSpacing: "-0.4px",
+            }}
+          >
             {t("pl.title")}
           </div>
-          <div style={{ fontSize: "13px", color: "var(--muted)", marginTop: "2px" }}>
+          <div
+            style={{
+              fontSize: "13px",
+              color: "var(--muted)",
+              marginTop: "2px",
+            }}
+          >
             {t("pl.subtitle").replace("{year}", String(data.year))}
           </div>
         </div>
-        <select value={year} onChange={(e) => setYear(Number(e.target.value))} style={yearSelectStyle}>
-          {YEAR_OPTIONS.map((y) => <option key={y} value={y}>{y}</option>)}
+        <select
+          value={year}
+          onChange={(e) => setYear(Number(e.target.value))}
+          style={yearSelectStyle}
+        >
+          {YEAR_OPTIONS.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
         </select>
       </div>
 
       {/* KPI cards */}
-      <div className="fp-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "20px" }}>
+      <div
+        className="fp-grid-4"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "10px",
+          marginBottom: "20px",
+        }}
+      >
         <KpiCard
           accent="var(--income)"
           label={t("pl.revenueLabel").replace("{year}", String(data.year))}
@@ -273,7 +365,7 @@ export default function PLPage() {
           label={t("pl.expensesLabel").replace("{year}", String(data.year))}
           value={formatEuro(expenses.total)}
           valueColor="var(--expense)"
-          sub="excl. VAT"
+          sub={t("pl.exclVatShort")}
         />
         <KpiCard
           accent={resultAccent}
@@ -292,11 +384,32 @@ export default function PLPage() {
       </div>
 
       {/* Two-column breakdown */}
-      <div className="fp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "20px" }}>
-
+      <div
+        className="fp-grid-2"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "12px",
+          marginBottom: "20px",
+        }}
+      >
         {/* Revenue breakdown */}
-        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "20px" }}>
-          <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)", marginBottom: "4px" }}>
+        <div
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "14px",
+            padding: "20px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "var(--text)",
+              marginBottom: "4px",
+            }}
+          >
             {t("pl.revenueBreakdown")}
           </div>
 
@@ -307,7 +420,11 @@ export default function PLPage() {
             label={t("pl.pillarInvoices")}
             amount={formatEuro(revenue.pillar)}
             amountColor="var(--income)"
-            pct={revenue.total > 0 ? `${((revenue.pillar / revenue.total) * 100).toFixed(1)}%` : "—"}
+            pct={
+              revenue.total > 0
+                ? `${((revenue.pillar / revenue.total) * 100).toFixed(1)}%`
+                : "—"
+            }
           />
           <BreakdownRow
             icon="E"
@@ -316,10 +433,16 @@ export default function PLPage() {
             label={t("pl.externalIncome")}
             amount={formatEuro(revenue.external)}
             amountColor="var(--income)"
-            pct={revenue.total > 0 ? `${((revenue.external / revenue.total) * 100).toFixed(1)}%` : "—"}
+            pct={
+              revenue.total > 0
+                ? `${((revenue.external / revenue.total) * 100).toFixed(1)}%`
+                : "—"
+            }
           />
 
-          <div style={{ borderTop: "1px solid var(--border)", margin: "8px 0" }} />
+          <div
+            style={{ borderTop: "1px solid var(--border)", margin: "8px 0" }}
+          />
 
           <BreakdownRow
             label={t("pl.totalRevenue")}
@@ -330,8 +453,22 @@ export default function PLPage() {
         </div>
 
         {/* Expenses by category */}
-        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "20px" }}>
-          <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)", marginBottom: "4px" }}>
+        <div
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "14px",
+            padding: "20px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "var(--text)",
+              marginBottom: "4px",
+            }}
+          >
             {t("pl.expensesByCategory")}
           </div>
 
@@ -341,11 +478,17 @@ export default function PLPage() {
               label={t(CATEGORY_KEYS[cat] ?? "expenses.categoryOther")}
               amount={formatEuro(amount)}
               amountColor="var(--expense)"
-              pct={expenses.total > 0 ? `${((amount / expenses.total) * 100).toFixed(1)}%` : "—"}
+              pct={
+                expenses.total > 0
+                  ? `${((amount / expenses.total) * 100).toFixed(1)}%`
+                  : "—"
+              }
             />
           ))}
 
-          <div style={{ borderTop: "1px solid var(--border)", margin: "8px 0" }} />
+          <div
+            style={{ borderTop: "1px solid var(--border)", margin: "8px 0" }}
+          />
 
           <BreakdownRow
             label={t("pl.totalExpenses")}
@@ -355,21 +498,59 @@ export default function PLPage() {
           />
 
           {/* Recurring reference */}
-          <div style={{ borderTop: "1px dashed var(--border)", marginTop: "12px", paddingTop: "10px", display: "flex", alignItems: "flex-start", gap: "10px" }}>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="var(--subtle)" strokeWidth="1.5" strokeLinecap="round" style={{ marginTop: "2px", flexShrink: 0 }}>
+          <div
+            style={{
+              borderTop: "1px dashed var(--border)",
+              marginTop: "12px",
+              paddingTop: "10px",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <svg
+              aria-hidden="true"
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="var(--subtle)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              style={{ marginTop: "2px", flexShrink: 0 }}
+            >
               <path d="M13 3.5A6 6 0 1 1 7 2" />
               <path d="M13 2v2h-2" />
             </svg>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "11px", color: "var(--subtle)", fontStyle: "italic" }}>
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "var(--subtle)",
+                  fontStyle: "italic",
+                }}
+              >
                 {t("pl.recurringRef")}
               </div>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  color: "var(--subtle)",
+                  marginTop: "2px",
+                }}
+              >
                 <span>{"~"}</span>
                 <span>{formatEuro(recurringRef.yearlyTotal)}</span>
                 <span>/yr</span>
               </div>
-              <div style={{ fontSize: "10px", color: "var(--subtle)", marginTop: "2px" }}>
+              <div
+                style={{
+                  fontSize: "10px",
+                  color: "var(--subtle)",
+                  marginTop: "2px",
+                }}
+              >
                 {t("pl.recurringNotCounted")}
               </div>
             </div>
@@ -379,10 +560,24 @@ export default function PLPage() {
 
       {/* Quarterly breakdown */}
       <div style={{ marginBottom: "20px" }}>
-        <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)", marginBottom: "12px" }}>
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "var(--text)",
+            marginBottom: "12px",
+          }}
+        >
           {t("pl.quarterlyBreakdown")}
         </div>
-        <div className="fp-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px" }}>
+        <div
+          className="fp-grid-4"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "10px",
+          }}
+        >
           {quarters.map((q) => (
             <div
               key={q.label}
@@ -393,17 +588,48 @@ export default function PLPage() {
                 padding: "16px",
               }}
             >
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "16px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.3px" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "16px",
+                  fontWeight: 700,
+                  color: "var(--text)",
+                  letterSpacing: "-0.3px",
+                }}
+              >
                 {q.label}
               </div>
-              <div style={{ fontSize: "11px", color: "var(--muted)", marginTop: "1px", marginBottom: "12px" }}>
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "var(--muted)",
+                  marginTop: "1px",
+                  marginBottom: "12px",
+                }}
+              >
                 {q.period.replace(` ${data.year}`, "")}
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "13px", fontWeight: 600, color: "var(--income)" }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    color: "var(--income)",
+                  }}
+                >
                   {formatEuro(q.revenue)}
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "13px", fontWeight: 600, color: "var(--expense)" }}>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    color: "var(--expense)",
+                  }}
+                >
                   <span>{"−"}</span>
                   <span>{formatEuro(q.expenses)}</span>
                 </div>
@@ -458,7 +684,8 @@ export default function PLPage() {
               fontFamily: "var(--font-mono)",
               fontSize: "20px",
               fontWeight: 700,
-              color: result.operating >= 0 ? "#fff" : "var(--danger-l, #fca5a5)",
+              color:
+                result.operating >= 0 ? "#fff" : "var(--danger-l, #fca5a5)",
             }}
           >
             {formatEuro(result.operating)}
@@ -477,24 +704,27 @@ export default function PLPage() {
               marginBottom: "6px",
             }}
           >
-            VAT position
+            {t("pl.vatPosition")}
           </div>
           <div
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "16px",
               fontWeight: 600,
-              color: vatPosition.net >= 0 ? "var(--vat-l, #bae6fd)" : "var(--income-l, #bbf7d0)",
+              color:
+                vatPosition.net >= 0
+                  ? "var(--vat-l, #bae6fd)"
+                  : "var(--income-l, #bbf7d0)",
             }}
           >
             {vatPosition.net >= 0 ? (
               <>
-                <span>Owed: </span>
+                <span>{t("pl.vatOwedPrefix")} </span>
                 <span>{formatEuro(vatPosition.net)}</span>
               </>
             ) : (
               <>
-                <span>Credit: +</span>
+                <span>{t("pl.vatCreditPrefix")} +</span>
                 <span>{formatEuro(Math.abs(vatPosition.net))}</span>
               </>
             )}
@@ -513,7 +743,6 @@ export default function PLPage() {
           {t("pl.disclaimer")}
         </div>
       </div>
-
     </div>
   );
 }

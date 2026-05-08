@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "@/components/LangProvider";
 
 interface Expense {
@@ -104,13 +104,23 @@ const actionBtnStyle: React.CSSProperties = {
 
 // ── Toggle pill ───────────────────────────────────────────────────────────────
 
-function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
+function Toggle({
+  checked,
+  onChange,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
-    <div
+    <button
+      type="button"
+      aria-pressed={checked}
       onClick={() => onChange(!checked)}
       style={{
         width: "36px",
         height: "20px",
+        padding: 0,
+        border: "none",
         borderRadius: "999px",
         background: checked ? "var(--expense)" : "var(--border)",
         cursor: "pointer",
@@ -132,7 +142,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
           boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
         }}
       />
-    </div>
+    </button>
   );
 }
 
@@ -158,7 +168,9 @@ function ExpenseForm({
   const [amountTotal, setAmountTotal] = useState(initial?.amountTotal ?? "");
   const [hasVat, setHasVat] = useState(initial?.hasVat ?? true);
   const [vatAmount, setVatAmount] = useState(initial?.vatAmount ?? "");
-  const [category, setCategory] = useState(initial?.category ?? "software_license");
+  const [category, setCategory] = useState(
+    initial?.category ?? "software_license",
+  );
   const [expenseDate, setExpenseDate] = useState(initial?.expenseDate ?? today);
   const [description, setDescription] = useState(initial?.description ?? "");
   const [notes] = useState(initial?.notes ?? "");
@@ -174,7 +186,7 @@ function ExpenseForm({
     }
     if (hasVat && amountTotal) {
       const total = parseFloat(amountTotal);
-      if (!isNaN(total)) {
+      if (!Number.isNaN(total)) {
         setVatAmount(round2((total / 1.21) * 0.21).toFixed(2));
       }
     } else if (!hasVat) {
@@ -188,7 +200,7 @@ function ExpenseForm({
       setVatAmount("0");
     } else {
       const total = parseFloat(amountTotal);
-      if (!isNaN(total) && total > 0) {
+      if (!Number.isNaN(total) && total > 0) {
         setVatAmount(round2((total / 1.21) * 0.21).toFixed(2));
       }
     }
@@ -196,13 +208,23 @@ function ExpenseForm({
 
   // Live breakdown
   const totalNum = parseFloat(amountTotal) || 0;
-  const vatNum = hasVat ? (parseFloat(vatAmount) || 0) : 0;
+  const vatNum = hasVat ? parseFloat(vatAmount) || 0 : 0;
   const exclNum = Math.round((totalNum - vatNum) * 100) / 100;
   const showBreakdown = hasVat && totalNum > 0;
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    await onSave({ vendor, amountTotal, hasVat, vatAmount, category, expenseDate, description, notes, status });
+    await onSave({
+      vendor,
+      amountTotal,
+      hasVat,
+      vatAmount,
+      category,
+      expenseDate,
+      description,
+      notes,
+      status,
+    });
   }
 
   const labelStyle: React.CSSProperties = {
@@ -227,8 +249,11 @@ function ExpenseForm({
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.vendor")}</label>
+          <label htmlFor="expense-vendor" style={labelStyle}>
+            {t("expenses.vendor")}
+          </label>
           <input
+            id="expense-vendor"
             type="text"
             value={vendor}
             onChange={(e) => setVendor(e.target.value)}
@@ -238,8 +263,11 @@ function ExpenseForm({
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.totalAmount")}</label>
+          <label htmlFor="expense-total" style={labelStyle}>
+            {t("expenses.totalAmount")}
+          </label>
           <input
+            id="expense-total"
             type="number"
             min="0"
             step="0.01"
@@ -251,8 +279,11 @@ function ExpenseForm({
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.vatAmount")}</label>
+          <label htmlFor="expense-vat" style={labelStyle}>
+            {t("expenses.vatAmount")}
+          </label>
           <input
+            id="expense-vat"
             type="number"
             min="0"
             step="0.01"
@@ -267,15 +298,32 @@ function ExpenseForm({
             }}
           />
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", paddingBottom: "2px" }}>
-          <label style={{ ...labelStyle, marginBottom: 0 }}>{t("expenses.hasVat")}</label>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "6px",
+            paddingBottom: "2px",
+          }}
+        >
+          <span style={{ ...labelStyle, marginBottom: 0 }}>
+            {t("expenses.hasVat")}
+          </span>
           <Toggle checked={hasVat} onChange={handleHasVatToggle} />
         </div>
       </div>
 
       {/* Breakdown */}
       {showBreakdown && (
-        <div style={{ fontSize: "11px", color: "var(--subtle)", marginBottom: "8px", fontFamily: "var(--font-mono)" }}>
+        <div
+          style={{
+            fontSize: "11px",
+            color: "var(--subtle)",
+            marginBottom: "8px",
+            fontFamily: "var(--font-mono)",
+          }}
+        >
           {t("expenses.breakdown")
             .replace("{excl}", exclNum.toFixed(2))
             .replace("{vat}", vatNum.toFixed(2))
@@ -294,8 +342,11 @@ function ExpenseForm({
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.category")}</label>
+          <label htmlFor="expense-category" style={labelStyle}>
+            {t("expenses.category")}
+          </label>
           <select
+            id="expense-category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             style={{ ...inputStyle, appearance: "none" as const }}
@@ -309,8 +360,11 @@ function ExpenseForm({
           </select>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.date")}</label>
+          <label htmlFor="expense-date" style={labelStyle}>
+            {t("expenses.date")}
+          </label>
           <input
+            id="expense-date"
             type="date"
             value={expenseDate}
             onChange={(e) => setExpenseDate(e.target.value)}
@@ -319,8 +373,11 @@ function ExpenseForm({
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>Status</label>
+          <label htmlFor="expense-status" style={labelStyle}>
+            {t("common.status")}
+          </label>
           <select
+            id="expense-status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             style={{ ...inputStyle, appearance: "none" as const }}
@@ -331,8 +388,11 @@ function ExpenseForm({
           </select>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("income.description")}</label>
+          <label htmlFor="expense-description" style={labelStyle}>
+            {t("income.description")}
+          </label>
           <input
+            id="expense-description"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -382,7 +442,11 @@ function ExpenseForm({
       </div>
 
       {error && (
-        <p style={{ fontSize: "12px", color: "var(--danger)", marginTop: "8px" }}>{error}</p>
+        <p
+          style={{ fontSize: "12px", color: "var(--danger)", marginTop: "8px" }}
+        >
+          {error}
+        </p>
       )}
     </form>
   );
@@ -391,26 +455,35 @@ function ExpenseForm({
 // ── Status helpers ────────────────────────────────────────────────────────────
 
 function statusBadgeStyle(status: string): React.CSSProperties {
-  if (status === "pending") return { background: "var(--warn-l)", color: "var(--warn)" };
-  if (status === "draft") return { background: "var(--border)", color: "var(--muted)" };
+  if (status === "pending")
+    return { background: "var(--warn-l)", color: "var(--warn)" };
+  if (status === "draft")
+    return { background: "var(--border)", color: "var(--muted)" };
   return { background: "var(--income-l)", color: "var(--income)" };
 }
 
 // ── Group by month ────────────────────────────────────────────────────────────
 
-function groupByMonth(expenses: Expense[]): Array<{ label: string; items: Expense[] }> {
+function groupByMonth(
+  expenses: Expense[],
+  locale: string,
+): Array<{ label: string; items: Expense[] }> {
   const groups = new Map<string, Expense[]>();
   for (const e of expenses) {
     const d = new Date(e.expenseDate);
     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(e);
+    const items = groups.get(key) ?? [];
+    items.push(e);
+    groups.set(key, items);
   }
   return Array.from(groups.entries())
     .sort((a, b) => b[0].localeCompare(a[0]))
     .map(([, items]) => ({
       label: items[0]
-        ? new Date(items[0].expenseDate).toLocaleString("fr-BE", { month: "long", year: "numeric" })
+        ? new Date(items[0].expenseDate).toLocaleString(locale, {
+            month: "long",
+            year: "numeric",
+          })
         : "",
       items,
     }));
@@ -423,7 +496,9 @@ type StatusFilter = "all" | "paid" | "pending" | "draft";
 const PAGE_SIZE = 20;
 
 export default function ExpensesPage() {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+  const dateLocale =
+    lang === "fr" ? "fr-BE" : lang === "nl" ? "nl-BE" : "en-US";
 
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [loading, setLoading] = useState(true);
@@ -449,28 +524,48 @@ export default function ExpensesPage() {
         seen.add(key);
         months.push({
           key,
-          label: d.toLocaleString("fr-BE", { month: "long", year: "numeric" }),
+          label: d.toLocaleString(dateLocale, {
+            month: "long",
+            year: "numeric",
+          }),
         });
       }
     }
     return months.sort((a, b) => b.key.localeCompare(a.key));
-  }, [expenses]);
+  }, [expenses, dateLocale]);
 
-  // Reset to page 1 when filters or search change
-  useEffect(() => { setPage(1); }, [search, categoryFilter, statusFilter, monthFilter]);
-
-  async function loadExpenses() {
+  const loadExpenses = useCallback(async () => {
     const res = await fetch("/api/expenses");
     if (res.ok) {
       const data = await res.json();
       setExpenses(data);
     }
     setLoading(false);
-  }
+  }, []);
 
   useEffect(() => {
     loadExpenses();
-  }, []);
+  }, [loadExpenses]);
+
+  function updateSearch(value: string) {
+    setSearch(value);
+    setPage(1);
+  }
+
+  function updateCategoryFilter(value: Category | "all") {
+    setCategoryFilter(value);
+    setPage(1);
+  }
+
+  function updateStatusFilter(value: StatusFilter) {
+    setStatusFilter(value);
+    setPage(1);
+  }
+
+  function updateMonthFilter(value: string) {
+    setMonthFilter(value);
+    setPage(1);
+  }
 
   async function handleAdd(values: ExpenseFormValues) {
     setAddSubmitting(true);
@@ -539,7 +634,7 @@ export default function ExpensesPage() {
   const total = displayed.reduce((s, e) => s + e.amountExcl + e.vatAmount, 0);
   const totalPages = Math.ceil(displayed.length / PAGE_SIZE);
   const paginated = displayed.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-  const grouped = groupByMonth(paginated);
+  const grouped = groupByMonth(paginated, dateLocale);
 
   const chipStyle = (active: boolean): React.CSSProperties => ({
     fontFamily: "var(--font-mono)",
@@ -571,7 +666,11 @@ export default function ExpensesPage() {
       borderRadius: "999px",
       border: `1px solid ${active ? colors[value] : "var(--border)"}`,
       background: active ? colors[value] : "var(--surface)",
-      color: active ? (value === "draft" ? "var(--text)" : "#fff") : "var(--muted)",
+      color: active
+        ? value === "draft"
+          ? "var(--text)"
+          : "#fff"
+        : "var(--muted)",
       cursor: "pointer",
       letterSpacing: "0.02em",
       whiteSpace: "nowrap" as const,
@@ -586,14 +685,34 @@ export default function ExpensesPage() {
 
   return (
     <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-
       {/* Toolbar */}
-      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px", gap: "12px" }}>
-        <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
+      <div
+        className="fp-mobile-stack"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "18px",
+          gap: "12px",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "20px",
+            fontWeight: 700,
+            color: "var(--text)",
+            letterSpacing: "-0.4px",
+          }}
+        >
           {t("expenses.title")}
         </div>
         <button
-          onClick={() => { setShowForm((v) => !v); setAddError(null); }}
+          type="button"
+          onClick={() => {
+            setShowForm((v) => !v);
+            setAddError(null);
+          }}
           style={{
             padding: "9px 18px",
             borderRadius: "999px",
@@ -621,12 +740,23 @@ export default function ExpensesPage() {
             marginBottom: "16px",
           }}
         >
-          <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)", marginBottom: "14px", fontFamily: "var(--font-display)" }}>
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "var(--text)",
+              marginBottom: "14px",
+              fontFamily: "var(--font-display)",
+            }}
+          >
             {t("expenses.quickAdd")}
           </div>
           <ExpenseForm
             onSave={handleAdd}
-            onCancel={() => { setShowForm(false); setAddError(null); }}
+            onCancel={() => {
+              setShowForm(false);
+              setAddError(null);
+            }}
             submitting={addSubmitting}
             error={addError}
           />
@@ -638,7 +768,7 @@ export default function ExpensesPage() {
         type="text"
         placeholder={t("expenses.searchPlaceholder")}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => updateSearch(e.target.value)}
         style={{
           width: "100%",
           boxSizing: "border-box" as const,
@@ -655,27 +785,70 @@ export default function ExpensesPage() {
       />
 
       {/* Filter chips */}
-      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
+      <div
+        className="fp-mobile-stack"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "8px",
+          marginBottom: "14px",
+          flexWrap: "wrap",
+        }}
+      >
         <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-          <button style={chipStyle(categoryFilter === "all")} onClick={() => setCategoryFilter("all")}>
+          <button
+            type="button"
+            style={chipStyle(categoryFilter === "all")}
+            onClick={() => updateCategoryFilter("all")}
+          >
             {t("common.all")}
           </button>
           {CATEGORIES.map((cat) => (
-            <button key={cat} style={chipStyle(categoryFilter === cat)} onClick={() => setCategoryFilter(cat)}>
+            <button
+              type="button"
+              key={cat}
+              style={chipStyle(categoryFilter === cat)}
+              onClick={() => updateCategoryFilter(cat)}
+            >
               {t(CATEGORY_KEYS[cat])}
             </button>
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <div style={{ display: "flex", gap: "6px" }}>
-            <button style={statusChipStyle("all")} onClick={() => setStatusFilter("all")}>{t("common.all")}</button>
-            <button style={statusChipStyle("paid")} onClick={() => setStatusFilter("paid")}>{t("expenses.statusPaid")}</button>
-            <button style={statusChipStyle("pending")} onClick={() => setStatusFilter("pending")}>{t("expenses.statusPending")}</button>
-            <button style={statusChipStyle("draft")} onClick={() => setStatusFilter("draft")}>{t("expenses.statusDraft")}</button>
+            <button
+              type="button"
+              style={statusChipStyle("all")}
+              onClick={() => updateStatusFilter("all")}
+            >
+              {t("common.all")}
+            </button>
+            <button
+              type="button"
+              style={statusChipStyle("paid")}
+              onClick={() => updateStatusFilter("paid")}
+            >
+              {t("expenses.statusPaid")}
+            </button>
+            <button
+              type="button"
+              style={statusChipStyle("pending")}
+              onClick={() => updateStatusFilter("pending")}
+            >
+              {t("expenses.statusPending")}
+            </button>
+            <button
+              type="button"
+              style={statusChipStyle("draft")}
+              onClick={() => updateStatusFilter("draft")}
+            >
+              {t("expenses.statusDraft")}
+            </button>
           </div>
           <select
             value={monthFilter}
-            onChange={(e) => setMonthFilter(e.target.value)}
+            onChange={(e) => updateMonthFilter(e.target.value)}
             style={{
               height: "32px",
               border: "1px solid var(--border-md)",
@@ -689,181 +862,387 @@ export default function ExpensesPage() {
               outline: "none",
             }}
           >
-            <option value="all">All months</option>
+            <option value="all">{t("expenses.allMonths")}</option>
             {availableMonths.map((m) => (
-              <option key={m.key} value={m.key}>{m.label}</option>
+              <option key={m.key} value={m.key}>
+                {m.label}
+              </option>
             ))}
           </select>
         </div>
       </div>
 
       {/* Expense list */}
-      <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", overflow: "hidden" }}>
-        <div style={{ padding: "12px 18px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fafafa" }}>
-          <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>
-            {displayed.length} {displayed.length === 1 ? "expense" : "expenses"}
+      <div
+        style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border)",
+          borderRadius: "14px",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            padding: "12px 18px",
+            borderBottom: "1px solid var(--border)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            background: "#fafafa",
+          }}
+        >
+          <div
+            style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}
+          >
+            {displayed.length}{" "}
+            {displayed.length === 1
+              ? t("expenses.countSingular")
+              : t("expenses.countPlural")}
           </div>
-          <div style={{ background: "var(--expense-l)", color: "var(--expense)", fontSize: "11px", fontWeight: 600, padding: "4px 10px", borderRadius: "999px" }}>
+          <div
+            style={{
+              background: "var(--expense-l)",
+              color: "var(--expense)",
+              fontSize: "11px",
+              fontWeight: 600,
+              padding: "4px 10px",
+              borderRadius: "999px",
+            }}
+          >
             −{formatEuro(total)}
           </div>
         </div>
 
         {loading ? (
-          <div style={{ padding: "32px", textAlign: "center", color: "var(--subtle)", fontSize: "13px" }}>
+          <div
+            style={{
+              padding: "32px",
+              textAlign: "center",
+              color: "var(--subtle)",
+              fontSize: "13px",
+            }}
+          >
             {t("common.loading")}
           </div>
         ) : displayed.length === 0 ? (
-          <div style={{ padding: "32px", textAlign: "center", color: "var(--subtle)", fontSize: "13px" }}>
+          <div
+            style={{
+              padding: "32px",
+              textAlign: "center",
+              color: "var(--subtle)",
+              fontSize: "13px",
+            }}
+          >
             {t("expenses.noExpenses")}
           </div>
         ) : (
           grouped.map((group) => (
             <div key={group.label}>
               {/* Month header */}
-              <div style={{ padding: "8px 18px", background: "#f8f9fb", borderBottom: "1px solid var(--border)", fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 600, color: "var(--muted)", letterSpacing: "0.08em", textTransform: "uppercase" as const, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div
+                style={{
+                  padding: "8px 18px",
+                  background: "#f8f9fb",
+                  borderBottom: "1px solid var(--border)",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  color: "var(--muted)",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase" as const,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <span>{group.label}</span>
-                <span style={{ color: "var(--expense)" }}>−{formatEuro(group.items.reduce((s, e) => s + e.amountExcl + e.vatAmount, 0))}</span>
+                <span style={{ color: "var(--expense)" }}>
+                  −
+                  {formatEuro(
+                    group.items.reduce(
+                      (s, e) => s + e.amountExcl + e.vatAmount,
+                      0,
+                    ),
+                  )}
+                </span>
               </div>
               {group.items.map((expense) => (
-            <div key={expense.id}>
-              {/* Row */}
-              <div className="fp-mobile-row" style={{ display: "flex", alignItems: "center", gap: "12px", padding: "13px 18px", borderBottom: "1px solid #f5f5f5" }}>
-                {/* Icon */}
-                <div
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "10px",
-                    background: "var(--expense-ll, #f5f0ff)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--expense)" strokeWidth="1.5" strokeLinecap="round">
-                    <rect x="2" y="3" width="12" height="10" rx="2" />
-                    <path d="M5 7h6M5 10h4" />
-                  </svg>
-                </div>
+                <div key={expense.id}>
+                  {/* Row */}
+                  <div
+                    className="fp-mobile-row"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "13px 18px",
+                      borderBottom: "1px solid #f5f5f5",
+                    }}
+                  >
+                    {/* Icon */}
+                    <div
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "10px",
+                        background: "var(--expense-ll, #f5f0ff)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="var(--expense)"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      >
+                        <rect x="2" y="3" width="12" height="10" rx="2" />
+                        <path d="M5 7h6M5 10h4" />
+                      </svg>
+                    </div>
 
-                {/* Body */}
-                <div data-mobile-main style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--text)" }}>{expense.vendor}</div>
-                  <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
-                    {formatDate(expense.expenseDate)} · {t(CATEGORY_KEYS[expense.category as Category] ?? "expenses.categoryOther")}
-                    {expense.receiptUrl ? ` · ${t("expenses.receiptAttached")}` : ` · ${t("expenses.noReceipt")}`}
+                    {/* Body */}
+                    <div data-mobile-main style={{ flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          color: "var(--text)",
+                        }}
+                      >
+                        {expense.vendor}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          color: "var(--subtle)",
+                          marginTop: "2px",
+                        }}
+                      >
+                        {formatDate(expense.expenseDate)} ·{" "}
+                        {t(
+                          CATEGORY_KEYS[expense.category as Category] ??
+                            "expenses.categoryOther",
+                        )}
+                        {expense.receiptUrl
+                          ? ` · ${t("expenses.receiptAttached")}`
+                          : ` · ${t("expenses.noReceipt")}`}
+                      </div>
+                      {expense.description && (
+                        <div
+                          style={{
+                            fontSize: "11px",
+                            color: "var(--subtle)",
+                            marginTop: "2px",
+                          }}
+                        >
+                          {expense.description}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Right side */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {/* Amount */}
+                      <div style={{ textAlign: "right" }}>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            color: "var(--expense)",
+                          }}
+                        >
+                          −{formatEuro(expense.amountExcl + expense.vatAmount)}
+                        </div>
+                        {expense.vatAmount > 0 ? (
+                          <div
+                            style={{
+                              fontSize: "11px",
+                              color: "var(--subtle)",
+                              marginTop: "2px",
+                            }}
+                          >
+                            {t("expenses.vatAmount")}{" "}
+                            {formatEuro(expense.vatAmount)}
+                          </div>
+                        ) : (
+                          <div
+                            style={{
+                              fontSize: "11px",
+                              color: "var(--subtle)",
+                              marginTop: "2px",
+                            }}
+                          >
+                            {t("expenses.noVat")}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Status badge */}
+                      <div
+                        style={{
+                          ...statusBadgeStyle(expense.status),
+                          fontSize: "10px",
+                          fontWeight: 600,
+                          padding: "3px 8px",
+                          borderRadius: "999px",
+                          fontFamily: "var(--font-mono)",
+                        }}
+                      >
+                        {statusLabel(expense.status)}
+                      </div>
+
+                      {/* Edit / Delete */}
+                      <div style={{ display: "flex", gap: "4px" }}>
+                        <button
+                          type="button"
+                          title={t("common.edit")}
+                          style={actionBtnStyle}
+                          onClick={() =>
+                            setEditingId(
+                              editingId === expense.id ? null : expense.id,
+                            )
+                          }
+                        >
+                          <svg
+                            aria-hidden="true"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          >
+                            <path d="M9.5 2.5l2 2L5 11H3v-2l6.5-6.5z" />
+                          </svg>
+                        </button>
+                        <button
+                          type="button"
+                          title={t("common.delete")}
+                          style={{ ...actionBtnStyle, color: "var(--danger)" }}
+                          onClick={() => handleDelete(expense.id)}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          >
+                            <path d="M2 4h10M5 4V2h4v2M6 7v4M8 7v4M3 4l1 8h6l1-8" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  {expense.description && (
-                    <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
-                      {expense.description}
+
+                  {/* Inline edit form */}
+                  {editingId === expense.id && (
+                    <div
+                      style={{
+                        borderTop: "1px solid #f0f0f0",
+                        padding: "16px 18px",
+                        background: "#fafafa",
+                      }}
+                    >
+                      <ExpenseForm
+                        initial={{
+                          vendor: expense.vendor,
+                          amountTotal: String(
+                            round2(expense.amountExcl + expense.vatAmount),
+                          ),
+                          hasVat: expense.vatAmount > 0,
+                          vatAmount: String(expense.vatAmount),
+                          category: expense.category,
+                          expenseDate: expense.expenseDate.split("T")[0],
+                          description: expense.description ?? "",
+                          notes: expense.notes ?? "",
+                          status: expense.status,
+                        }}
+                        onSave={(values) => handleEdit(expense.id, values)}
+                        onCancel={() => {
+                          setEditingId(null);
+                          setEditError(null);
+                        }}
+                        submitting={editSubmitting}
+                        error={editError}
+                      />
                     </div>
                   )}
                 </div>
-
-                {/* Right side */}
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-                  {/* Amount */}
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "14px", fontWeight: 600, color: "var(--expense)" }}>
-                      −{formatEuro(expense.amountExcl + expense.vatAmount)}
-                    </div>
-                    {expense.vatAmount > 0 ? (
-                      <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
-                        {t("expenses.vatAmount")} {formatEuro(expense.vatAmount)}
-                      </div>
-                    ) : (
-                      <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
-                        No VAT
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Status badge */}
-                  <div
-                    style={{
-                      ...statusBadgeStyle(expense.status),
-                      fontSize: "10px",
-                      fontWeight: 600,
-                      padding: "3px 8px",
-                      borderRadius: "999px",
-                      fontFamily: "var(--font-mono)",
-                    }}
-                  >
-                    {statusLabel(expense.status)}
-                  </div>
-
-                  {/* Edit / Delete */}
-                  <div style={{ display: "flex", gap: "4px" }}>
-                    <button
-                      title={t("common.edit")}
-                      style={actionBtnStyle}
-                      onClick={() => setEditingId(editingId === expense.id ? null : expense.id)}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                        <path d="M9.5 2.5l2 2L5 11H3v-2l6.5-6.5z" />
-                      </svg>
-                    </button>
-                    <button
-                      title={t("common.delete")}
-                      style={{ ...actionBtnStyle, color: "var(--danger)" }}
-                      onClick={() => handleDelete(expense.id)}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                        <path d="M2 4h10M5 4V2h4v2M6 7v4M8 7v4M3 4l1 8h6l1-8" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Inline edit form */}
-              {editingId === expense.id && (
-                <div style={{ borderTop: "1px solid #f0f0f0", padding: "16px 18px", background: "#fafafa" }}>
-                  <ExpenseForm
-                    initial={{
-                      vendor: expense.vendor,
-                      amountTotal: String(round2(expense.amountExcl + expense.vatAmount)),
-                      hasVat: expense.vatAmount > 0,
-                      vatAmount: String(expense.vatAmount),
-                      category: expense.category,
-                      expenseDate: expense.expenseDate.split("T")[0],
-                      description: expense.description ?? "",
-                      notes: expense.notes ?? "",
-                      status: expense.status,
-                    }}
-                    onSave={(values) => handleEdit(expense.id, values)}
-                    onCancel={() => { setEditingId(null); setEditError(null); }}
-                    submitting={editSubmitting}
-                    error={editError}
-                  />
-                </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-        ))
-      )}
+          ))
+        )}
       </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 0", fontSize: "13px", color: "var(--muted)" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "12px 0",
+            fontSize: "13px",
+            color: "var(--muted)",
+          }}
+        >
           <span>
-            {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, displayed.length)} of {displayed.length}
+            {(page - 1) * PAGE_SIZE + 1}–
+            {Math.min(page * PAGE_SIZE, displayed.length)} of {displayed.length}
           </span>
           <div style={{ display: "flex", gap: "6px" }}>
             <button
+              type="button"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              style={{ padding: "6px 14px", borderRadius: "8px", border: "1px solid var(--border)", background: page === 1 ? "var(--ground)" : "var(--surface)", color: page === 1 ? "var(--subtle)" : "var(--text)", fontSize: "13px", cursor: page === 1 ? "not-allowed" : "pointer", fontFamily: "var(--font-sans)" }}
+              style={{
+                padding: "6px 14px",
+                borderRadius: "8px",
+                border: "1px solid var(--border)",
+                background: page === 1 ? "var(--ground)" : "var(--surface)",
+                color: page === 1 ? "var(--subtle)" : "var(--text)",
+                fontSize: "13px",
+                cursor: page === 1 ? "not-allowed" : "pointer",
+                fontFamily: "var(--font-sans)",
+              }}
             >
               ←
             </button>
             <button
+              type="button"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              style={{ padding: "6px 14px", borderRadius: "8px", border: "1px solid var(--border)", background: page === totalPages ? "var(--ground)" : "var(--surface)", color: page === totalPages ? "var(--subtle)" : "var(--text)", fontSize: "13px", cursor: page === totalPages ? "not-allowed" : "pointer", fontFamily: "var(--font-sans)" }}
+              style={{
+                padding: "6px 14px",
+                borderRadius: "8px",
+                border: "1px solid var(--border)",
+                background:
+                  page === totalPages ? "var(--ground)" : "var(--surface)",
+                color: page === totalPages ? "var(--subtle)" : "var(--text)",
+                fontSize: "13px",
+                cursor: page === totalPages ? "not-allowed" : "pointer",
+                fontFamily: "var(--font-sans)",
+              }}
             >
               →
             </button>

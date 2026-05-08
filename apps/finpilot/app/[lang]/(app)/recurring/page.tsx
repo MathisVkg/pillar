@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "@/components/LangProvider";
 
 interface RecurringExpense {
@@ -121,7 +121,9 @@ function RecurringForm({
   const { t } = useTranslation();
 
   const [name, setName] = useState(initial?.name ?? "");
-  const [category, setCategory] = useState(initial?.category ?? "software_license");
+  const [category, setCategory] = useState(
+    initial?.category ?? "software_license",
+  );
   const [frequency, setFrequency] = useState(initial?.frequency ?? "monthly");
   const [amount, setAmount] = useState(initial?.amount ?? "");
   const [notes, setNotes] = useState(initial?.notes ?? "");
@@ -143,20 +145,26 @@ function RecurringForm({
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.vendor")}</label>
+          <label htmlFor="recurring-name" style={labelStyle}>
+            {t("expenses.vendor")}
+          </label>
           <input
+            id="recurring-name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Proximus Mobile"
+            placeholder={t("recurringExpenses.vendorPlaceholder")}
             style={inputStyle}
             required
           />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.category")}</label>
+          <label htmlFor="recurring-category" style={labelStyle}>
+            {t("expenses.category")}
+          </label>
           <select
+            id="recurring-category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             style={{ ...inputStyle, appearance: "none" as const }}
@@ -171,22 +179,32 @@ function RecurringForm({
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>Frequency</label>
+          <label htmlFor="recurring-frequency" style={labelStyle}>
+            {t("recurringExpenses.frequency")}
+          </label>
           <select
+            id="recurring-frequency"
             value={frequency}
             onChange={(e) => setFrequency(e.target.value)}
             style={{ ...inputStyle, appearance: "none" as const }}
             required
           >
-            <option value="monthly">{t("recurringExpenses.freqMonthly")}</option>
-            <option value="quarterly">{t("recurringExpenses.freqQuarterly")}</option>
+            <option value="monthly">
+              {t("recurringExpenses.freqMonthly")}
+            </option>
+            <option value="quarterly">
+              {t("recurringExpenses.freqQuarterly")}
+            </option>
             <option value="yearly">{t("recurringExpenses.freqYearly")}</option>
           </select>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("expenses.totalAmount")}</label>
+          <label htmlFor="recurring-amount" style={labelStyle}>
+            {t("expenses.totalAmount")}
+          </label>
           <input
+            id="recurring-amount"
             type="number"
             min="0"
             step="0.01"
@@ -199,8 +217,11 @@ function RecurringForm({
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={labelStyle}>{t("income.description")}</label>
+          <label htmlFor="recurring-notes" style={labelStyle}>
+            {t("income.description")}
+          </label>
           <input
+            id="recurring-notes"
             type="text"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -251,7 +272,9 @@ function RecurringForm({
       </div>
 
       {error && (
-        <p style={{ fontSize: "12px", color: "var(--danger)", marginTop: "8px" }}>
+        <p
+          style={{ fontSize: "12px", color: "var(--danger)", marginTop: "8px" }}
+        >
           {error}
         </p>
       )}
@@ -271,17 +294,17 @@ export default function RecurringPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  async function load() {
+  const load = useCallback(async () => {
     const res = await fetch("/api/recurring-expenses");
     if (res.ok) {
       setItems(await res.json());
     }
     setLoading(false);
-  }
+  }, []);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   // ── KPI calculations (active only) ─────────────────────────────────────────
 
@@ -362,7 +385,9 @@ export default function RecurringPage() {
 
   async function handleDelete(id: string) {
     if (!confirm(t("recurringExpenses.confirmDelete"))) return;
-    const res = await fetch(`/api/recurring-expenses/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/recurring-expenses/${id}`, {
+      method: "DELETE",
+    });
     if (res.ok) {
       setLoading(true);
       await load();
@@ -394,7 +419,14 @@ export default function RecurringPage() {
           borderTop: `3px solid ${accent}`,
         }}
       >
-        <div style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 500, marginBottom: "8px" }}>
+        <div
+          style={{
+            fontSize: "12px",
+            color: "var(--muted)",
+            fontWeight: 500,
+            marginBottom: "8px",
+          }}
+        >
           {label}
         </div>
         <div
@@ -416,19 +448,45 @@ export default function RecurringPage() {
 
   return (
     <div className="fp-page" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-
       {/* Toolbar */}
-      <div className="fp-mobile-stack" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px", gap: "12px" }}>
+      <div
+        className="fp-mobile-stack"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "18px",
+          gap: "12px",
+        }}
+      >
         <div>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "20px",
+              fontWeight: 700,
+              color: "var(--text)",
+              letterSpacing: "-0.4px",
+            }}
+          >
             {t("recurringExpenses.title")}
           </div>
-          <div style={{ fontSize: "13px", color: "var(--muted)", marginTop: "2px" }}>
+          <div
+            style={{
+              fontSize: "13px",
+              color: "var(--muted)",
+              marginTop: "2px",
+            }}
+          >
             {t("recurringExpenses.subtitle")}
           </div>
         </div>
         <button
-          onClick={() => { setShowForm((v) => !v); setFormError(null); }}
+          type="button"
+          onClick={() => {
+            setShowForm((v) => !v);
+            setFormError(null);
+          }}
           style={{
             padding: "9px 18px",
             borderRadius: "999px",
@@ -460,28 +518,28 @@ export default function RecurringPage() {
           label={t("recurringExpenses.monthlyTotal")}
           value={formatEuro(monthlyTotal)}
           valueColor="var(--expense)"
-          sub="monthly items only \u00B7 per month"
+          sub={t("recurringExpenses.monthlyItemsOnly")}
         />
         <KpiCard
           accent="var(--expense)"
           label={t("recurringExpenses.quarterlyTotal")}
           value={formatEuro(quarterlyTotal)}
           valueColor="var(--expense)"
-          sub="quarterly items only \u00B7 per quarter"
+          sub={t("recurringExpenses.quarterlyItemsOnly")}
         />
         <KpiCard
           accent="var(--brand)"
           label={t("recurringExpenses.yearlyTotal")}
           value={formatEuro(yearlyTotal)}
           valueColor="var(--text)"
-          sub="yearly items only \u00B7 per year"
+          sub={t("recurringExpenses.yearlyItemsOnly")}
         />
         <KpiCard
           accent="var(--vat)"
           label={t("recurringExpenses.annualProjection")}
           value={formatEuro(annualProjection)}
           valueColor="var(--vat)"
-          sub="all items \u00B7 full year cost"
+          sub={t("recurringExpenses.annualProjectionSub")}
         />
       </div>
 
@@ -498,7 +556,10 @@ export default function RecurringPage() {
         >
           <RecurringForm
             onSave={handleAdd}
-            onCancel={() => { setShowForm(false); setFormError(null); }}
+            onCancel={() => {
+              setShowForm(false);
+              setFormError(null);
+            }}
             submitting={submitting}
             error={formError}
           />
@@ -506,26 +567,72 @@ export default function RecurringPage() {
       )}
 
       {/* List */}
-      <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", overflow: "hidden" }}>
-
+      <div
+        style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border)",
+          borderRadius: "14px",
+          overflow: "hidden",
+        }}
+      >
         {/* Header */}
-        <div style={{ padding: "12px 18px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fafafa" }}>
-          <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>
-            {items.length} {items.length === 1 ? "recurring expense" : "recurring expenses"}
+        <div
+          style={{
+            padding: "12px 18px",
+            borderBottom: "1px solid var(--border)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            background: "#fafafa",
+          }}
+        >
+          <div
+            style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}
+          >
+            {items.length}{" "}
+            {items.length === 1
+              ? t("recurringExpenses.countSingular")
+              : t("recurringExpenses.countPlural")}
           </div>
-          <div style={{ background: "var(--expense-l)", color: "var(--expense)", fontSize: "11px", fontWeight: 600, padding: "4px 10px", borderRadius: "999px", display: "flex", alignItems: "center", gap: "1px" }}>
+          <div
+            style={{
+              background: "var(--expense-l)",
+              color: "var(--expense)",
+              fontSize: "11px",
+              fontWeight: 600,
+              padding: "4px 10px",
+              borderRadius: "999px",
+              display: "flex",
+              alignItems: "center",
+              gap: "1px",
+            }}
+          >
             <span>{"~"}</span>
             <span>{formatEuro(annualProjection)}</span>
-            <span>/yr</span>
+            <span>{t("recurringExpenses.perYearShort")}</span>
           </div>
         </div>
 
         {loading ? (
-          <div style={{ padding: "32px", textAlign: "center", color: "var(--subtle)", fontSize: "13px" }}>
+          <div
+            style={{
+              padding: "32px",
+              textAlign: "center",
+              color: "var(--subtle)",
+              fontSize: "13px",
+            }}
+          >
             {t("common.loading")}
           </div>
         ) : items.length === 0 ? (
-          <div style={{ padding: "32px", textAlign: "center", color: "var(--subtle)", fontSize: "13px" }}>
+          <div
+            style={{
+              padding: "32px",
+              textAlign: "center",
+              color: "var(--subtle)",
+              fontSize: "13px",
+            }}
+          >
             {t("recurringExpenses.noItems")}
           </div>
         ) : (
@@ -553,7 +660,9 @@ export default function RecurringPage() {
                       width: "36px",
                       height: "36px",
                       borderRadius: "10px",
-                      background: item.isActive ? "var(--expense-ll, #f5f0ff)" : "var(--border)",
+                      background: item.isActive
+                        ? "var(--expense-ll, #f5f0ff)"
+                        : "var(--border)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -561,11 +670,14 @@ export default function RecurringPage() {
                     }}
                   >
                     <svg
+                      aria-hidden="true"
                       width="16"
                       height="16"
                       viewBox="0 0 16 16"
                       fill="none"
-                      stroke={item.isActive ? "var(--expense)" : "var(--subtle)"}
+                      stroke={
+                        item.isActive ? "var(--expense)" : "var(--subtle)"
+                      }
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     >
@@ -586,45 +698,93 @@ export default function RecurringPage() {
                     >
                       {item.name}
                     </div>
-                    <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
-                      {t(CATEGORY_KEYS[item.category as Category] ?? "expenses.categoryOther")}
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        color: "var(--subtle)",
+                        marginTop: "2px",
+                      }}
+                    >
+                      {t(
+                        CATEGORY_KEYS[item.category as Category] ??
+                          "expenses.categoryOther",
+                      )}
                       {" \u00B7 "}
                       {t(FREQ_LABELS[item.frequency])}
                     </div>
                     {item.notes && (
-                      <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px", fontStyle: "italic" }}>
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          color: "var(--subtle)",
+                          marginTop: "2px",
+                          fontStyle: "italic",
+                        }}
+                      >
                         {item.notes}
                       </div>
                     )}
                   </div>
 
                   {/* Right side */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      flexShrink: 0,
+                    }}
+                  >
                     {/* Amount */}
                     <div style={{ textAlign: "right" }}>
-                      <div style={{ fontFamily: "var(--font-mono)", fontSize: "14px", fontWeight: 600, color: "var(--expense)" }}>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          color: "var(--expense)",
+                        }}
+                      >
                         {formatEuro(item.amount)}
                       </div>
-                      <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "1px" }}>
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          color: "var(--subtle)",
+                          marginTop: "1px",
+                        }}
+                      >
                         {t(FREQ_LABELS[item.frequency]).toLowerCase()}
                       </div>
                       {isNotMonthly && (
-                        <div style={{ fontSize: "10px", color: "var(--subtle)", marginTop: "1px" }}>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            color: "var(--subtle)",
+                            marginTop: "1px",
+                          }}
+                        >
                           <span>{"= "}</span>
                           <span>{formatEuro(yearlyEq)}</span>
-                          <span>/yr</span>
+                          <span>{t("recurringExpenses.perYearShort")}</span>
                         </div>
                       )}
                     </div>
 
                     {/* Active toggle */}
-                    <div
+                    <button
+                      type="button"
+                      aria-pressed={item.isActive}
                       onClick={() => handleToggle(item)}
                       style={{
                         width: "36px",
                         height: "20px",
+                        padding: 0,
+                        border: "none",
                         borderRadius: "999px",
-                        background: item.isActive ? "var(--income)" : "var(--border)",
+                        background: item.isActive
+                          ? "var(--income)"
+                          : "var(--border)",
                         cursor: "pointer",
                         position: "relative",
                         flexShrink: 0,
@@ -644,11 +804,12 @@ export default function RecurringPage() {
                           boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
                         }}
                       />
-                    </div>
+                    </button>
 
                     {/* Edit / Delete */}
                     <div style={{ display: "flex", gap: "4px" }}>
                       <button
+                        type="button"
                         title={t("common.edit")}
                         style={actionBtnStyle}
                         onClick={() => {
@@ -656,16 +817,35 @@ export default function RecurringPage() {
                           setFormError(null);
                         }}
                       >
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                        <svg
+                          aria-hidden="true"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        >
                           <path d="M9.5 2.5l2 2L5 11H3v-2l6.5-6.5z" />
                         </svg>
                       </button>
                       <button
+                        type="button"
                         title={t("common.delete")}
                         style={{ ...actionBtnStyle, color: "var(--danger)" }}
                         onClick={() => handleDelete(item.id)}
                       >
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                        <svg
+                          aria-hidden="true"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        >
                           <path d="M2 4h10M5 4V2h4v2M6 7v4M8 7v4M3 4l1 8h6l1-8" />
                         </svg>
                       </button>
@@ -675,7 +855,13 @@ export default function RecurringPage() {
 
                 {/* Inline edit form */}
                 {editingId === item.id && (
-                  <div style={{ borderTop: "1px solid #f0f0f0", padding: "16px 18px", background: "#fafafa" }}>
+                  <div
+                    style={{
+                      borderTop: "1px solid #f0f0f0",
+                      padding: "16px 18px",
+                      background: "#fafafa",
+                    }}
+                  >
                     <RecurringForm
                       initial={{
                         name: item.name,
@@ -685,7 +871,10 @@ export default function RecurringPage() {
                         notes: item.notes ?? "",
                       }}
                       onSave={(values) => handleEdit(item.id, values)}
-                      onCancel={() => { setEditingId(null); setFormError(null); }}
+                      onCancel={() => {
+                        setEditingId(null);
+                        setFormError(null);
+                      }}
                       submitting={submitting}
                       error={formError}
                     />

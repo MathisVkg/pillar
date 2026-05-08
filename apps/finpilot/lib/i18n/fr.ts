@@ -11,6 +11,8 @@ const fr = {
     add: "Ajouter",
     filter: "Filtrer",
     all: "Tout",
+    status: "Statut",
+    total: "Total",
     noData: "Pas encore de donn\u00E9es",
   },
   auth: {
@@ -80,6 +82,8 @@ const fr = {
     statusDraft: "Brouillon",
     editEntry: "Modifier",
     deleteEntry: "Supprimer",
+    countSingular: "entr\u00E9e",
+    countPlural: "entr\u00E9es",
   },
   expenses: {
     title: "D\u00E9penses",
@@ -110,6 +114,10 @@ const fr = {
     categoryOffice: "Bureau",
     categoryVehicle: "V\u00E9hicule",
     categoryOther: "Autre",
+    allMonths: "Tous les mois",
+    noVat: "Pas de TVA",
+    countSingular: "d\u00E9pense",
+    countPlural: "d\u00E9penses",
   },
   pl: {
     title: "R\u00E9sultat net",
@@ -129,8 +137,12 @@ const fr = {
     expensesLabel: "Total d\u00E9penses \u00B7 {year}",
     resultLabel: "R\u00E9sultat \u00B7 {year}",
     exclVat: "HTVA \u00B7 toutes sources",
+    exclVatShort: "HTVA",
     revenueMinusExpenses: "revenus \u2013 d\u00E9penses",
     resultOverRevenue: "r\u00E9sultat / revenus",
+    vatPosition: "Position TVA",
+    vatOwedPrefix: "D\u00FB\u00A0:",
+    vatCreditPrefix: "Cr\u00E9dit\u00A0:",
     disclaimer: "Chiffres indicatifs uniquement. Consultez votre comptable pour les d\u00E9clarations fiscales et \u00E9tats financiers pr\u00E9cis.",
   },
   vatSummary: {
@@ -154,6 +166,7 @@ const fr = {
     tableExcl: "HTVA",
     tableVat: "TVA",
     tableTotal: "Total TVAC",
+    expensesWithVatTitle: "{quarter} d\u00E9penses avec TVA \u00B7 {period}",
   },
   recurringExpenses: {
     title: "D\u00E9penses r\u00E9currentes",
@@ -173,6 +186,15 @@ const fr = {
     freqMonthly: "Mensuel",
     freqQuarterly: "Trimestriel",
     freqYearly: "Annuel",
+    frequency: "Fr\u00E9quence",
+    vendorPlaceholder: "ex. Proximus Mobile",
+    monthlyItemsOnly: "\u00E9l\u00E9ments mensuels uniquement \u00B7 par mois",
+    quarterlyItemsOnly: "\u00E9l\u00E9ments trimestriels uniquement \u00B7 par trimestre",
+    yearlyItemsOnly: "\u00E9l\u00E9ments annuels uniquement \u00B7 par an",
+    annualProjectionSub: "tous les \u00E9l\u00E9ments \u00B7 co\u00FBt annuel",
+    countSingular: "d\u00E9pense r\u00E9currente",
+    countPlural: "d\u00E9penses r\u00E9currentes",
+    perYearShort: "/an",
   },
   exportPage: {
     title: "Export",
@@ -190,6 +212,9 @@ const fr = {
     atLeastOne: "S\u00E9lectionnez au moins un fichier.",
     formatNote: "Les fichiers s\u2019ouvrent correctement dans Excel et LibreOffice. S\u00E9parateur d\u00E9cimal\u00A0: virgule.",
     quickPeriods: "P\u00E9riodes rapides",
+    incomeSub: "income_entry \u00B7 entr\u00E9es pay\u00E9es uniquement",
+    expensesSub: "expense \u00B7 toutes les entr\u00E9es",
+    vatSub: "indicatif \u00B7 pour r\u00E9f\u00E9rence",
   },
 } as const;
 

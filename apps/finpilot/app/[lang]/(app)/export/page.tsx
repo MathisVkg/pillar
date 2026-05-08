@@ -18,11 +18,15 @@ function Toggle({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <div
+    <button
+      type="button"
+      aria-pressed={checked}
       onClick={() => onChange(!checked)}
       style={{
         width: "36px",
         height: "20px",
+        padding: 0,
+        border: "none",
         borderRadius: "999px",
         background: checked ? "var(--income)" : "var(--border)",
         cursor: "pointer",
@@ -44,7 +48,7 @@ function Toggle({
           boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
         }}
       />
-    </div>
+    </button>
   );
 }
 
@@ -109,21 +113,21 @@ export default function ExportPage() {
       if (includeIncome) {
         await downloadFile(
           `/api/export/income?${params}`,
-          `pillar-finpilot-revenus-${fromDate}-${toDate}.csv`
+          `pillar-finpilot-revenus-${fromDate}-${toDate}.csv`,
         );
       }
       if (includeExpenses) {
         await new Promise((r) => setTimeout(r, 300));
         await downloadFile(
           `/api/export/expenses?${params}`,
-          `pillar-finpilot-depenses-${fromDate}-${toDate}.csv`
+          `pillar-finpilot-depenses-${fromDate}-${toDate}.csv`,
         );
       }
       if (includeVat) {
         await new Promise((r) => setTimeout(r, 300));
         await downloadFile(
           `/api/export/vat-summary?${params}`,
-          `pillar-finpilot-tva-${fromDate}-${toDate}.csv`
+          `pillar-finpilot-tva-${fromDate}-${toDate}.csv`,
         );
       }
 
@@ -203,7 +207,7 @@ export default function ExportPage() {
       iconBg: "var(--income-l)",
       iconColor: "var(--income)",
       label: t("exportPage.includeIncome"),
-      sub: "income_entry · paid entries only",
+      sub: t("exportPage.incomeSub"),
       value: includeIncome,
       onChange: setIncludeIncome,
     },
@@ -212,7 +216,7 @@ export default function ExportPage() {
       iconBg: "var(--expense-l, #fff3f0)",
       iconColor: "var(--expense, #e05c3a)",
       label: t("exportPage.includeExpenses"),
-      sub: "expense · all entries",
+      sub: t("exportPage.expensesSub"),
       value: includeExpenses,
       onChange: setIncludeExpenses,
     },
@@ -221,7 +225,7 @@ export default function ExportPage() {
       iconBg: "var(--vat-l, #f0f4ff)",
       iconColor: "var(--vat, #4361ee)",
       label: t("exportPage.includeVat"),
-      sub: "indicative · for reference",
+      sub: t("exportPage.vatSub"),
       value: includeVat,
       onChange: setIncludeVat,
     },
@@ -252,10 +256,21 @@ export default function ExportPage() {
       <div style={cardStyle}>
         <div style={cardTitleStyle}>{t("exportPage.dateRange")}</div>
 
-        <div className="fp-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+        <div
+          className="fp-form-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "10px",
+            marginBottom: "12px",
+          }}
+        >
           <div>
-            <label style={labelStyle}>{t("exportPage.from")}</label>
+            <label htmlFor="export-from-date" style={labelStyle}>
+              {t("exportPage.from")}
+            </label>
             <input
+              id="export-from-date"
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
@@ -263,8 +278,11 @@ export default function ExportPage() {
             />
           </div>
           <div>
-            <label style={labelStyle}>{t("exportPage.to")}</label>
+            <label htmlFor="export-to-date" style={labelStyle}>
+              {t("exportPage.to")}
+            </label>
             <input
+              id="export-to-date"
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
@@ -273,15 +291,38 @@ export default function ExportPage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "6px", alignItems: "center", flexWrap: "wrap" }}>
-          <span style={{ fontSize: "11px", color: "var(--muted)", marginRight: "2px" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "6px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "11px",
+              color: "var(--muted)",
+              marginRight: "2px",
+            }}
+          >
             {t("exportPage.quickPeriods")}:
           </span>
-          <button style={chipStyle} onClick={() => setQuarter(1)}>Q1</button>
-          <button style={chipStyle} onClick={() => setQuarter(2)}>Q2</button>
-          <button style={chipStyle} onClick={() => setQuarter(3)}>Q3</button>
-          <button style={chipStyle} onClick={() => setQuarter(4)}>Q4</button>
-          <button style={chipStyle} onClick={setThisYear}>{currentYear}</button>
+          <button type="button" style={chipStyle} onClick={() => setQuarter(1)}>
+            Q1
+          </button>
+          <button type="button" style={chipStyle} onClick={() => setQuarter(2)}>
+            Q2
+          </button>
+          <button type="button" style={chipStyle} onClick={() => setQuarter(3)}>
+            Q3
+          </button>
+          <button type="button" style={chipStyle} onClick={() => setQuarter(4)}>
+            Q4
+          </button>
+          <button type="button" style={chipStyle} onClick={setThisYear}>
+            {currentYear}
+          </button>
         </div>
       </div>
 
@@ -292,13 +333,16 @@ export default function ExportPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
           {includeRows.map((row, i) => (
             <div
-              key={i}
+              key={row.label}
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "12px",
                 padding: "12px 0",
-                borderBottom: i < includeRows.length - 1 ? "1px solid var(--border)" : "none",
+                borderBottom:
+                  i < includeRows.length - 1
+                    ? "1px solid var(--border)"
+                    : "none",
               }}
             >
               <div
@@ -320,10 +364,22 @@ export default function ExportPage() {
                 {row.icon}
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--text)" }}>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 500,
+                    color: "var(--text)",
+                  }}
+                >
                   {row.label}
                 </div>
-                <div style={{ fontSize: "11px", color: "var(--subtle)", marginTop: "2px" }}>
+                <div
+                  style={{
+                    fontSize: "11px",
+                    color: "var(--subtle)",
+                    marginTop: "2px",
+                  }}
+                >
                   {row.sub}
                 </div>
               </div>
@@ -347,17 +403,28 @@ export default function ExportPage() {
               gap: "6px",
             }}
           >
-            ✓ {t("exportPage.filesDownloaded").replace("{n}", String(downloadedCount))}
+            ✓{" "}
+            {t("exportPage.filesDownloaded").replace(
+              "{n}",
+              String(downloadedCount),
+            )}
           </div>
         )}
 
         {error && (
-          <div style={{ fontSize: "13px", color: "var(--danger)", marginBottom: "12px" }}>
+          <div
+            style={{
+              fontSize: "13px",
+              color: "var(--danger)",
+              marginBottom: "12px",
+            }}
+          >
             {error}
           </div>
         )}
 
         <button
+          type="button"
           onClick={handleDownload}
           disabled={loading}
           style={{

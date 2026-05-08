@@ -1,11 +1,15 @@
 "use client";
 
+import { useLang } from "@/components/LangProvider";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 export default function Topbar() {
-  // TODO: replace hardcoded period with current month from Date
   // TODO: replace hardcoded initials with session user initials
-  const period = "APR 2026";
+  const lang = useLang();
+  const period = new Date().toLocaleString(
+    lang === "fr" ? "fr-BE" : lang === "nl" ? "nl-BE" : "en-US",
+    { month: "short", year: "numeric" },
+  );
   const initials = "YO";
 
   return (
