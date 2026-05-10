@@ -610,26 +610,33 @@ export default function RoadBookPage() {
       label: t("roadBook.totalYear"),
       tint: "var(--ground)",
       value: `${formatKm(kpis.totalYear)} ${t("roadBook.km")}`,
+      variant: "default",
     },
     {
       accent: "var(--income)",
       label: t("roadBook.professionalYear"),
       tint: "var(--income-l)",
       value: `${formatKm(kpis.professionalYear)} ${t("roadBook.km")}`,
+      variant: "default",
     },
     {
       accent: "var(--expense)",
       label: t("roadBook.personalYear"),
       tint: "var(--expense-l)",
       value: `${formatKm(kpis.personalYear)} ${t("roadBook.km")}`,
+      variant: "default",
     },
     {
       accent: "var(--vat)",
       label: t("roadBook.usageSplit"),
+      personalValue: `${formatPercent(personalPercent)}% ${t(
+        "roadBook.personalLower",
+      )}`,
+      professionalValue: `${formatPercent(professionalPercent)}% ${t(
+        "roadBook.professionalLower",
+      )}`,
       tint: "var(--vat-l)",
-      value: `${formatPercent(professionalPercent)}% ${t(
-        "roadBook.professional",
-      )} / ${formatPercent(personalPercent)}% ${t("roadBook.personal")}`,
+      variant: "split",
     },
   ];
 
@@ -740,19 +747,38 @@ export default function RoadBookPage() {
             <div style={{ fontSize: "11px", color: "var(--muted)" }}>
               {card.label}
             </div>
-            <div
-              style={{
-                marginTop: "8px",
-                fontSize: "24px",
-                fontWeight: 700,
-                color: card.accent,
-                fontFamily: "var(--font-mono)",
-                lineHeight: 1.2,
-                overflowWrap: "anywhere",
-              }}
-            >
-              {card.value}
-            </div>
+            {card.variant === "split" ? (
+              <div
+                style={{
+                  marginTop: "8px",
+                  color: card.accent,
+                  display: "flex",
+                  flexDirection: "column",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "17px",
+                  fontWeight: 700,
+                  gap: "3px",
+                  lineHeight: 1.35,
+                }}
+              >
+                <span>{card.professionalValue}</span>
+                <span>{card.personalValue}</span>
+              </div>
+            ) : (
+              <div
+                style={{
+                  marginTop: "8px",
+                  fontSize: "24px",
+                  fontWeight: 700,
+                  color: card.accent,
+                  fontFamily: "var(--font-mono)",
+                  lineHeight: 1.2,
+                  overflowWrap: "anywhere",
+                }}
+              >
+                {card.value}
+              </div>
+            )}
           </div>
         ))}
       </div>
