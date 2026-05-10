@@ -186,6 +186,38 @@ function formatEuro(amount: number): string {
   }).format(amount);
 }
 
+function statusBadgeStyle(status: AssetStatus): React.CSSProperties {
+  if (status === "active") {
+    return {
+      background: "var(--income-l)",
+      border: "1px solid rgba(5, 150, 105, 0.18)",
+      color: "var(--income)",
+    };
+  }
+
+  if (status === "sold") {
+    return {
+      background: "var(--vat-l)",
+      border: "1px solid rgba(37, 99, 235, 0.18)",
+      color: "var(--vat)",
+    };
+  }
+
+  if (status === "lost") {
+    return {
+      background: "var(--warn-l)",
+      border: "1px solid rgba(245, 158, 11, 0.22)",
+      color: "var(--warn)",
+    };
+  }
+
+  return {
+    background: "var(--ground)",
+    border: "1px solid var(--border)",
+    color: "var(--muted)",
+  };
+}
+
 function toFormValues(asset: CompanyAsset): FormValues {
   return {
     name: asset.name,
@@ -484,6 +516,7 @@ export default function CompanyAssetsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<CompanyAsset | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [formVersion, setFormVersion] = useState(0);
   const [statusFilter, setStatusFilter] = useState<"all" | AssetStatus>("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -590,6 +623,7 @@ export default function CompanyAssetsPage() {
 
       setEditing(null);
       setFormVersion((version) => version + 1);
+      setIsFormOpen(false);
       await loadAssets();
     } catch (err) {
       setError(err instanceof Error ? err.message : t("common.error"));
@@ -622,17 +656,28 @@ export default function CompanyAssetsPage() {
   }
 
   const kpiCards = [
-    { label: t("companyAssets.activeAssets"), value: kpis.activeAssets },
     {
+      accent: "var(--income)",
+      label: t("companyAssets.activeAssets"),
+      tint: "var(--income-l)",
+      value: kpis.activeAssets,
+    },
+    {
+      accent: "var(--brand)",
       label: t("companyAssets.totalPurchaseValue"),
+      tint: "var(--ground)",
       value: formatEuro(kpis.totalValue),
     },
     {
+      accent: "var(--warn)",
       label: t("companyAssets.warrantyExpiringSoon"),
+      tint: "var(--warn-l)",
       value: kpis.warrantySoon,
     },
     {
+      accent: "var(--vat)",
       label: t("companyAssets.totalVat"),
+      tint: "var(--vat-l)",
       value: formatEuro(kpis.totalVat),
     },
   ];
@@ -671,25 +716,54 @@ export default function CompanyAssetsPage() {
             {t("companyAssets.subtitle")}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={handleExport}
-          style={{
-            height: "36px",
-            padding: "0 16px",
-            borderRadius: "8px",
-            border: "1px solid var(--border)",
-            background: "#fff",
-            color: "var(--income)",
-            fontSize: "13px",
-            fontWeight: 600,
-            cursor: "pointer",
-            fontFamily: "var(--font-sans)",
-            whiteSpace: "nowrap",
-          }}
+        <div
+          className="fp-mobile-stack"
+          style={{ display: "flex", gap: "8px", alignItems: "center" }}
         >
-          {t("companyAssets.exportCsv")}
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              setEditing(null);
+              setError(null);
+              setFormVersion((version) => version + 1);
+              setIsFormOpen(true);
+            }}
+            style={{
+              height: "36px",
+              padding: "0 16px",
+              borderRadius: "8px",
+              border: "none",
+              background: "var(--income)",
+              color: "#fff",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("companyAssets.addAsset")}
+          </button>
+          <button
+            type="button"
+            onClick={handleExport}
+            style={{
+              height: "36px",
+              padding: "0 16px",
+              borderRadius: "8px",
+              border: "1px solid var(--border)",
+              background: "#fff",
+              color: "var(--income)",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("companyAssets.exportCsv")}
+          </button>
+        </div>
       </div>
 
       <div
@@ -705,8 +779,9 @@ export default function CompanyAssetsPage() {
           <div
             key={card.label}
             style={{
-              background: "#fff",
+              background: `linear-gradient(180deg, ${card.tint}, #fff 70%)`,
               border: "1px solid var(--border)",
+              borderTop: `4px solid ${card.accent}`,
               borderRadius: "12px",
               padding: "16px",
             }}
@@ -719,8 +794,10 @@ export default function CompanyAssetsPage() {
                 marginTop: "8px",
                 fontSize: "24px",
                 fontWeight: 700,
-                color: "var(--text)",
+                color: card.accent,
                 fontFamily: "var(--font-mono)",
+                lineHeight: 1.2,
+                overflowWrap: "anywhere",
               }}
             >
               {card.value}
@@ -729,27 +806,30 @@ export default function CompanyAssetsPage() {
         ))}
       </div>
 
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid var(--border)",
-          borderRadius: "12px",
-          padding: "16px",
-          marginBottom: "16px",
-        }}
-      >
-        <CompanyAssetForm
-          key={`${editing?.id ?? "new"}-${formVersion}`}
-          initial={editing ? toFormValues(editing) : undefined}
-          onSave={handleSave}
-          onCancel={() => {
-            setEditing(null);
-            setFormVersion((version) => version + 1);
+      {isFormOpen ? (
+        <div
+          style={{
+            background: "#fff",
+            border: "1px solid var(--border)",
+            borderRadius: "12px",
+            padding: "16px",
+            marginBottom: "16px",
           }}
-          submitting={submitting}
-          error={error}
-        />
-      </div>
+        >
+          <CompanyAssetForm
+            key={`${editing?.id ?? "new"}-${formVersion}`}
+            initial={editing ? toFormValues(editing) : undefined}
+            onSave={handleSave}
+            onCancel={() => {
+              setEditing(null);
+              setFormVersion((version) => version + 1);
+              setIsFormOpen(false);
+            }}
+            submitting={submitting}
+            error={error}
+          />
+        </div>
+      ) : null}
 
       <div
         style={{
@@ -942,7 +1022,18 @@ export default function CompanyAssetsPage() {
                         borderBottom: "1px solid var(--border)",
                       }}
                     >
-                      {t(STATUS_KEYS[asset.status])}
+                      <span
+                        style={{
+                          ...statusBadgeStyle(asset.status),
+                          borderRadius: "999px",
+                          display: "inline-flex",
+                          fontSize: "12px",
+                          fontWeight: 800,
+                          padding: "4px 9px",
+                        }}
+                      >
+                        {t(STATUS_KEYS[asset.status])}
+                      </span>
                     </td>
                     <td
                       style={{
@@ -984,7 +1075,11 @@ export default function CompanyAssetsPage() {
                       >
                         <button
                           type="button"
-                          onClick={() => setEditing(asset)}
+                          onClick={() => {
+                            setEditing(asset);
+                            setError(null);
+                            setIsFormOpen(true);
+                          }}
                           style={actionBtnStyle}
                           aria-label={t("companyAssets.editAsset")}
                           title={t("companyAssets.editAsset")}

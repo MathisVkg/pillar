@@ -143,6 +143,28 @@ function formatKm(value: number): string {
   }).format(value);
 }
 
+function formatPercent(value: number): string {
+  return new Intl.NumberFormat("fr-BE", {
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
+function typeBadgeStyle(type: RoadBookType): React.CSSProperties {
+  if (type === "professional") {
+    return {
+      background: "var(--income-l)",
+      border: "1px solid rgba(5, 150, 105, 0.18)",
+      color: "var(--income)",
+    };
+  }
+
+  return {
+    background: "var(--expense-l)",
+    border: "1px solid rgba(124, 58, 237, 0.18)",
+    color: "var(--expense)",
+  };
+}
+
 function toFormValues(entry: RoadBookEntry): FormValues {
   return {
     tripDate: toDateInputValue(entry.tripDate),
@@ -427,6 +449,7 @@ export default function RoadBookPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<RoadBookEntry | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [formVersion, setFormVersion] = useState(0);
   const [typeFilter, setTypeFilter] = useState<"all" | RoadBookType>("all");
   const [fromDate, setFromDate] = useState("");
@@ -454,7 +477,6 @@ export default function RoadBookPage() {
 
   const now = new Date();
   const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth();
 
   const kpis = useMemo(() => {
     return entries.reduce(
@@ -466,22 +488,25 @@ export default function RoadBookPage() {
             acc.professionalYear += entry.distanceKm;
           if (entry.type === "personal") acc.personalYear += entry.distanceKm;
         }
-        if (
-          date.getFullYear() === currentYear &&
-          date.getMonth() === currentMonth
-        ) {
-          acc.currentMonth += entry.distanceKm;
-        }
         return acc;
       },
       {
         totalYear: 0,
         professionalYear: 0,
         personalYear: 0,
-        currentMonth: 0,
       },
     );
-  }, [entries, currentMonth, currentYear]);
+  }, [entries, currentYear]);
+
+  const totalSplitDistance = kpis.professionalYear + kpis.personalYear;
+  const professionalPercent =
+    totalSplitDistance > 0
+      ? Math.round((kpis.professionalYear / totalSplitDistance) * 1000) / 10
+      : 0;
+  const personalPercent =
+    totalSplitDistance > 0
+      ? Math.round((kpis.personalYear / totalSplitDistance) * 1000) / 10
+      : 0;
 
   const filteredEntries = useMemo(() => {
     const from = fromDate ? new Date(`${fromDate}T00:00:00`) : null;
@@ -546,6 +571,7 @@ export default function RoadBookPage() {
 
       setEditing(null);
       setFormVersion((version) => version + 1);
+      setIsFormOpen(false);
       await loadEntries();
     } catch (err) {
       setError(err instanceof Error ? err.message : t("common.error"));
@@ -579,10 +605,32 @@ export default function RoadBookPage() {
   }
 
   const kpiCards = [
-    { label: t("roadBook.totalYear"), value: kpis.totalYear },
-    { label: t("roadBook.professionalYear"), value: kpis.professionalYear },
-    { label: t("roadBook.personalYear"), value: kpis.personalYear },
-    { label: t("roadBook.currentMonth"), value: kpis.currentMonth },
+    {
+      accent: "var(--brand)",
+      label: t("roadBook.totalYear"),
+      tint: "var(--ground)",
+      value: `${formatKm(kpis.totalYear)} ${t("roadBook.km")}`,
+    },
+    {
+      accent: "var(--income)",
+      label: t("roadBook.professionalYear"),
+      tint: "var(--income-l)",
+      value: `${formatKm(kpis.professionalYear)} ${t("roadBook.km")}`,
+    },
+    {
+      accent: "var(--expense)",
+      label: t("roadBook.personalYear"),
+      tint: "var(--expense-l)",
+      value: `${formatKm(kpis.personalYear)} ${t("roadBook.km")}`,
+    },
+    {
+      accent: "var(--vat)",
+      label: t("roadBook.usageSplit"),
+      tint: "var(--vat-l)",
+      value: `${formatPercent(professionalPercent)}% ${t(
+        "roadBook.professional",
+      )} / ${formatPercent(personalPercent)}% ${t("roadBook.personal")}`,
+    },
   ];
 
   return (
@@ -619,25 +667,54 @@ export default function RoadBookPage() {
             {t("roadBook.subtitle")}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={handleExport}
-          style={{
-            height: "36px",
-            padding: "0 16px",
-            borderRadius: "8px",
-            border: "1px solid var(--border)",
-            background: "#fff",
-            color: "var(--income)",
-            fontSize: "13px",
-            fontWeight: 600,
-            cursor: "pointer",
-            fontFamily: "var(--font-sans)",
-            whiteSpace: "nowrap",
-          }}
+        <div
+          className="fp-mobile-stack"
+          style={{ display: "flex", gap: "8px", alignItems: "center" }}
         >
-          {t("roadBook.exportCsv")}
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              setEditing(null);
+              setError(null);
+              setFormVersion((version) => version + 1);
+              setIsFormOpen(true);
+            }}
+            style={{
+              height: "36px",
+              padding: "0 16px",
+              borderRadius: "8px",
+              border: "none",
+              background: "var(--income)",
+              color: "#fff",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("roadBook.addTrip")}
+          </button>
+          <button
+            type="button"
+            onClick={handleExport}
+            style={{
+              height: "36px",
+              padding: "0 16px",
+              borderRadius: "8px",
+              border: "1px solid var(--border)",
+              background: "#fff",
+              color: "var(--income)",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("roadBook.exportCsv")}
+          </button>
+        </div>
       </div>
 
       <div
@@ -653,8 +730,9 @@ export default function RoadBookPage() {
           <div
             key={card.label}
             style={{
-              background: "#fff",
+              background: `linear-gradient(180deg, ${card.tint}, #fff 70%)`,
               border: "1px solid var(--border)",
+              borderTop: `4px solid ${card.accent}`,
               borderRadius: "12px",
               padding: "16px",
             }}
@@ -667,37 +745,42 @@ export default function RoadBookPage() {
                 marginTop: "8px",
                 fontSize: "24px",
                 fontWeight: 700,
-                color: "var(--text)",
+                color: card.accent,
                 fontFamily: "var(--font-mono)",
+                lineHeight: 1.2,
+                overflowWrap: "anywhere",
               }}
             >
-              {formatKm(card.value)} {t("roadBook.km")}
+              {card.value}
             </div>
           </div>
         ))}
       </div>
 
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid var(--border)",
-          borderRadius: "12px",
-          padding: "16px",
-          marginBottom: "16px",
-        }}
-      >
-        <RoadBookForm
-          key={`${editing?.id ?? "new"}-${formVersion}`}
-          initial={editing ? toFormValues(editing) : undefined}
-          onSave={handleSave}
-          onCancel={() => {
-            setEditing(null);
-            setFormVersion((version) => version + 1);
+      {isFormOpen ? (
+        <div
+          style={{
+            background: "#fff",
+            border: "1px solid var(--border)",
+            borderRadius: "12px",
+            padding: "16px",
+            marginBottom: "16px",
           }}
-          submitting={submitting}
-          error={error}
-        />
-      </div>
+        >
+          <RoadBookForm
+            key={`${editing?.id ?? "new"}-${formVersion}`}
+            initial={editing ? toFormValues(editing) : undefined}
+            onSave={handleSave}
+            onCancel={() => {
+              setEditing(null);
+              setFormVersion((version) => version + 1);
+              setIsFormOpen(false);
+            }}
+            submitting={submitting}
+            error={error}
+          />
+        </div>
+      ) : null}
 
       <div
         style={{
@@ -859,7 +942,18 @@ export default function RoadBookPage() {
                         borderBottom: "1px solid var(--border)",
                       }}
                     >
-                      {t(`roadBook.${entry.type}`)}
+                      <span
+                        style={{
+                          ...typeBadgeStyle(entry.type),
+                          borderRadius: "999px",
+                          display: "inline-flex",
+                          fontSize: "12px",
+                          fontWeight: 800,
+                          padding: "4px 9px",
+                        }}
+                      >
+                        {t(`roadBook.${entry.type}`)}
+                      </span>
                     </td>
                     <td
                       style={{
@@ -917,7 +1011,11 @@ export default function RoadBookPage() {
                       >
                         <button
                           type="button"
-                          onClick={() => setEditing(entry)}
+                          onClick={() => {
+                            setEditing(entry);
+                            setError(null);
+                            setIsFormOpen(true);
+                          }}
                           style={actionBtnStyle}
                           aria-label={t("roadBook.editEntry")}
                           title={t("roadBook.editEntry")}
